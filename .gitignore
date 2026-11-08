@@ -40,3 +40,5 @@ __pycache__/
 AGENTS.md
 README-VI.md
 /docs
+*.md
+/backend/tests
