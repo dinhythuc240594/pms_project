@@ -13,6 +13,7 @@ BACKEND_DIR = Path(__file__).resolve().parents[1]
 
 class ConfigurationError(ValueError):
     """A configuration error safe to display without credentials."""
+    pass
 
 
 def postgres_url(value, name="DATABASE_URL"):
