@@ -1,0 +1,20 @@
+.loha-loading {
+  --loha-blue: #0c7cd5;
+  --loha-lime: #def09f;
+  --loha-muted: var(--text-secondary, #56677a);
+  display: grid;
+  place-items: center;
+  min-height: min(480px, 65dvh);
+  padding: 40px 20px;
+  color: var(--manager-ink, var(--text-primary, #122b44));
+  font-family: var(--font-sans);
+  box-sizing: border-box;
+}
+.loha-loading-full { min-height: 100dvh; background: var(--manager-soft, var(--bg-main, #f3f7fb)); }
+.loha-loading-content { display: flex; flex-direction: column; align-items: center; width: min(360px, 100%); text-align: center; }
+.loha-loading .loha-brand { color: inherit; text-decoration: none; }
+.loha-loading-indicator { display: grid; place-items: center; width: 56px; height: 56px; margin: 40px 0 24px; border: 1px solid var(--manager-line, var(--border-color, #dce5ed)); border-radius: 50%; background: var(--manager-surface, var(--bg-surface, #fff)); }
+.loha-loading-indicator .loha-request-spinner { width: 24px; height: 24px; box-sizing: border-box; }
+.loha-loading-title { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.5; }
+.loha-loading-hint { max-width: 32ch; margin: 12px 0 0; color: var(--loha-muted); font-size: 13px; line-height: 1.7; }
+.loha-loading :focus-visible { outline: 3px solid var(--loha-blue); outline-offset: 6px; border-radius: 4px; }
