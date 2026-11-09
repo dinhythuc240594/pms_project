@@ -1,0 +1,28 @@
+.loha-error-page { --error-ink: var(--manager-ink, #122b44); --error-muted: var(--manager-muted, #56677a); --error-surface: var(--manager-surface, #fff); --error-soft: var(--manager-soft, #f3f7fb); --error-line: var(--manager-line, #dce4ec); --error-accent: var(--manager-accent, #086ab4); display: flex; flex-direction: column; gap: 24px; min-width: 0; width: 100%; padding: clamp(20px, 4vw, 48px); border: 1px solid var(--error-line); border-radius: 16px; background: var(--error-surface); color: var(--error-ink); font-family: var(--font-sans); }
+.loha-error-page *, .loha-error-page *::before, .loha-error-page *::after { box-sizing: border-box; }
+.loha-error-full { min-height: 100dvh; border: 0; border-radius: 0; background: var(--error-soft); }
+.loha-error-brand { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.loha-error-brand .loha-brand { color: var(--error-ink); text-decoration: none; }
+.loha-error-brand .loha-brand small { color: var(--error-muted); }
+.loha-error-brand .loha-brand-mark { background: #0c7cd5; }
+.loha-error-brand .loha-brand-mark > span { background: #def09f; }
+.loha-error-brand > span { color: var(--error-muted); font-size: 9px; font-weight: 600; letter-spacing: 1.4px; }
+.loha-error-content { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 16px; width: min(640px, 100%); margin: 12px auto; text-align: center; }
+.loha-error-visual { display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%; padding: 20px 0; }
+.loha-error-visual > span { color: var(--error-ink); font-size: clamp(72px, 13vw, 128px); font-weight: 700; letter-spacing: -.06em; line-height: 1; font-variant-numeric: tabular-nums; }
+.loha-error-visual > div { display: grid; place-items: center; width: 72px; height: 72px; border: 1px solid var(--error-line); border-radius: 12px; background: var(--error-surface); color: var(--error-accent); }
+.loha-error-eyebrow { margin: 0; color: var(--error-accent); font-size: 10px; font-weight: 650; letter-spacing: 1.4px; }
+.loha-error-page :where(h1, h2) { margin: 0; color: var(--error-ink); font-size: clamp(24px, 3vw, 34px); font-weight: 650; letter-spacing: -.6px; line-height: 1.3; overflow-wrap: anywhere; }
+.loha-error-description { max-width: 500px; margin: 0; color: var(--error-muted); font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
+.loha-error-actions { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+.loha-error-page .loha-error-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 11px 18px; border: 1px solid var(--error-line); border-radius: 6px; background: var(--error-surface); color: var(--error-ink); font: inherit; font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer; }
+.loha-error-page .loha-error-primary { border-color: #086ab4; background: #086ab4; color: #fff; }
+.loha-error-page .loha-error-text-link { color: var(--error-accent); text-decoration: underline; font-size: 13px; }
+.loha-error-page :where(a, button):focus-visible { outline: 3px solid var(--error-accent); outline-offset: 4px; }
+.loha-error-page button:disabled { opacity: .6; cursor: wait; }
+.loha-error-page .loha-error-retry-message { color: var(--manager-danger, #b83030); margin: 0; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.loha-error-extra { width: 100%; font-size: 13px; line-height: 1.7; }
+.loha-error-footer { margin: 0; color: var(--error-muted); font-size: 11px; line-height: 1.6; text-align: center; }
+.loha-error-dialog { width: min(760px, 100%); max-height: calc(100dvh - 40px); overflow-y: auto; border-radius: 16px; }
+.loha-error-dialog .loha-error-page { border: 0; }
+@media (max-width: 600px) { .loha-error-brand > span { display: none; } .loha-error-visual { gap: 16px; padding: 12px 0; } .loha-error-visual > div { width: 56px; height: 56px; } .loha-error-actions { width: 100%; } .loha-error-actions .loha-error-button { width: 100%; } .loha-error-dialog { max-height: calc(100dvh - 24px); } }

@@ -1,0 +1,24 @@
+@import '@fontsource-variable/inter/standard.css';
+@import '@fontsource-variable/inter/standard-italic.css';
+@import '@fontsource/be-vietnam-pro/300.css';
+@import '@fontsource/be-vietnam-pro/400.css';
+@import '@fontsource/be-vietnam-pro/500.css';
+@import '@fontsource/be-vietnam-pro/600.css';
+@import '@fontsource/be-vietnam-pro/700.css';
+@import '@fontsource/be-vietnam-pro/800.css';
+@import '@fontsource/be-vietnam-pro/900.css';
+@import '@fontsource/be-vietnam-pro/400-italic.css';
+@import '@fontsource/be-vietnam-pro/600-italic.css';
+@import '@fontsource/be-vietnam-pro/700-italic.css';
+@import '@fontsource-variable/noto-sans-sc';
+
+:root {
+  /* Keep all fonts local: a blocked remote CSS import also delays CJK fonts. */
+  --font-sans: 'Inter Variable', 'Be Vietnam Pro', 'Noto Sans SC Variable', 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+  --font-mono: ui-monospace, Consolas, Monaco, 'Courier New', 'Noto Sans SC Variable', monospace;
+}
+
+:root:lang(zh) {
+  /* Prefer the bundled Chinese face throughout the translated interface. */
+  --font-sans: 'Noto Sans SC Variable', 'Inter Variable', 'Be Vietnam Pro', 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+}
