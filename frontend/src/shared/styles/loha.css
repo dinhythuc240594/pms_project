@@ -1,0 +1,52 @@
+.loha-home {
+  --loha-ink: #122b44;
+  --loha-muted: #56677a;
+  --loha-blue: var(--accent-primary, #0c7cd5);
+  --loha-blue-dark: #075f9e;
+  --loha-line: #dce4ec;
+  --loha-soft: #f3f7fb;
+  --loha-cream: #f7f7f0;
+  --loha-lime: #def09f;
+  background: #fff;
+  color: var(--loha-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.loha-home *, .loha-home *::before, .loha-home *::after { box-sizing: border-box; }
+.loha-home h1, .loha-home h2, .loha-home h3, .loha-home p { margin: 0; }
+.loha-home a { color: inherit; text-decoration: none; }
+.loha-home button { font: inherit; }
+.loha-home svg { flex-shrink: 0; }
+.loha-home :is(a, button, summary):focus-visible { outline: 3px solid var(--loha-blue); outline-offset: 5px; }
+.loha-home :is(section[id], main[id]) { scroll-margin-top: 100px; }
+.loha-container { width: min(1200px, calc(100% - 96px)); margin-inline: auto; }
+.loha-brand { display: inline-flex; align-items: center; gap: 12px; font-size: 25px; font-weight: 800; line-height: 1.15; letter-spacing: -.8px; flex-shrink: 0; }
+.loha-brand small { display: block; font-size: 8px; letter-spacing: 1.4px; font-weight: 600; margin-top: 5px; color: var(--loha-muted); }
+.loha-brand-mark { position: relative; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px 10px 2px 10px; background: var(--loha-blue); color: #fff; font-size: 28px; font-weight: 700; }
+.loha-brand-mark > span { position: absolute; right: 7px; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--loha-lime); }
+.loha-button { display: inline-flex; align-items: center; justify-content: center; gap: 24px; padding: 15px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background .15s, transform .15s; }
+.loha-button:hover { transform: translateY(-2px); }
+.loha-home .loha-button-primary { background: var(--loha-blue-dark); color: #fff; }
+.loha-button-primary:hover { background: var(--loha-blue-dark); }
+.loha-text-link { display: inline-flex; align-items: center; gap: 12px; font-weight: 600; font-size: 13px; }
+.loha-text-link:hover { color: var(--loha-blue); }
+.loha-kicker { display: block; color: var(--loha-blue-dark); font-size: 9px; letter-spacing: 1.6px; font-weight: 600; }
+.loha-home h2 { font-size: clamp(30px, 3vw, 42px); line-height: 1.25; font-weight: 600; letter-spacing: -1.4px; }
+.loha-home .loha-button-light { background: var(--loha-lime); color: var(--loha-ink); }
+.loha-button-light:hover { background: #e9f7bd; }
+@media (max-width: 1100px) {
+  .loha-container { width: calc(100% - 64px); }
+}
+@media (max-width: 600px) {
+  .loha-container { width: calc(100% - 40px); }
+  .loha-brand { font-size: 22px; gap: 9px; }
+  .loha-brand small { font-size: 7px; letter-spacing: 1px; }
+  .loha-brand-mark { width: 35px; height: 35px; font-size: 24px; }
+  .loha-button { padding: 14px 20px; font-size: 13px; gap: 16px; }
+  .loha-text-link { font-size: 12px; }
+  .loha-home h2 { font-size: 31px; letter-spacing: -1px; }
+  .loha-kicker { font-size: 8px; line-height: 1.9; letter-spacing: 1px; }
+}
+@media (prefers-reduced-motion: reduce) { .loha-home *, .loha-home *::before, .loha-home *::after { transition: none !important; animation: none !important; } }
