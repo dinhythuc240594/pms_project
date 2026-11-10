@@ -1,0 +1,25 @@
+.draft-confirmation {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 20px;
+  border: 0;
+  background: #0f172a99;
+  color: #172b27;
+  z-index: 20000;
+}
+
+.draft-confirmation[open] { display: grid; place-items: center; }
+.draft-confirmation::backdrop { background: transparent; }
+.draft-confirmation-content { width: min(100%, 460px); padding: 24px; border-radius: 16px; background: white; box-shadow: 0 20px 70px #0003; }
+.draft-confirmation h2 { margin: 0 0 12px; font-size: 20px; }
+.draft-confirmation p { margin: 0 0 24px; line-height: 1.6; color: #52635d; }
+.draft-confirmation-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+.draft-confirmation-actions button { min-height: 42px; padding: 9px 16px; border: 1px solid #c8d3cd; border-radius: 8px; background: white; color: #25483d; font: inherit; font-weight: 600; cursor: pointer; }
+.draft-confirmation-actions button:focus-visible { outline: 3px solid #69a690; outline-offset: 3px; }
+.draft-confirmation-actions .draft-confirmation-discard { border-color: #b93832; background: #b93832; color: white; }
+.draft-confirmation-actions button:disabled { opacity: .5; cursor: wait; }
