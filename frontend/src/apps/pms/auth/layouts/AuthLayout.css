@@ -1,0 +1,71 @@
+.loha-auth { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; min-height: 100svh; }
+.loha-auth-aside { display: flex; flex-direction: column; justify-content: space-between; gap: 48px; padding: 40px 48px 32px; background: var(--loha-cream); border-right: 1px solid var(--loha-line); min-width: 0; }
+.loha-auth-brand-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.loha-auth-back { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; min-height: 44px; color: var(--loha-muted) !important; }
+.loha-auth-back:hover { color: var(--loha-blue-dark) !important; }
+.loha-auth-story { max-width: 480px; margin-block: auto; }
+.loha-auth-kicker { display: block; color: var(--loha-blue-dark); font-size: 9px; letter-spacing: 1.5px; font-weight: 650; }
+.loha-auth-story-title { font-size: clamp(38px, 3.5vw, 56px); line-height: 1.17; font-weight: 650; letter-spacing: -2px; margin-top: 20px !important; }
+.loha-auth-story-title em { color: var(--loha-blue-dark); font-style: normal; }
+.loha-auth-story-copy { max-width: 385px; margin-top: 24px !important; color: var(--loha-muted); font-size: 14px; line-height: 1.85; }
+.loha-auth-photo { position: relative; margin-top: 36px; overflow: hidden; border-radius: 8px; aspect-ratio: 1.9; background: #344535; }
+.loha-auth-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.loha-auth-photo > div { position: absolute; inset: auto 0 0; padding: 36px 24px 20px; background: linear-gradient(transparent, #091a27e6); color: #fff; font-size: 13px; line-height: 1.6; font-weight: 500; }
+.loha-auth-photo > div span { display: block; margin-bottom: 6px; font-size: 8px; letter-spacing: 1.5px; }
+.loha-auth-aside-footer { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--loha-muted); line-height: 1.7; }
+.loha-auth-aside-footer svg { color: var(--loha-blue-dark); }
+.loha-auth-panel { display: flex; flex-direction: column; min-width: 0; padding: 48px; background: #fff; }
+.loha-auth-form-wrap { width: 100%; max-width: 420px; margin: auto; padding-block: 32px; }
+.loha-auth-heading h1 { margin-top: 16px; font-size: 36px; line-height: 1.25; font-weight: 650; letter-spacing: -1.4px; }
+.loha-auth-heading p { margin-top: 16px; font-size: 14px; line-height: 1.8; color: var(--loha-muted); }
+.loha-auth-form { display: flex; flex-direction: column; gap: 24px; margin-top: 36px; }
+.loha-auth-field label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+.loha-auth-field input { display: block; width: 100%; min-height: 52px; padding: 12px 16px; border: 1px solid #8393a2; border-radius: 6px; background: #fff; color: var(--loha-ink); font: inherit; font-size: 16px; line-height: 1.6; }
+.loha-auth-field input::placeholder { color: var(--loha-muted); opacity: 1; }
+.loha-auth-field input:focus-visible { border-color: var(--loha-blue-dark); outline: 3px solid var(--loha-blue-dark); outline-offset: 3px; }
+.loha-auth-password { position: relative; }
+.loha-auth-password input { padding-right: 56px; }
+.loha-auth-password-toggle { position: absolute; right: 4px; top: 4px; display: grid; place-items: center; width: 44px; height: 44px; background: transparent; border: 0; border-radius: 4px; color: var(--loha-muted); cursor: pointer; }
+.loha-auth-password-toggle:hover { background: var(--loha-soft); color: var(--loha-blue-dark); }
+.loha-auth-remember { display: inline-flex; align-items: center; align-self: flex-start; gap: 10px; min-height: 44px; margin-block: -12px; font-size: 13px; color: var(--loha-muted); cursor: pointer; }
+.loha-auth-remember input { width: 18px; height: 18px; accent-color: var(--loha-blue-dark); }
+.loha-auth-remember input:focus-visible { outline: 3px solid var(--loha-blue-dark); outline-offset: 4px; }
+.loha-auth-submit { width: 100%; min-height: 52px; border: 0; margin-top: 4px; cursor: pointer; }
+.loha-auth .loha-auth-submit { font-size: 14px; font-weight: 600; }
+.loha-auth-submit:disabled { opacity: .65; cursor: wait; transform: none; }
+.loha-auth-forgot { color: var(--loha-muted); font-size: 12px; line-height: 1.85; }
+.loha-auth-forgot strong { display: block; color: var(--loha-ink); font-size: 13px; font-weight: 500; }
+.loha-auth-error { display: flex; align-items: flex-start; gap: 10px; background: #fff3f0; border: 1px solid #edcdc3; color: #962f25; border-radius: 6px; padding: 14px 16px; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+.loha-auth-error svg { margin-top: 3px; }
+.loha-auth-panel-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; width: 100%; max-width: 420px; margin: 0 auto; padding-top: 20px; border-top: 1px solid var(--loha-line); font-size: 10px; color: var(--loha-muted); }
+.loha-auth-panel-footer nav { display: flex; gap: 20px; }
+.loha-auth-panel-footer nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: 12px; }
+.loha-auth-panel-footer nav a:hover { color: var(--loha-blue-dark); }
+.loha-auth-spinner { animation: loha-auth-spin 1s linear infinite; }
+@keyframes loha-auth-spin { to { transform: rotate(360deg); } }
+@media (max-width: 1100px) {
+  .loha-auth-aside, .loha-auth-panel { padding: 32px; }
+  .loha-auth-story-title { font-size: 40px; letter-spacing: -1.6px; }
+  .loha-auth-brand-row { gap: 12px; }
+  .loha-auth-aside .loha-brand small { font-size: 7px; letter-spacing: 1px; }
+}
+@media (max-width: 900px) {
+  .loha-auth { grid-template-columns: 1fr; }
+  .loha-auth-aside { padding: 16px 32px; border-right: 0; border-bottom: 1px solid var(--loha-line); }
+  .loha-auth-brand-row { flex-wrap: nowrap; }
+  .loha-auth-story, .loha-auth-aside-footer { display: none; }
+  .loha-auth-panel { padding: 32px; min-height: calc(100svh - 77px); }
+  .loha-auth-form-wrap { padding-block: 24px 40px; }
+}
+@media (max-width: 600px) {
+  .loha-auth-aside { padding: 12px 20px; }
+  .loha-auth-brand-row { gap: 12px; }
+  .loha-auth-back { font-size: 11px; gap: 5px; }
+  .loha-auth-back svg { width: 14px; }
+  .loha-auth-panel { padding: 28px 20px 16px; min-height: calc(100svh - 69px); }
+  .loha-auth-form-wrap { padding-block: 12px 32px; }
+  .loha-auth-heading h1 { font-size: 32px; letter-spacing: -1px; }
+  .loha-auth-form { margin-top: 28px; gap: 20px; }
+  .loha-auth-panel-footer { gap: 4px; padding-top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .loha-auth-spinner { animation: none; } }
