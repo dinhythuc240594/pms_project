@@ -1,0 +1,55 @@
+.loha-desktop-nav a[aria-current="page"], .loha-mobile-nav a[aria-current="page"] { color: var(--loha-blue-dark); font-weight: 700; }
+.loha-page-intro { background: var(--loha-cream); padding: 64px 0 56px; border-bottom: 1px solid var(--loha-line); }
+.loha-page-intro h1 { max-width: 850px; margin-top: 20px; font-size: clamp(36px, 4.5vw, 56px); font-weight: 650; letter-spacing: -2px; line-height: 1.2; }
+.loha-page-intro h1 em { color: var(--loha-blue-dark); font-style: normal; }
+.loha-page-intro p { max-width: 640px; margin-top: 24px; color: var(--loha-muted); font-size: 15px; line-height: 1.85; }
+.loha-price-section { padding: 48px 0 72px; }
+.loha-price-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.loha-price-top > p { color: var(--loha-muted); font-size: 13px; max-width: 380px; }
+.loha-price-cycle { display: flex; padding: 4px; border: 1px solid var(--loha-line); border-radius: 6px; background: var(--loha-soft); gap: 4px; }
+.loha-price-cycle button { border: 0; min-height: 44px; padding: 8px 20px; background: transparent; border-radius: 4px; color: var(--loha-muted); font-size: 13px; font-weight: 600; cursor: pointer; }
+.loha-price-cycle button[aria-pressed="true"] { background: var(--loha-ink); color: #fff; }
+.loha-price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px; }
+.loha-price-card { min-width: 0; overflow-wrap: anywhere; border: 1px solid var(--loha-line); border-radius: 8px; padding: 36px; display: flex; flex-direction: column; }
+.loha-price-state { padding: 24px; border: 1px solid var(--loha-line); border-radius: 8px; color: var(--loha-muted); line-height: 1.8; overflow-wrap: anywhere; }
+.loha-price-state > button { margin-top: 16px; }
+.loha-price-card-pro { background: var(--loha-ink); color: #fff; border-color: var(--loha-ink); }
+.loha-price-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.loha-price-card-top > span { border: 1px solid var(--loha-line); padding: 4px 10px; border-radius: 4px; color: var(--loha-muted); font-size: 10px; font-weight: 600; }
+.loha-price-card-pro .loha-price-card-top > span { border-color: #527088; color: var(--loha-lime); }
+.loha-price-card h2 { font-size: 28px; letter-spacing: -.8px; }
+.loha-price-description { margin-top: 16px !important; color: var(--loha-muted); font-size: 14px; line-height: 1.8; min-height: 50px; }
+.loha-price-card-pro .loha-price-description, .loha-price-card-pro .loha-price-period { color: #d0dce6; }
+.loha-price-amount { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-top: 28px !important; line-height: 1.2; }
+.loha-price-amount strong { font-size: clamp(32px, 3vw, 42px); font-weight: 650; letter-spacing: -1.3px; }
+.loha-price-amount span { font-size: 14px; }
+.loha-price-period { color: var(--loha-muted); font-size: 12px; margin-top: 12px !important; min-height: 40px; }
+.loha-price-card > a { margin-top: 24px; width: 100%; }
+.loha-price-includes { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--loha-line); }
+.loha-price-card-pro .loha-price-includes { border-color: #456077; }
+.loha-price-includes h3 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.loha-price-includes ul { list-style: none; margin: 20px 0 0; padding: 0; }
+.loha-price-includes li { display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; font-size: 13px; }
+.loha-price-includes svg { margin-top: 3px; color: var(--loha-blue-dark); }
+.loha-price-card-pro .loha-price-includes svg { color: var(--loha-lime); }
+.loha-price-roadmap { margin-top: 24px !important; padding: 16px; border: 1px solid #456077; border-radius: 4px; color: #d0dce6; font-size: 12px; line-height: 1.8; }
+.loha-price-note { display: flex; align-items: flex-start; gap: 12px; margin-top: 28px; padding: 20px 24px; background: var(--loha-soft); border-radius: 6px; font-size: 12px; color: var(--loha-muted); line-height: 1.85; }
+.loha-price-note svg { color: var(--loha-blue-dark); margin-top: 3px; }
+.loha-price-questions { max-width: 820px; margin: 0 auto; }
+.loha-price-questions h2 { margin-bottom: 32px; }
+@media (max-width: 900px) { .loha-page-intro { padding: 48px 0; } .loha-price-card { padding: 28px; } }
+@media (max-width: 600px) {
+  .loha-page-intro { padding: 40px 0 36px; }
+  .loha-page-intro h1 { font-size: 36px; letter-spacing: -1.2px; }
+  .loha-page-intro p { font-size: 14px; margin-top: 20px; }
+  .loha-price-section { padding: 32px 0 48px; }
+  .loha-price-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .loha-price-cycle { width: 100%; }
+  .loha-price-cycle button { flex: 1; padding-inline: 12px; }
+  .loha-price-grid { grid-template-columns: 1fr; }
+  .loha-price-card { padding: 24px; }
+  .loha-price-card h2 { font-size: 26px; }
+  .loha-price-amount strong { font-size: 34px; }
+  .loha-price-description { min-height: 0; }
+  .loha-price-note { padding: 20px; font-size: 12px; }
+}

@@ -1,0 +1,57 @@
+.loha-skip-link { position: fixed; top: -80px; left: 16px; z-index: 100; background: var(--loha-ink); color: #fff !important; padding: 12px 20px; border-radius: 4px; }
+.loha-skip-link:focus { top: 12px; }
+.loha-header { position: sticky; top: 0; z-index: 30; background: rgba(255, 255, 255, .97); border-bottom: 1px solid var(--loha-line); }
+.loha-header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; min-height: 72px; padding-block: 14px; }
+.loha-header-controls { display: flex; align-items: center; gap: 12px; margin-left: auto; min-width: 0; }
+.loha-home :is(section[id], main[id]) { scroll-margin-top: calc(var(--loha-header-height, 88px) + 12px); }
+@media (min-width: 601px) { .loha-header-inner { min-height: 76px; padding-block: 0; gap: 24px; } }
+@media (min-width: 901px) { .loha-header-inner { min-height: 88px; } .loha-header-controls { margin-left: 0; } }
+.loha-desktop-nav { display: flex; gap: 32px; font-size: 13px; font-weight: 500; }
+.loha-desktop-nav a, .loha-footer nav a { transition: color .15s; }
+.loha-desktop-nav a:hover, .loha-footer nav a:hover { color: var(--loha-blue); }
+.loha-header-actions { display: flex; align-items: center; gap: 10px; }
+.loha-header .loha-language-switcher { --border-color: var(--loha-line); --text-primary: var(--loha-ink); --text-muted: var(--loha-muted); --accent-primary: var(--loha-blue); --bg-main: #f2f7fa; --bg-surface: #fff; }
+.loha-header-login { display: flex; align-items: center; gap: 16px; font-weight: 600; font-size: 13px; border: 1px solid var(--loha-line); padding: 11px 16px; border-radius: 6px; }
+.loha-header-login:hover { border-color: var(--loha-blue); color: var(--loha-blue); }
+.loha-menu-button { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; background: transparent; border: 1px solid var(--loha-line); border-radius: 6px; color: var(--loha-ink); cursor: pointer; }
+.loha-mobile-nav { padding: 8px 24px 24px; border-top: 1px solid var(--loha-line); }
+.loha-mobile-nav a { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+.loha-start { position: relative; overflow: hidden; background: var(--loha-ink); color: #fff; padding: 64px 0; }
+.loha-start-inner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.loha-start .loha-kicker { color: var(--loha-lime); font-size: 9px; }
+.loha-start h2 { font-size: clamp(36px, 4vw, 52px); font-weight: 500; margin-top: 20px; }
+.loha-start-inner > div:last-child p { color: #d0dce6; font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
+.loha-start-decoration { position: absolute; right: 24px; top: -140px; font-size: 500px; font-weight: 700; line-height: 1; color: #ffffff05; transform: rotate(-15deg); }
+.loha-footer { padding: 40px 0 24px; background: #fff; }
+.loha-footer-top { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding-bottom: 36px; }
+.loha-footer-top > div > p { font-size: 11px; color: var(--loha-muted); margin-top: 12px; }
+.loha-footer nav { display: flex; gap: 24px; font-size: 12px; }
+.loha-footer-bottom { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--loha-line); padding-top: 20px; font-size: 10px; color: var(--loha-muted); }
+@media (min-width: 901px) {
+  .loha-mobile-nav { display: none; }
+}
+@media (max-width: 1100px) {
+  .loha-desktop-nav { gap: 20px; font-size: 12px; }
+}
+@media (max-width: 900px) {
+  .loha-desktop-nav { display: none; }
+  .loha-menu-button { display: flex; }
+  .loha-footer-top { flex-wrap: wrap; gap: 24px; }
+  .loha-footer-top > a { margin-left: auto; }
+}
+@media (max-width: 600px) {
+  .loha-header-actions { margin-left: 0; }
+  .loha-header-login { display: none; }
+  .loha-menu-button { margin-left: 0; }
+  .loha-header .loha-language-menu { right: -56px; width: min(224px, calc(100vw - 32px)); }
+  .loha-start { padding: 44px 0; }
+  .loha-start-inner { display: block; }
+  .loha-start h2 { font-size: 42px; margin-bottom: 24px; }
+  .loha-start-inner > div:last-child p { font-size: 13px; }
+  .loha-start-decoration { right: -40px; top: 0; font-size: 420px; }
+  .loha-footer-top { align-items: flex-start; gap: 28px; }
+  .loha-footer-top > div { width: 100%; }
+  .loha-footer nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+  .loha-footer-top > a { font-size: 11px; }
+  .loha-footer-bottom { flex-direction: column; gap: 4px; }
+}

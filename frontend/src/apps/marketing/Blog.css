@@ -1,0 +1,51 @@
+.loha-blog-layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 72px; align-items: start; }
+.loha-blog-sidebar { position: sticky; top: 128px; }
+.loha-blog-filters { display: flex; flex-direction: column; gap: 4px; margin: 20px 0 32px; }
+.loha-blog-filters button { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 10px 14px; color: var(--loha-muted); background: transparent; border: 1px solid transparent; border-radius: 6px; text-align: left; cursor: pointer; font-size: 14px; }
+.loha-blog-filters button:hover { background: var(--loha-soft); }
+.loha-blog-filters button[aria-pressed='true'] { color: var(--loha-blue-dark); background: var(--loha-soft); border-color: var(--loha-line); font-weight: 600; }
+.loha-blog-filters button svg { visibility: hidden; }
+.loha-blog-filters button[aria-pressed='true'] svg { visibility: visible; }
+.loha-blog-note { border-top: 1px solid var(--loha-line); padding-top: 24px; }
+.loha-blog-note > svg { color: var(--loha-blue-dark); margin-bottom: 12px; }
+.loha-blog-note p { font-size: 13px; line-height: 1.85; color: var(--loha-muted); }
+.loha-blog-note strong { display: block; font-size: 15px; color: var(--loha-ink); margin-bottom: 6px; }
+.loha-blog-note .loha-text-link { margin-top: 20px; min-height: 44px; }
+.loha-blog-articles { min-width: 0; }
+.loha-blog-count { color: var(--loha-muted); font-size: 12px; padding-bottom: 20px; border-bottom: 1px solid var(--loha-line); }
+.loha-blog-article { padding: 32px 0; border-bottom: 1px solid var(--loha-line); }
+.loha-blog-article-meta { display: flex; align-items: center; gap: 8px; color: var(--loha-blue-dark); margin-bottom: 12px; font-size: 12px; font-weight: 600; }
+.loha-home .loha-blog-article h2 { font-size: clamp(23px, 2.25vw, 30px); line-height: 1.4; letter-spacing: -.65px; }
+.loha-home .loha-blog-excerpt { margin-top: 14px; color: var(--loha-muted); font-size: 14px; line-height: 1.85; max-width: 640px; }
+.loha-blog-details { margin-top: 12px; }
+.loha-blog-details summary { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--loha-blue-dark); cursor: pointer; font-size: 13px; font-weight: 600; list-style: none; }
+.loha-blog-details summary::-webkit-details-marker { display: none; }
+.loha-blog-details summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+.loha-blog-details summary svg { transition: transform .15s; }
+.loha-blog-close { display: none; }
+.loha-blog-details[open] .loha-blog-read { display: none; }
+.loha-blog-details[open] .loha-blog-close { display: inline; }
+.loha-blog-details[open] summary svg { transform: rotate(-90deg); }
+.loha-blog-article-body { padding-top: 12px; color: var(--loha-muted); font-size: 14px; line-height: 1.9; }
+.loha-home .loha-blog-article-body h3 { font-size: 15px; color: var(--loha-ink); margin-top: 24px; font-weight: 600; }
+.loha-blog-article-body ol { padding-left: 24px; margin: 12px 0 24px; }
+.loha-blog-article-body li { padding-left: 6px; margin-bottom: 12px; }
+.loha-blog-article-body li::marker { color: var(--loha-blue-dark); font-weight: 600; }
+.loha-home .loha-blog-takeaway { padding: 16px 20px; border-left: 3px solid var(--loha-blue-dark); background: var(--loha-soft); color: var(--loha-ink); }
+@media (max-width: 1000px) {
+  .loha-blog-layout { grid-template-columns: 190px minmax(0, 1fr); gap: 40px; }
+}
+@media (max-width: 700px) {
+  .loha-blog-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .loha-blog-sidebar { position: static; }
+  .loha-blog-filters { flex-direction: row; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .loha-blog-filters button { padding: 10px 12px; font-size: 13px; }
+  .loha-blog-filters button svg { display: none; }
+  .loha-blog-note { display: none; }
+  .loha-blog-article { padding: 28px 0; }
+  .loha-home .loha-blog-article h2 { font-size: 24px; letter-spacing: -.5px; }
+  .loha-home .loha-blog-takeaway { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loha-blog-details summary svg { transition: none; }
+}
