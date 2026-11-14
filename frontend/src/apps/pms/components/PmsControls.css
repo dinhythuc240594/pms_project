@@ -1,0 +1,43 @@
+.pms-shell {
+  --pms-control-radius: 9px;
+  --pms-panel-radius: 14px;
+  --pms-control-height: 44px;
+  --pms-control-border: #d7e1eb;
+  --pms-surface-soft: #f8fafc;
+  --pms-control-font-size: 13px;
+}
+
+/* Keep legacy inline forms and newer client workspaces on the same controls. */
+.pms-shell .pms-main :is(input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="range"]):not([type="color"]), select, textarea) {
+  min-width: 0;
+  min-height: var(--pms-control-height);
+  border-radius: var(--pms-control-radius) !important;
+  font-family: inherit;
+  color-scheme: light;
+}
+
+.pms-shell .pms-main :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea):focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.pms-shell .pms-main :is(input[type="checkbox"], input[type="radio"]) { accent-color: var(--accent-primary); }
+.pms-shell .pms-main :is(input, select, textarea):disabled { cursor: not-allowed; }
+.pms-shell .pms-main :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea):disabled { background-color: #f1f5f9; color: var(--text-muted); }
+
+.pms-shell .pms-main :is(.pms-domain-page button, .pms-profile-button, .pms-form-dialog-heading > button, .ota-button, .rates-link-button, .inventory-link-button, .manager-button) {
+  min-height: var(--pms-control-height);
+  border-radius: var(--pms-control-radius);
+}
+
+.pms-shell .pms-main :is(.domain-panel, .pms-profile-panel, .ota-panel, .pms-form-dialog) { border-radius: var(--pms-panel-radius); }
+.pms-shell .pms-main .ota-button--primary { background: var(--accent-primary); border-color: var(--accent-primary); }
+.pms-shell .pms-main .ota-button--primary:hover:not(:disabled) { background: var(--accent-secondary); border-color: var(--accent-secondary); }
+
+@media (max-width: 700px) {
+  .pms-shell .pms-main :is(input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="range"]):not([type="color"]), select, textarea) {
+    min-height: var(--pms-control-height) !important;
+    font-size: 16px !important;
+  }
+  .pms-shell .pms-main :is(.pms-domain-page button, .pms-profile-button, .ota-button, .rates-link-button, .inventory-link-button, .manager-button) { min-height: var(--pms-control-height); }
+}
