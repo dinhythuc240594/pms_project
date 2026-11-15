@@ -1,0 +1,89 @@
+.loha-rooms { padding: 16px; background: var(--bg-main, #f3f7fa); color: var(--text-primary, #122b44); min-width: 0; }
+.loha-rooms-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.loha-rooms-eyebrow { color: var(--accent-primary, #086ab4); font-size: 11px; letter-spacing: .1em; font-weight: 700; }
+.loha-rooms h1 { font-size: 28px; line-height: 1.25; letter-spacing: -.04em; margin: 8px 0; }
+.loha-rooms-heading p { margin: 0; color: var(--text-secondary, #5a7084); font-size: 14px; line-height: 1.6; }
+.loha-rooms button { font-family: inherit; cursor: pointer; }
+.loha-rooms button:focus-visible, .loha-rooms select:focus-visible, .loha-room-dialog button:focus-visible, .loha-room-dialog a:focus-visible { outline: 2px solid var(--accent-primary, #086ab4); outline-offset: 3px; }
+.loha-rooms button:disabled, .loha-room-dialog button:disabled { opacity: .4; cursor: not-allowed; }
+.loha-rooms .loha-rooms-primary, .loha-room-dialog .loha-rooms-primary { background: var(--accent-primary, #086ab4); border: 1px solid var(--accent-primary, #086ab4); color: #fff; border-radius: 8px; padding: 10px 12px; min-height: 42px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.loha-rooms-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+.loha-rooms-stat { background: var(--bg-card, #fff); border: 1px solid var(--border-color, #dce5ee); border-radius: 12px; padding: 14px; }
+.loha-rooms-stat > span { display: block; color: var(--text-secondary, #5a7084); font-size: 12px; line-height: 1.4; }
+.loha-rooms-stat > strong { display: flex; align-items: baseline; gap: 8px; font-size: 28px; font-weight: 600; margin-top: 12px; letter-spacing: -.04em; }
+.loha-rooms-stat strong > span { font-size: 11px; font-weight: 400; letter-spacing: 0; color: var(--text-secondary, #5a7084); }
+.loha-rooms-stat.stat-available { background: #eaf4d9; border-color: #d9e9c1; }
+.loha-rooms-stat.stat-available > strong { color: #315815; }
+.loha-rooms-panel { background: var(--bg-card, #fff); border: 1px solid var(--border-color, #dce5ee); border-radius: 12px; overflow: hidden; }
+.loha-rooms-toolbar { padding: 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.loha-rooms-toolbar h2 { font-size: 16px; margin: 0 0 6px; }
+.loha-rooms-toolbar p { font-size: 12px; color: var(--text-secondary, #5a7084); margin: 0; line-height: 1.5; }
+.loha-rooms-filters { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.loha-rooms-filters select { min-width: 150px; max-width: 100%; padding: 8px 12px; min-height: 40px; border: 1px solid #aabccb; border-radius: 8px; color: var(--text-primary, #122b44); background: var(--bg-card, #fff); font: inherit; font-size: 13px; }
+.loha-rooms-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.loha-rooms-view { display: flex; gap: 4px; padding: 3px; border-radius: 8px; background: var(--bg-surface, #f3f7fa); border: 1px solid var(--border-color, #dce5ee); }
+.loha-rooms-view button { display: grid; place-items: center; width: 34px; min-height: 32px; padding: 0; border: 0; border-radius: 5px; background: transparent; color: var(--text-secondary, #5a7084); }
+.loha-rooms-view button[aria-pressed=true] { background: var(--bg-card, #fff); color: var(--accent-primary, #086ab4); }
+.loha-rooms-legend { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border-color, #dce5ee); border-bottom: 1px solid var(--border-color, #dce5ee); background: var(--bg-surface, #f7fafd); }
+.loha-rooms-legend button { display: flex; align-items: center; gap: 7px; padding: 8px 10px; min-height: 34px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: var(--text-secondary, #5a7084); font-size: 11px; }
+.loha-rooms-legend button[aria-pressed=true] { background: var(--bg-card, #fff); border-color: var(--border-color, #dce5ee); color: var(--text-primary, #122b44); font-weight: 600; }
+.loha-rooms-legend strong { font-size: 11px; font-weight: 600; margin-left: 3px; }
+.loha-rooms-dot { width: 7px; height: 7px; border-radius: 2px; background: #9ab0c0; }
+.legend-confirmed .loha-rooms-dot { background: #3287c6; } .legend-occupied .loha-rooms-dot { background: #6a9a3f; } .legend-dirty .loha-rooms-dot { background: #bd8a28; } .legend-blocked .loha-rooms-dot { background: #af6469; }
+.loha-rooms-body { padding: 16px; }
+.loha-rooms-floor, .loha-rooms-unassigned { margin-bottom: 20px; }
+.loha-rooms-floor:last-child { margin-bottom: 0; }
+.loha-rooms-floor-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.loha-rooms-floor-heading h3 { font-size: 14px; margin: 0; font-weight: 600; }
+.loha-rooms-floor-heading > span { color: var(--text-secondary, #5a7084); font-size: 11px; }
+.loha-rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(235px, 100%), 1fr)); gap: 12px; }
+.loha-rooms-grid.is-list { grid-template-columns: 1fr; }
+.loha-rooms .loha-room-card { display: flex; flex-direction: column; min-width: 0; width: 100%; text-align: left; padding: 0; border: 1px solid var(--border-color, #dce5ee); border-radius: 10px; overflow: hidden; background: var(--bg-card, #fff); color: var(--text-primary, #122b44); transition: border-color .15s; }
+.loha-rooms .loha-room-card:hover { border-color: var(--accent-primary, #086ab4); }
+.loha-room-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 12px 10px; }
+.loha-room-card-top > strong { font-size: 15px; font-weight: 600; }
+.loha-room-card-icons { display: flex; gap: 7px; color: var(--text-secondary, #5a7084); }
+.loha-room-card-icons > svg:first-child:not(:last-child) { color: #99701e; }
+.loha-room-type { padding: 0 12px; color: var(--text-secondary, #5a7084); font-size: 11px; }
+.loha-room-card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; min-height: 100px; flex: 1; }
+.loha-room-guest { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; }
+.loha-room-stay { font-size: 11px; color: var(--text-secondary, #5a7084); }
+.loha-room-booking-code { font-size: 10px; color: var(--text-secondary, #5a7084); overflow-wrap: anywhere; }
+.loha-room-empty { display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 8px; min-height: 70px; color: var(--text-secondary, #5a7084); font-size: 12px; }
+.loha-room-empty svg { opacity: .65; } .loha-room-empty small { font-size: 10px; color: #8e681d; }
+.loha-room-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 12px; border-top: 1px solid var(--border-color, #dce5ee); }
+.loha-room-status { display: inline-block; font-size: 10px; font-weight: 600; color: #506b80; background: #eff4f8; padding: 5px 7px; border-radius: 5px; }
+.room-confirmed .loha-room-status, .loha-room-status.room-confirmed { background: #e7f3fc; color: #0961a1; }
+.room-occupied .loha-room-status, .loha-room-status.room-occupied { background: #e8f4d5; color: #315815; }
+.room-blocked .loha-room-status, .loha-room-status.room-blocked { background: #fff0f1; color: #a3343d; }
+.loha-room-payment { color: var(--text-secondary, #5a7084); font-size: 10px; }
+.loha-rooms-empty { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 28px 12px; color: var(--text-secondary, #5a7084); font-size: 13px; }
+.loha-rooms-empty strong { color: var(--text-primary, #122b44); }
+.loha-room-dialog { background: var(--bg-card, #fff); border: 1px solid var(--border-color, #dce5ee); border-radius: 12px; width: 460px; max-width: 100%; max-height: 90dvh; overflow-y: auto; color: var(--text-primary, #122b44); font-family: inherit; }
+.loha-room-dialog-heading { display: flex; justify-content: space-between; gap: 12px; padding: 16px; border-bottom: 1px solid var(--border-color, #dce5ee); }
+.loha-room-dialog-heading h2 { margin: 0 0 12px; font-size: 20px; }
+.loha-room-dialog-heading .loha-room-status, .loha-room-dirty { margin-right: 6px; }
+.loha-room-dirty { display: inline-block; font-size: 10px; font-weight: 600; padding: 5px 7px; border-radius: 5px; background: #fff5df; color: #8e681d; }
+.loha-room-close { border: 1px solid var(--border-color, #dce5ee); background: var(--bg-surface, #f3f7fa); color: var(--text-secondary, #5a7084); width: 34px; height: 34px; display: grid; place-items: center; border-radius: 8px; cursor: pointer; }
+.loha-room-dialog-info { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-size: 13px; }
+.loha-room-dialog-info > div { display: flex; gap: 12px; justify-content: space-between; }
+.loha-room-dialog-info span { color: var(--text-secondary, #5a7084); flex-shrink: 0; }
+.loha-room-dialog-info strong { font-weight: 500; text-align: right; overflow-wrap: anywhere; min-width: 0; }
+.loha-room-error { margin: 0; padding: 12px 16px; color: #a3343d; font-size: 13px; }
+.loha-room-dialog-actions { padding: 16px; border-top: 1px solid var(--border-color, #dce5ee); display: flex; flex-direction: column; gap: 12px; }
+.loha-room-dialog-actions button, .loha-room-dialog-actions a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 10px 12px; border: 1px solid var(--border-color, #dce5ee); background: var(--bg-card, #fff); color: var(--text-primary, #122b44); border-radius: 8px; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration: none; }
+.loha-room-action-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.loha-room-action-wide { grid-column: 1 / -1; }
+@media (min-width: 700px) { .is-list .loha-room-card { flex-direction: row; align-items: center; flex-wrap: wrap; } .is-list .loha-room-card-top { width: 140px; flex-shrink: 0; } .is-list .loha-room-type { width: 110px; flex-shrink: 0; padding: 12px; } .is-list .loha-room-card-body { min-height: 0; min-width: 0; padding: 12px; flex: 1 1 120px; } .is-list .loha-room-card-footer { border-top: 0; padding: 12px; flex-direction: column; } .is-list .loha-room-empty { min-height: 0; flex-direction: row; } }
+@media (max-width: 1100px) { .loha-rooms-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .loha-rooms { padding: 12px; } .loha-rooms-heading { flex-direction: column; align-items: flex-start; gap: 12px; } .loha-rooms h1 { font-size: 25px; } .loha-rooms-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .loha-rooms-stat { padding: 12px; } .loha-rooms-stat > strong { font-size: 25px; margin-top: 8px; } .loha-rooms-toolbar, .loha-rooms-legend, .loha-rooms-body { padding: 12px; } .loha-rooms-filters { width: 100%; } .loha-rooms-filters select { flex: 1 1 180px; width: 100%; min-width: 0; font-size: 16px; } .loha-rooms-view { margin-left: auto; } .loha-rooms-legend { gap: 4px; } .loha-rooms-legend button { padding: 7px 5px; font-size: 10px; } .loha-room-dialog-info > div { flex-direction: column; gap: 6px; } .loha-room-dialog-info strong { text-align: left; } }
+@media (prefers-reduced-motion: reduce) { .loha-rooms .loha-room-card { transition: none; } }
+@media (pointer: coarse), (max-width: 900px) {
+  .loha-rooms .loha-rooms-primary, .loha-room-dialog .loha-rooms-primary, .loha-rooms-filters select, .loha-rooms-legend button, .loha-room-dialog-actions button, .loha-room-dialog-actions a { min-height: 44px; }
+  .loha-rooms-view button, .loha-room-close { width: 44px; min-height: 44px; }
+  .loha-room-close { height: 44px; flex-shrink: 0; }
+  .loha-rooms-filters select { font-size: 16px; }
+}
+@media (max-width: 600px) {
+  .loha-rooms-legend button { padding: 8px; font-size: 12px; }
+}
