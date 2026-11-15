@@ -124,8 +124,10 @@ def seed_local():
 
 
 def register_commands(app):
+    from .chatbot.cli import install_chatbot_schema
     from .marketing.cli import register_marketing_commands
 
+    app.cli.add_command(install_chatbot_schema)
     register_marketing_commands(app)
     app.cli.add_command(database_check)
     app.cli.add_command(init_admin)

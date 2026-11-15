@@ -20,6 +20,9 @@ export const CORE_ROLES = {
   HOUSEKEEPING: ['profile.view', 'rooms.view', 'housekeeping.view', 'housekeeping.write', 'notifications.view'],
   ACCOUNTANT: ['profile.view', 'dashboard.view', 'reservations.view', 'guests.view', 'cashbook.view', 'reports.view', 'reports.advanced.view', 'rates.view', 'payments.write', 'cashbook.write', 'pos.view', 'pos.write', 'finance.adjust', 'pos.cancel', 'cashbook.reverse', 'inventory.view', 'inventory.write', 'notifications.view'],
 };
+for (const [role, actions] of Object.entries(CORE_ROLES)) {
+  if (role !== 'HOTEL_OWNER') actions.push('chatbot.view', 'chatbot.send');
+}
 export const systemUser = user => ['SYSTEM_MANAGER', 'SUPER_ADMIN'].includes(user?.globalRole);
 export function tenantRole(user, id) {
   return user?.memberships?.find(m => m.tenantId === id && m.active !== false)?.role;

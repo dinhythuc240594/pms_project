@@ -60,7 +60,7 @@ ROLE_ACTIONS = {
     },
 }
 for _actions in ROLE_ACTIONS.values():
-    _actions.update({"workspace.view", "profile.view", "notifications.view"})
+    _actions.update({"workspace.view", "profile.view", "notifications.view", "chatbot.view", "chatbot.send"})
 ROLE_ACTIONS["FRONT_DESK"].add("channels.view")
 
 

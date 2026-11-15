@@ -147,7 +147,16 @@ def load_config(environ=None, *, env_file=BACKEND_DIR / ".env"):
             raise ValueError
     except (ValueError, TypeError):
         raise ConfigurationError("MARKETING_AI_DAILY_LIMIT must be from 1 to 1000.") from None
+    try:
+        chatbot_daily_limit = int(values.get("OPENAI_CHAT_DAILY_LIMIT", "30"))
+        if not 1 <= chatbot_daily_limit <= 1000:
+            raise ValueError
+    except (ValueError, TypeError):
+        raise ConfigurationError("OPENAI_CHAT_DAILY_LIMIT must be from 1 to 1000.") from None
     return {
+        "OPENAI_API_KEY": values.get("OPENAI_API_KEY") or values.get("MARKETING_AI_API_KEY", ""),
+        "OPENAI_CHAT_MODEL": values.get("OPENAI_CHAT_MODEL", ""),
+        "OPENAI_CHAT_DAILY_LIMIT": chatbot_daily_limit,
         "MARKETING_ENABLED": marketing_enabled == "true",
         "MARKETING_PUBLIC_ORIGIN": marketing_origin,
         "MARKETING_AI_API_KEY": values.get("MARKETING_AI_API_KEY", ""),

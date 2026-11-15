@@ -1,7 +1,7 @@
 import { t as tUi, tr as labelUi, useI18n } from '../../../shared/i18n/useI18n.js';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, ChevronDown, Info, KeyRound, LogOut, Menu, Settings, ShieldCheck, UserRound, Users } from 'lucide-react';
+import { Building2, ChevronDown, Info, KeyRound, LogOut, Menu, MessageSquare, Settings, ShieldCheck, UserRound, Users } from 'lucide-react';
 import { AccessLink as Link } from '../../../shared/components/AccessControl';
 import LegacyOverlay from './LegacyOverlay';
 import UsageInfoModal from './UsageInfoModal';
@@ -11,7 +11,7 @@ import { ROLE_NAMES } from '../data/access';
 import LanguageSwitcher from '../../../shared/i18n/LanguageSwitcher.jsx';
 import { useDraftNavigation } from '../../../shared/drafts/DraftGuardProvider';
 
-export default function Header({ onOpenNavigation }) {
+export default function Header({ onOpenNavigation, onToggleChatbot, chatbotOpen = false, chatbotTriggerRef }) {
   useI18n();
   const { logout, user, role, tenant, isManager, subscription, settingsPath } = usePms();
   const [profileOpen, setProfileOpen] = useState(false);
@@ -50,6 +50,7 @@ export default function Header({ onOpenNavigation }) {
       <div className="pms-topbar-context"><button type="button" className="pms-topbar-icon pms-menu-trigger" aria-label={tUi("header.openHotelMenu")} aria-haspopup="dialog" aria-controls="pms-mobile-navigation" onClick={onOpenNavigation}><Menu size={20} /></button><Building2 className="pms-context-icon" size={20} aria-hidden="true" /><div><span>{tUi("header.workspace")}</span><strong title={tenant?.name}>{tenant?.name || 'LOHA PMS'}</strong></div></div>
       <div className="pms-topbar-actions">
         <div className="pms-topbar-language"><LanguageSwitcher compact /></div>
+        <button ref={chatbotTriggerRef} type="button" className="pms-topbar-icon pms-chatbot-trigger" aria-label={tUi('chatbot.open')} aria-expanded={chatbotOpen} aria-controls="pms-chatbot-sidebar" disabled={!tenant?.id || !onToggleChatbot} onClick={onToggleChatbot}><MessageSquare size={19} aria-hidden="true" /></button>
         <NotificationBell />
         <button type="button" className="pms-plan-button" onClick={openUsage} aria-label={tUi("header.planInfo")}><ShieldCheck size={16} /><span>{subscription?.planName || tUi("header.plan")}</span><ChevronDown size={14} /></button>
         <div className="pms-account" ref={profileRef}>

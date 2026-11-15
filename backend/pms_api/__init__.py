@@ -11,6 +11,7 @@ from .auth.urls import auth
 from .bookings.urls import booking
 from .catalog.urls import catalog
 from .channels.urls import channels
+from .chatbot.urls import chatbot
 from .commands import register_commands
 from .config import BACKEND_DIR, load_config
 from .extensions import db, migrate
@@ -63,6 +64,7 @@ def create_app(environ=None, *, env_file=BACKEND_DIR / ".env"):
     app.register_blueprint(admin)
     app.register_blueprint(features)
     app.register_blueprint(catalog)
+    app.register_blueprint(chatbot)
     app.register_blueprint(channels)
     app.register_blueprint(booking)
     app.register_blueprint(finance)

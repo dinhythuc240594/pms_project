@@ -1311,5 +1311,21 @@
   "auditIp.copy": "Copy IP",
   "auditIp.copied": "IP address copied.",
   "auditIp.copyFailed": "Could not copy. Please try again.",
-  "auditIp.title": "IP address information"
+  "auditIp.title": "IP address information",
+  "chatbot.title": "Codex assistant",
+  "chatbot.open": "Open Codex assistant",
+  "chatbot.close": "Close assistant",
+  "chatbot.frameTitle": "Chat with the OpenAI assistant",
+  "chatbot.poweredBy": "OpenAI",
+  "chatbot.newConversation": "New conversation",
+  "chatbot.messages": "Conversation",
+  "chatbot.welcome": "I can help explain PMS workflows, draft content and assist with coding.",
+  "chatbot.you": "You",
+  "chatbot.thinking": "The assistant is replying…",
+  "chatbot.checkAgain": "Check request again",
+  "chatbot.unavailable": "The assistant has not been enabled by your administrator.",
+  "chatbot.input": "Your question",
+  "chatbot.placeholder": "Type a question…",
+  "chatbot.send": "Send",
+  "chatbot.tenantDenied": "You do not have access to chat in this hotel."
 }

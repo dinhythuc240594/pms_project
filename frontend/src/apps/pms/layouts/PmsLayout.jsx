@@ -5,7 +5,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { RefreshCw } from 'lucide-react';
 import { usePms } from '../data/usePms';
 import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
+import ChatbotWorkspace from '../chatbot/ChatbotWorkspace';
 import RequestActivity from '../../../shared/components/RequestActivity';
 import { watchWorkspace } from '../data/workspaceSync';
 import './PmsLayout.css';
@@ -16,7 +16,7 @@ export default function PmsLayout() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [refreshing, setRefreshing] = useState(false), [blockedRefresh, setBlockedRefresh] = useState(null);
-  const { subscription, storageWarning, tenantId, tenant, settings, accessDialog, authGeneration, workspaceLoading, pendingRequests, workspaceRevision, workspaceSyncError, writeReceipt, lastSyncedAt, refreshWorkspace } = usePms();
+  const { user, subscription, storageWarning, tenantId, tenant, settings, accessDialog, authGeneration, workspaceLoading, pendingRequests, workspaceRevision, workspaceSyncError, writeReceipt, lastSyncedAt, refreshWorkspace } = usePms();
   const { pathname } = useLocation();
   const menuRef = useRef(null);
   const syncControl = useRef(null), syncState = useRef(null);
@@ -46,7 +46,7 @@ export default function PmsLayout() {
       <dialog id="pms-mobile-navigation" className="pms-mobile-navigation" ref={menuRef} aria-label={tUi("nav.hotelMenu")} onClick={event => { if (event.target === event.currentTarget) setMobileMenu(false); }} onCancel={() => setMobileMenu(false)} onClose={() => setMobileMenu(false)}><Sidebar onClose={() => setMobileMenu(false)} /></dialog>
       <div className="pms-workspace">
         <RequestActivity />
-        <Header onOpenNavigation={() => setMobileMenu(true)} />
+        <ChatbotWorkspace key={JSON.stringify([tenantId, user?.id, authGeneration])} tenantId={tenantId} onOpenNavigation={() => setMobileMenu(true)}>
         <main id="pms-main-content" className="pms-main" tabIndex={-1}>
           <div className="pms-content">
             {subscription?.operationalAccess?.active && <p className="pms-shell-notice" role="status">{tUi('billing.operationalAccess', { until: formatDateTime(subscription.operationalAccess.until, settings.timezone) })} {tUi('billing.operationalAccessHint')}</p>}
@@ -63,6 +63,7 @@ export default function PmsLayout() {
             <Outlet key={JSON.stringify([tenantId, authGeneration, pathname])} />
           </div>
         </main>
+        </ChatbotWorkspace>
       </div>
     </div>
   );

@@ -43,4 +43,5 @@ README-VI.md
 /docs
 *.md
 !/backend/pms_api/marketing/README.md
+!/backend/pms_api/chatbot/README.md
 /backend/tests

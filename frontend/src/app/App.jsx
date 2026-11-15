@@ -61,6 +61,7 @@ const Sales = lazyRoute(() => import('../apps/pms/finance/pages/Sales'));
 const UserManagement = lazyRoute(() => import('../apps/pms/user-management/pages/UserManagement'));
 const MarketingPages = lazyRoute(() => import('../apps/pms/marketing/pages/MarketingPages'));
 const MarketingBuilder = lazyRoute(() => import('../apps/pms/marketing/pages/MarketingBuilder'));
+const ChatbotEmbed = lazyRoute(() => import('../apps/pms/chatbot/ChatbotEmbed'));
 const MarketingBrand = lazyRoute(() => import('../apps/pms/marketing/pages/MarketingBrand'));
 const Reports = lazyRoute(() => import('../apps/pms/reports/pages/Reports'));
 const DayReconciliation = lazyRoute(() => import('../apps/pms/reconciliation/DayReconciliation'));
@@ -115,6 +116,7 @@ function AppContent() {
 // oxlint-disable-next-line react/only-export-components -- Share the actual route tree with integration tests.
 export const appRoutes = createRoutesFromElements(
   <Route element={<AppContent />}>
+    <Route path="/id/chatbot/embed" element={<LayoutGuard><ChatbotEmbed /></LayoutGuard>} />
     {/* ---------------------------------------------------------
     PHÂN VÙNG 1: MARKETING (DOMAIN CHÍNH)
     Sử dụng MarketingLayout (Header, Footer chuẩn doanh nghiệp)

@@ -1171,5 +1171,21 @@
   "billing.refunded": "已退款 / 冲销",
   "billing.operationalAccess": "临时运营权限有效至 {until}",
   "billing.completionRestricted": "临时运营权限仅允许完成现有业务。此操作需要续订套餐。",
-  "billing.operationalAccessHint": "仅允许完成现有住宿及款项业务，新增功能仍停用。"
+  "billing.operationalAccessHint": "仅允许完成现有住宿及款项业务，新增功能仍停用。",
+  "chatbot.title": "Codex 助手",
+  "chatbot.open": "打开 Codex 助手",
+  "chatbot.close": "关闭助手",
+  "chatbot.frameTitle": "与 OpenAI 助手聊天",
+  "chatbot.poweredBy": "OpenAI",
+  "chatbot.newConversation": "新对话",
+  "chatbot.messages": "对话内容",
+  "chatbot.welcome": "我可以帮助解释 PMS 工作流程、起草内容和协助编程。",
+  "chatbot.you": "您",
+  "chatbot.thinking": "助手正在回复…",
+  "chatbot.checkAgain": "重新检查请求",
+  "chatbot.unavailable": "管理员尚未启用助手。",
+  "chatbot.input": "您的问题",
+  "chatbot.placeholder": "输入问题…",
+  "chatbot.send": "发送",
+  "chatbot.tenantDenied": "您无权在此酒店中使用聊天功能。"
 }

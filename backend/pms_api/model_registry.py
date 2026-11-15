@@ -6,6 +6,7 @@ from importlib import import_module
 def register_models():
     for module in (
         "core_models",
+        "chatbot.models",
         "marketing.models",
         "admin.feature_models",
         "admin.client_models",

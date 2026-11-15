@@ -1171,5 +1171,21 @@
   "billing.refunded": "Đã hoàn/đảo",
   "billing.operationalAccess": "Được vận hành tạm đến {until}",
   "billing.completionRestricted": "Quyền vận hành tạm chỉ cho hoàn tất nghiệp vụ hiện có. Thao tác này cần gia hạn gói.",
-  "billing.operationalAccessHint": "Chỉ hoàn tất lưu trú và khoản tiền hiện có; chưa mở quyền tạo mới."
+  "billing.operationalAccessHint": "Chỉ hoàn tất lưu trú và khoản tiền hiện có; chưa mở quyền tạo mới.",
+  "chatbot.title": "Trợ lý Codex",
+  "chatbot.open": "Mở trợ lý Codex",
+  "chatbot.close": "Đóng trợ lý",
+  "chatbot.frameTitle": "Trò chuyện với trợ lý OpenAI",
+  "chatbot.poweredBy": "OpenAI",
+  "chatbot.newConversation": "Cuộc trò chuyện mới",
+  "chatbot.messages": "Nội dung trò chuyện",
+  "chatbot.welcome": "Tôi có thể giúp bạn giải thích nghiệp vụ PMS, soạn nội dung và hỗ trợ lập trình.",
+  "chatbot.you": "Bạn",
+  "chatbot.thinking": "Trợ lý đang trả lời…",
+  "chatbot.checkAgain": "Kiểm tra lại yêu cầu",
+  "chatbot.unavailable": "Trợ lý chưa được quản trị viên bật.",
+  "chatbot.input": "Câu hỏi của bạn",
+  "chatbot.placeholder": "Nhập câu hỏi…",
+  "chatbot.send": "Gửi",
+  "chatbot.tenantDenied": "Bạn không có quyền mở trò chuyện trong khách sạn này."
 }
