@@ -119,6 +119,7 @@ export function PmsProvider({ children }) {
     return result;
   }
   const requestTenant=useCallback(async(path,options)=>{const token=scope.current();try{if(!token.tenantId)throw new Error('Chưa chọn khách sạn.');const data=await api.request('/api/tenants/'+encodeURIComponent(token.tenantId)+path,options);if(!scope.isCurrent(token))throw new Error('Khách sạn đã thay đổi.');return data;}catch(error){if(scope.isCurrent(token)&&[401,403].includes(error.status)){if(error.code==='tenant_denied')revokeTenant(token.tenantId);return fail(error);}throw error;}},[api,scope,fail,revokeTenant,tenantId,user?.id]);
+  const marketingRequest=useCallback((path,options)=>requestTenant('/marketing'+path,options),[requestTenant]);
   const access=(action,feature,write=!action.endsWith('.view'))=>{
     const result=permitted(user,tenant,action,write);
     return result.allowed ? subscriptionDecision(state.subscription,state.features,action,feature,write) : result;
@@ -225,6 +226,7 @@ export function PmsProvider({ children }) {
   const getCommissions=useCallback(filters=>requestTenant('/commissions?'+dateRangeParams(filters,{startKey:'startDate',endKey:'endDate'})),[requestTenant]);
   const features=Object.entries(state.features||{}).filter(([code])=>isFeatureVisible(code)).map(([code,enabled])=>({...FEATURES.find(item=>item.code===code),id:code,code,name:FEATURES.find(item=>item.code===code)?.name||code,enabledGlobal:enabled,allowed:enabled}));
   const value={
+    marketingRequest,
     ...state,...state.masters,loading,workspaceLoading:workspaceLoading||Boolean(user&&tenantId&&state.tenant?.id!==tenantId&&!loadError),pendingRequests,workspaceRevision,lastSyncedAt,workspaceSyncError,writeReceipt,refreshWorkspace,loadError:loadError||adminLoadError?.message||'',loadErrorStatus:loadError?loadErrorStatus:adminLoadError?.status||null,retry:retryData,tenant,tenantId,hotels,tenants:systemUser(user)?allTenants:hotels,user,role,isManager:systemUser(user),authGeneration,
     workspace:{tenants:allTenants.length?allTenants:hotels,users:state.users,auditLogs,features,tenantFeatureOverrides:{}},
     login,logout,selectTenant,access,routeAccess,settingsPath:routeAccess('/id/settings').allowed?'/id/settings':'/id/settings?section=channels',allowAction,runAction,accessDialog,showAccess:setAccessDialog,closeAccess:()=>setAccessDialog(null),

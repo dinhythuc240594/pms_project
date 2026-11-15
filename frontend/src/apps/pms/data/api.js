@@ -40,6 +40,9 @@ export function permitted(user, tenant, action, write = false) {
   return { allowed: true };
 }
 export const ACTION_FEATURES = {
+  'marketing.view': 'AI_MARKETING_PAGES', 'marketing.write': 'AI_MARKETING_PAGES',
+  'marketing.generate': 'AI_MARKETING_PAGES', 'marketing.review': 'AI_MARKETING_PAGES',
+  'marketing.publish': 'AI_MARKETING_PAGES', 'marketing.unpublish': 'AI_MARKETING_PAGES',
   'reservations.checkout': 'RESERVATION_VIEW', 'housekeeping.complete': 'HOUSEKEEPING',
   'dashboard.view': 'DASHBOARD', 'reservations.view': 'RESERVATION_VIEW', 'reservations.write': 'RESERVATION_CREATE',
   'rooms.view': 'ROOM_DIAGRAM', 'housekeeping.view': 'HOUSEKEEPING', 'housekeeping.write': 'HOUSEKEEPING', 'housekeeping.manage': 'HOUSEKEEPING',

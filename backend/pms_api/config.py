@@ -127,7 +127,32 @@ def load_config(environ=None, *, env_file=BACKEND_DIR / ".env"):
     default_origins = (
         "http://localhost:5173,http://127.0.0.1:5173" if environment != "production" else ""
     )
+    marketing_origin = values.get("MARKETING_PUBLIC_ORIGIN", "").rstrip("/")
+    if marketing_origin:
+        try:
+            parsed_origin = urlsplit(marketing_origin)
+            if (parsed_origin.scheme not in ({"https"} if environment == "production" else {"http", "https"})
+                    or not parsed_origin.hostname or parsed_origin.username or parsed_origin.password
+                    or parsed_origin.path or parsed_origin.query or parsed_origin.fragment):
+                raise ValueError
+            parsed_origin.port
+        except ValueError:
+            raise ConfigurationError("MARKETING_PUBLIC_ORIGIN must be an exact public origin.") from None
+    marketing_enabled = values.get("MARKETING_ENABLED", "true")
+    if marketing_enabled not in ("true", "false"):
+        raise ConfigurationError("MARKETING_ENABLED must be true or false.")
+    try:
+        marketing_daily_limit = int(values.get("MARKETING_AI_DAILY_LIMIT", "20"))
+        if not 1 <= marketing_daily_limit <= 1000:
+            raise ValueError
+    except (ValueError, TypeError):
+        raise ConfigurationError("MARKETING_AI_DAILY_LIMIT must be from 1 to 1000.") from None
     return {
+        "MARKETING_ENABLED": marketing_enabled == "true",
+        "MARKETING_PUBLIC_ORIGIN": marketing_origin,
+        "MARKETING_AI_API_KEY": values.get("MARKETING_AI_API_KEY", ""),
+        "MARKETING_AI_MODEL": values.get("MARKETING_AI_MODEL", ""),
+        "MARKETING_AI_DAILY_LIMIT": marketing_daily_limit,
         "APP_ENV": environment,
         "DEBUG": False,
         "TESTING": environment == "testing",

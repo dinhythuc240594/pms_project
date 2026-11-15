@@ -1,0 +1,311 @@
+<div id="loha-marketing-design" lang="vi" aria-label="Thiết kế trình tạo trang marketing khách sạn">
+  <style>
+    #loha-marketing-design{--lm-bg:light-dark(#f3f5f7,#101923);--lm-panel:light-dark(#fff,#18232f);--lm-ink:light-dark(#173049,#ebf1f7);--lm-muted:light-dark(#526578,#b0bfce);--lm-line:light-dark(#d9e1e8,#3c4c5b);--lm-soft:light-dark(#eaf3fb,#233f56);--lm-blue:light-dark(#0865ad,#81c7ff);--lm-button:light-dark(#0865ad,#81c7ff);--lm-on-button:light-dark(#fff,#102c43);--lm-green:light-dark(#16613b,#98dbb4);--lm-warn:light-dark(#87521a,#efc27f);--lm-page:light-dark(#fff,#18232f);font:14px/1.5 'Be Vietnam Pro',Inter,system-ui,sans-serif;color:var(--lm-ink);width:100%;color-scheme:light dark}
+    #loha-marketing-design *{box-sizing:border-box;min-width:0}
+    #loha-marketing-design [hidden]{display:none!important}
+    #loha-marketing-design h2,#loha-marketing-design h3,#loha-marketing-design p{margin:0}
+    #loha-marketing-design button,#loha-marketing-design input,#loha-marketing-design textarea,#loha-marketing-design select{font:inherit;color:inherit}
+    #loha-marketing-design button{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 12px;border:1px solid var(--lm-line);border-radius:6px;background:var(--lm-panel);max-width:100%;white-space:normal;text-align:center}
+    #loha-marketing-design button:hover:not(:disabled){background:var(--lm-soft)}
+    #loha-marketing-design button:disabled{opacity:.5}
+    #loha-marketing-design .lm-primary{background:var(--lm-button);color:var(--lm-on-button);border-color:var(--lm-button)}
+    #loha-marketing-design .lm-primary:hover:not(:disabled){background:var(--lm-button);filter:brightness(.93)}
+    #loha-marketing-design input:not([type=checkbox]),#loha-marketing-design textarea,#loha-marketing-design select{width:100%;padding:9px 10px;border:1px solid var(--lm-line);border-radius:5px;background:var(--lm-panel)}
+    #loha-marketing-design textarea{resize:vertical;min-height:125px}
+    #loha-marketing-design input[type=checkbox]{width:17px;height:17px;flex:0 0 auto;accent-color:var(--lm-button);margin:3px 0 0}
+    #loha-marketing-design label{display:block}
+    #loha-marketing-design label>span:first-child{display:block;font-weight:600;margin-bottom:6px}
+    #loha-marketing-design .lm-shell{background:var(--lm-bg);border:1px solid var(--lm-line);border-radius:10px;overflow:clip}
+    #loha-marketing-design .lm-chrome{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:var(--lm-panel);padding:12px 18px;border-bottom:1px solid var(--lm-line)}
+    #loha-marketing-design .lm-logo{font-size:19px;font-weight:750;letter-spacing:1px;color:var(--lm-blue)}
+    #loha-marketing-design .lm-chrome-label{border-left:1px solid var(--lm-line);padding-left:12px}
+    #loha-marketing-design .lm-hotel{margin-left:auto;font-size:12px;color:var(--lm-muted)}
+    #loha-marketing-design .lm-design-label{font-size:11px;letter-spacing:.7px;color:var(--lm-muted)}
+    #loha-marketing-design .lm-toolbar{padding:16px 18px;display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+    #loha-marketing-design .lm-title-group{flex:1 1 240px}
+    #loha-marketing-design .lm-breadcrumb{font-size:11px;color:var(--lm-muted);margin-bottom:4px}
+    #loha-marketing-design h2{font-size:19px;font-weight:650}
+    #loha-marketing-design .lm-actions{display:flex;gap:7px;flex-wrap:wrap}
+    #loha-marketing-design .lm-statusbar{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:0 18px 14px;font-size:12px}
+    #loha-marketing-design .lm-working{color:var(--lm-warn);font-weight:600}
+    #loha-marketing-design .lm-live{color:var(--lm-green)}
+    #loha-marketing-design .lm-workspace{display:grid;grid-template-columns:minmax(190px,220px) minmax(0,1fr) minmax(180px,220px);border-top:1px solid var(--lm-line)}
+    #loha-marketing-design .lm-left,#loha-marketing-design .lm-inspector{padding:16px;background:var(--lm-panel)}
+    #loha-marketing-design .lm-left{border-right:1px solid var(--lm-line)}
+    #loha-marketing-design .lm-inspector{border-left:1px solid var(--lm-line)}
+    #loha-marketing-design .lm-panel-title{font-size:13px;font-weight:650;margin-bottom:12px}
+    #loha-marketing-design .lm-stack{display:grid;gap:14px}
+    #loha-marketing-design .lm-small{font-size:12px;color:var(--lm-muted)}
+    #loha-marketing-design .lm-template-list{display:flex;gap:6px;flex-wrap:wrap}
+    #loha-marketing-design .lm-template-list button{font-size:11px;padding:5px 8px}
+    #loha-marketing-design button[aria-pressed=true]{border-color:var(--lm-blue);background:var(--lm-soft);color:var(--lm-blue)}
+    #loha-marketing-design .lm-outline{border-top:1px solid var(--lm-line);padding-top:16px}
+    #loha-marketing-design .lm-outline button{width:100%;text-align:left;justify-content:flex-start;margin-top:5px;border-color:transparent}
+    #loha-marketing-design .lm-outline button span:first-child{font-size:11px;color:var(--lm-muted);width:23px}
+    #loha-marketing-design .lm-proposal{padding:10px;border:1px solid var(--lm-line);border-radius:6px;display:grid;gap:8px}
+    #loha-marketing-design .lm-preview{padding:14px;align-self:start}
+    #loha-marketing-design .lm-devicebar{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+    #loha-marketing-design .lm-devicebar button{font-size:12px;padding:6px 9px}
+    #loha-marketing-design .lm-page{width:100%;margin-inline:auto;background:var(--lm-page);border:1px solid var(--lm-line);border-radius:7px;overflow:clip;transition:max-width .15s ease;max-width:100%}
+    #loha-marketing-design .lm-page.is-mobile{max-width:320px}
+    #loha-marketing-design .lm-page-nav{padding:13px 16px;display:flex;gap:8px;justify-content:space-between;align-items:center;border-bottom:1px solid var(--lm-line)}
+    #loha-marketing-design .lm-page-name{font-weight:650;font-size:12px}
+    #loha-marketing-design .lm-page-nav>span:last-child{font-size:10px;color:var(--lm-muted)}
+    #loha-marketing-design .lm-hero{padding:24px 20px 22px;background:var(--lm-soft)}
+    #loha-marketing-design .lm-eyebrow{font-size:10px;letter-spacing:1.7px;color:var(--lm-blue);margin-bottom:12px}
+    #loha-marketing-design .lm-hero h3{font-size:clamp(23px,3.2vw,34px);font-weight:550;line-height:1.24;letter-spacing:-.6px;overflow-wrap:anywhere;margin-bottom:12px}
+    #loha-marketing-design .lm-hero p{color:var(--lm-muted);font-size:12px;line-height:1.7}
+    #loha-marketing-design .lm-cta{display:inline-block;margin-top:18px;padding:9px 12px;background:var(--lm-button);color:var(--lm-on-button);border-radius:4px;font-size:11px;font-weight:600;overflow-wrap:anywhere}
+    #loha-marketing-design .lm-page-section{padding:18px 20px;border-top:1px solid var(--lm-line)}
+    #loha-marketing-design .lm-page-section h3{font-size:15px;font-weight:600;margin-bottom:7px}
+    #loha-marketing-design .lm-page-section p{font-size:11px;color:var(--lm-muted)}
+    #loha-marketing-design .lm-room-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    #loha-marketing-design .lm-room-image{height:66px;background:var(--lm-soft);display:flex;align-items:center;justify-content:center;color:var(--lm-muted);font-size:10px;border-radius:4px}
+    #loha-marketing-design .lm-room-name{font-size:11px;margin-top:6px;font-weight:600}
+    #loha-marketing-design .lm-amenities{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+    #loha-marketing-design .lm-amenities span{font-size:10px;border:1px solid var(--lm-line);border-radius:4px;padding:4px 7px}
+    #loha-marketing-design .lm-page-section.is-active,#loha-marketing-design .lm-hero.is-active{box-shadow:inset 3px 0 var(--lm-blue)}
+    #loha-marketing-design .lm-page-footer{padding:12px 20px;border-top:1px solid var(--lm-line);font-size:10px;color:var(--lm-muted)}
+    #loha-marketing-design .lm-inspector .lm-stack{gap:16px}
+    #loha-marketing-design .lm-inspector label{font-size:12px}
+    #loha-marketing-design .lm-inspector textarea{min-height:94px}
+    #loha-marketing-design .lm-inspector-note{padding-top:12px;border-top:1px solid var(--lm-line)}
+    #loha-marketing-design .lm-review{padding:18px;background:var(--lm-panel);border-left:1px solid var(--lm-line);align-self:stretch}
+    #loha-marketing-design .lm-review h3{font-size:16px;font-weight:650}
+    #loha-marketing-design .lm-checklist{display:grid;gap:13px;margin:18px 0}
+    #loha-marketing-design .lm-check{display:flex;align-items:flex-start;gap:9px;font-size:12px}
+    #loha-marketing-design .lm-check span{display:inline!important;font-weight:400!important;margin:0!important}
+    #loha-marketing-design .lm-checks-passed{font-size:12px;color:var(--lm-green);margin-top:12px}
+    #loha-marketing-design .lm-review-actions{display:grid;gap:9px;border-top:1px solid var(--lm-line);padding-top:16px}
+    #loha-marketing-design .lm-review-status{margin-top:12px;font-size:12px;color:var(--lm-green)}
+    #loha-marketing-design .lm-review-url{margin-top:14px;font-size:11px;overflow-wrap:anywhere;color:var(--lm-muted)}
+    #loha-marketing-design .lm-bottom{padding:12px 18px;background:var(--lm-panel);border-top:1px solid var(--lm-line);font-size:11px;color:var(--lm-muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+    #loha-marketing-design .lm-workspace.is-review{grid-template-columns:minmax(0,1fr) minmax(245px,320px)}
+    #loha-marketing-design .lm-workspace.inspector-below:not(.is-review){grid-template-columns:minmax(190px,220px) minmax(0,1fr)}
+    #loha-marketing-design .lm-workspace.inspector-below .lm-inspector{grid-column:1/-1;border-left:0;border-top:1px solid var(--lm-line)}
+    #loha-marketing-design .lm-workspace.inspector-below .lm-inspector .lm-stack{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media(max-width:880px){#loha-marketing-design .lm-workspace{grid-template-columns:minmax(180px,220px) minmax(0,1fr)}#loha-marketing-design .lm-inspector{grid-column:1/-1;border-left:0;border-top:1px solid var(--lm-line)}#loha-marketing-design .lm-inspector .lm-stack{grid-template-columns:1fr 1fr}#loha-marketing-design .lm-workspace.is-review{grid-template-columns:minmax(0,1fr) minmax(220px,280px)}}
+    @media(max-width:600px){#loha-marketing-design .lm-workspace,#loha-marketing-design .lm-workspace.is-review,#loha-marketing-design .lm-workspace.inspector-below:not(.is-review){grid-template-columns:minmax(0,1fr)}#loha-marketing-design .lm-left{border-right:0;border-bottom:1px solid var(--lm-line)}#loha-marketing-design .lm-review{border-left:0;border-top:1px solid var(--lm-line)}#loha-marketing-design .lm-inspector .lm-stack,#loha-marketing-design .lm-workspace.inspector-below .lm-inspector .lm-stack{grid-template-columns:1fr}#loha-marketing-design .lm-hotel{margin-left:0;flex-basis:100%}#loha-marketing-design .lm-toolbar{padding:14px}#loha-marketing-design .lm-title-group{flex-basis:100%}#loha-marketing-design .lm-preview{padding:10px}#loha-marketing-design .lm-outline{padding-top:10px}#loha-marketing-design .lm-outline button{display:inline-flex;width:auto}#loha-marketing-design input:not([type=checkbox]),#loha-marketing-design textarea,#loha-marketing-design select{font-size:16px}#loha-marketing-design .lm-page-nav>span:last-child{display:none}}
+    @media(pointer:coarse){#loha-marketing-design button{min-height:44px}}
+    @media(prefers-reduced-motion:reduce){#loha-marketing-design .lm-page{transition:none}}
+  </style>
+  <div class="lm-shell">
+    <header class="lm-chrome">
+      <span class="lm-logo">LOHA</span><span class="lm-chrome-label">Marketing</span><span class="lm-design-label">BẢN THIẾT KẾ</span>
+      <span class="lm-hotel">An Nhiên Hotel · Chủ khách sạn</span>
+    </header>
+    <div class="lm-toolbar">
+      <div class="lm-title-group"><div class="lm-breadcrumb">Marketing / Trang giới thiệu / Chỉnh sửa</div><h2>Giới thiệu khách sạn</h2></div>
+      <div class="lm-actions">
+        <button id="lm-edit" class="cursor-interaction" type="button" hidden>Quay lại chỉnh sửa</button>
+        <button id="lm-save" class="cursor-interaction" type="button">Lưu bản nháp</button>
+        <button id="lm-review-open" class="lm-primary cursor-interaction" type="button">Xem trước &amp; duyệt</button>
+      </div>
+    </div>
+    <div class="lm-statusbar"><span id="lm-working" class="lm-working">Bản nháp v3 · Chưa duyệt</span><span id="lm-live" class="lm-live">Bản công khai v2</span></div>
+    <div id="lm-workspace" class="lm-workspace">
+      <aside id="lm-left" class="lm-left" aria-label="Yêu cầu AI và bố cục trang">
+        <div class="lm-stack">
+          <div><div class="lm-panel-title">Tạo với AI</div><div class="lm-template-list" aria-label="Prompt mẫu">
+            <button class="cursor-interaction" type="button" data-template="hotel" aria-pressed="true">Giới thiệu</button>
+            <button class="cursor-interaction" type="button" data-template="campaign" aria-pressed="false">Chiến dịch</button>
+            <button class="cursor-interaction" type="button" data-template="custom" aria-pressed="false">Tự nhập</button>
+          </div></div>
+          <label for="lm-prompt"><span class="lm-small">Yêu cầu của bạn</span><textarea id="lm-prompt">Tạo trang giới thiệu An Nhiên Hotel, giọng văn gần gũi, tông xanh dịu. Có hạng phòng, tiện ích và liên hệ. Dùng thông tin khách sạn đã xác nhận; không tự tạo giá hoặc đánh giá.</textarea></label>
+          <button id="lm-generate" class="lm-primary cursor-interaction" type="button"><i data-lucide="sparkles" aria-hidden="true"></i>Tạo bản nháp</button>
+          <div id="lm-proposal" class="lm-proposal" hidden><p class="lm-small">Đề xuất mới đã sẵn sàng. Bản nháp chưa thay đổi.</p><p id="lm-proposal-heading"></p><button id="lm-apply" class="cursor-interaction" type="button">Áp dụng đề xuất</button></div>
+          <div class="lm-outline"><div class="lm-panel-title">Bố cục trang</div>
+            <button class="cursor-interaction" type="button" data-section="hero" aria-pressed="true"><span>01</span>Mở đầu</button>
+            <button class="cursor-interaction" type="button" data-section="rooms" aria-pressed="false"><span>02</span>Hạng phòng</button>
+            <button class="cursor-interaction" type="button" data-section="amenities" aria-pressed="false"><span>03</span>Tiện ích</button>
+            <button class="cursor-interaction" type="button" data-section="contact" aria-pressed="false"><span>04</span>Liên hệ</button>
+          </div>
+        </div>
+      </aside>
+      <main class="lm-preview" aria-label="Xem trước trang khách sạn">
+        <div class="lm-devicebar" aria-label="Kích thước xem trước"><button class="cursor-interaction" type="button" data-device="desktop" aria-pressed="true"><i data-lucide="monitor" aria-hidden="true"></i>Máy tính</button><button class="cursor-interaction" type="button" data-device="mobile" aria-pressed="false"><i data-lucide="smartphone" aria-hidden="true"></i>Điện thoại</button></div>
+        <article id="lm-page" class="lm-page">
+          <div class="lm-page-nav"><span class="lm-page-name">AN NHIÊN HOTEL</span><span>Không gian · Hạng phòng · Liên hệ</span></div>
+          <section id="lm-preview-hero" class="lm-hero is-active"><div class="lm-eyebrow">CHÀO MỪNG BẠN</div><h3 id="lm-heading-hero">Một khoảng nghỉ, theo cách của bạn.</h3><p id="lm-body-hero">Khám phá không gian An Nhiên Hotel và liên hệ để được tư vấn cho kỳ lưu trú sắp tới.</p><span id="lm-preview-cta" class="lm-cta">Liên hệ đặt phòng</span></section>
+          <section id="lm-preview-rooms" class="lm-page-section"><h3 id="lm-heading-rooms">Không gian cho kỳ lưu trú</h3><p id="lm-body-rooms">Chọn hạng phòng phù hợp và liên hệ khách sạn để biết thêm thông tin.</p><div class="lm-room-grid"><div><div class="lm-room-image">Hình ảnh khách sạn</div><div class="lm-room-name">Hạng phòng A</div></div><div><div class="lm-room-image">Hình ảnh khách sạn</div><div class="lm-room-name">Hạng phòng B</div></div></div></section>
+          <section id="lm-preview-amenities" class="lm-page-section"><h3 id="lm-heading-amenities">Những điều bạn cần</h3><p id="lm-body-amenities">Các tiện ích sẽ được lấy từ hồ sơ khách sạn đã xác nhận.</p><div class="lm-amenities"><span>Tiện ích trong hồ sơ</span><span>Thông tin đã xác nhận</span></div></section>
+          <section id="lm-preview-contact" class="lm-page-section"><h3 id="lm-heading-contact">Bắt đầu kỳ lưu trú của bạn</h3><p id="lm-body-contact">Liên hệ trực tiếp An Nhiên Hotel để được hỗ trợ.</p></section>
+          <footer class="lm-page-footer">An Nhiên Hotel · Nội dung và hình ảnh minh họa</footer>
+        </article>
+      </main>
+      <aside id="lm-inspector" class="lm-inspector" aria-label="Thuộc tính khối đang chọn">
+        <div class="lm-panel-title" id="lm-inspector-title">Chỉnh sửa · Mở đầu</div>
+        <div class="lm-stack">
+          <label for="lm-title-input"><span>Tiêu đề</span><input id="lm-title-input" value="Một khoảng nghỉ, theo cách của bạn." maxlength="100"></label>
+          <label for="lm-body-input"><span>Nội dung</span><textarea id="lm-body-input" maxlength="600">Khám phá không gian An Nhiên Hotel và liên hệ để được tư vấn cho kỳ lưu trú sắp tới.</textarea></label>
+          <label id="lm-cta-field" for="lm-cta-input"><span>Nút hành động chính</span><input id="lm-cta-input" value="Liên hệ đặt phòng" maxlength="45"></label>
+          <label for="lm-theme"><span>Phong cách trang</span><select id="lm-theme"><option value="blue">Xanh biển dịu</option><option value="green">Xanh lá thanh lịch</option></select></label>
+          <div class="lm-inspector-note lm-small">Thay đổi được lưu vào bản nháp. Trang đang công khai chỉ đổi sau khi duyệt và xuất bản.</div>
+        </div>
+      </aside>
+      <aside id="lm-review" class="lm-review" aria-label="Duyệt phiên bản trước khi xuất bản" hidden>
+        <h3 id="lm-review-title">Duyệt phiên bản v3</h3>
+        <p class="lm-small" style="margin-top:6px">Kiểm tra trang và xác nhận nội dung trước khi xuất bản.</p>
+        <div class="lm-checks-passed">✓ Bố cục và dữ liệu mẫu sẵn sàng review</div>
+        <div class="lm-checklist">
+          <label class="lm-check"><input type="checkbox" data-check="facts"><span>Thông tin khách sạn đã chính xác</span></label>
+          <label class="lm-check"><input type="checkbox" data-check="cta"><span>Nút liên hệ dẫn đúng địa chỉ</span></label>
+          <label class="lm-check"><input type="checkbox" data-check="assets"><span>Ảnh có quyền sử dụng, mô tả phù hợp</span></label>
+          <label class="lm-check"><input type="checkbox" data-check="mobile"><span>Đã xem trang trên điện thoại và máy tính</span></label>
+        </div>
+        <div class="lm-review-actions"><button id="lm-approve" class="lm-primary cursor-interaction" type="button" disabled>Duyệt phiên bản v3</button><button id="lm-publish" class="cursor-interaction" type="button" disabled>Xuất bản v3</button></div>
+        <p id="lm-review-status" class="lm-review-status" aria-live="polite">Chưa duyệt · Cần đủ 4 xác nhận</p>
+        <div class="lm-review-url">Đường dẫn dự kiến<br><strong>/p/an-nhien/gioi-thieu</strong></div>
+      </aside>
+    </div>
+    <footer class="lm-bottom"><span id="lm-notice" role="status" aria-live="polite">Đã lưu v3 · Bản công khai v2 vẫn giữ nguyên</span><span>Mô phỏng thao tác · Không xuất bản trang thật</span></footer>
+  </div>
+</div>
+<script>
+(() => {
+  const root = document.getElementById('loha-marketing-design');
+  const byId = id => root.querySelector('#' + id);
+  const all = selector => [...root.querySelectorAll(selector)];
+  const state = {
+    revision: 3, live: 2, approved: null, dirty: false, stage: 'edit', section: 'hero', template: 'hotel', device: 'desktop', cta: 'Liên hệ đặt phòng', proposal: null,
+    content: {
+      hero: { title: 'Một khoảng nghỉ, theo cách của bạn.', body: 'Khám phá không gian An Nhiên Hotel và liên hệ để được tư vấn cho kỳ lưu trú sắp tới.' },
+      rooms: { title: 'Không gian cho kỳ lưu trú', body: 'Chọn hạng phòng phù hợp và liên hệ khách sạn để biết thêm thông tin.' },
+      amenities: { title: 'Những điều bạn cần', body: 'Các tiện ích sẽ được lấy từ hồ sơ khách sạn đã xác nhận.' },
+      contact: { title: 'Bắt đầu kỳ lưu trú của bạn', body: 'Liên hệ trực tiếp An Nhiên Hotel để được hỗ trợ.' }
+    }
+  };
+  const names = { hero: 'Mở đầu', rooms: 'Hạng phòng', amenities: 'Tiện ích', contact: 'Liên hệ' };
+  function applySavedView(saved) {
+    const view = saved?.privateContent;
+    if (view?.device === 'desktop' || view?.device === 'mobile') state.device = view.device;
+    if (view?.section && Object.hasOwn(names, view.section)) state.section = view.section;
+  }
+  function rememberView() {
+    const saved = globalThis.openai?.setWidgetState?.({ modelContent: { previewDevice: state.device }, privateContent: { device: state.device, section: state.section } });
+    saved?.catch?.(() => {});
+  }
+  applySavedView(globalThis.openai?.widgetState);
+  const prompts = {
+    hotel: 'Tạo trang giới thiệu An Nhiên Hotel, giọng văn gần gũi, tông xanh dịu. Có hạng phòng, tiện ích và liên hệ. Dùng thông tin khách sạn đã xác nhận; không tự tạo giá hoặc đánh giá.',
+    campaign: 'Tạo landing page cho chiến dịch kỳ nghỉ của An Nhiên Hotel. Nội dung ngắn, CTA liên hệ đặt phòng. Chỉ dùng ưu đãi và điều kiện do khách sạn cung cấp. Đánh dấu thông tin còn thiếu.',
+    custom: ''
+  };
+  const notice = message => { byId('lm-notice').textContent = message; };
+  function invalidate() {
+    state.approved = null;
+    all('[data-check]').forEach(el => { el.checked = false; });
+  }
+  function render() {
+    const reviewing = state.stage === 'review';
+    const approved = state.approved === state.revision && !state.dirty;
+    const complete = all('[data-check]').every(el => el.checked);
+    byId('lm-workspace').classList.toggle('is-review', reviewing);
+    byId('lm-left').hidden = reviewing;
+    byId('lm-inspector').hidden = reviewing;
+    byId('lm-review').hidden = !reviewing;
+    byId('lm-edit').hidden = !reviewing;
+    byId('lm-save').hidden = reviewing;
+    byId('lm-review-open').hidden = reviewing;
+    byId('lm-working').textContent = `Bản nháp v${state.revision} · ${state.dirty ? 'Có thay đổi chưa lưu' : approved ? 'Đã duyệt' : 'Chưa duyệt'}`;
+    byId('lm-live').textContent = `Bản công khai v${state.live}`;
+    byId('lm-save').disabled = !state.dirty;
+    byId('lm-review-title').textContent = `Duyệt phiên bản v${state.revision}`;
+    byId('lm-approve').textContent = approved ? `Đã duyệt v${state.revision}` : `Duyệt phiên bản v${state.revision}`;
+    byId('lm-approve').disabled = !complete || approved;
+    byId('lm-publish').textContent = state.live === state.revision ? `v${state.revision} đã xuất bản` : `Xuất bản v${state.revision}`;
+    byId('lm-publish').disabled = !approved || state.live === state.revision;
+    byId('lm-publish').classList.toggle('lm-primary', approved);
+    byId('lm-review-status').textContent = state.live === state.revision ? `Mô phỏng: v${state.revision} đang công khai` : approved ? `Đã duyệt đúng v${state.revision} · Có thể xuất bản` : `Chưa duyệt · ${all('[data-check]').filter(el => el.checked).length}/4 xác nhận`;
+    byId('lm-page').classList.toggle('is-mobile', state.device === 'mobile');
+    all('[data-device]').forEach(el => el.setAttribute('aria-pressed', String(el.dataset.device === state.device)));
+    all('[data-section]').forEach(el => el.setAttribute('aria-pressed', String(el.dataset.section === state.section)));
+    Object.entries(state.content).forEach(([key, value]) => {
+      byId('lm-heading-' + key).textContent = value.title;
+      byId('lm-body-' + key).textContent = value.body;
+      byId('lm-preview-' + key).classList.toggle('is-active', !reviewing && state.section === key);
+    });
+    byId('lm-preview-cta').textContent = state.cta;
+    byId('lm-inspector-title').textContent = 'Chỉnh sửa · ' + names[state.section];
+    byId('lm-cta-field').hidden = state.section !== 'hero';
+    byId('lm-proposal').hidden = !state.proposal;
+  }
+  function loadInputs() {
+    byId('lm-title-input').value = state.content[state.section].title;
+    byId('lm-body-input').value = state.content[state.section].body;
+    byId('lm-cta-input').value = state.cta;
+  }
+  function markDirty() {
+    state.dirty = true;
+    state.proposal = null;
+    invalidate();
+    notice('Có thay đổi chưa lưu · Cần duyệt lại trước khi xuất bản');
+    render();
+  }
+  function saveDraft() {
+    if (state.dirty) { state.revision += 1; state.dirty = false; invalidate(); }
+    notice(`Đã lưu v${state.revision} · Bản công khai v${state.live} vẫn giữ nguyên`);
+    render();
+  }
+  byId('lm-title-input').addEventListener('input', event => { state.content[state.section].title = event.target.value; markDirty(); });
+  byId('lm-body-input').addEventListener('input', event => { state.content[state.section].body = event.target.value; markDirty(); });
+  byId('lm-cta-input').addEventListener('input', event => { state.cta = event.target.value; markDirty(); });
+  byId('lm-theme').addEventListener('change', event => {
+    const green = event.target.value === 'green';
+    byId('lm-page').style.setProperty('--lm-soft', green ? 'light-dark(#e8f2ec,#203d32)' : 'light-dark(#eaf3fb,#233f56)');
+    byId('lm-page').style.setProperty('--lm-button', green ? 'light-dark(#256846,#9dd7b6)' : 'light-dark(#0865ad,#81c7ff)');
+    byId('lm-page').style.setProperty('--lm-on-button', green ? 'light-dark(#fff,#113423)' : 'light-dark(#fff,#102c43)');
+    markDirty();
+  });
+  all('[data-template]').forEach(button => button.addEventListener('click', () => {
+    state.template = button.dataset.template;
+    byId('lm-prompt').value = prompts[state.template];
+    state.proposal = null;
+    all('[data-template]').forEach(el => el.setAttribute('aria-pressed', String(el === button)));
+    if (state.template === 'custom') byId('lm-prompt').focus();
+    render();
+  }));
+  all('[data-section]').forEach(button => button.addEventListener('click', () => { state.section = button.dataset.section; loadInputs(); render(); rememberView(); }));
+  all('[data-device]').forEach(button => button.addEventListener('click', () => { state.device = button.dataset.device; render(); rememberView(); }));
+  byId('lm-generate').addEventListener('click', () => {
+    if (!byId('lm-prompt').value.trim()) { notice('Hãy nhập yêu cầu hoặc chọn một prompt mẫu.'); byId('lm-prompt').focus(); return; }
+    if (state.dirty) saveDraft();
+    state.proposal = state.template === 'campaign' ? { title: 'Kỳ nghỉ tiếp theo bắt đầu từ đây.', body: 'Khám phá An Nhiên Hotel và liên hệ để tìm hiểu thông tin cho kỳ nghỉ của bạn.' } : { title: 'Dừng chân tại An Nhiên.', body: 'Một không gian cho hành trình sắp tới. Khám phá các hạng phòng và liên hệ trực tiếp với khách sạn.' };
+    state.proposal.baseRevision = state.revision;
+    byId('lm-proposal-heading').textContent = state.proposal.title;
+    notice('Đề xuất minh họa đã sẵn sàng · Chọn Áp dụng để cập nhật bản nháp');
+    render();
+  });
+  byId('lm-apply').addEventListener('click', () => {
+    if (!state.proposal) return;
+    if (state.dirty || state.proposal.baseRevision !== state.revision) { state.proposal = null; render(); notice('Bản nháp đã thay đổi. Hãy tạo lại đề xuất.'); return; }
+    state.content.hero = { title: state.proposal.title, body: state.proposal.body };
+    state.proposal = null; state.section = 'hero'; state.dirty = true;
+    saveDraft(); loadInputs(); render();
+  });
+  byId('lm-save').addEventListener('click', saveDraft);
+  byId('lm-review-open').addEventListener('click', () => {
+    if (!state.cta.trim() || Object.values(state.content).some(section => !section.title.trim())) { notice('Cần bổ sung tiêu đề các khối và nhãn nút hành động trước khi duyệt.'); return; }
+    saveDraft(); state.stage = 'review'; render(); notice(`Đang xem đúng bản v${state.revision} · Xác nhận checklist để duyệt`);
+  });
+  byId('lm-edit').addEventListener('click', () => { state.stage = 'edit'; loadInputs(); render(); });
+  all('[data-check]').forEach(input => input.addEventListener('change', () => { if (!input.checked) state.approved = null; render(); }));
+  byId('lm-approve').addEventListener('click', () => {
+    if (state.dirty || !all('[data-check]').every(el => el.checked)) return;
+    state.approved = state.revision; render(); notice(`Đã duyệt v${state.revision} · Trang công khai vẫn ở v${state.live}`);
+  });
+  byId('lm-publish').addEventListener('click', () => {
+    if (state.approved !== state.revision || state.dirty) return;
+    state.live = state.revision; render(); notice(`Mô phỏng xuất bản v${state.revision} thành công · Không có trang thật được xuất bản`);
+  });
+  loadInputs(); render();
+  window.addEventListener('openai:set_globals', event => {
+    if (event.detail?.globals?.widgetState) { applySavedView(event.detail.globals.widgetState); loadInputs(); render(); }
+  });
+  if (globalThis.Tweak) {
+    const layout = { inspector: 'side' };
+    const tweak = new Tweak({ container: root, onChange: () => { byId('lm-workspace').classList.toggle('inspector-below', layout.inspector === 'below'); } });
+    tweak.addSelect(layout, 'inspector', { label: 'Vị trí thuộc tính', options: [{ label: 'Bên phải', value: 'side' }, { label: 'Bên dưới', value: 'below' }] });
+  }
+})();
+</script>

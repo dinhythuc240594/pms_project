@@ -124,6 +124,9 @@ def seed_local():
 
 
 def register_commands(app):
+    from .marketing.cli import register_marketing_commands
+
+    register_marketing_commands(app)
     app.cli.add_command(database_check)
     app.cli.add_command(init_admin)
     app.cli.add_command(seed_local)

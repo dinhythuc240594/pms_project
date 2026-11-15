@@ -59,6 +59,9 @@ const InventoryCheck = lazyRoute(() => import('../apps/pms/inventory/pages/Inven
 const InventoryStock = lazyRoute(() => import('../apps/pms/inventory/pages/InventoryStock'));
 const Sales = lazyRoute(() => import('../apps/pms/finance/pages/Sales'));
 const UserManagement = lazyRoute(() => import('../apps/pms/user-management/pages/UserManagement'));
+const MarketingPages = lazyRoute(() => import('../apps/pms/marketing/pages/MarketingPages'));
+const MarketingBuilder = lazyRoute(() => import('../apps/pms/marketing/pages/MarketingBuilder'));
+const MarketingBrand = lazyRoute(() => import('../apps/pms/marketing/pages/MarketingBrand'));
 const Reports = lazyRoute(() => import('../apps/pms/reports/pages/Reports'));
 const DayReconciliation = lazyRoute(() => import('../apps/pms/reconciliation/DayReconciliation'));
 
@@ -172,6 +175,10 @@ export const appRoutes = createRoutesFromElements(
           <Route path="inventory/stock" element={<InventoryStock />} />
           <Route path="sales" element={<Sales />} />
           <Route path="users" element={<UserManagement />} />
+          <Route path="marketing" element={<Navigate to="/id/marketing/pages" replace />} />
+          <Route path="marketing/pages" element={<MarketingPages />} />
+          <Route path="marketing/pages/:pageId/edit" element={<MarketingBuilder />} />
+          <Route path="marketing/brand" element={<MarketingBrand />} />
           <Route path="ota" element={<OtaSettingsRedirect />} />
           <Route path="ota-history" element={<OtaSettingsRedirect history />} />
           <Route path="reports" element={<Reports />} />

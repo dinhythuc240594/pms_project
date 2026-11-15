@@ -5,13 +5,17 @@ import { AccessLink as Link } from '../../../shared/components/AccessControl';
 import LohaBrand from '../../../shared/components/LohaBrand';
 import { usePms } from '../data/usePms';
 import { ROLE_NAMES } from '../data/access';
-import { LayoutDashboard, CalendarCheck, BedDouble, Tags, Database, Settings, ChevronDown, ChevronRight, ClipboardList, Store, Sparkles, Box, BarChart3, PanelLeftClose, PanelLeftOpen, Building2, X } from 'lucide-react';
+import { LayoutDashboard, CalendarCheck, BedDouble, Tags, Database, Settings, ChevronDown, ChevronRight, ClipboardList, Store, Sparkles, Box, BarChart3, PanelLeftClose, PanelLeftOpen, Building2, Globe, X } from 'lucide-react';
 const navItems = [
   { icon: LayoutDashboard, label: 'Tổng quan', path: '/id/dashboard' },
   { icon: CalendarCheck, label: 'Lịch đặt phòng', path: '/id/ari' },
   { icon: BedDouble, label: 'Sơ đồ phòng', path: '/id/room-diagram' },
   { icon: ClipboardList, label: 'Đặt phòng', path: '/id/reservations' },
   { icon: Store, label: 'Dịch vụ & POS', path: '/id/sales' },
+  { icon: Globe, label: 'Marketing', path: '/id/marketing', subItems: [
+    { label: 'Trang giới thiệu', path: '/id/marketing/pages' },
+    { label: 'Hồ sơ thương hiệu', path: '/id/marketing/brand' },
+  ] },
   {
     icon: Database, label: 'Tài chính & thu chi', path: '/id/cashflow',
     subItems: [

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="{{ page.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.seo.title }}</title>
+  <meta name="description" content="{{ page.seo.description }}">
+  <meta property="og:title" content="{{ page.seo.title }}">
+  <meta property="og:description" content="{{ page.seo.description }}">
+  <meta property="og:type" content="website">
+  {% if canonical %}<link rel="canonical" href="{{ canonical }}"><meta property="og:url" content="{{ canonical }}">{% endif %}
+  <style>{{ css | safe }}</style>
+</head>
+<body class="theme-{{ page.brand.theme }}">
+  <a class="skip" href="#main">{{ 'Đến nội dung chính' if page.locale == 'vi' else 'Skip to content' }}</a>
+  <header class="header wrap">
+    <a class="brand" href="#main">{{ page.brand.name }}</a>
+    <nav aria-label="{{ 'Điều hướng trang' if page.locale == 'vi' else 'Page navigation' }}">
+      {% for section in page.sections if section.visible and section.type != 'hero' %}<a href="#{{ section.id }}">{{ section.heading }}</a>{% endfor %}
+    </nav>
+  </header>
+  <main id="main">
+    {% for section in page.sections if section.visible %}
+    <section id="{{ section.id }}" class="section {{ 'hero' if section.type == 'hero' else '' }}">
+      <div class="wrap section-inner {{ 'with-image' if section.imageUrl else '' }}">
+        <div>
+          {% if section.type == 'hero' %}<p class="eyebrow">{{ page.brand.name }}</p><h1>{{ section.heading }}</h1>
+          {% else %}<h2>{{ section.heading }}</h2>{% endif %}
+          {% if section.body %}<p class="body-copy">{{ section.body }}</p>{% endif %}
+          {% if section.type in ('hero', 'contact') and page.cta.url %}<a class="cta" href="{{ page.cta.url }}" rel="noopener noreferrer">{{ page.cta.label }}</a>{% endif %}
+        </div>
+        {% if section.imageUrl %}<img src="{{ section.imageUrl }}" alt="{{ section.imageAlt }}" loading="{{ 'eager' if section.type == 'hero' else 'lazy' }}" referrerpolicy="no-referrer">{% endif %}
+      </div>
+    </section>
+    {% endfor %}
+  </main>
+  <footer class="footer wrap">{{ page.brand.name }}</footer>
+</body>
+</html>

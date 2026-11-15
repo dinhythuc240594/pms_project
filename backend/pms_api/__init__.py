@@ -18,6 +18,7 @@ from .finance.urls import finance
 from .health_urls import health as health_blueprint
 from .housekeeping.urls import housekeeping
 from .inventory.urls import inventory
+from .marketing.urls import marketing, marketing_public
 from .model_registry import register_models
 from .notifications_urls import notifications as notifications_blueprint
 from .pricing.urls import pricing
@@ -72,6 +73,8 @@ def create_app(environ=None, *, env_file=BACKEND_DIR / ".env"):
     app.register_blueprint(reports)
     app.register_blueprint(reconciliation)
     app.register_blueprint(billing)
+    app.register_blueprint(marketing)
+    app.register_blueprint(marketing_public)
     register_commands(app)
 
     WorkspaceURL.register(

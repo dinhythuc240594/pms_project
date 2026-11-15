@@ -1,4 +1,5 @@
 export const FEATURES = [
+  ['AI_MARKETING_PAGES', 'Trang marketing bằng AI', 'Pro'],
   ['DASHBOARD', 'Bảng điều khiển', 'Trial'], ['ROOM_DIAGRAM', 'Sơ đồ phòng', 'Trial'],
   ['RESERVATION_VIEW', 'Xem đặt phòng', 'Trial'], ['RESERVATION_CREATE', 'Tạo đặt phòng', 'Trial'],
   ['TAPE_CHART', 'Timeline đặt phòng', 'Basic'], ['ARI_MANAGEMENT', 'Giá & Phòng trống', 'Basic'],
@@ -22,6 +23,7 @@ export function routePolicy(path) {
   }
   const [pathname, query = ''] = path.split('?');
   const p = pathname.replace(/^\/id\/?/, '');
+  if (/^marketing(?:\/|$)/.test(p)) return { action: 'marketing.view', feature: 'AI_MARKETING_PAGES' };
   if (/^profile/.test(p)) return { action: 'profile.view' };
   if (/^settings\/?$/.test(p) && new URLSearchParams(query).get('section') === 'channels') return { action: 'channels.view', feature: 'OTA_SYNC' };
   if (/^settings/.test(p)) return { action: 'settings.write' };
