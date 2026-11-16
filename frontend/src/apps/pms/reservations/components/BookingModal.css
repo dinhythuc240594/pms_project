@@ -1,0 +1,31 @@
+.booking-create-panel { min-width: 0; min-height: 0; overflow: hidden; font-size: 14px; }
+.booking-create-panel *, .booking-create-panel *::before, .booking-create-panel *::after { box-sizing: border-box; }
+.booking-create-header { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; flex-shrink: 0; gap: 12px; padding: 20px 24px; }
+.booking-create-header > div { flex: 1; min-width: 0; }
+.booking-create-close { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; }
+.booking-create-body { min-height: 0; overscroll-behavior: contain; padding: 24px; }
+.booking-create-panel button { min-height: 44px; font-family: inherit; cursor: pointer; }
+.booking-create-panel :is(input:not([type="checkbox"]), select) { width: 100%; min-width: 0; height: 44px; font-size: 14px; font-family: inherit; }
+.booking-create-panel :is(button, input, select):focus-visible { outline: 2px solid var(--accent-primary, #086ab4); outline-offset: 3px; }
+.booking-create-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.booking-create-grid > *, .booking-create-date-pair > * { min-width: 0; }
+.booking-create-date-pair { display: grid; grid-template-columns: minmax(0, 1fr) 120px; gap: 8px; }
+.booking-create-room-card, .booking-create-room-choices { flex-wrap: wrap; gap: 12px; min-width: 0; }
+.booking-create-room-options { min-width: 0; }
+.booking-create-room-options label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
+.booking-create-room-options input { width: 18px; height: 18px; margin: 0; }
+.booking-create-guest { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) auto; gap: 8px; margin-top: 12px; }
+.booking-create-guest > button { min-width: 44px; padding: 8px 12px; border: 1px solid #efcbd0; border-radius: 6px; background: #fff; color: #a3343d; }
+.booking-create-footer { flex-shrink: 0; align-items: center; gap: 12px; padding: 16px 24px max(16px, env(safe-area-inset-bottom, 0px)); }
+.booking-create-footer-actions { flex-shrink: 0; }
+.booking-create-error { flex-shrink: 0; max-height: 20dvh; overflow-y: auto; margin: 0; }
+@media (max-width: 600px), (max-width: 1100px) and (pointer: coarse) {
+  .booking-create-header { padding: 12px; }
+  .booking-create-body { padding: 16px 12px; }
+  .booking-create-panel :is(input:not([type="checkbox"]), select) { font-size: 16px; }
+  .booking-create-grid, .booking-create-guest { grid-template-columns: minmax(0, 1fr); }
+  .booking-create-guest > button { justify-self: end; min-width: 44px; }
+  .booking-create-room-choices { width: 100%; }
+  .booking-create-footer { flex-direction: column; align-items: stretch; padding: 12px 12px max(12px, env(safe-area-inset-bottom, 0px)); }
+  .booking-create-footer-actions > button { flex: 1; justify-content: center; }
+}
