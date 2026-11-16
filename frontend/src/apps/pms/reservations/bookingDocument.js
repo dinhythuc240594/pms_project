@@ -1,0 +1,14 @@
+import { formatDate } from '../../../shared/lib/date.js';
+import { money, statusLabels, bookingRooms } from '../data/model.js';
+import { escapeHtml as escape, openPrintDocument } from '../data/document.js';
+
+export function bookingDocumentHtml(booking, hotel = {}, settings = {}) {
+  const amount = value => escape(money(value, booking.currency));
+  const rows = (booking.nightlyRates || []).map(night => `<tr><td>${escape(formatDate(night.date))}</td><td>${escape(night.room)}</td><td>${amount(night.price)}</td></tr>`).join('');
+  const extras = (booking.charges || []).map(charge => `<tr><td>${escape(charge.description)}</td><td>${escape(charge.quantity)}</td><td>${amount(charge.amount)}</td></tr>`).join('');
+  return `<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Phiếu đặt phòng ${escape(booking.id)}</title><style>body{font:14px Arial,sans-serif;color:#15304a;max-width:850px;margin:32px auto;padding:0 24px}h1{font-size:24px}p{line-height:1.7}table{width:100%;border-collapse:collapse;margin:20px 0}th,td{padding:10px;border-bottom:1px solid #dbe4ec;text-align:left}th:last-child,td:last-child{text-align:right}.total{text-align:right;font-size:16px}button{padding:10px 18px;border:0;border-radius:6px;background:#006bb6;color:white;cursor:pointer}@media print{body{margin:0;padding:0}button{display:none}tr{break-inside:avoid}@page{margin:18mm}}</style></head><body><h1>${escape(hotel.name || settings.name || 'LOHA')}</h1><p>${escape(settings.address)}<br>${escape(settings.phone)}${settings.contactEmail ? ' · ' + escape(settings.contactEmail) : ''}${settings.taxCode ? '<br>Mã số thuế: ' + escape(settings.taxCode) : ''}</p><hr><h2>Phiếu đặt phòng</h2><p><strong>Mã:</strong> ${escape(booking.id)} · ${escape(statusLabels[booking.status] || booking.status)}<br><strong>Khách:</strong> ${escape(booking.guest)}${booking.phone ? ' · ' + escape(booking.phone) : ''}<br><strong>Phòng:</strong> ${escape(bookingRooms(booking).join(', '))}<br><strong>Nhận:</strong> ${escape(formatDate(booking.checkIn))} · <strong>Trả:</strong> ${escape(formatDate(booking.checkOut))}<br><strong>Nguồn:</strong> ${escape(booking.source)}<br><strong>Tiền tệ:</strong> ${escape(booking.currency)}</p><table><thead><tr><th>Đêm lưu trú</th><th>Phòng</th><th>Tiền phòng</th></tr></thead><tbody>${rows || '<tr><td colspan="3">Chưa có chi tiết giá đêm.</td></tr>'}</tbody></table>${extras ? '<h3>Dịch vụ & điều chỉnh</h3><table><thead><tr><th>Nội dung</th><th>Số lượng</th><th>Số tiền</th></tr></thead><tbody>' + extras + '</tbody></table>' : ''}<p class="total">Tổng: <strong>${amount(booking.total)}</strong><br>Đã thanh toán ròng: ${amount(booking.paid)}<br>Số dư: <strong>${amount(booking.balance)}</strong></p></body></html>`;
+}
+
+export function openBookingDocument(booking, hotel, settings) {
+  openPrintDocument(() => bookingDocumentHtml(booking, hotel, settings), 'In phiếu', 'Trình duyệt đang chặn cửa sổ phiếu in. Cho phép mở cửa sổ rồi thử lại.');
+}

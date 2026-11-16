@@ -1,0 +1,58 @@
+.loha-reservations { padding: 16px; color: var(--text-primary, #122b44); background: var(--bg-main, #f3f7fa); min-width: 0; }
+.loha-reservations-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 16px; }
+.loha-reservations-eyebrow { color: var(--accent-primary, #086ab4); font-size: 11px; font-weight: 700; letter-spacing: .1em; }
+.loha-reservations h1 { font-size: 28px; letter-spacing: -.04em; line-height: 1.25; margin: 8px 0; }
+.loha-reservations-heading p { color: var(--text-secondary, #5a7084); font-size: 14px; margin: 0; line-height: 1.6; }
+.loha-reservations button { font-family: inherit; cursor: pointer; }
+.loha-reservations button:focus-visible, .loha-reservations select:focus-visible, .loha-reservations input:focus-visible, .loha-reservations-table-scroll:focus-visible { outline: 2px solid var(--accent-primary, #086ab4); outline-offset: 3px; }
+.loha-reservations-actions, .loha-reservations-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.loha-reservations-actions button, .loha-reservations-filters button, .loha-reservations-advanced button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 12px; border: 1px solid var(--border-color, #dce5ee); border-radius: 8px; background: var(--bg-card, #fff); color: var(--text-primary, #122b44); font-size: 13px; font-weight: 600; }
+.loha-reservations-actions .is-primary { background: var(--accent-primary, #086ab4); border-color: var(--accent-primary, #086ab4); color: #fff; }
+.loha-reservations-status-strip { display: flex; gap: 0; overflow-x: auto; border: 1px solid var(--border-color, #dce5ee); border-radius: 12px; background: var(--bg-card, #fff); padding: 6px; margin-bottom: 16px; }
+.loha-reservations-status-strip button { border: 0; border-radius: 8px; background: transparent; color: var(--text-secondary, #5a7084); min-height: 44px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; flex: 1; gap: 16px; white-space: nowrap; font-size: 13px; }
+.loha-reservations-status-strip strong { font-size: 16px; color: var(--text-primary, #122b44); }
+.loha-reservations-status-strip .is-selected { background: #eef5fb; color: var(--accent-primary, #086ab4); font-weight: 600; }
+.loha-reservations-panel { background: var(--bg-card, #fff); border: 1px solid var(--border-color, #dce5ee); border-radius: 12px; overflow: hidden; min-width: 0; }
+.loha-reservations-toolbar { padding: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.loha-reservations-search { display: flex; align-items: center; gap: 10px; flex: 1; max-width: 400px; min-width: 220px; border: 1px solid #aabccb; border-radius: 8px; background: var(--bg-surface, #f8fafc); color: var(--text-muted, #73879a); padding: 0 12px; }
+.loha-reservations-search input { min-width: 0; width: 100%; border: 0; background: transparent; color: var(--text-primary, #122b44); min-height: 42px; font-size: 14px; font-family: inherit; }
+.loha-reservations-advanced { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; padding: 0 16px 16px; }
+.loha-reservations-advanced label { display: grid; gap: 6px; font-size: 12px; color: var(--text-secondary, #5a7084); min-width: 170px; }
+.loha-reservations select { min-height: 40px; border: 1px solid #aabccb; background: var(--bg-card, #fff); color: var(--text-primary, #122b44); border-radius: 8px; padding: 8px 12px; font-family: inherit; font-size: 14px; }
+.loha-reservations-list-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-top: 1px solid var(--border-color, #dce5ee); color: var(--text-secondary, #5a7084); font-size: 12px; }
+.loha-reservations-list-heading > span:last-child { display: flex; gap: 6px; align-items: center; }
+.loha-reservations-list-heading strong { color: var(--text-primary, #122b44); }
+.loha-reservations-table-scroll { width: 100%; overflow-x: auto; }
+.loha-reservations table { width: 100%; border-collapse: collapse; min-width: 960px; text-align: left; }
+.loha-reservations th { padding: 12px 16px; background: var(--bg-surface, #f6f9fc); color: var(--text-secondary, #5a7084); font-size: 11px; font-weight: 600; white-space: nowrap; }
+.loha-reservations td { padding: 14px 16px; border-top: 1px solid var(--border-color, #e5edf4); font-size: 13px; vertical-align: middle; }
+.loha-reservations tbody tr:hover { background: var(--bg-surface, #f8fafc); }
+.loha-reservations td strong { font-weight: 600; }
+.loha-reservations td small { display: block; color: var(--text-secondary, #5a7084); font-size: 11px; margin-top: 5px; }
+.loha-reservations .loha-reservations-code { border: 0; background: transparent; color: var(--accent-primary, #086ab4); font-size: 12px; font-weight: 600; text-align: left; padding: 4px 0; text-decoration: underline; text-underline-offset: 4px; max-width: 140px; overflow-wrap: anywhere; }
+.loha-reservations-guest { display: flex; align-items: center; gap: 10px; }
+.loha-reservations-avatar { flex: 0 0 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: #eaf2f9; color: var(--accent-primary, #086ab4); font-weight: 700; }
+.loha-reservations-dates { white-space: nowrap; font-size: 12px; }
+.loha-reservations-dates > span { color: var(--text-muted, #73879a); }
+.loha-reservations-badge { display: inline-block; white-space: nowrap; padding: 6px 9px; border-radius: 6px; font-size: 11px; font-weight: 600; background: #eff3f6; color: #4c6478; }
+.loha-reservations-badge.status-confirmed { color: #0961a1; background: #e8f3fc; }
+.loha-reservations-badge.status-in_house { color: #315815; background: #e8f4d5; }
+.loha-reservations-badge.status-cancelled, .loha-reservations-badge.status-no_show { color: #a3343d; background: #fff0f1; }
+.loha-reservations-source { display: inline-block; border: 1px solid var(--border-color, #dce5ee); padding: 4px 8px; border-radius: 5px; font-size: 11px; }
+.loha-reservations .loha-reservations-total, .loha-reservations th:last-child { text-align: right; white-space: nowrap; font-weight: 600; }
+.loha-reservations-empty { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 28px; color: var(--text-secondary, #5a7084); }
+.loha-reservations-empty strong { color: var(--text-primary, #122b44); }
+.loha-reservations-pagination { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 12px 16px; border-top: 1px solid var(--border-color, #dce5ee); color: var(--text-secondary, #5a7084); font-size: 12px; }
+.loha-reservations-pagination nav { display: flex; gap: 5px; }
+.loha-reservations-pagination button { display: grid; place-items: center; min-width: 36px; min-height: 36px; border: 1px solid var(--border-color, #dce5ee); border-radius: 7px; background: var(--bg-card, #fff); color: var(--text-primary, #122b44); }
+.loha-reservations-pagination .is-current { background: var(--accent-primary, #086ab4); border-color: var(--accent-primary, #086ab4); color: #fff; }
+.loha-reservations button:disabled { opacity: .4; cursor: not-allowed; }
+@media (max-width: 900px) { .loha-reservations-heading { align-items: flex-start; flex-direction: column; } .loha-reservations-toolbar { align-items: stretch; } .loha-reservations-search { max-width: none; } }
+@media (max-width: 600px) { .loha-reservations { padding: 12px; } .loha-reservations h1 { font-size: 25px; } .loha-reservations-heading { gap: 12px; } .loha-reservations-actions { width: 100%; } .loha-reservations-actions button { flex: 1; padding: 8px 10px; } .loha-reservations-toolbar { padding: 12px; } .loha-reservations-search { min-width: 0; flex-basis: 100%; } .loha-reservations-filters { width: 100%; } .loha-reservations-filters button { padding: 8px 10px; font-size: 12px; } .loha-reservations-list-heading { padding: 12px 12px; flex-wrap: wrap; } .loha-reservations-advanced { padding: 0 12px 12px; } .loha-reservations-advanced label { flex: 1; } .loha-reservations-pagination { padding: 12px; } .loha-reservations-status-strip button { padding: 10px 12px; gap: 12px; } }
+@media (pointer: coarse), (max-width: 900px) {
+  .loha-reservations-actions button, .loha-reservations-filters button, .loha-reservations-advanced button, .loha-reservations-search input, .loha-reservations select { min-height: 44px; }
+  .loha-reservations .loha-reservations-code { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+  .loha-reservations-pagination button { min-width: 44px; min-height: 44px; }
+  .loha-reservations-table-scroll { overscroll-behavior-x: contain; }
+  .loha-reservations-search input, .loha-reservations select { font-size: 16px; }
+}
