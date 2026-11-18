@@ -1,0 +1,63 @@
+.pms-matrix-page { --rates-label-width: 260px; --rates-day-width: 90px; }
+.pms-matrix-page .rates-table-panel > .rates-section-heading { padding: 12px 16px; }
+.pms-matrix-page .rates-matrix-scroll { max-height: 64dvh; overflow: auto; scrollbar-gutter: stable; }
+.pms-matrix-page .rates-matrix { width: calc(var(--rates-label-width) + var(--rates-day-count) * var(--rates-day-width)); min-width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; }
+.pms-matrix-page .rates-label-column { width: var(--rates-label-width); }
+.pms-matrix-page .rates-date-column { width: var(--rates-day-width); }
+.pms-matrix-page .rates-matrix :is(th, td) { height: 34px; min-width: var(--rates-day-width); padding: 0; border-right: 1px solid #dce3ea; border-bottom: 1px solid #dce3ea; text-align: center; vertical-align: middle; }
+.pms-matrix-page .rates-matrix th:first-child { width: var(--rates-label-width); min-width: var(--rates-label-width); max-width: var(--rates-label-width); padding: 0; background: #fff; text-align: left; }
+.pms-matrix-page .rates-matrix thead th { height: 46px; padding: 4px 6px; background: #f6f8fa; border-bottom: 2px solid #cdd7e1; }
+.pms-matrix-page .rates-matrix thead th:first-child { padding: 0; background: #f6f8fa; }
+.pms-matrix-page .rates-matrix thead th.is-weekend { background: #e6f6ef; }
+.pms-matrix-page .rates-matrix thead th.is-today { background: #d6f1f5; color: #075e76; }
+.pms-matrix-page .rates-matrix thead strong { margin: 0; font-size: 12px; line-height: 18px; }
+.pms-matrix-page .rates-matrix thead small { font-size: 11px; line-height: 16px; }
+.pms-matrix-page .rates-matrix tbody + tbody .rates-room-row > :is(th, td) { border-top: 1px solid #b9c8d5; }
+.pms-matrix-page .rates-matrix tbody tr:last-child > :is(th, td) { border-bottom: 1px solid #dce3ea; }
+.pms-matrix-page .rates-matrix td { --matrix-cell-bg: #fff; background: var(--matrix-cell-bg); }
+.pms-matrix-page .rates-matrix td.is-weekend { --matrix-cell-bg: #d4fae7; }
+.pms-matrix-page .rates-matrix td.is-today { --matrix-cell-bg: #a9e7ed; }
+.pms-matrix-page .rates-matrix tbody tr:hover > td { background: var(--matrix-cell-bg); }
+.pms-matrix-page .rates-matrix tbody tr:hover > th { background: #f4f8fb; }
+.pms-matrix-page .rates-availability-cell { position: relative; font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; box-shadow: inset 0 -4px var(--matrix-stock-color, #dce3ea); }
+.pms-matrix-page .rates-availability-cell.is-active { --matrix-stock-color: #86efac; }
+.pms-matrix-page .rates-availability-cell.is-low { --matrix-stock-color: #facc6b; }
+.pms-matrix-page .rates-availability-cell.is-paused { --matrix-stock-color: #ffb56b; }
+.pms-matrix-page .rates-availability-cell.is-unknown { color: var(--text-muted); }
+.pms-matrix-page .rates-availability-cell svg { margin-left: 4px; vertical-align: middle; color: #9a5e15; }
+.pms-matrix-page button.rates-group-toggle { display: flex; align-items: center; gap: 5px; width: 100%; min-height: 34px; padding: 6px 8px; border: 0; border-radius: 0; background: transparent; color: var(--text-secondary); text-align: left; font-size: 12px; line-height: 18px; text-transform: uppercase; }
+.pms-matrix-page .rates-group-toggle > span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.pms-matrix-page .rates-group-selected { flex-shrink: 0; padding: 1px 4px; border-radius: 3px; background: #e0efff; color: #075e9f; font-size: 9px; text-transform: none; }
+.pms-matrix-page button.rates-row-select { display: flex; align-items: center; gap: 6px; width: 100%; min-height: 32px; padding: 5px 8px 5px 20px; margin: 0; border: 0; border-radius: 0; background: transparent; color: var(--text-secondary); text-align: left; font-size: 12px; line-height: 20px; }
+.pms-matrix-page .rates-row-select > span { flex: 1; }
+.pms-matrix-page .rates-row-select small { font-size: 10px; font-weight: 400; color: var(--accent-primary); }
+.pms-matrix-page .rates-row-select[aria-pressed="true"], .pms-matrix-page .rates-row-select[aria-pressed="mixed"] { background: #edf5ff; color: #075e9f; }
+.pms-matrix-page .rates-price-row-label { display: flex; align-items: center; gap: 6px; padding: 6px 12px 6px 24px; font-size: 12px; }
+.pms-matrix-page button.rates-cell { position: relative; display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100%; min-height: 32px; height: 32px; padding: 4px; margin: 0; border: 0; border-radius: 0; background: transparent; color: var(--text-primary); font-size: 12px; font-weight: 400; line-height: 20px; }
+.pms-matrix-page .rates-cell-price { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pms-matrix-page .rates-cell > svg { position: absolute; top: 1px; right: 1px; }
+.pms-matrix-page .rates-price-cell.is-stopped .rates-cell { color: #6c7c8c; }
+.pms-matrix-page button.rates-cell:hover:not(:disabled) { background: #e4f2fc; }
+.pms-matrix-page button.rates-cell[aria-pressed="true"] { background: #cce8ff; color: #07578f; box-shadow: inset 0 0 0 2px #086ab4; }
+.pms-matrix-page .rates-cell:disabled { opacity: 1; cursor: default; }
+.pms-matrix-page .rates-matrix :is(button, [tabindex]):focus-visible { outline-offset: -2px; }
+.pms-matrix-page .rates-legend i { width: 16px; height: 4px; border-radius: 1px; background: #86efac; }
+.pms-matrix-page .rates-legend i.is-low { background: #facc6b; }
+.pms-matrix-page .rates-legend i.is-paused { background: #ffb56b; }
+.pms-matrix-page .rates-legend i.is-today { height: 10px; background: #a9e7ed; }
+.pms-matrix-page .rates-legend i.is-weekend { height: 10px; background: #d4fae7; }
+.pms-matrix-page .rates-bulk-panel { position: sticky; top: 0; bottom: auto; z-index: 5; margin-bottom: 12px; padding: 12px 16px; box-shadow: 0 4px 16px #122b4410; }
+.pms-matrix-page .rates-bulk-panel .rates-section-heading { margin-bottom: 10px; }
+.pms-matrix-page .rates-bulk-panel .domain-fields { gap: 8px; }
+.pms-matrix-page .rates-bulk-panel input { min-height: 36px; padding: 7px 10px; }
+.pms-matrix-page .rates-bulk-panel label { flex: 1 1 180px; }
+@media (max-width: 768px) {
+  .pms-matrix-page { --rates-label-width: 190px; --rates-day-width: 86px; }
+  .pms-matrix-page .rates-matrix-scroll { max-height: 60dvh; }
+  .pms-matrix-page .rates-row-select small { display: none; }
+  .pms-matrix-page .rates-bulk-panel { position: static; }
+}
+@media (pointer: coarse) {
+  .pms-matrix-page button.rates-cell, .pms-matrix-page button.rates-row-select { min-height: 40px; height: 40px; }
+  .pms-matrix-page button.rates-group-toggle { min-height: 40px; }
+}

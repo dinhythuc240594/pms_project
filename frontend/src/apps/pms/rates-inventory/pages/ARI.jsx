@@ -4,22 +4,14 @@ import React, { useState } from 'react';
 import { usePms } from '../../data/usePms';
 import { bookingRoomStays, today, addDays, nights, money, overlaps, roomIsBlocked } from '../../data/model';
 import BookingDetailPanel from '../../reservations/components/BookingDetailPanel';
-import { ChevronLeft, ChevronRight, Search, Filter, Calendar as CalendarIcon, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Search, Filter, Calendar as CalendarIcon } from 'lucide-react';
 import './ARI.css';
-
-const fold = value => String(value ?? '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/đ/g, 'd');
-// Phone digits are compared without spaces/dots so "0901 234" finds "0901234567".
-// Phones need at least 5 digits so a room number such as "101" does not match random phone fragments.
-const digits = value => String(value ?? '').replace(/\D/g, '');
-const bookingSearchText = booking => fold([booking.id, booking.guest, ...(booking.guests || []).map(guest => guest?.name)].filter(Boolean).join(' '));
-const bookingPhones = booking => [booking.phone, ...(booking.guests || []).map(guest => guest?.phone)].map(digits).filter(Boolean);
 
 export default function ARI() {
   useI18n();
   const { rooms, bookings: reservations, available, roomTypes, settings, roomBlocks } = usePms();
   const [currentDate, setCurrentDate] = useState(today(settings.timezone));
   const [query, setQuery] = useState('');
-  const [onlyMatches, setOnlyMatches] = useState(false);
   const [typeFilter, setTypeFilter] = useState('');
   const [showFilter, setShowFilter] = useState(false);
   const [selectedBookingId, setSelectedBookingId] = useState(null);
@@ -27,21 +19,8 @@ export default function ARI() {
   const getDayName = date => ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'][date.getDay()];
   const isWeekend = date => date.getDay() === 0 || date.getDay() === 6;
   const isToday = date => date.toLocaleDateString('en-CA') === today(settings.timezone);
-  const typedGroups = roomTypes.filter(t => !typeFilter || t.id === typeFilter).map(t => ({ ...t, price: money(t.price,settings.currency), rooms: rooms.filter(r => r.active !== false && r.typeId === t.id).map(r => ({ ...r, name: 'R - ' + r.id, blocked: roomIsBlocked(r, roomBlocks, currentDate, addDays(currentDate, 14)) })), available: dates.map((_, i) => available(addDays(currentDate, i), addDays(currentDate, i + 1), t.id).length) }));
-  const needle = fold(query.trim());
-  const phoneNeedle = /^[\d\s.+()-]+$/.test(query.trim()) && digits(query).length >= 5 ? digits(query) : '';
-  const bookingMatches = b => Boolean(needle) && (bookingSearchText(b).includes(needle) || (Boolean(phoneNeedle) && bookingPhones(b).some(phone => phone.includes(phoneNeedle))));
-  const roomMatches = room => Boolean(needle) && [room.id, room.number].some(value => value != null && fold(value).includes(needle));
-  // Every booking stays on the chart; a search highlights matches instead of hiding occupancy.
-  const bookings = reservations.filter(b => overlaps(b, currentDate, addDays(currentDate, 14))).flatMap(b => { const match = bookingMatches(b); return bookingRoomStays(b).filter(stay => stay.start < addDays(currentDate, 14) && stay.end > currentDate).map(stay => ({ ...b, match, room: String(stay.room), colStart: Math.max(0, nights(currentDate, stay.start)), colSpan: Math.min(14, nights(currentDate, stay.end)) - Math.max(0, nights(currentDate, stay.start)), bgColor: b.status === 'IN_HOUSE' ? '#10b981' : '#3b82f6', payment: Number(b.balance) === 0 ? 'paid' : Number(b.paid)>0 ? 'partial' : 'unpaid' })); });
-  const roomsWithMatchingStay = new Set(bookings.filter(b => b.match).map(b => b.room));
-  const visibleRooms = typedGroups.flatMap(group => group.rooms);
-  const matchedRoomIds = new Set(needle ? visibleRooms.filter(room => roomMatches(room) || roomsWithMatchingStay.has(String(room.id))).map(room => String(room.id)) : []);
-  const matchedBookingCount = new Set(bookings.filter(b => b.match && matchedRoomIds.has(b.room)).map(b => b.id)).size;
-  const onlyMatching = onlyMatches && Boolean(needle);
-  const groups = onlyMatching ? typedGroups.map(group => ({ ...group, rooms: group.rooms.filter(room => matchedRoomIds.has(String(room.id))) })).filter(group => group.rooms.length) : typedGroups;
-  const clearSearch = () => { setQuery(''); setOnlyMatches(false); };
-  const typeName = roomTypes.find(type => type.id === typeFilter)?.name;
+  const groups = roomTypes.filter(t => !typeFilter || t.id === typeFilter).map(t => ({ ...t, price: money(t.price,settings.currency), rooms: rooms.filter(r => r.active !== false && r.typeId === t.id).map(r => ({ ...r, name: 'R - ' + r.id, blocked: roomIsBlocked(r, roomBlocks, currentDate, addDays(currentDate, 14)) })), available: dates.map((_, i) => available(addDays(currentDate, i), addDays(currentDate, i + 1), t.id).length) }));
+  const bookings = reservations.filter(b => overlaps(b, currentDate, addDays(currentDate, 14)) && (b.guest + ' ' + b.id).toLowerCase().includes(query.toLowerCase())).flatMap(b => bookingRoomStays(b).filter(stay => stay.start < addDays(currentDate, 14) && stay.end > currentDate).map(stay => ({ ...b, room: String(stay.room), colStart: Math.max(0, nights(currentDate, stay.start)), colSpan: Math.min(14, nights(currentDate, stay.end)) - Math.max(0, nights(currentDate, stay.start)), bgColor: b.status === 'IN_HOUSE' ? '#10b981' : '#3b82f6', payment: Number(b.balance) === 0 ? 'paid' : Number(b.paid)>0 ? 'partial' : 'unpaid' })));
 
   return (
     <div className="pms-original pms-legacy-timeline" style={{ display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: '#f4f5f7', fontFamily: 'var(--font-sans)' }}>
@@ -62,7 +41,7 @@ export default function ARI() {
           
           <div className="ari-search" style={{ position: 'relative' }}>
             <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af' }} aria-hidden="true" />
-            <input type="search" aria-label={labelUi("Tìm khách, mã đặt phòng, số điện thoại hoặc số phòng")} value={query} onChange={e => setQuery(e.target.value)} placeholder={labelUi("Khách, mã, SĐT, phòng...")} style={{ padding: '8px 12px 8px 36px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+            <input type="search" aria-label={labelUi("Tìm tên khách hoặc mã đặt phòng")} value={query} onChange={e => setQuery(e.target.value)} placeholder={labelUi("Tìm tên khách, mã...")} style={{ padding: '8px 12px 8px 36px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
           </div>
 
           <button aria-expanded={showFilter} aria-controls={showFilter ? 'ari-room-type-filter' : undefined} onClick={() => setShowFilter(!showFilter)} style={{ backgroundColor: '#fff', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontWeight: '500', color: '#374151' }}>
@@ -73,16 +52,6 @@ export default function ARI() {
       </div>
 
       {showFilter && <select id="ari-room-type-filter" className="ari-room-type-filter" aria-label={labelUi("Lọc loại phòng")} value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={{ margin: '8px 12px', padding: '8px', border: '1px solid #d1d5db', borderRadius: '8px' }}><option value="">{tUi("common.allRoomTypes")}</option>{roomTypes.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}</select>}
-      {needle && <div className="ari-search-results">
-        <p role="status">{matchedRoomIds.size
-          ? <><strong>{matchedRoomIds.size}</strong>{' '}{labelUi("phòng khớp")}{' · '}<strong>{matchedBookingCount}</strong>{' '}{labelUi("đặt phòng khớp")}</>
-          : labelUi("Không có phòng hoặc đặt phòng khớp")}{' '}“{query.trim()}”{' · '}{formatDate(currentDate)} – {formatDate(addDays(currentDate, 13))}{typeName ? ` · ${typeName}` : ''}</p>
-        <div className="ari-search-modes" role="group" aria-label={labelUi("Chế độ hiển thị phòng")}>
-          <button type="button" aria-pressed={!onlyMatching} className={!onlyMatching ? 'is-selected' : ''} onClick={() => setOnlyMatches(false)}>{labelUi("Tất cả phòng")}</button>
-          <button type="button" aria-pressed={onlyMatching} className={onlyMatching ? 'is-selected' : ''} disabled={!matchedRoomIds.size && !onlyMatching} onClick={() => setOnlyMatches(true)}>{labelUi("Chỉ phòng khớp")}</button>
-          <button type="button" onClick={clearSearch}><X size={14} aria-hidden="true" />{labelUi("Xóa tìm kiếm")}</button>
-        </div>
-      </div>}
       <p className="ari-mobile-hint">{labelUi("Vuốt ngang để xem ngày khác. Chạm đặt phòng để mở chi tiết.")}</p>
       {/* Main Gantt Chart Area */}
       <div className="pms-legacy-chart" role="region" aria-label={labelUi("Lịch đặt phòng, có thể cuộn ngang và dọc")} tabIndex={0} style={{ flex: 1, overflow: 'auto', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
@@ -116,7 +85,6 @@ export default function ARI() {
           </div>
         </div>
 
-        {onlyMatching && !groups.length && <p className="ari-no-match">{labelUi("Không có phòng khớp trong khoảng ngày và loại phòng đang xem.")}{' '}<button type="button" onClick={() => setOnlyMatches(false)}>{labelUi("Xem tất cả phòng")}</button></p>}
         {/* Timeline Body (Scrollable both ways) */}
         <div className="ari-chart-row" style={{ display: 'flex' }}>
           
@@ -131,10 +99,10 @@ export default function ARI() {
                 </div>
                 {/* Rooms */}
                 {rt.rooms.map((room) => (
-                  <div key={room.id} data-room-id={room.id} data-match={needle && matchedRoomIds.has(String(room.id)) ? 'true' : undefined} title={room.name} className={`ari-room-label${room.blocked ? ' ari-room-blocked' : ''}${needle && matchedRoomIds.has(String(room.id)) ? ' ari-room-match' : ''}`} style={{ height: '48px', borderBottom: '1px solid #f3f4f6', display: 'flex', alignItems: 'center' }}>
+                  <div key={room.id} data-room-id={room.id} title={room.name} className={`ari-room-label${room.blocked ? ' ari-room-blocked' : ''}`} style={{ height: '48px', borderBottom: '1px solid #f3f4f6', display: 'flex', alignItems: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span className="ari-room-dot" aria-hidden="true" />
-                      <div className="ari-room-caption"><span style={{ fontSize: '14px', fontWeight: '600', color: '#4b5563' }}>{room.name}</span>{room.blocked && <small>{tUi('rooms.blocked')}</small>}{needle && matchedRoomIds.has(String(room.id)) && <small className="ari-room-match-label">{labelUi("Khớp tìm kiếm")}</small>}</div>
+                      <div className="ari-room-caption"><span style={{ fontSize: '14px', fontWeight: '600', color: '#4b5563' }}>{room.name}</span>{room.blocked && <small>{tUi('rooms.blocked')}</small>}</div>
                     </div>
                   </div>
                 ))}
@@ -177,7 +145,7 @@ export default function ARI() {
 
                       {/* Booking Pills */}
                       {roomBookings.map((booking) => (
-                        <button type="button" className={`ari-booking${needle ? (booking.match ? ' is-match' : ' is-dimmed') : ''}`} data-booking-id={booking.id} aria-label={`${booking.guest}, phòng ${room.name}, ${formatDate(booking.checkIn)} đến ${formatDate(booking.checkOut)}${needle && booking.match ? ', ' + labelUi('khớp tìm kiếm') : ''}`} onClick={() => setSelectedBookingId(booking.id)} key={`${booking.id}:${booking.colStart}`} style={{ border: 'none', textAlign: 'left',
+                        <button className="ari-booking" aria-label={`${booking.guest}, phòng ${room.name}, ${formatDate(booking.checkIn)} đến ${formatDate(booking.checkOut)}`} onClick={() => setSelectedBookingId(booking.id)} key={`${booking.id}:${booking.colStart}`} style={{ border: 'none', textAlign: 'left',
                           position: 'absolute',
                           left: `${booking.colStart * 100 + 2}px`, // 100px per day, 2px inset
                           width: `${booking.colSpan * 100 - 4}px`,
