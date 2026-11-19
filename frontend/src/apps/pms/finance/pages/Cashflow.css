@@ -1,0 +1,55 @@
+.cashflow-drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  margin: 0;
+  width: min(480px, 100%);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: -12px 0 48px #102c4b1f;
+  overflow: hidden;
+  font: inherit;
+}
+.cashflow-drawer::backdrop { background: #102c4b66; }
+.cashflow-drawer[open] { animation: cashflow-drawer-enter 180ms ease-out; }
+.cashflow-drawer > form { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.cashflow-drawer-heading { display: flex; align-items: center; gap: 12px; padding: calc(24px + env(safe-area-inset-top, 0px)) 24px 24px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+.cashflow-drawer-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; background: #eaf4fc; color: var(--accent-primary); flex-shrink: 0; }
+.cashflow-drawer-title { flex: 1; min-width: 0; }
+.cashflow-drawer-title p { margin: 0 0 4px; color: var(--text-secondary); font-size: 12px; }
+.cashflow-drawer-title h2 { margin: 0; font-size: 22px; font-weight: 600; line-height: 1.3; letter-spacing: -.4px; }
+.cashflow-drawer button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-surface); color: var(--text-primary); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.cashflow-drawer .cashflow-drawer-close { width: 44px; padding: 10px; border-color: transparent; color: var(--text-secondary); flex-shrink: 0; }
+.cashflow-drawer button:hover { background: var(--bg-main); }
+.cashflow-drawer button:disabled { opacity: .6; cursor: not-allowed; }
+.cashflow-drawer :focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 3px; }
+.cashflow-drawer-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; overflow-wrap: anywhere; padding: 24px; }
+.cashflow-drawer-body > [role="alert"] { margin: 0 0 20px; overflow-wrap: anywhere; }
+.cashflow-drawer fieldset { display: grid; align-content: start; gap: 24px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.cashflow-drawer label { display: grid; gap: 8px; min-width: 0; color: var(--text-secondary); font-size: 13px; font-weight: 500; }
+.cashflow-drawer :is(input, select, textarea) { width: 100%; min-width: 0; min-height: 46px; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-surface); color: var(--text-primary); font: inherit; font-size: 14px; line-height: 1.5; }
+.cashflow-drawer :is(input, select, textarea):focus { border-color: var(--accent-primary); }
+.cashflow-drawer textarea { min-height: 112px; resize: vertical; }
+.cashflow-drawer .cashflow-amount { padding: 16px; border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-main); }
+.cashflow-amount-control { display: flex; align-items: center; gap: 12px; }
+.cashflow-drawer .cashflow-amount input { min-height: 44px; padding: 0; border: 0; border-radius: 0; background: transparent; font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.cashflow-amount input::placeholder { color: var(--text-muted); opacity: 1; }
+.cashflow-amount-control > span { flex-shrink: 0; white-space: nowrap; color: var(--text-secondary); font-size: 13px; }
+.cashflow-drawer-hint { margin: -12px 0 0; color: var(--text-secondary); font-size: 13px; line-height: 1.6; }
+.cashflow-drawer-footer { display: flex; justify-content: flex-end; gap: 12px; padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--border-color); background: var(--bg-main); flex-shrink: 0; }
+.cashflow-drawer .cashflow-drawer-submit { min-width: 144px; border-color: var(--accent-primary); background: var(--accent-primary); color: #fff; }
+.cashflow-drawer .cashflow-drawer-submit:hover { background: var(--accent-secondary); }
+@keyframes cashflow-drawer-enter { from { transform: translateX(32px); opacity: .6; } to { transform: translateX(0); opacity: 1; } }
+@media (max-width: 540px) {
+  .cashflow-drawer-heading { padding: calc(16px + env(safe-area-inset-top, 0px)) 16px 16px; }
+  .cashflow-drawer-body { padding: 20px 16px; }
+  .cashflow-drawer-footer { padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
+  .cashflow-drawer-footer button { flex: 1; }
+  .pms-shell .cashflow-drawer .cashflow-amount input { font-size: 28px !important; }
+}
+@media (prefers-reduced-motion: reduce) { .cashflow-drawer[open] { animation: none; } }
