@@ -1,0 +1,301 @@
+.pms-housekeeping .hk-room-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+.pms-housekeeping button.hk-room-action {
+  margin-left: 8px;
+}
+.pms-housekeeping .hk-room-action:hover:not(:disabled) {
+  background: var(--bg-main);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+.pms-housekeeping .hk-room-action:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.pms-housekeeping .hk-room-task-link {
+  color: var(--accent-primary);
+  font-size: 12px;
+  text-decoration: none;
+}
+.pms-housekeeping .hk-room-task-link:hover {
+  text-decoration: underline;
+}
+.pms-housekeeping :is(.hk-room-action, .hk-room-task-link, .hk-queue-presets button):focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Header and toolbars wrap instead of forcing horizontal scrolling. */
+.pms-housekeeping .hk-page-header {
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.pms-housekeeping .pms-housekeeping-filters {
+  flex-wrap: wrap;
+}
+.pms-housekeeping .hk-history-dates {
+  flex-wrap: wrap;
+}
+
+/* Read-only queue presets */
+.pms-housekeeping .hk-queue-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.pms-housekeeping .hk-queue-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pms-housekeeping .hk-queue-presets button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 6px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  background: #fff;
+  color: #374151;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.pms-housekeeping .hk-queue-presets button[aria-pressed='true'] {
+  border-color: var(--accent-primary);
+  background: #eaf4fc;
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+.pms-housekeeping .hk-queue-count {
+  min-width: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+.pms-housekeeping .hk-queue-summary {
+  font-size: 13px;
+  color: #4b5563;
+}
+.pms-housekeeping .hk-queue-bar .hk-queue-clear {
+  margin-left: 0;
+}
+
+/* Exact room target */
+.pms-housekeeping .hk-target-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #eaf4fc;
+  color: #0b4a7a;
+  font-size: 14px;
+}
+.pms-housekeeping .hk-target-banner p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.pms-housekeeping .hk-target-banner:not(.is-found) {
+  background: #fff1f0;
+  color: #b42318;
+}
+.pms-housekeeping .hk-target-banner .hk-target-clear {
+  margin-left: 0;
+}
+.pms-housekeeping .hk-target-raw {
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 13px;
+}
+
+/* Row details kept inside the existing six cells */
+.pms-housekeeping .hk-room-number {
+  display: block;
+}
+.pms-housekeeping .hk-room-reason {
+  display: block;
+  width: fit-content;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 12px;
+  font-weight: 600;
+}
+.pms-housekeeping .hk-task-when {
+  display: block;
+  margin-top: 4px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.pms-housekeeping .hk-empty {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 16px;
+  color: #6b7280;
+  font-size: 14px;
+  text-align: center;
+}
+.pms-housekeeping .hk-empty p {
+  margin: 0;
+}
+.pms-housekeeping .hk-history-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding: 12px 20px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 13px;
+  color: #4b5563;
+}
+.pms-housekeeping .hk-history-pager-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.pms-housekeeping .hk-history-pager-actions .hk-room-action {
+  margin-left: 0;
+}
+
+@media (pointer: coarse) {
+  .pms-housekeeping .hk-room-action,
+  .pms-housekeeping .hk-queue-presets button {
+    min-height: 42px;
+  }
+  .pms-housekeeping .hk-quick-toggle {
+    min-width: 42px;
+    min-height: 42px;
+  }
+}
+
+/* Mobile: status/history rows become readable cards while staying a semantic table with the same cells. */
+@media (max-width: 640px) {
+  .pms-housekeeping {
+    padding: 12px !important;
+  }
+  .pms-housekeeping .pms-housekeeping-filters {
+    padding: 12px !important;
+    gap: 8px !important;
+  }
+  .pms-housekeeping .pms-housekeeping-filters > select {
+    flex: 1 1 140px;
+    min-width: 0;
+  }
+  .pms-housekeeping .pms-housekeeping-filters .hk-search {
+    flex: 1 1 100% !important;
+    max-width: none !important;
+  }
+  .pms-housekeeping .hk-queue-bar,
+  .pms-housekeeping .hk-target-banner,
+  .pms-housekeeping .hk-history-pager {
+    padding: 12px;
+  }
+  .pms-housekeeping .hk-table-scroll {
+    overflow-x: visible !important;
+  }
+  .pms-housekeeping :is(.hk-status-table, .hk-history-table) {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .pms-housekeeping :is(.hk-status-table, .hk-history-table),
+  .pms-housekeeping :is(.hk-status-table, .hk-history-table) tbody {
+    display: block;
+  }
+  .pms-housekeeping :is(.hk-status-table, .hk-history-table) thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .pms-housekeeping :is(.hk-status-table, .hk-history-table) tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    margin: 10px;
+    padding: 12px;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px;
+  }
+  .pms-housekeeping :is(.hk-status-table, .hk-history-table) td {
+    display: block;
+    min-width: 0;
+    padding: 0 !important;
+    overflow-wrap: anywhere;
+  }
+  .pms-housekeeping :is(.hk-status-table, .hk-history-table) td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: uppercase;
+  }
+  .pms-housekeeping .hk-status-table td.hk-cell-room::before {
+    display: none;
+  }
+  .pms-housekeeping .hk-status-table .hk-cell-room {
+    order: 0;
+  }
+  .pms-housekeeping .hk-status-table .hk-cell-condition {
+    order: 1;
+  }
+  .pms-housekeeping .hk-status-table .hk-cell-stay {
+    order: 2;
+  }
+  .pms-housekeeping .hk-status-table .hk-cell-assignment {
+    order: 3;
+  }
+  .pms-housekeeping .hk-status-table .hk-cell-code {
+    order: 4;
+  }
+  .pms-housekeeping .hk-status-table .hk-cell-notes {
+    order: 5;
+  }
+  .pms-housekeeping .hk-status-table .hk-cell-code > div {
+    flex-wrap: wrap;
+    gap: 8px !important;
+  }
+  .pms-housekeeping .hk-status-table .hk-cell-notes button.hk-room-action {
+    margin: 8px 0 0;
+  }
+}
