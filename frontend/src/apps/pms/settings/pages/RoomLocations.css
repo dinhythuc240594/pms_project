@@ -1,0 +1,74 @@
+.room-locations { min-width: 0; padding: 21px; border: 1px solid #e3eaf1; border-radius: var(--pms-panel-radius, 12px); background: #fff; color: #344a62; }
+.room-locations-heading { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px 20px; margin-bottom: 20px; }
+.room-locations-heading > div { flex: 1 1 300px; min-width: 0; }
+.room-locations-heading h2 { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin: 0 0 6px; color: #26394e; font-size: 17px; font-weight: 650; line-height: 1.45; }
+.room-locations-heading p { max-width: 540px; margin: 0; color: #718096; font-size: 12px; line-height: 1.65; }
+.room-locations-count { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 23px; padding: 0 6px; border-radius: 7px; background: #f0f4f8; color: #697c91; font-size: 11px; font-weight: 600; }
+.room-locations-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--accent-primary, #086ab4); font-size: 12px; font-weight: 600; line-height: 1.5; text-decoration: none; }
+.room-locations-link:hover { text-decoration: underline; }
+.room-locations-link > svg { flex-shrink: 0; }
+.room-locations-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.room-locations-search { position: relative; display: flex; align-items: center; flex: 1 1 240px; max-width: 440px; min-width: 0; }
+.room-locations-search > svg { position: absolute; left: 12px; color: #94a3b8; pointer-events: none; }
+.room-locations :is(input, button) { box-sizing: border-box; font: inherit; }
+.room-locations input { width: 100%; min-width: 0; min-height: var(--pms-control-height, 44px); margin: 0; padding: 10px 12px; border: 1px solid var(--pms-control-border, #d7e1eb); border-radius: var(--pms-control-radius, 9px); background: #fff; color: #344a62; font-size: 13px; font-weight: 400; line-height: 1.5; }
+.room-locations-search input { padding-left: 37px; background: #fbfcfe; }
+.room-locations input::placeholder { color: #94a3b8; }
+.room-locations input:hover:not(:disabled) { border-color: #b9ccdd; }
+.room-locations :is(input, button, a, [tabindex]):focus-visible { outline: 3px solid #086ab426; outline-offset: 2px; }
+.room-locations input:focus-visible { border-color: var(--accent-primary, #086ab4); }
+.room-locations-results { margin-left: auto; color: #8290a2; font-size: 11px; line-height: 1.6; white-space: nowrap; }
+.room-locations-table { width: 100%; overflow-x: auto; border: 1px solid #e6ecf2; border-radius: 10px; }
+.room-locations-table table { width: 100%; min-width: 680px; border-collapse: collapse; text-align: left; }
+.room-locations-table th { padding: 12px 15px; border-bottom: 1px solid #e6ecf2; background: #f8fafc; color: #8290a2; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.room-locations-table td { padding: 12px 15px; border-bottom: 1px solid #edf1f5; color: #53677c; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.room-locations-table tr:last-child td { border-bottom: 0; }
+.room-locations-table tbody tr:hover { background: #fbfdff; }
+.room-locations-table .is-inactive .room-locations-room { opacity: .6; }
+.room-locations-table .room-locations-actions-heading { text-align: right; }
+.room-locations-room { display: flex; align-items: center; gap: 10px; }
+.room-locations-room strong { color: #344a62; font-weight: 600; }
+.room-locations-room small { display: block; margin-top: 2px; color: #8290a2; font-size: 10px; }
+.room-locations-room-icon { display: grid; place-items: center; flex: 0 0 33px; height: 33px; border-radius: 9px; background: #f1f6fb; color: #7996b2; }
+.room-locations-unassigned { color: #9aa7b7; font-size: 11px; }
+.room-locations-row-actions { display: flex; justify-content: flex-end; }
+.room-locations .room-locations-edit { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; min-width: 44px; padding: 8px; border: 0; border-radius: 8px; background: transparent; color: #6d89a4; font-size: 11px; line-height: 1.4; cursor: pointer; }
+.room-locations-edit:hover:not(:disabled) { background: #eaf4fc; color: var(--accent-primary, #086ab4); }
+.room-locations button:disabled, .room-locations fieldset:disabled button { opacity: .5; cursor: not-allowed; }
+.room-locations-editor { min-width: 0; margin-bottom: 19px; padding: 18px; border: 1px solid #dce9f5; border-radius: 10px; background: #f8fbfe; }
+.room-locations-editor fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.room-locations-editor-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 15px; }
+.room-locations-editor-heading h3 { display: flex; align-items: center; gap: 8px; margin: 0; color: #344a62; font-size: 14px; font-weight: 600; line-height: 1.6; }
+.room-locations-editor-heading h3 > svg { flex-shrink: 0; }
+.room-locations .room-locations-icon-button { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; margin-top: -10px; margin-right: -10px; padding: 8px; border: 0; border-radius: 8px; background: transparent; color: #8290a2; cursor: pointer; }
+.room-locations-icon-button:hover:not(:disabled) { background: #eaf1f8; color: #344a62; }
+.room-locations-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.room-locations-field { display: flex; flex-direction: column; gap: 7px; min-width: 0; color: #52677f; font-size: 12px; font-weight: 600; line-height: 1.5; }
+.room-locations-editor-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; margin-top: 18px; padding-top: 15px; border-top: 1px solid #e3edf5; }
+.room-locations-editor-footer p { flex: 1 1 250px; margin: 0; color: #8290a2; font-size: 11px; line-height: 1.65; }
+.room-locations-editor-actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin-left: auto; }
+.room-locations .room-locations-button { display: inline-flex; justify-content: center; align-items: center; gap: 7px; min-height: 44px; padding: 10px 13px; border: 1px solid var(--pms-control-border, #d7e1eb); border-radius: var(--pms-control-radius, 9px); background: #fff; color: #52677f; font-size: 12px; font-weight: 600; line-height: 1.5; cursor: pointer; }
+.room-locations-button > svg { flex-shrink: 0; }
+.room-locations-button:hover:not(:disabled) { border-color: #bed2e3; background: #f7fafc; }
+.room-locations .room-locations-button.is-primary { border-color: var(--accent-primary, #086ab4); background: var(--accent-primary, #086ab4); color: #fff; }
+.room-locations .room-locations-button.is-primary:hover:not(:disabled) { filter: brightness(.94); }
+.room-locations-notice { display: flex; align-items: center; gap: 8px; margin: 0 0 16px; padding: 11px 13px; border: 1px solid #d8ebdf; border-radius: 9px; background: #eef8f2; color: #327852; font-size: 12px; line-height: 1.65; overflow-wrap: anywhere; }
+.room-locations-notice > svg { flex-shrink: 0; }
+.room-locations-notice.is-error { border-color: #f2dce0; background: #fff2f3; color: #b94450; }
+.room-locations-readonly { margin: 0 0 16px; color: #8290a2; font-size: 12px; line-height: 1.65; }
+.room-locations-table .room-locations-empty { padding: 32px 20px; color: #8290a2; text-align: center; }
+.room-locations-empty > svg { color: #91a9bf; }
+.room-locations-empty p { margin: 10px 0 0; }
+@media (max-width: 700px) {
+  .room-locations { padding: 15px; }
+  .room-locations-heading { gap: 6px; margin-bottom: 15px; }
+  .room-locations-heading > div { flex-basis: 100%; }
+  .room-locations-heading h2 { font-size: 16px; }
+  .room-locations input { min-height: 44px; font-size: 16px; }
+  .room-locations-search { max-width: none; }
+  .room-locations-results { width: 100%; }
+  .room-locations-editor { padding: 14px; }
+  .room-locations-form-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .room-locations-editor-actions { flex: 1 1 100%; }
+  .room-locations-editor-actions .room-locations-button { flex: 1 1 130px; }
+}

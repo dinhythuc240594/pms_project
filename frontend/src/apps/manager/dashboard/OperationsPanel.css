@@ -1,0 +1,22 @@
+.operations-panel { min-width: 0; overflow: hidden; }
+.operations-message { margin: 0; padding: 16px 20px; border-top: 1px solid var(--manager-line); color: var(--manager-muted); font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.operations-warning { color: var(--manager-warning); }
+.operations-workers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--manager-line); }
+.operations-workers > div { min-width: 0; padding: 20px; }
+.operations-workers > div + div { border-left: 1px solid var(--manager-line); }
+.operations-workers dt { color: var(--manager-ink); font-size: 14px; font-weight: 650; }
+.operations-workers dd { margin: 8px 0 0; color: var(--manager-muted); font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.operations-workers dd:first-of-type { color: var(--manager-ink); font-size: 14px; font-weight: 600; }
+.operations-workers dd.operations-warning { color: var(--manager-warning); }
+.operations-queue { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 20px; background: var(--manager-soft); border-top: 1px solid var(--manager-line); }
+.operations-queue > div { min-width: 0; }
+.operations-queue dt { color: var(--manager-muted); font-size: 12px; line-height: 1.6; }
+.operations-queue dd { margin: 6px 0 0; color: var(--manager-ink); font-size: 16px; font-weight: 650; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .operations-workers { grid-template-columns: minmax(0, 1fr); }
+  .operations-workers > div { padding: 16px; }
+  .operations-workers > div + div { border-left: 0; border-top: 1px solid var(--manager-line); }
+  .operations-queue { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 16px; }
+  .operations-message { padding: 16px; }
+  .operations-panel .manager-button { min-height: 44px; white-space: normal; }
+}
