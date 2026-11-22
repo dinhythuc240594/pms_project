@@ -2,7 +2,7 @@
 
 LOHA PMS (Property Management System) là đồ án xây dựng hệ thống quản lý khách sạn theo mô hình SaaS. Repository này lưu mã nguồn backend, frontend và lịch sử bàn giao của nhóm qua Git/GitHub.
 
-> **Trạng thái cập nhật ngày 09/11/2026:** Đang tích hợp mã nguồn theo từng hạng mục. Phần nền tảng và một số thành phần dùng chung đã được ghép vào `main`; ứng dụng cần thêm các module nghiệp vụ, tài nguyên và migration để chạy đầy đủ.
+> **Cập nhật ngày 22/11/2026:** Repository đã có mã nguồn cho đặt phòng, giá và tồn phòng, OTA, tài chính, buồng phòng, kho, báo cáo và quản trị. Các hạng mục được tích hợp qua Pull Request; ứng dụng vẫn cần bổ sung các điểm kết nối, tài nguyên và migration còn thiếu trước khi chạy đầy đủ.
 
 ## Mục tiêu của hệ thống
 
@@ -43,7 +43,7 @@ Các phiên bản dưới đây được khai báo trong cấu hình hiện tạ
 pms_project/
 ├── backend/
 │   ├── common/               # Tiện ích HTTP và định dạng dữ liệu dùng chung
-│   ├── pms_api/              # Khởi tạo ứng dụng, cấu hình, health và workspace
+│   ├── pms_api/              # Flask, phân quyền và các module nghiệp vụ
 │   ├── tests/                # Kiểm thử và dữ liệu mẫu cho kiểm thử
 │   ├── app.py                # Điểm khởi chạy backend
 │   ├── manage.py             # Lệnh quản lý ứng dụng Flask
@@ -54,7 +54,8 @@ pms_project/
 │   ├── src/
 │   │   ├── app/              # Cấu hình điều hướng và kiểm thử route
 │   │   ├── assets/           # Tài nguyên giao diện
-│   │   └── shared/components/ # Thành phần giao diện dùng chung
+│   │   ├── apps/             # Ứng dụng khách sạn, quản trị và marketing
+│   │   └── shared/           # Component, định dạng dữ liệu, đa ngôn ngữ và biểu mẫu
 │   ├── package.json          # Phụ thuộc và các lệnh frontend
 │   └── vite.config.js        # Cấu hình Vite và proxy API
 ├── start_backend.bat         # Công cụ khởi chạy backend trên Windows
@@ -73,16 +74,26 @@ Tên thành viên được ghi theo thông tin tác giả trong lịch sử Git.
 
 Chi tiết đóng góp có thể xem tại [lịch sử commit](https://github.com/dinhythuc240594/pms_project/commits/main/) và [các Pull Request đã merge](https://github.com/dinhythuc240594/pms_project/pulls?q=is%3Apr+is%3Amerged).
 
-## Tiến độ bàn giao
+## Phạm vi mã nguồn hiện có
 
-| Mốc | Nội dung đã có trên `main` |
+| Hạng mục | Các thành phần đã có mã nguồn |
 | --- | --- |
-| 08/11/2026 | Cấu hình dự án; khởi tạo Flask và React; cấu hình môi trường, dependency, router, Docker và công cụ chạy trên Windows. Phần của Lộc gồm 22 file qua 8 commit. |
-| 09/11/2026 | Tiện ích HTTP chung; bộ xử lý health/workspace; kiểm thử cấu hình và hợp đồng route; trang 404, tài nguyên, CSS và các component dùng chung. Phần của Lộc gồm 22 file qua 10 commit. |
+| Nền tảng | Cấu hình Flask/React, đăng nhập, phân quyền, workspace, tiện ích HTTP, nhập ngày và đa ngôn ngữ. |
+| Phòng và đặt phòng | Danh mục phòng, đặt phòng, lưu trú, chi tiết booking, thanh toán và thay đổi kỳ ở. |
+| Giá và tồn phòng | Giá theo đêm, ma trận giá, lịch ARI, quy tắc giá và dữ liệu phục vụ báo cáo. |
+| Kênh OTA | Kết nối Channex, quản lý credential, mapping, hàng đợi đồng bộ, onboarding, lịch sử và giao diện xử lý ngoại lệ. |
+| Tài chính và đối soát | Bán hàng POS, sổ quỹ, hoa hồng, báo cáo kinh doanh, đối soát và chốt ngày. |
+| Buồng phòng | Danh sách công việc, lịch sử, nhân viên, ca làm, phân công và kế hoạch dọn tự động. |
+| Kho | Nhập, xuất, chuyển, kiểm kê, tồn kho và thiết lập danh mục kho, hàng hóa, vật tư, nhà cung cấp. |
+| Quản trị | Các thành phần quản lý khách sạn, người dùng, thuê bao, tính năng và hỗ trợ OTA. |
 
-Các thành phần frontend đã được bàn giao gồm kiểm soát truy cập, nhập ngày, nhận diện thương hiệu, màn hình chờ và chỉ báo hoạt động yêu cầu. Backend đã có các file kiểm thử HTTP, cấu hình, khởi tạo ứng dụng và an toàn thiết lập PostgreSQL local.
+Bảng trên mô tả phạm vi mã nguồn, chưa xác nhận các chức năng đã chạy hoàn chỉnh. Mã trên nhánh bàn giao được đưa vào `main` sau khi Pull Request được kiểm tra và merge.
 
-Đây là tiến độ tích hợp mã nguồn. Các chức năng nghiệp vụ trong mục tiêu hệ thống sẽ được bổ sung và kiểm chứng khi ghép đủ các phần phụ thuộc.
+### Bàn giao ngày 22/11/2026
+
+- Bổ sung [InventorySettings.jsx](frontend/src/apps/pms/inventory/pages/InventorySettings.jsx) cùng [CSS](frontend/src/apps/pms/inventory/pages/InventorySettings.css), lấy nguyên nội dung từ bản `pms-system` hiện tại.
+- Cập nhật README theo tiến độ tích hợp, cấu hình thực tế và quy trình một nhánh mỗi ngày.
+- File `backend/pms_api/channels/exceptions_application.py` trong danh sách phân công không có ở nguồn hiện tại nên được bỏ qua; không lấy bù từ bản snapshot của workflow.
 
 ## Thiết lập và kiểm tra
 
@@ -97,13 +108,14 @@ cd pms_project
 
 Chuẩn bị Python 3.14, Node.js từ 22.12.0, npm và PostgreSQL. Mẫu cấu hình backend nằm tại [backend/.env.example](backend/.env.example); thông tin kết nối database được cấu hình ở backend. Giữ mật khẩu và khóa dịch vụ trong môi trường local hoặc môi trường triển khai.
 
-Bản hiện tại còn thiếu một số phần phụ thuộc:
+Một số điểm còn thiếu đã được xác định trong bản hiện tại:
 
-- Backend: các module nghiệp vụ, thành phần còn lại của `common`, migration và script thiết lập PostgreSQL local.
-- Frontend: các trang/layout, tiện ích dùng chung, tài nguyên kiểu chữ và `scripts/bundle-manifest.mjs` được tham chiếu trong cấu hình Vite.
-- Cấu hình Docker yêu cầu hash của các gói Python, trong khi `requirements.txt` hiện chỉ có phiên bản; cần đồng bộ cấu hình dependency trước khi dùng Docker.
+- Backend: các file đăng ký route như `pms_api/admin/urls.py`, `pms_api/admin/features_urls.py`, `pms_api/notifications_urls.py`, `pms_api/reconciliation/urls.py`, `pms_api/saas_billing/urls.py` đang được tham chiếu nhưng chưa có. Thư mục `backend/migrations/` cũng chưa được bàn giao.
+- Frontend: cấu hình Vite tham chiếu `frontend/scripts/bundle-manifest.mjs` chưa có; một số layout và trang quản trị được khai báo trong điều hướng vẫn cần bổ sung.
+- Công cụ Windows: `start_backend.bat` cần `backend/scripts/local_postgres.py`; helper và tài liệu `backend/README.md` mà file này tham chiếu chưa có trong repo.
+- Docker: `backend/Dockerfile` cài dependency với `--require-hashes`, trong khi các file requirements hiện chỉ có phiên bản. Cần bổ sung hash và migration trước khi dùng quy trình Docker này.
 
-Sau khi ghép đầy đủ mã nguồn và cấu hình môi trường, các lệnh chính là:
+Việc cài thư viện chưa đủ để khắc phục các file còn thiếu ở trên. Các lệnh sau áp dụng khi đã ghép đủ mã nguồn, cấu hình môi trường và chuẩn bị database phù hợp:
 
 | Thư mục thực hiện | Lệnh | Mục đích |
 | --- | --- | --- |
@@ -112,20 +124,23 @@ Sau khi ghép đầy đủ mã nguồn và cấu hình môi trường, các lệ
 | `frontend/` | `npm test` | Chạy bộ kiểm thử frontend. |
 | `frontend/` | `npm run lint` | Kiểm tra mã frontend. |
 | `frontend/` | `npm run build` | Tạo bản build frontend. |
-| `backend/` | `python -m pip install -r requirements.txt` | Cài phụ thuộc vào môi trường Python riêng của dự án. |
-| `backend/` | `python app.py` | Chạy backend sau khi hoàn tất cấu hình database và migration. |
-| `backend/` | `python -m unittest discover -s tests` | Chạy kiểm thử; một số bài kiểm tra cần các module và môi trường tương ứng. |
+| `backend/` | `python -m venv .venv` | Tạo môi trường riêng bằng Python 3.14. |
+| `backend/` | `.\.venv\Scripts\python.exe -m pip install -r requirements.txt` | Cài phụ thuộc backend vào môi trường riêng trên Windows. |
+| `backend/` | `.\.venv\Scripts\python.exe app.py` | Chạy backend sau khi hoàn tất mã nguồn, cấu hình database và migration. |
+| `backend/` | `.\.venv\Scripts\python.exe -m unittest discover -s tests` | Chạy kiểm thử; các bài tích hợp cần database kiểm thử và fixture tương ứng. |
 
-Frontend được cấu hình proxy đường dẫn `/api` đến backend tại `http://127.0.0.1:5000`. Hai file `start_backend.bat` và `start_frontend.bat` hỗ trợ thao tác chạy trên Windows sau khi đã hoàn tất thiết lập.
+Các lệnh Python trong bảng dùng PowerShell trên Windows; `python` phải trỏ đến Python 3.14 khi tạo môi trường. Cấu hình frontend khai báo npm 11.16.0 và có lockfile cho `npm ci`.
 
-**Tình trạng kiểm chứng:** Các file bàn giao đã được đối chiếu với nguồn và kiểm tra cú pháp, định dạng dữ liệu. Việc chạy đầy đủ ứng dụng, toàn bộ bộ kiểm thử và bản build sẽ được kiểm chứng sau khi bổ sung các phần phụ thuộc còn thiếu.
+Frontend proxy cả `/api` và `/p` đến backend tại `http://127.0.0.1:5000`. Hai file `start_backend.bat` và `start_frontend.bat` hỗ trợ chạy trên Windows khi đã hoàn tất thiết lập. Riêng `start_backend.bat` còn khởi động PostgreSQL local và chạy migration, nên cần đủ helper, schema và môi trường database trước khi sử dụng.
+
+**Tình trạng kiểm chứng:** Cặp file ngày 22/11 đã được đối chiếu SHA-256 với nguồn và qua kiểm tra JSX/CSS, không có cảnh báo. Chưa chạy thử toàn bộ ứng dụng, test giao diện của gói này hoặc bản build; các kết quả kiểm tra tĩnh không thay thế kiểm thử khi ghép đủ hệ thống.
 
 ## Quy trình làm việc
 
 1. Cập nhật `main` trước khi bắt đầu hạng mục mới.
-2. Tạo nhánh theo người phụ trách, ngày và nội dung, ví dụ `loc/2026-11-09-frontend-date-input`.
-3. Giữ file component, CSS và kiểm thử liên quan trong cùng hạng mục; kiểm tra đúng các file trước khi commit.
-4. Push nhánh và mở Pull Request về nhánh phù hợp. Với các nhánh nối tiếp, nhánh tổng hợp chứa đầy đủ các commit trước đó.
+2. Dùng một nhánh cho gói công việc mỗi ngày, ví dụ `loc/2026-11-22-inventory-settings`.
+3. Chia commit theo từng phần việc có ý nghĩa trên cùng nhánh. Giữ component, CSS và kiểm thử liên quan trong cùng nhóm; chỉ stage đúng các file đã kiểm tra.
+4. Push nhánh và mở một Pull Request về `main`, ghi nội dung bàn giao, cách kiểm tra và phần phụ thuộc còn thiếu.
 5. Kiểm tra, merge vào `main`, đồng bộ lại trên máy và cập nhật README khi tiến độ thay đổi.
 
 Lịch sử commit và Pull Request được giữ để theo dõi từng lần bàn giao, nội dung thay đổi và thành viên thực hiện.
