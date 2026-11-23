@@ -1,6 +1,6 @@
-# LOHA PMS — Hệ thống quản lý khách sạn
+# PMS — Hệ thống quản lý khách sạn
 
-LOHA PMS (Property Management System) là đồ án xây dựng hệ thống quản lý khách sạn theo mô hình SaaS. Repository này lưu mã nguồn backend, frontend và lịch sử bàn giao của nhóm qua Git/GitHub.
+PMS (Property Management System) là đồ án xây dựng hệ thống quản lý khách sạn theo mô hình SaaS. Repository này lưu mã nguồn backend, frontend và lịch sử bàn giao của nhóm qua Git/GitHub.
 
 > **Cập nhật ngày 22/11/2026:** Repository đã có mã nguồn cho đặt phòng, giá và tồn phòng, OTA, tài chính, buồng phòng, kho, báo cáo và quản trị. Các hạng mục được tích hợp qua Pull Request; ứng dụng vẫn cần bổ sung các điểm kết nối, tài nguyên và migration còn thiếu trước khi chạy đầy đủ.
 
