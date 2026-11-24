@@ -1,0 +1,1260 @@
+.ota-page {
+  min-width: 0;
+  max-width: 1280px;
+  margin: 0 auto;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+.pms-content:has(> .ota-page),
+.pms-content > .ota-page {
+  max-width: none;
+}
+.ota-page :is(h1, h2, h3, p) {
+  margin: 0;
+}
+.ota-page h1 {
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.8px;
+  line-height: 1.3;
+}
+.ota-page h2 {
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.25px;
+}
+.ota-page--embedded {
+  max-width: none;
+}
+.ota-page--embedded > .ota-page-header {
+  margin-top: 16px;
+}
+.ota-page--embedded > .ota-page-header h2 {
+  font-size: 20px;
+}
+.ota-page h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.ota-page p {
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+.ota-page svg {
+  flex-shrink: 0;
+}
+.ota-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.ota-page-header > div:first-child {
+  min-width: 0;
+}
+.ota-page-header h1 {
+  margin: 6px 0 8px;
+}
+.ota-page .ota-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+.ota-page-actions,
+.ota-title-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ota-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+.ota-button:hover:not(:disabled) {
+  background: var(--bg-main);
+  border-color: #b3c4d3;
+}
+.ota-button--primary {
+  color: white;
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+}
+.ota-button--primary:hover:not(:disabled) {
+  color: white;
+  background: #214460;
+  border-color: #214460;
+}
+.ota-button--secondary {
+  background: var(--bg-surface);
+}
+.ota-button--ghost {
+  border-color: transparent;
+  color: var(--accent-primary);
+  background: transparent;
+}
+.ota-button--small {
+  min-height: 34px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.ota-page button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.ota-tabs {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 16px;
+}
+.ota-tab {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 0 0 12px;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+.ota-tab:hover {
+  color: var(--text-primary);
+}
+.ota-tab.is-active {
+  color: var(--text-primary);
+  font-weight: 650;
+  border-bottom-color: var(--accent-primary);
+}
+.ota-tab.is-active svg {
+  color: var(--accent-primary);
+}
+.ota-panel {
+  min-width: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.ota-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px;
+}
+.ota-section-header > div {
+  min-width: 0;
+}
+.ota-section-header p {
+  margin-top: 5px;
+  font-size: 12px;
+}
+.ota-provider {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.ota-provider-logo {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  background: var(--text-primary);
+  color: var(--pms-lime);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+.ota-provider h2 {
+  font-size: 19px;
+}
+.ota-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.ota-status-dot {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.ota-status--neutral {
+  color: #56677a;
+  background: #f1f4f7;
+  border-color: #e3e9ef;
+}
+.ota-status--succeeded {
+  color: #216544;
+  background: #edf7ef;
+  border-color: #d4e9d8;
+}
+.ota-status--warning,
+.ota-status--queued,
+.ota-status--needs_review {
+  color: #865918;
+  background: #fff8e8;
+  border-color: #f1e3be;
+}
+.ota-status--processing {
+  color: #0864a4;
+  background: #eef6fd;
+  border-color: #d6e9f8;
+}
+.ota-status--failed {
+  color: #a3373f;
+  background: #fff0f0;
+  border-color: #f4d8dc;
+}
+.ota-connection-details {
+  display: grid;
+  grid-template-columns: 0.8fr 1.5fr 1.2fr;
+  gap: 16px;
+  padding: 16px 16px 16px;
+  border-top: 1px solid var(--border-color);
+}
+.ota-connection-details > div {
+  min-width: 0;
+}
+.ota-detail-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.ota-connection-details strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+.ota-environment {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.ota-property code {
+  display: block;
+  font-size: 11px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.ota-credential {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+.ota-credential.is-ready {
+  color: #216544;
+}
+.ota-connection-details .ota-webhook-hint {
+  flex-basis: 100%;
+  margin-top: 8px;
+  font-size: 11px;
+}
+.ota-webhook-hint a {
+  color: var(--accent-primary);
+}
+.ota-onboarding {
+  padding: 16px;
+  padding-top: 0;
+}
+.ota-onboarding > div {
+  padding: 16px;
+  background: var(--bg-main);
+  border-radius: 8px;
+}
+.ota-onboarding p {
+  margin-top: 5px;
+  font-size: 12px;
+}
+.ota-onboarding ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  gap: 16px;
+  margin-top: 16px;
+}
+.ota-onboarding li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.ota-onboarding li > span {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 600;
+}
+.ota-onboarding li:first-child > span {
+  background: var(--pms-lime);
+  color: var(--text-primary);
+  border-color: var(--pms-lime);
+}
+.ota-onboarding strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+.ota-onboarding small {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.ota-booking-onboarding .ota-sync-action {
+  padding-top: 0;
+}
+.ota-onboarding-steps {
+  display: grid;
+  gap: 12px;
+  padding-left: 20px;
+  margin: 0 0 16px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+.ota-onboarding-steps a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent-primary);
+}
+.ota-onboarding-loads {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 16px 0;
+  list-style: none;
+}
+.ota-onboarding-loads li {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+.ota-onboarding-loads li > span {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ota-onboarding-loads details {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.ota-onboarding-loads summary {
+  cursor: pointer;
+}
+.ota-onboarding-loads code {
+  display: block;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+}
+.ota-onboarding-confirm {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 16px 0;
+  padding-block: 8px;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.ota-onboarding-confirm input {
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.ota-booking-onboarding :is(button, summary, a) {
+  min-height: 44px;
+}
+.ota-booking-onboarding summary {
+  display: flex;
+  align-items: center;
+}
+.ota-count {
+  padding: 2px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.ota-mappings {
+  border-top: 1px solid var(--border-color);
+}
+.ota-mapping-labels,
+.ota-mapping-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(180px, 1.6fr) auto 56px;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 16px;
+}
+.ota-mapping-labels {
+  background: #f8fafc;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.ota-mapping-row + .ota-mapping-row {
+  border-top: 1px solid var(--border-color);
+}
+.ota-mapping-row > * {
+  min-width: 0;
+}
+.ota-room-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ota-room-name strong {
+  font-size: 12px;
+  display: block;
+  overflow-wrap: anywhere;
+}
+.ota-room-name small {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+.ota-room-icon,
+.ota-job-icon {
+  display: grid;
+  place-items: center;
+  color: var(--accent-primary);
+  background: #edf4f9;
+  border-radius: 7px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.ota-mapping-arrow {
+  color: #8ea2b4;
+  margin-left: auto;
+}
+.ota-mapping-ids {
+  display: grid;
+  gap: 6px;
+}
+.ota-mapping-ids > span {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.ota-mapping-ids code {
+  min-width: 0;
+  color: var(--text-secondary);
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+.ota-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+.ota-text-link:hover {
+  text-decoration: underline;
+}
+.ota-sync-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border-color);
+}
+.ota-sync-action {
+  min-width: 0;
+  padding: 16px;
+}
+.ota-sync-action + .ota-sync-action {
+  border-left: 1px solid var(--border-color);
+}
+.ota-sync-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.ota-sync-heading p {
+  font-size: 11px;
+  margin-top: 5px;
+}
+.ota-action-icon {
+  display: grid;
+  place-items: center;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.ota-date-range {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 12px;
+}
+.ota-date-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  height: 40px;
+}
+.ota-sync-action .ota-sync-copy {
+  min-height: 80px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.ota-sync-action .ota-action-hint {
+  font-size: 11px;
+  margin-top: 12px;
+}
+.ota-sync-action .ota-action-hint.is-blocked {
+  color: var(--text-muted);
+}
+.ota-panel-footnote {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-color);
+  background: #fafcfd;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.ota-panel-footnote svg {
+  margin-top: 2px;
+}
+.ota-page .ota-page-footnote {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.ota-form {
+  margin: 0 16px 16px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: #fafcfd;
+}
+.ota-form-heading {
+  margin-bottom: 16px;
+}
+.ota-form-heading p {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.ota-page fieldset {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.ota-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.ota-field {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.ota-field :is(input, select) {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 9px 11px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  color-scheme: light;
+}
+.ota-field input::placeholder {
+  color: #8493a2;
+}
+.ota-field :is(input, select):disabled {
+  color: var(--text-muted);
+  background: #f6f8fa;
+}
+.ota-field input[readonly] {
+  color: var(--text-secondary);
+  background: #f1f5f8;
+  font-size: 10px;
+}
+.ota-api-key-field {
+  display: grid;
+  gap: 7px;
+  margin-top: 12px;
+}
+.ota-secret-input {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+.ota-secret-input input {
+  flex: 1;
+  min-width: 0;
+  min-height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 9px 11px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 12px;
+}
+.ota-secret-input input::placeholder {
+  color: #8493a2;
+}
+.ota-secret-input input:disabled {
+  color: var(--text-muted);
+  background: #f6f8fa;
+}
+.ota-secret-input button {
+  flex-shrink: 0;
+  min-width: 40px;
+}
+.ota-storage-notice {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+.ota-field-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.ota-form > fieldset > .ota-field-hint {
+  margin-top: 12px;
+}
+.ota-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+.ota-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: var(--bg-surface);
+  cursor: pointer;
+}
+.ota-toggle > span:first-child {
+  flex: 1;
+  min-width: 0;
+}
+.ota-toggle strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+.ota-toggle small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+.ota-toggle input {
+  position: absolute;
+  right: 16px;
+  width: 38px;
+  height: 22px;
+  opacity: 0;
+}
+.ota-toggle-track {
+  display: block;
+  width: 38px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 20px;
+  background: #c5d0da;
+  flex-shrink: 0;
+}
+.ota-toggle-track::after {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.15s;
+}
+.ota-toggle input:checked + .ota-toggle-track {
+  background: var(--accent-primary);
+}
+.ota-toggle input:checked + .ota-toggle-track::after {
+  transform: translateX(16px);
+}
+.ota-toggle input:focus-visible + .ota-toggle-track {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+.ota-toggle:has(input:disabled) {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.ota-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.ota-notice > span {
+  flex: 1;
+  min-width: 0;
+}
+.ota-notice--error {
+  color: #a3373f;
+  background: #fff4f4;
+  border-color: #f2d5da;
+}
+.ota-notice--success {
+  color: #216544;
+  background: #f0f8f2;
+  border-color: #d4e9d8;
+}
+.ota-notice--info {
+  color: #355675;
+  background: #edf4fa;
+  border-color: #d7e5f1;
+}
+.ota-notice a {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  color: inherit;
+  white-space: nowrap;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ota-notice a:hover {
+  text-decoration: underline;
+}
+.ota-notice:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+.ota-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 16px;
+  text-align: center;
+}
+.ota-state h3 {
+  font-size: 13px;
+}
+.ota-state p {
+  max-width: 400px;
+  font-size: 12px;
+}
+.ota-state-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: #f6f9fb;
+  color: #7c93a6;
+  margin-bottom: 2px;
+}
+.ota-state--loading {
+  color: var(--text-muted);
+  min-height: 240px;
+}
+.ota-history-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ota-history-filter .ota-field {
+  min-width: 180px;
+}
+.ota-history-count {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+.ota-history-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
+  gap: 12px;
+  padding: 0 16px 16px;
+}
+.ota-history-filter-actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ota-history-row-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.ota-job-details {
+  border-top: 1px solid var(--border-color);
+  background: #fafcfd;
+}
+.ota-job-details-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0 16px 16px;
+}
+.ota-job-details-fields dt {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+.ota-job-details-fields dd {
+  color: var(--text-primary);
+  font-size: 12px;
+  margin: 6px 0 0;
+  overflow-wrap: anywhere;
+}
+.ota-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.ota-table {
+  width: 100%;
+  min-width: 1040px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 12px;
+}
+.ota-table th {
+  padding: 12px 16px;
+  border-block: 1px solid var(--border-color);
+  background: #f8fafc;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+.ota-table td {
+  padding: 16px;
+  border-bottom: 1px solid #edf1f5;
+  vertical-align: top;
+}
+.ota-table tr:last-child td {
+  border-bottom: 0;
+}
+.ota-job-type {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.ota-job-type strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+.ota-job-icon {
+  width: 32px;
+  height: 32px;
+}
+.ota-cell-meta {
+  display: block;
+  color: var(--text-muted);
+  font-size: 10px;
+  line-height: 1.6;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+}
+.ota-result {
+  min-width: 140px;
+  max-width: 240px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.65;
+}
+.ota-result--error {
+  color: #a3373f;
+}
+.ota-retry-action {
+  min-width: 140px;
+  max-width: 200px;
+}
+.ota-history-footer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-color);
+  background: #fafcfd;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+.ota-review-table {
+  min-width: 840px;
+}
+.ota-review-table td {
+  max-width: 280px;
+  overflow-wrap: anywhere;
+}
+.ota-review-table .ota-result p {
+  margin-top: 8px;
+}
+.ota-review-rooms {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+.ota-review-rooms summary {
+  cursor: pointer;
+}
+.ota-review-rooms ul {
+  padding-left: 16px;
+  margin: 8px 0 0;
+}
+.ota-review-rooms li + li {
+  margin-top: 8px;
+}
+.ota-review-rooms li span {
+  display: block;
+}
+.ota-review-pagination {
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.ota-review-pagination nav {
+  display: flex;
+  gap: 8px;
+}
+.ota-review-scroll-hint {
+  display: none;
+}
+.ota-spin {
+  animation: ota-spin 1s linear infinite;
+}
+@keyframes ota-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ota-catalog-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.ota-field-hint code {
+  overflow-wrap: anywhere;
+}
+.ota-page .ota-inbound-plans {
+  margin-top: 16px;
+}
+.ota-inbound-plans legend {
+  font-size: 12px;
+  font-weight: 600;
+}
+.ota-inbound-choice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-block: 8px;
+  font-size: 12px;
+}
+.ota-inbound-choice input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.ota-ari-preview {
+  padding: 16px;
+  border-top: 1px solid var(--border-color);
+}
+@media (max-width: 1100px) {
+  .ota-connection-details {
+    grid-template-columns: 1fr 1.5fr;
+  }
+  .ota-connection-details > div:last-child {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .ota-connection-details > div:last-child .ota-detail-label {
+    margin: 0;
+  }
+  .ota-connection-details > div:last-child .ota-credential {
+    margin: 0;
+  }
+  .ota-mapping-labels,
+  .ota-mapping-row {
+    gap: 12px;
+  }
+  .ota-date-range {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .ota-date-arrow {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .pms-shell .ota-page-header {
+    padding: 0 !important;
+    flex-wrap: nowrap;
+  }
+  .pms-shell .ota-page-header > div:first-child {
+    width: auto !important;
+    flex: 1;
+  }
+  .ota-page-actions {
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 26px;
+  }
+}
+@media (max-width: 680px) {
+  .ota-page-header {
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .ota-page h1 {
+    font-size: 24px;
+  }
+  .ota-page-header > div:first-child > p:last-child {
+    max-width: 300px;
+    font-size: 12px;
+  }
+  .ota-page-actions .ota-button {
+    padding: 9px;
+    font-size: 0;
+    gap: 0;
+  }
+  .ota-page .ota-eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.1px;
+  }
+  .ota-tabs {
+    gap: 16px;
+  }
+  .ota-tab {
+    font-size: 12px;
+  }
+  .ota-section-header {
+    padding: 16px;
+  }
+  .ota-provider-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 9px;
+  }
+  .ota-provider {
+    gap: 12px;
+  }
+  .ota-connection .ota-section-header > .ota-button {
+    width: 100%;
+  }
+  .ota-onboarding {
+    padding: 0 16px 16px;
+  }
+  .ota-onboarding ol {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .ota-connection-details {
+    padding: 16px;
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+  .ota-connection-details > div:last-child {
+    display: block;
+  }
+  .ota-connection-details > div:last-child .ota-detail-label {
+    margin-bottom: 10px;
+  }
+  .ota-connection-details > div:last-child .ota-credential {
+    margin-bottom: 8px;
+  }
+  .ota-mapping-labels {
+    display: none;
+  }
+  .ota-mapping-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 16px;
+    gap: 12px;
+  }
+  .ota-room-name {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .ota-mapping-arrow {
+    display: none;
+  }
+  .ota-mapping-ids {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .ota-mapping-row > .ota-status {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .ota-mapping-row > .ota-button {
+    grid-column: 2;
+    justify-self: end;
+  }
+  .ota-sync-grid {
+    grid-template-columns: 1fr;
+  }
+  .ota-sync-action {
+    padding: 16px;
+  }
+  .ota-sync-action + .ota-sync-action {
+    border-left: 0;
+    border-top: 1px solid var(--border-color);
+  }
+  .ota-sync-action .ota-sync-copy {
+    min-height: 0;
+  }
+  .ota-sync-action .ota-button {
+    width: 100%;
+  }
+  .ota-panel-footnote {
+    padding: 12px 16px;
+  }
+  .ota-form {
+    padding: 12px;
+    margin: 0 12px 16px;
+  }
+  .ota-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .ota-notice {
+    flex-wrap: wrap;
+  }
+  .ota-notice a {
+    margin-left: 20px;
+  }
+  .ota-history-filter {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .ota-history-filter .ota-field {
+    min-width: 0;
+    flex: 1;
+  }
+  .ota-history-filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ota-job-details-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ota-history-footer {
+    padding: 12px 16px;
+  }
+  .ota-review-scroll-hint {
+    display: block;
+  }
+}
+@media (max-width: 680px), (pointer: coarse) {
+  .ota-history .ota-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .ota-history .ota-field :is(input, select) {
+    min-height: 44px;
+    font-size: 16px;
+  }
+  .ota-history .ota-review-rooms summary {
+    min-height: 44px;
+    padding-block: 12px;
+  }
+}

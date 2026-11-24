@@ -1,0 +1,219 @@
+.ota-integration {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  color: var(--text-primary);
+}
+.ota-integration-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.ota-integration-heading :is(h1, h2) {
+  margin: 0;
+  font-size: 23px;
+  line-height: 1.4;
+}
+.ota-integration-heading p,
+.ota-integration-guide p {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.ota-integration-tabs {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border-color);
+}
+.ota-integration-tabs button {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ota-integration-tabs button.is-active {
+  color: var(--accent-primary);
+  border-bottom-color: currentColor;
+}
+.ota-integration-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.ota-integration-summary article {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-surface);
+}
+.ota-integration-summary svg {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+.ota-integration-summary strong {
+  font-size: 13px;
+}
+.ota-integration-summary p {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+.ota-integration-guide {
+  padding: 16px;
+  margin: 0;
+}
+.ota-integration-guide h3 {
+  margin: 0;
+  font-size: 16px;
+}
+.ota-integration-guide ol {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+.ota-integration-guide li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-color);
+}
+.ota-integration-guide li > span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: var(--accent-primary);
+  background: var(--bg-main);
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 600;
+}
+.ota-integration-guide li > div {
+  flex: 1;
+  min-width: 0;
+}
+.ota-integration-guide li strong {
+  font-size: 13px;
+}
+.ota-integration-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ota-integration .ota-page-header {
+  margin-bottom: 16px;
+}
+.ota-integration .ota-page--embedded > .ota-page-header {
+  margin-top: 0;
+}
+.ota-integration .ota-page {
+  width: 100%;
+  max-width: none;
+}
+.ota-technical {
+  border-top: 1px solid var(--border-color);
+  padding: 12px 16px;
+  font-size: 12px;
+}
+.ota-technical > summary {
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.ota-technical .ota-connection-details {
+  padding: 12px 0 0;
+  border: 0;
+}
+.ota-mapping-ids details {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+.ota-mapping-ids details summary {
+  cursor: pointer;
+}
+.ota-mapping-ids > strong {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.ota-mapping-ids > span {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.ota-mapping-ids details > span {
+  display: block;
+  margin-top: 4px;
+}
+.ota-source-picker {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+.ota-source-picker h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+.ota-source-picker p {
+  margin: 0 0 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.ota-source-picker .ota-form-actions {
+  padding-top: 12px;
+  margin-top: 12px;
+}
+.ota-property-create {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 12px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+.ota-integration :is(button, a, summary, input, select):focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+@media (max-width: 1000px) {
+  .ota-integration-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .ota-integration-tabs {
+    gap: 12px;
+  }
+  .ota-integration-tabs button {
+    font-size: 12px;
+  }
+  .ota-integration-guide li {
+    flex-wrap: wrap;
+  }
+  .ota-integration-guide li > div {
+    flex-basis: calc(100% - 44px);
+  }
+  .ota-integration-guide li > button {
+    margin-left: 44px;
+  }
+}
