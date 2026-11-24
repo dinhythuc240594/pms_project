@@ -1,0 +1,67 @@
+.client-channels {
+  --manager-ink: var(--text-primary);
+  --manager-muted: var(--text-secondary);
+  --manager-accent: var(--accent-primary);
+  --manager-accent-bg: var(--bg-primary-light, #eaf4fc);
+  --manager-surface: var(--bg-surface);
+  --manager-soft: var(--bg-main);
+  --manager-line: var(--border-color);
+  --manager-danger: var(--danger, #b83030);
+  --manager-warning: var(--warning, #915700);
+  --manager-input: var(--bg-surface);
+  max-width: none;
+}
+.client-channels .manager-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 10px 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 8px;
+  background: var(--manager-surface);
+  color: var(--manager-ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.client-channels .manager-button-primary {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #fff;
+}
+.client-channels .channex-channel-danger {
+  background: var(--manager-soft);
+  border-color: var(--manager-danger);
+  color: var(--manager-danger);
+}
+.client-channels .channex-channel-delete {
+  color: var(--manager-danger);
+}
+.client-channels .manager-icon-button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--manager-line);
+  border-radius: 8px;
+  background: var(--manager-surface);
+  color: var(--manager-ink);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.client-channels .manager-button:hover,
+.client-channels .manager-icon-button:hover {
+  filter: brightness(0.97);
+}
+.client-channels :is(button, input, select, a, summary):focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+.client-channels .ota-onboarding .ota-button {
+  margin-top: 12px;
+}
