@@ -2,7 +2,7 @@
 
 PMS (Property Management System) là đồ án xây dựng hệ thống quản lý khách sạn theo mô hình SaaS. Repository này lưu mã nguồn backend, frontend và lịch sử bàn giao của nhóm qua Git/GitHub.
 
-> **Cập nhật ngày 22/11/2026:** Repository đã có mã nguồn cho đặt phòng, giá và tồn phòng, OTA, tài chính, buồng phòng, kho, báo cáo và quản trị. Các hạng mục được tích hợp qua Pull Request; ứng dụng vẫn cần bổ sung các điểm kết nối, tài nguyên và migration còn thiếu trước khi chạy đầy đủ.
+> **Cập nhật ngày 24/11/2026:** Repository đã có mã nguồn cho đặt phòng, giá và tồn phòng, OTA, tài chính, buồng phòng, kho, báo cáo và quản trị. Các hạng mục được tích hợp qua Pull Request; ứng dụng vẫn cần bổ sung các điểm kết nối, tài nguyên và migration còn thiếu trước khi chạy đầy đủ.
 
 ## Mục tiêu của hệ thống
 
@@ -95,6 +95,19 @@ Bảng trên mô tả phạm vi mã nguồn, chưa xác nhận các chức năng
 - Cập nhật README theo tiến độ tích hợp, cấu hình thực tế và quy trình một nhánh mỗi ngày.
 - File `backend/pms_api/channels/exceptions_application.py` trong danh sách phân công không có ở nguồn hiện tại nên được bỏ qua; không lấy bù từ bản snapshot của workflow.
 
+### Chuẩn bị các gói 24–27/11/2026
+
+Bốn gói được chuẩn bị cùng đợt vào ngày 24/11/2026 trên một nhánh chung; ngày trong bảng là nhãn phân công của workflow, không phải ngày thực hiện commit.
+
+| Gói Lộc | File có trong nguồn | Nội dung chính |
+| --- | --- | --- |
+| 24/11 | 5/6 | Quản lý tính năng và giao diện thanh toán của chủ khách sạn. |
+| 25/11 | 9/10 | Quản trị Channex, danh mục mapping và thao tác OTA của khách sạn. |
+| 26/11 | 8/10 | Airbnb, chọn nguồn kết nối và giao diện kênh OTA. |
+| 27/11 | 9/10 | Thông báo, bố cục quản trị và chỉ báo vận hành. |
+
+Tổng cộng 31 file ứng dụng được lấy từ `pms-system`. Bỏ qua bốn file chưa có trong `backend/pms_api/admin/`: `features_application.py`, `channex_application.py`, `channex_channels_application.py`, `channex_insights_application.py`; cùng `frontend/src/apps/manager/mockData.js`. Không lấy bù từ snapshot workflow.
+
 ## Thiết lập và kiểm tra
 
 ### Lấy mã nguồn
@@ -110,7 +123,7 @@ Chuẩn bị Python 3.14, Node.js từ 22.12.0, npm và PostgreSQL. Mẫu cấu 
 
 Một số điểm còn thiếu đã được xác định trong bản hiện tại:
 
-- Backend: các file đăng ký route như `pms_api/admin/urls.py`, `pms_api/admin/features_urls.py`, `pms_api/notifications_urls.py`, `pms_api/reconciliation/urls.py`, `pms_api/saas_billing/urls.py` đang được tham chiếu nhưng chưa có. Thư mục `backend/migrations/` cũng chưa được bàn giao.
+- Backend: các file đăng ký route như `pms_api/admin/urls.py`, `pms_api/reconciliation/urls.py`, `pms_api/saas_billing/urls.py` đang được tham chiếu nhưng chưa có. Thư mục `backend/migrations/` cũng chưa được bàn giao.
 - Frontend: cấu hình Vite tham chiếu `frontend/scripts/bundle-manifest.mjs` chưa có; một số layout và trang quản trị được khai báo trong điều hướng vẫn cần bổ sung.
 - Công cụ Windows: `start_backend.bat` cần `backend/scripts/local_postgres.py`; helper và tài liệu `backend/README.md` mà file này tham chiếu chưa có trong repo.
 - Docker: `backend/Dockerfile` cài dependency với `--require-hashes`, trong khi các file requirements hiện chỉ có phiên bản. Cần bổ sung hash và migration trước khi dùng quy trình Docker này.
@@ -133,12 +146,12 @@ Các lệnh Python trong bảng dùng PowerShell trên Windows; `python` phải 
 
 Frontend proxy cả `/api` và `/p` đến backend tại `http://127.0.0.1:5000`. Hai file `start_backend.bat` và `start_frontend.bat` hỗ trợ chạy trên Windows khi đã hoàn tất thiết lập. Riêng `start_backend.bat` còn khởi động PostgreSQL local và chạy migration, nên cần đủ helper, schema và môi trường database trước khi sử dụng.
 
-**Tình trạng kiểm chứng:** Cặp file ngày 22/11 đã được đối chiếu SHA-256 với nguồn và qua kiểm tra JSX/CSS, không có cảnh báo. Chưa chạy thử toàn bộ ứng dụng, test giao diện của gói này hoặc bản build; các kết quả kiểm tra tĩnh không thay thế kiểm thử khi ghép đủ hệ thống.
+**Tình trạng kiểm chứng:** 31 file trong đợt 24–27/11 đã được đối chiếu SHA-256 với nguồn; kiểm tra cú pháp 11 file Python, kiểm tra tĩnh 15 file JavaScript/JSX và phân tích 5 file CSS đều đạt, không có cảnh báo. Mười bài kiểm thử Node độc lập trong `catalog.test.js`, `clientChannelOperations.test.js` và `operationsPresentation.test.js` đều qua. Chưa chạy test giao diện, test tích hợp PostgreSQL, toàn bộ ứng dụng hoặc bản build; kiểm tra tĩnh và các test độc lập không thay thế kiểm thử khi ghép đủ hệ thống.
 
 ## Quy trình làm việc
 
 1. Cập nhật `main` trước khi bắt đầu hạng mục mới.
-2. Dùng một nhánh cho gói công việc mỗi ngày, ví dụ `loc/2026-11-22-inventory-settings`.
+2. Ưu tiên một nhánh cho gói công việc mỗi ngày. Khi chuẩn bị nhiều gói trong cùng đợt, dùng một nhánh chung, ví dụ `loc/2026-11-24-27-handoff`.
 3. Chia commit theo từng phần việc có ý nghĩa trên cùng nhánh. Giữ component, CSS và kiểm thử liên quan trong cùng nhóm; chỉ stage đúng các file đã kiểm tra.
 4. Push nhánh và mở một Pull Request về `main`, ghi nội dung bàn giao, cách kiểm tra và phần phụ thuộc còn thiếu.
 5. Kiểm tra, merge vào `main`, đồng bộ lại trên máy và cập nhật README khi tiến độ thay đổi.
