@@ -1,0 +1,158 @@
+.manager-ota {
+  --text-primary: var(--manager-ink);
+  --text-secondary: var(--manager-muted);
+  --text-muted: var(--manager-muted);
+  --accent-primary: var(--manager-accent);
+  --bg-main: var(--manager-soft);
+  --bg-surface: var(--manager-surface);
+  --border-color: var(--manager-line);
+  --pms-lime: var(--manager-lime);
+  width: 100%;
+  min-width: 0;
+}
+.manager-ota .ota-page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+.manager-ota-context {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0 0 24px;
+  padding: 16px 20px;
+  border: 1px solid var(--manager-line);
+  border-radius: 12px;
+  background: var(--manager-surface);
+}
+.manager-ota-hotel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  color: var(--manager-accent);
+}
+.manager-ota-hotel > div {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+.manager-ota-hotel small {
+  color: var(--manager-muted);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+}
+.manager-ota-hotel strong {
+  color: var(--manager-ink);
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+.manager-ota-loading {
+  padding: 24px;
+  color: var(--manager-muted);
+}
+.manager-ota
+  :is(
+    .ota-form,
+    .ota-mapping-labels,
+    .ota-table th,
+    .ota-panel-footnote,
+    .ota-history-footer,
+    .ota-state-icon
+  ) {
+  background: var(--manager-soft);
+}
+.manager-ota .ota-table td {
+  border-color: var(--manager-line);
+}
+.manager-ota :is(.ota-room-icon, .ota-job-icon) {
+  background: var(--manager-accent-bg);
+}
+.manager-ota .ota-provider-logo {
+  background: #142d45;
+}
+.manager-ota .ota-onboarding li:first-child > span {
+  color: #142d45;
+}
+.manager-ota .ota-button--primary {
+  background: #142d45;
+  border-color: #142d45;
+  color: white;
+}
+.manager-ota .ota-button--primary:hover:not(:disabled) {
+  background: #214460;
+  border-color: #214460;
+}
+.manager-ota .ota-field :is(input, select):disabled,
+.manager-ota .ota-field input[readonly],
+.manager-ota .ota-secret-input input:disabled {
+  background: var(--manager-soft);
+}
+.manager-shell[data-theme='dark'] .manager-ota .ota-field :is(input, select) {
+  color-scheme: dark;
+}
+.manager-shell[data-theme='dark'] .manager-ota .ota-credential.is-ready {
+  color: #86dfba;
+}
+@media (max-width: 600px) {
+  .manager-ota-context {
+    padding: 16px;
+    align-items: flex-start;
+  }
+  .manager-ota-hotel {
+    align-items: flex-start;
+  }
+  .manager-ota :is(.ota-field, .ota-secret-input) :is(input, select) {
+    min-height: 44px;
+    font-size: 16px;
+  }
+  .manager-ota :is(.ota-button, .manager-button) {
+    min-height: 44px;
+  }
+  .manager-ota .manager-icon-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .manager-ota .ota-provider > div {
+    min-width: 0;
+  }
+  .manager-ota .ota-provider h2 {
+    overflow-wrap: anywhere;
+  }
+  .manager-ota .ota-tabs {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+  .manager-ota .ota-tab {
+    flex-shrink: 0;
+    min-height: 44px;
+  }
+  .manager-ota .ota-room-name {
+    grid-column: 1 / -1;
+  }
+  .manager-ota .ota-room-name > div {
+    min-width: 0;
+  }
+  .manager-ota .ota-mapping-row > .ota-status {
+    grid-column: 1;
+    grid-row: 3;
+    white-space: normal;
+  }
+  .manager-ota .ota-mapping-row > .ota-button {
+    grid-row: 3;
+  }
+  .manager-ota .ota-date-range {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .manager-ota .ota-form-actions {
+    flex-wrap: wrap;
+  }
+  .manager-ota .ota-form-actions > button {
+    flex: 1 1 140px;
+  }
+  .manager-ota .ota-integration-heading > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}

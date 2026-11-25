@@ -1,0 +1,252 @@
+.manager-self-profile {
+  display: grid;
+  gap: 20px;
+}
+.manager-profile-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+.manager-profile-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  color: var(--manager-accent);
+  background: var(--manager-accent-bg);
+  font-size: 24px;
+  font-weight: 650;
+}
+.manager-profile-summary-copy {
+  display: grid;
+  flex: 1 1 160px;
+  min-width: 0;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+.manager-profile-summary-copy strong {
+  font-size: 18px;
+  font-weight: 650;
+}
+.manager-profile-summary-copy > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--manager-muted);
+  font-size: 13px;
+}
+.manager-profile-summary-copy svg,
+.manager-profile-role svg {
+  flex-shrink: 0;
+}
+.manager-profile-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--manager-line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.manager-profile-card {
+  padding: 20px;
+}
+.manager-profile-section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.manager-profile-section-heading > div {
+  flex: 1;
+  min-width: 0;
+}
+.manager-profile-section-icon,
+.manager-profile-session-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--manager-soft);
+  color: var(--manager-muted);
+}
+.manager-profile-section-heading h3 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 650;
+}
+.manager-profile-section-heading p {
+  margin: 4px 0 0;
+  color: var(--manager-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.manager-profile-card form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.manager-profile-fields {
+  display: grid;
+  gap: 16px;
+}
+.manager-profile-fields label {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.manager-profile-fields input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid var(--manager-line);
+  background: var(--manager-input);
+  color: var(--manager-ink);
+  border-radius: 8px;
+  padding: 11px 12px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.manager-profile-fields input[readonly] {
+  background: var(--manager-soft);
+  color: var(--manager-muted);
+}
+.manager-profile-hint {
+  color: var(--manager-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 12px 0 20px;
+}
+.manager-profile-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--manager-line);
+  padding-top: 16px;
+  margin-top: auto;
+}
+.manager-profile-card-actions > .manager-button {
+  width: 100%;
+}
+.manager-profile-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  color: var(--manager-accent);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.manager-profile-feedback svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.manager-profile-feedback.is-error {
+  color: var(--manager-danger);
+}
+.manager-profile-sessions > .manager-profile-feedback {
+  margin-bottom: 16px;
+}
+.manager-profile-sessions .manager-profile-section-heading > .manager-button {
+  width: 100%;
+}
+.manager-profile-session-state {
+  margin: 0 0 20px;
+  padding: 20px;
+  border-radius: 8px;
+  background: var(--manager-soft);
+  color: var(--manager-muted);
+  font-size: 13px;
+}
+.manager-session-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+.manager-session-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 12px;
+  padding: 16px 0;
+  border-top: 1px solid var(--manager-line);
+  overflow-wrap: anywhere;
+}
+.manager-profile-session-icon.is-current {
+  background: var(--manager-accent-bg);
+  color: var(--manager-accent);
+}
+.manager-profile-session-copy {
+  display: grid;
+  gap: 8px;
+}
+.manager-profile-session-copy strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+.manager-session-list small {
+  color: var(--manager-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.manager-profile-session-expiry {
+  grid-column: 2;
+}
+.manager-profile-revoke {
+  color: var(--manager-danger);
+}
+@media (min-width: 601px) {
+  .manager-profile-summary,
+  .manager-profile-card {
+    padding: 24px;
+  }
+  .manager-profile-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .manager-profile-password-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .manager-profile-password-fields > label:first-child {
+    grid-column: 1 / -1;
+  }
+  .manager-profile-card-actions > .manager-button,
+  .manager-profile-sessions .manager-profile-section-heading > .manager-button {
+    width: auto;
+  }
+  .manager-profile-fields input {
+    font-size: 14px;
+  }
+  .manager-session-list li {
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px;
+  }
+  .manager-profile-session-expiry {
+    grid-column: auto;
+    justify-self: end;
+  }
+}
+@media (min-width: 1201px) {
+  .manager-self-profile {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  }
+  .manager-self-profile > .manager-page-heading,
+  .manager-profile-summary,
+  .manager-profile-sessions {
+    grid-column: 1 / -1;
+  }
+}

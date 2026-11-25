@@ -1,0 +1,325 @@
+.admin-features-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.admin-features-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.admin-features-metric {
+  min-width: 0;
+  padding: 20px;
+  display: grid;
+  gap: 8px;
+}
+.admin-features-metric > span {
+  color: var(--manager-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+.admin-features-metric > strong {
+  color: var(--manager-ink);
+  font-size: 28px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+.admin-features-metric small {
+  color: var(--manager-muted);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.admin-features-metric > strong small {
+  font-size: 16px;
+}
+.admin-features-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+}
+.admin-features-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  background: var(--manager-soft);
+  color: var(--manager-muted);
+}
+.admin-features-search svg {
+  flex-shrink: 0;
+}
+.admin-features-search input {
+  min-width: 0;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--manager-ink);
+  font-size: 13px;
+}
+.admin-features-categories {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 2 1 360px;
+  gap: 8px;
+  min-width: 0;
+}
+.admin-features-categories button {
+  padding: 8px 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  color: var(--manager-muted);
+  background: var(--manager-surface);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.admin-features-categories button[aria-pressed='true'] {
+  background: var(--manager-accent-bg);
+  border-color: var(--manager-accent);
+  color: var(--manager-accent);
+}
+.admin-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 16px;
+}
+.admin-features-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  overflow-wrap: anywhere;
+}
+.admin-features-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--manager-line);
+}
+.admin-features-drawer-toolbar {
+  flex-wrap: wrap;
+}
+.admin-features-drawer-toolbar > button {
+  white-space: normal;
+  text-align: left;
+}
+.admin-features-drawer-status,
+.admin-features-drawer-footer {
+  flex-wrap: wrap;
+}
+.admin-features-drawer-footer {
+  gap: 12px;
+}
+.admin-features-drawer-footer > span {
+  flex: 1 1 160px;
+}
+.admin-features-drawer-footer > button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.admin-features-drawer input {
+  min-width: 0;
+}
+.admin-features-drawer,
+.admin-features-modal {
+  overflow-wrap: anywhere;
+}
+.admin-features-drawer div,
+.admin-features-modal div {
+  min-width: 0;
+}
+.admin-features-modal :is(input, select) {
+  min-width: 0;
+  max-width: 100%;
+}
+@media (max-width: 700px) {
+  .admin-features-summary {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .admin-features-metric {
+    padding: 16px;
+  }
+  .admin-features-filters {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-features-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .admin-features-metric:last-child {
+    grid-column: 1 / -1;
+  }
+  .admin-features-page button {
+    min-height: 44px;
+  }
+  .admin-features-page :is(input, select) {
+    font-size: 16px !important;
+    min-height: 44px;
+  }
+  .admin-features-search {
+    padding-block: 0;
+    flex-basis: 100%;
+  }
+  .admin-features-categories {
+    flex-basis: 100%;
+  }
+  .admin-features-categories button {
+    flex: 1 1 auto;
+    overflow-wrap: anywhere;
+  }
+  .admin-features-card {
+    padding: 16px;
+  }
+  .admin-features-card > div:first-child > div > div:first-child {
+    min-width: 0;
+  }
+  .admin-features-card-footer > button {
+    width: 100%;
+    justify-content: center;
+  }
+  .admin-features-card [role='switch'] {
+    height: 44px !important;
+    background-color: transparent !important;
+  }
+  .admin-features-card [role='switch']::before {
+    content: '';
+    position: absolute;
+    inset: 8px 0;
+    border-radius: 16px;
+    background: var(--manager-line);
+  }
+  .admin-features-card [role='switch'][aria-checked='true']::before {
+    background: var(--manager-accent);
+  }
+  .admin-features-card [role='switch'] > div {
+    top: 11px !important;
+  }
+  .admin-features-toast {
+    inset-inline: 12px !important;
+    bottom: 12px !important;
+    overflow-wrap: anywhere;
+  }
+  .admin-features-toast svg {
+    flex-shrink: 0;
+  }
+  .admin-features-drawer {
+    height: 100dvh !important;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .admin-features-drawer > div {
+    flex-shrink: 0;
+  }
+  .admin-features-drawer-heading,
+  .admin-features-drawer-status,
+  .admin-features-drawer-toolbar,
+  .admin-features-drawer-body,
+  .admin-features-drawer-footer {
+    padding: 16px !important;
+  }
+  .admin-features-drawer-heading {
+    gap: 12px;
+    align-items: flex-start !important;
+  }
+  .admin-features-drawer-heading > div:first-child {
+    gap: 8px !important;
+  }
+  .admin-features-drawer-heading > div:first-child > div:last-child > div {
+    flex-wrap: wrap;
+  }
+  .admin-features-drawer-heading button {
+    min-width: 44px;
+    flex-shrink: 0;
+  }
+  .admin-features-drawer-search {
+    padding-block: 0 !important;
+  }
+  .admin-features-drawer-toolbar > button,
+  .admin-features-drawer-footer > button {
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+  }
+  .admin-features-drawer-body {
+    flex: none !important;
+    overflow-y: visible !important;
+  }
+  .admin-features-overrides {
+    position: relative;
+    display: block;
+    min-width: 0 !important;
+  }
+  .admin-features-overrides thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .admin-features-overrides tbody {
+    display: block;
+  }
+  .admin-features-overrides tr {
+    display: grid;
+    gap: 16px;
+    padding: 16px;
+  }
+  .admin-features-overrides td {
+    display: block;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+  .admin-features-overrides td > div {
+    max-width: none !important;
+  }
+  .admin-features-overrides td:first-child > div > div:last-child > div:last-child {
+    flex-wrap: wrap;
+  }
+  .admin-features-overrides td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 6px;
+    color: var(--manager-muted);
+    font-size: 12px;
+  }
+  .admin-features-overrides button {
+    width: 100%;
+    justify-content: center;
+  }
+  .admin-features-modal {
+    padding: 16px !important;
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .admin-features-modal > div:first-child {
+    align-items: flex-start !important;
+    gap: 12px;
+  }
+  .admin-features-modal button[aria-label] {
+    min-width: 44px;
+    flex-shrink: 0;
+  }
+  .admin-features-modal form > div:last-child > button {
+    flex: 1 1 100%;
+  }
+}
