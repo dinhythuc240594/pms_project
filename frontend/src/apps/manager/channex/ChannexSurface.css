@@ -1,0 +1,220 @@
+/* Channex views are shared by the PMS settings and Manager workspaces. */
+.pms-shell .channex-surface {
+  --manager-ink: var(--text-primary, #122b44);
+  --manager-muted: var(--text-secondary, #56677a);
+  --manager-accent: var(--accent-primary, #086ab4);
+  --manager-accent-bg: #eaf4fc;
+  --manager-surface: var(--bg-surface, #fff);
+  --manager-soft: var(--bg-main, #f3f7fa);
+  --manager-line: var(--border-color, #dce5ed);
+  --manager-danger: var(--accent-danger, #b83030);
+  --manager-warning: #915700;
+  --manager-input: var(--bg-surface, #fff);
+}
+
+.channex-surface {
+  min-width: 0;
+  border: 1px solid var(--manager-line, #dce5ed);
+  border-radius: 12px;
+  background: var(--manager-surface, #fff);
+  color: var(--manager-ink, #122b44);
+}
+
+.channex-surface .manager-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 7px;
+  background: var(--manager-surface);
+  color: var(--manager-ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.channex-surface .manager-button-primary {
+  border-color: #086ab4;
+  background: #086ab4;
+  color: #fff;
+}
+
+.channex-surface .manager-icon-button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--manager-line);
+  border-radius: 7px;
+  background: var(--manager-surface);
+  color: var(--manager-ink);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.channex-surface :is(.manager-button, .manager-icon-button):hover:not(:disabled) {
+  filter: brightness(0.96);
+}
+.channex-surface button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.channex-surface :is(button, input, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--manager-accent);
+  outline-offset: 3px;
+}
+.channex-surface .channex-tabs {
+  padding-inline: 16px;
+  gap: 20px;
+}
+.channex-surface .channex-tabs button {
+  min-height: 48px;
+  padding-block: 12px;
+}
+.channex-data-view .channex-section-heading {
+  padding: 16px;
+  gap: 12px;
+}
+.channex-data-view .channex-section-block {
+  padding: 0 16px 16px;
+}
+.channex-data-view .channex-plan-section {
+  padding-top: 16px;
+}
+.channex-data-view .channex-table-heading {
+  padding-bottom: 12px;
+}
+.channex-data-view .channex-pagination {
+  padding: 12px 16px;
+}
+.channex-data-view .manager-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border: 1px solid var(--manager-line, #dce5ed);
+  border-radius: 8px;
+  background: var(--manager-surface, #fff);
+}
+.channex-data-view > .manager-table-wrap {
+  width: calc(100% - 32px);
+  margin-inline: 16px;
+}
+.channex-data-view .manager-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  color: var(--manager-ink, #122b44);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.channex-data-view .manager-table :is(th, td) {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--manager-line, #dce5ed);
+  vertical-align: middle;
+}
+.channex-data-view .manager-table thead th {
+  background: var(--manager-soft, #f3f7fa);
+  color: var(--manager-muted, #56677a);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.channex-data-view .manager-table tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--manager-soft, #f3f7fa) 45%, var(--manager-surface, #fff));
+}
+.channex-data-view .manager-table tbody tr:hover {
+  background: var(--manager-accent-bg, #eaf4fc);
+}
+.channex-data-view .manager-table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+.channex-data-view .channex-inventory-table {
+  width: max-content;
+}
+.channex-data-view .channex-inventory-table thead th:first-child {
+  z-index: 2;
+}
+.channex-data-view .channex-inventory-table tbody th {
+  background: var(--manager-surface, #fff);
+}
+.channex-data-view .channex-table-identity {
+  align-items: center;
+}
+.channex-data-view .channex-table-identity > div {
+  min-width: 0;
+}
+.channex-data-view .channex-room-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
+}
+.channex-data-view .channex-room-table {
+  min-width: 860px;
+}
+.channex-data-view .channex-status {
+  font-size: 11px;
+}
+.channex-room-table .channex-number {
+  font-variant-numeric: tabular-nums;
+}
+.channex-room-table td:last-child {
+  width: 100px;
+}
+
+/* Keep the dialog opaque even if it is rendered outside a themed workspace. */
+.pms-legacy-overlay > .channex-editor {
+  background: var(--manager-surface, #fff);
+  color: var(--manager-ink, #122b44);
+  border-color: var(--manager-line, #dce5ed);
+  box-shadow: 0 24px 72px #09182845;
+}
+.channex-editor .channex-editor-heading {
+  background: var(--manager-surface, #fff);
+}
+.channex-editor .channex-editor-actions {
+  background: var(--manager-soft, #f3f7fa);
+}
+.channex-editor .channex-editor-fields {
+  gap: 16px;
+}
+.channex-editor .channex-editor-grid {
+  gap: 12px;
+}
+.channex-editor .channex-editor-hint {
+  color: var(--manager-muted, #56677a);
+  background: var(--manager-soft, #f3f7fa);
+}
+.channex-editor :is(input, select) {
+  border-color: var(--manager-line, #dce5ed);
+  background: var(--manager-input, #fff);
+  color: var(--manager-ink, #122b44);
+}
+.channex-editor :is(input, select)::placeholder {
+  color: var(--manager-muted, #66788b);
+  opacity: 1;
+}
+.channex-editor :is(input, select):focus-visible {
+  outline: 2px solid var(--manager-accent, #086ab4);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .channex-surface .channex-tabs {
+    gap: 16px;
+    padding-inline: 12px;
+  }
+  .channex-data-view .channex-section-heading {
+    align-items: flex-start;
+  }
+  .channex-editor .channex-editor-actions > button {
+    flex: 1;
+  }
+}
