@@ -18,14 +18,11 @@
 }
 .hk-staff-page .hk-page-heading {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 16px;
-}
-.hk-page-heading p {
-  font-size: 13px;
 }
 .hk-team-count {
   display: inline-flex;
