@@ -23,8 +23,21 @@
   border: 2px solid var(--manager-line, var(--border-color, #dce5ed));
   border-top-color: var(--manager-accent, var(--accent-primary, #086ab4));
   border-radius: 50%;
-  animation: loha-request-spin .8s linear infinite;
+  animation: loha-request-spin 0.8s linear infinite;
 }
-@keyframes loha-request-spin { to { transform: rotate(360deg); } }
-@media (max-width: 600px) { .loha-request-activity { right: 16px; bottom: 16px; } }
-@media (prefers-reduced-motion: reduce) { .loha-request-spinner { animation: none; } }
+@keyframes loha-request-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 600px) {
+  .loha-request-activity {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loha-request-spinner {
+    animation: none;
+  }
+}
