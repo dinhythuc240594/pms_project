@@ -1,2 +1,4 @@
-import PricingManagement from './PricingManagement';
-export default function Vouchers() { return <PricingManagement catalog="vouchers" />; }
+import PricingManagement from './PricingManagement'
+export default function Vouchers() {
+  return <PricingManagement catalog="vouchers" />
+}
