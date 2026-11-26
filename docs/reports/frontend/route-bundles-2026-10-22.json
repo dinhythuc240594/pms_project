@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "measuredAt": "2026-10-22T12:21:45.618Z",
+  "baselineCommit": "1f079f8574ff75d4f343bf4468d3d1875e0504ad",
+  "baselinePrerequisites": [
+    "src/apps/pms/reservations/components/BookingModal.jsx",
+    "src/apps/pms/reservations/components/BookingTabs.jsx",
+    "src/apps/pms/channel-manager/pages/OTAHistory.jsx"
+  ],
+  "environment": {
+    "node": "v26.12.0",
+    "npm": "12.2.1",
+    "vite": "8.2.2"
+  },
+  "compression": {
+    "gzipLevel": 9,
+    "brotliQuality": 11,
+    "unit": "bytes",
+    "independentFileCompression": true
+  },
+  "scope": "Cold JS/CSS route graph: HTML entry plus matched lazy layout/page, following static imports and CSS only.",
+  "before": {
+    "totalEmittedJsCss": {
+      "raw": 1950776,
+      "gzip": 494529,
+      "brotli": 366770,
+      "assetCount": 5
+    },
+    "routes": [
+      {
+        "name": "entry",
+        "path": "(before route renders)",
+        "raw": 1950776,
+        "gzip": 494529,
+        "brotli": 366770,
+        "assetCount": 5
+      },
+      {
+        "name": "login",
+        "path": "/id/login",
+        "raw": 1950776,
+        "gzip": 494529,
+        "brotli": 366770,
+        "assetCount": 5
+      },
+      {
+        "name": "marketing",
+        "path": "/",
+        "raw": 1950776,
+        "gzip": 494529,
+        "brotli": 366770,
+        "assetCount": 5
+      },
+      {
+        "name": "pms",
+        "path": "/id/dashboard",
+        "raw": 1950776,
+        "gzip": 494529,
+        "brotli": 366770,
+        "assetCount": 5
+      },
+      {
+        "name": "manager",
+        "path": "/manager/dashboard",
+        "raw": 1950776,
+        "gzip": 494529,
+        "brotli": 366770,
+        "assetCount": 5
+      },
+      {
+        "name": "inventory",
+        "path": "/id/inventory/in",
+        "raw": 1950776,
+        "gzip": 494529,
+        "brotli": 366770,
+        "assetCount": 5
+      },
+      {
+        "name": "reports",
+        "path": "/id/reports",
+        "raw": 1950776,
+        "gzip": 494529,
+        "brotli": 366770,
+        "assetCount": 5
+      }
+    ],
+    "entryAssets": [
+      {
+        "file": "assets/index-BKEbrvtU.css",
+        "raw": 301181,
+        "gzip": 46752,
+        "brotli": 38911
+      },
+      {
+        "file": "assets/index-W5DlEIH8.js",
+        "raw": 1335380,
+        "gzip": 348613,
+        "brotli": 242054
+      },
+      {
+        "file": "assets/modules-CKZYeMQL.js",
+        "raw": 3566,
+        "gzip": 1570,
+        "brotli": 1403
+      },
+      {
+        "file": "assets/rolldown-runtime-CbXtAM7H.js",
+        "raw": 589,
+        "gzip": 368,
+        "brotli": 326
+      },
+      {
+        "file": "assets/vendor-CGnr7U85.js",
+        "raw": 310060,
+        "gzip": 97226,
+        "brotli": 84076
+      }
+    ]
+  },
+  "after": {
+    "totalEmittedJsCss": {
+      "raw": 1994526,
+      "gzip": 582970,
+      "brotli": 482206,
+      "assetCount": 160
+    },
+    "routes": [
+      {
+        "name": "entry",
+        "path": "(before route renders)",
+        "raw": 922229,
+        "gzip": 283626,
+        "brotli": 218368,
+        "assetCount": 9
+      },
+      {
+        "name": "login",
+        "path": "/id/login",
+        "raw": 941551,
+        "gzip": 290742,
+        "brotli": 224496,
+        "assetCount": 19
+      },
+      {
+        "name": "marketing",
+        "path": "/",
+        "raw": 975452,
+        "gzip": 299977,
+        "brotli": 232670,
+        "assetCount": 27
+      },
+      {
+        "name": "pms",
+        "path": "/id/dashboard",
+        "raw": 1004696,
+        "gzip": 309038,
+        "brotli": 240698,
+        "assetCount": 41
+      },
+      {
+        "name": "manager",
+        "path": "/manager/dashboard",
+        "raw": 987918,
+        "gzip": 304960,
+        "brotli": 237105,
+        "assetCount": 36
+      },
+      {
+        "name": "inventory",
+        "path": "/id/inventory/in",
+        "raw": 1006272,
+        "gzip": 311743,
+        "brotli": 243127,
+        "assetCount": 45
+      },
+      {
+        "name": "reports",
+        "path": "/id/reports",
+        "raw": 1003920,
+        "gzip": 310538,
+        "brotli": 242036,
+        "assetCount": 42
+      }
+    ],
+    "entryAssets": [
+      {
+        "file": "assets/arrow-left-D9OPZxPN.js",
+        "raw": 165,
+        "gzip": 163,
+        "brotli": 169
+      },
+      {
+        "file": "assets/arrow-right-By87RWUU.js",
+        "raw": 165,
+        "gzip": 163,
+        "brotli": 162
+      },
+      {
+        "file": "assets/chunk-BV7QT456-Cp745qB5.js",
+        "raw": 95155,
+        "gzip": 31216,
+        "brotli": 27616
+      },
+      {
+        "file": "assets/circle-alert-CdZrBlnd.js",
+        "raw": 250,
+        "gzip": 185,
+        "brotli": 184
+      },
+      {
+        "file": "assets/createLucideIcon-ZZSaWMOg.js",
+        "raw": 1385,
+        "gzip": 782,
+        "brotli": 703
+      },
+      {
+        "file": "assets/index-B6Q8Wwq2.css",
+        "raw": 19742,
+        "gzip": 4892,
+        "brotli": 4273
+      },
+      {
+        "file": "assets/index-CqMXPHqI.js",
+        "raw": 248106,
+        "gzip": 77586,
+        "brotli": 67355
+      },
+      {
+        "file": "assets/jsx-runtime-BRZHomcu.js",
+        "raw": 557117,
+        "gzip": 168502,
+        "brotli": 117789
+      },
+      {
+        "file": "assets/usePms-B0uGn-Nl.js",
+        "raw": 144,
+        "gzip": 137,
+        "brotli": 117
+      }
+    ]
+  },
+  "featureModuleCounts": [
+    {
+      "route": "entry",
+      "manager": 0,
+      "inventory": 0,
+      "reports": 0,
+      "charts": 0,
+      "motion": 0
+    },
+    {
+      "route": "login",
+      "manager": 0,
+      "inventory": 0,
+      "reports": 0,
+      "charts": 0,
+      "motion": 0
+    },
+    {
+      "route": "marketing",
+      "manager": 0,
+      "inventory": 0,
+      "reports": 0,
+      "charts": 0,
+      "motion": 0
+    },
+    {
+      "route": "pms",
+      "manager": 0,
+      "inventory": 0,
+      "reports": 0,
+      "charts": 0,
+      "motion": 0
+    },
+    {
+      "route": "manager",
+      "manager": 11,
+      "inventory": 0,
+      "reports": 0,
+      "charts": 0,
+      "motion": 0
+    },
+    {
+      "route": "inventory",
+      "manager": 0,
+      "inventory": 5,
+      "reports": 0,
+      "charts": 0,
+      "motion": 0
+    },
+    {
+      "route": "reports",
+      "manager": 0,
+      "inventory": 0,
+      "reports": 3,
+      "charts": 0,
+      "motion": 0
+    }
+  ],
+  "checks": {
+    "moduleProvenanceAvailable": true,
+    "forbiddenRouteModules": 0
+  }
+}
