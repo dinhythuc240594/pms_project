@@ -114,8 +114,7 @@ def member_link(tenant_id, user_id):
         select(User).where(User.id == user_id, User.active.is_(True)).with_for_update(read=True)
     )
     member = db.session.scalar(
-        select(TenantUser)
-        .where(
+        select(TenantUser).where(
             TenantUser.tenant_id == tenant_id,
             TenantUser.user_id == user_id,
             TenantUser.active.is_(True),
@@ -151,7 +150,9 @@ def staff_values(tenant_id, data, row=None):
     known_fields(data, {"name", "phone", "userId", "active"})
     row = row or HousekeepingStaff(tenant_id=tenant_id)
     row.name = text_value(data.get("name", row.name), "Tên nhân viên", 160)
-    row.phone = phone_value(text_value(data.get("phone", row.phone or ""), "Điện thoại", 40, empty=True))
+    row.phone = phone_value(
+        text_value(data.get("phone", row.phone or ""), "Điện thoại", 40, empty=True)
+    )
     user_id = data.get("userId", row.user_id)
     active = bool_value(data.get("active", row.active if row.active is not None else True))
     if user_id is not None:
