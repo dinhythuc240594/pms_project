@@ -1,0 +1,1273 @@
+.manager-channex,
+.channex-property {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.channex-hotel-picker .channex-section-heading {
+  justify-content: flex-end;
+  padding: 16px;
+}
+.channex-hotel-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0 16px 16px;
+}
+.channex-hotel-controls label {
+  display: grid;
+  gap: 6px;
+  flex: 1 1 240px;
+  min-width: 0;
+  color: var(--manager-muted);
+  font-size: 12px;
+}
+.channex-hotel-controls label > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.channex-hotel-controls :is(select, input) {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  background: var(--manager-surface);
+  color: var(--manager-ink);
+  font: inherit;
+  font-size: 13px;
+}
+.channex-hotel-list {
+  list-style: none;
+  padding: 0 16px;
+  margin: 0;
+}
+.channex-hotel-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--manager-line);
+}
+.channex-hotel-list li > svg {
+  color: var(--manager-accent);
+  flex-shrink: 0;
+}
+.channex-hotel-list li > div {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+.channex-hotel-list strong {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.channex-hotel-list p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--manager-muted);
+  overflow-wrap: anywhere;
+}
+.channex-page-heading .manager-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+}
+.manager-channex .manager-panel {
+  overflow: hidden;
+}
+.channex-account-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 20px;
+}
+.channex-source-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 220px;
+}
+.channex-source-icon,
+.channex-property-icon,
+.channex-room-icon,
+.channex-channel-icon,
+.channex-editor-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--manager-accent);
+  background: var(--manager-accent-bg);
+  border-radius: 10px;
+}
+.channex-source-icon {
+  width: 40px;
+  height: 40px;
+}
+.channex-source-field label {
+  display: grid;
+  gap: 4px;
+  width: min(100%, 380px);
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-source-field select {
+  min-width: 0;
+  width: 100%;
+  min-height: 36px;
+  padding: 4px 28px 4px 0;
+  border: 0;
+  background: var(--manager-surface);
+  color: var(--manager-ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.channex-environment {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--manager-accent-bg);
+  color: var(--manager-accent);
+  font-size: 11px;
+  font-weight: 600;
+}
+.channex-environment--production {
+  color: var(--manager-warning);
+  background: var(--manager-soft);
+}
+.channex-account-toolbar > :is(.channex-state, .channex-loading) {
+  width: 100%;
+}
+.channex-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 24px;
+}
+.channex-section-heading > div {
+  min-width: 0;
+  flex: 1;
+}
+.channex-section-heading :is(h3, h4) {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+}
+.channex-section-heading p {
+  margin: 6px 0 0;
+  color: var(--manager-muted);
+  font-size: 12px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.channex-count {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 24px;
+  min-height: 24px;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  color: var(--manager-muted);
+  font-size: 11px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+.channex-property-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 24px 8px;
+}
+.channex-property-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 0;
+  border-top: 1px solid var(--manager-line);
+}
+.channex-property-icon {
+  width: 52px;
+  height: 52px;
+}
+.channex-property-main {
+  min-width: 0;
+}
+.channex-property-main h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.channex-property-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 6px 0 0;
+  color: var(--manager-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.channex-property-meta,
+.channex-workspace-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 8px;
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-property-meta > span,
+.channex-workspace-meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  overflow-wrap: anywhere;
+}
+.channex-property-meta svg,
+.channex-workspace-meta svg {
+  flex-shrink: 0;
+}
+.channex-property-open {
+  color: var(--manager-accent);
+  background: var(--manager-accent-bg);
+  border-color: transparent;
+}
+.channex-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: start;
+  min-height: 40px;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--manager-muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.channex-back-link:hover {
+  color: var(--manager-accent);
+}
+.channex-workspace-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.channex-workspace-identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex: 1;
+}
+.channex-workspace-identity > div {
+  min-width: 0;
+}
+.channex-property-title {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: -0.6px;
+  overflow-wrap: anywhere;
+}
+.channex-local-link {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  font-size: 12px;
+}
+.channex-local-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--manager-muted);
+  font-size: 11px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.channex-local-status svg {
+  flex-shrink: 0;
+}
+.channex-local-status--linked {
+  color: var(--manager-accent);
+}
+.channex-local-status strong {
+  font-weight: 600;
+}
+.channex-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+.channex-local-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 32px;
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-local-actions a:hover {
+  color: var(--manager-accent);
+}
+.channex-tabs {
+  display: flex;
+  min-width: 0;
+  gap: 20px;
+  padding: 0 24px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border-bottom: 1px solid var(--manager-line);
+}
+.channex-tabs button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 16px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--manager-muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.channex-tabs button:hover {
+  color: var(--manager-ink);
+}
+.channex-tabs button.is-active {
+  color: var(--manager-accent);
+  border-bottom-color: var(--manager-accent);
+}
+.channex-section-block {
+  padding: 0 24px 24px;
+}
+.channex-table-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 16px;
+}
+.channex-table-heading h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.channex-room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 16px;
+}
+.channex-room-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--manager-line);
+  border-radius: 10px;
+  background: var(--manager-surface);
+}
+.channex-room-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.channex-room-icon {
+  width: 44px;
+  height: 44px;
+}
+.channex-room-name {
+  min-width: 0;
+  flex: 1;
+}
+.channex-room-name h5 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.channex-room-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  font-size: 10px;
+  color: var(--manager-accent);
+}
+.channex-room-quantity {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 20px 0 16px;
+}
+.channex-room-quantity strong {
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+}
+.channex-room-quantity span {
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-room-capacity {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--manager-line);
+}
+.channex-room-capacity dt {
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-room-capacity dd {
+  margin: 6px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.channex-edit {
+  background: transparent;
+}
+.channex-room-top .channex-edit {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  color: var(--manager-muted);
+}
+.channex-plan-section {
+  border-top: 1px solid var(--manager-line);
+  padding-top: 24px;
+}
+.channex-plan-section .manager-table-wrap {
+  border: 1px solid var(--manager-line);
+  border-radius: 8px;
+}
+.channex-table {
+  min-width: 760px;
+}
+.channex-rates {
+  min-width: 760px;
+}
+.channex-bookings {
+  min-width: 1000px;
+}
+.manager-channex .manager-table :is(th, td) {
+  padding: 16px;
+}
+.manager-channex .manager-table thead th {
+  font-size: 11px;
+}
+.channex-table td {
+  vertical-align: middle;
+  line-height: 1.5;
+}
+.channex-table td:first-child {
+  min-width: 220px;
+}
+.channex-table tbody tr:hover {
+  background: color-mix(in srgb, var(--manager-soft) 50%, transparent);
+}
+.channex-table strong,
+.channex-inventory-table strong {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.channex-table small,
+.channex-inventory-table small {
+  display: block;
+  margin-top: 4px;
+  color: var(--manager-muted);
+  font-size: 11px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.channex-remote-id {
+  margin-top: 4px;
+  max-width: 100%;
+  color: var(--manager-muted);
+  font-size: 10px;
+}
+.channex-remote-id summary {
+  width: fit-content;
+  padding: 4px 0;
+  cursor: pointer;
+}
+.channex-remote-id summary:hover {
+  color: var(--manager-accent);
+}
+.channex-remote-id code {
+  display: block;
+  max-width: 100%;
+  margin: 4px 0;
+  padding: 8px;
+  border: 1px solid var(--manager-line);
+  border-radius: 5px;
+  background: var(--manager-soft);
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.channex-property-meta .channex-remote-id,
+.channex-workspace-meta .channex-remote-id {
+  margin-top: 0;
+}
+.channex-property-meta .channex-remote-id[open],
+.channex-workspace-meta .channex-remote-id[open] {
+  flex-basis: 100%;
+}
+.channex-table-caption {
+  margin: 12px 0 0;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--manager-muted);
+}
+.channex-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: var(--manager-soft);
+  color: var(--manager-muted);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.channex-status::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.channex-status--active {
+  color: var(--manager-accent);
+  background: var(--manager-accent-bg);
+}
+.channex-status--warning,
+.channex-warning {
+  color: var(--manager-warning);
+}
+.channex-money {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.channex-table-identity {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.channex-channel-icon {
+  width: 36px;
+  height: 36px;
+}
+.channex-state {
+  padding: 32px 24px;
+  text-align: center;
+  color: var(--manager-muted);
+}
+.channex-state-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  border: 1px solid var(--manager-line);
+  border-radius: 10px;
+  background: var(--manager-soft);
+}
+.channex-state h3 {
+  margin: 16px 0 8px;
+  font-size: 15px;
+  color: var(--manager-ink);
+}
+.channex-state p {
+  max-width: 520px;
+  margin: 0 auto 20px;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.channex-error > svg {
+  color: var(--manager-danger);
+}
+.channex-loading {
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+}
+.channex-loading span {
+  display: block;
+  height: 64px;
+  border-radius: 8px;
+  background: var(--manager-soft);
+}
+.channex-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--manager-line);
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-pagination .manager-button {
+  min-height: 36px;
+  padding: 8px 12px;
+  font-size: 11px;
+}
+.channex-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 24px 20px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  color: var(--manager-accent);
+  background: var(--manager-accent-bg);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.channex-filters {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 24px 16px;
+  padding: 16px;
+  border: 1px solid var(--manager-line);
+  border-radius: 8px;
+  background: var(--manager-soft);
+}
+.channex-filters label {
+  display: grid;
+  min-width: 160px;
+  gap: 6px;
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-filters :is(input, select) {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  color: var(--manager-ink);
+  background: var(--manager-surface);
+  font-size: 12px;
+}
+.channex-range-label {
+  margin: 0;
+  padding: 0 24px 16px;
+  color: var(--manager-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.channex-date-error {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--manager-danger);
+  font-size: 12px;
+}
+.channex-table-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 16px 24px;
+  border-top: 1px solid var(--manager-line);
+  font-size: 13px;
+  font-weight: 600;
+}
+.channex-inventory-table {
+  width: max-content;
+  min-width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+.channex-inventory-table th,
+.channex-inventory-table td {
+  min-width: 120px;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.channex-inventory-table th:first-child {
+  width: 180px;
+  min-width: 180px;
+  max-width: 220px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+.channex-inventory-table tbody th {
+  color: var(--manager-ink);
+  background: var(--manager-surface);
+  font-size: 12px;
+}
+.channex-editor {
+  width: min(600px, 100%);
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  border: 1px solid var(--manager-line);
+  border-radius: 12px;
+  background: var(--manager-surface);
+  color: var(--manager-ink);
+  box-shadow: 0 16px 64px #09182830;
+}
+.channex-editor-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px;
+  border-bottom: 1px solid var(--manager-line);
+}
+.channex-editor-icon {
+  width: 44px;
+  height: 44px;
+}
+.channex-editor-heading > div {
+  flex: 1;
+  min-width: 0;
+}
+.channex-editor-eyebrow {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--manager-accent);
+}
+.channex-editor-heading h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+.channex-editor-heading p {
+  margin: 8px 0 0;
+  color: var(--manager-muted);
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.channex-editor form {
+  padding: 24px;
+}
+.channex-editor-fields {
+  display: grid;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.channex-editor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.channex-editor label {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+  color: var(--manager-ink);
+  font-size: 12px;
+  font-weight: 500;
+}
+.channex-editor :is(input, select) {
+  min-height: 44px;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 7px;
+  background: var(--manager-input);
+  color: var(--manager-ink);
+  font-size: 13px;
+}
+.channex-editor :is(input, select):disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--manager-soft);
+}
+.channex-editor-section {
+  border-top: 1px solid var(--manager-line);
+  padding-top: 20px;
+}
+.channex-editor-section h3 {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.channex-editor-occupancy {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.channex-editor-price {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--manager-line);
+  border-radius: 7px;
+  background: var(--manager-input);
+}
+.channex-editor-price input {
+  border: 0;
+  background: transparent;
+}
+.channex-editor-price span {
+  padding: 0 12px;
+  font-size: 12px;
+  color: var(--manager-muted);
+}
+.channex-editor-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  border-radius: 6px;
+  color: var(--manager-muted);
+  background: var(--manager-soft);
+  font-size: 11px;
+  line-height: 1.7;
+  font-weight: 400;
+}
+.channex-editor-hint svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.channex-editor-error {
+  margin: 0 0 16px;
+  padding: 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  color: var(--manager-danger);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.channex-editor-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px -24px -24px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--manager-line);
+  background: var(--manager-soft);
+}
+.manager-channex button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.manager-shell[data-theme='dark']
+  :is(.channex-filters, .channex-source-field, .channex-editor)
+  :is(input, select) {
+  color-scheme: dark;
+}
+.channex-channel-list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0 24px 24px;
+  list-style: none;
+}
+.channex-channel-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--manager-line);
+  border-radius: 10px;
+  background: var(--manager-surface);
+}
+.channex-channel-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.channex-channel-card-heading > div {
+  flex: 1;
+  min-width: 160px;
+}
+.channex-channel-card-heading h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.channex-channel-card-heading p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 0;
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-channel-card-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-top: 16px;
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-channel-card-meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.channex-channel-card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--manager-line);
+}
+.channex-channel-card-actions .manager-button {
+  font-size: 11px;
+}
+.channex-channel-delete {
+  color: var(--manager-danger);
+}
+.channex-channel-danger {
+  color: var(--manager-danger);
+  background: var(--manager-soft);
+  border-color: var(--manager-danger);
+}
+.channex-channel-editor {
+  width: min(820px, 100%);
+}
+.channex-channel-note {
+  margin: 8px 0 16px;
+  color: var(--manager-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.channex-editor .channex-channel-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: center;
+}
+.channex-editor .channex-channel-toggle input,
+.channex-editor .channex-channel-confirm input {
+  width: 18px;
+  min-height: 18px;
+  height: 18px;
+  padding: 0;
+  flex-shrink: 0;
+  accent-color: var(--manager-accent);
+}
+.channex-editor label small {
+  color: var(--manager-muted);
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.channex-channel-probe {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-block: 4px 8px;
+}
+.channex-channel-mapping {
+  display: grid;
+  gap: 16px;
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid var(--manager-line);
+  border-radius: 8px;
+  background: var(--manager-soft);
+}
+.channex-channel-mapping.is-removed {
+  opacity: 0.65;
+}
+.channex-channel-mapping-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.channex-channel-mapping-head strong {
+  font-size: 12px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.channex-channel-mapping-head small {
+  display: block;
+  margin-top: 4px;
+  color: var(--manager-muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.channex-channel-mapping-head .manager-icon-button {
+  width: auto;
+  min-width: 32px;
+  padding: 8px;
+  color: var(--manager-muted);
+  font-size: 11px;
+}
+.channex-channel-readiness {
+  margin-block: 20px;
+}
+.channex-channel-readiness h3 {
+  margin: 0 0 12px;
+  font-size: 13px;
+}
+.channex-channel-readiness ul {
+  padding-left: 20px;
+  color: var(--manager-warning);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.channex-editor .channex-channel-confirm {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+  color: var(--manager-muted);
+  line-height: 1.7;
+}
+.channex-airbnb .channex-table-heading {
+  margin-top: 20px;
+}
+.channex-airbnb > .manager-button {
+  margin-top: 16px;
+}
+.channex-channel-current-mappings {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+.channex-channel-current-mappings > .channex-channel-mapping-head {
+  padding: 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+}
+@media (max-width: 1100px) {
+  .channex-property-row {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+  .channex-property-row .channex-local-link,
+  .channex-property-row > .channex-local-status {
+    grid-column: 2;
+  }
+  .channex-property-open {
+    grid-column: 3;
+    grid-row: 1 / 3;
+  }
+}
+@media (max-width: 600px) {
+  .manager-channex,
+  .channex-property {
+    gap: 16px;
+  }
+  .channex-account-toolbar {
+    padding: 16px;
+    gap: 12px;
+  }
+  .channex-source-field {
+    flex-basis: 100%;
+    min-width: 0;
+  }
+  .channex-account-toolbar > .manager-button {
+    margin-left: auto;
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+  .channex-section-heading,
+  .channex-pagination {
+    padding: 20px 16px;
+  }
+  .channex-section-heading > div {
+    flex-basis: 100%;
+  }
+  .channex-hotel-picker .channex-section-heading {
+    justify-content: flex-start;
+  }
+  .channex-hotel-list li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+  .channex-hotel-list li > :is(div, .ota-status) {
+    grid-column: 2;
+  }
+  .channex-hotel-list li > .manager-button {
+    grid-column: 1 / -1;
+  }
+  :is(.channex-hotel-controls, .channex-source-field, .channex-filters, .channex-editor)
+    :is(input, select) {
+    min-height: 44px;
+    font-size: 16px;
+  }
+  .channex-property-list {
+    padding-inline: 16px;
+  }
+  .channex-property-row {
+    gap: 12px;
+    padding-block: 20px;
+  }
+  .channex-property-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .channex-property-open {
+    grid-row: auto;
+    grid-column: 2 / -1;
+    justify-self: start;
+    margin-top: 4px;
+  }
+  .channex-property-main {
+    grid-column: 2 / -1;
+  }
+  .channex-property-row .channex-local-link,
+  .channex-property-row > .channex-local-status {
+    grid-column: 2 / -1;
+  }
+  .channex-workspace-heading {
+    gap: 12px;
+  }
+  .channex-workspace-identity {
+    flex-basis: 100%;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .channex-property-title {
+    font-size: 20px;
+  }
+  .channex-tabs {
+    padding-inline: 16px;
+    gap: 16px;
+  }
+  .channex-tabs button {
+    font-size: 11px;
+    min-height: 52px;
+  }
+  .channex-section-block {
+    padding: 0 16px 20px;
+  }
+  .channex-plan-section {
+    padding-top: 20px;
+  }
+  .channex-room-card {
+    padding: 16px;
+  }
+  .channex-filters {
+    margin-inline: 16px;
+  }
+  .channex-filters label {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+  .channex-state {
+    padding: 32px 16px;
+  }
+  .channex-range-label,
+  .channex-table-title {
+    padding-inline: 16px;
+  }
+  .channex-editor-heading,
+  .channex-editor form {
+    padding: 16px;
+  }
+  .channex-editor-heading h2 {
+    font-size: 19px;
+    overflow-wrap: anywhere;
+  }
+  .channex-editor-heading > .manager-icon-button {
+    width: 44px;
+    height: 44px;
+  }
+  .channex-editor-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .channex-editor-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .channex-editor-occupancy {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .channex-editor-actions {
+    margin: 20px -16px -16px;
+    padding: 16px;
+  }
+  .channex-editor-actions > .manager-button {
+    min-height: 44px;
+  }
+  .channex-inventory-table th:first-child {
+    width: 140px;
+    min-width: 140px;
+  }
+  .channex-channel-list {
+    padding-inline: 16px;
+  }
+  .channex-channels-view > .channex-section-heading {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .channex-channels-view > .channex-section-heading > .channex-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .channex-channel-card {
+    padding: 16px;
+  }
+  .channex-channel-card-actions .manager-button {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+  .channex-channel-card-heading p {
+    flex-wrap: wrap;
+    line-height: 1.6;
+  }
+  .channex-channel-mapping-head {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 400px) {
+  .channex-editor-occupancy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .channex-editor .channex-editor-actions > .manager-button {
+    flex-basis: 100%;
+  }
+}
