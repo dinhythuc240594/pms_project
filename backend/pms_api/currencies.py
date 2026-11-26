@@ -7,8 +7,26 @@ SaaS plan and invoice currencies have their own commercial restrictions.
 from .security import ApiError
 
 HOTEL_CURRENCIES = (
-    "VND", "USD", "EUR", "GBP", "JPY", "KRW", "CNY", "HKD", "SGD", "THB",
-    "AUD", "CAD", "CHF", "NZD", "MYR", "IDR", "PHP", "INR", "AED", "TWD",
+    "VND",
+    "USD",
+    "EUR",
+    "GBP",
+    "JPY",
+    "KRW",
+    "CNY",
+    "HKD",
+    "SGD",
+    "THB",
+    "AUD",
+    "CAD",
+    "CHF",
+    "NZD",
+    "MYR",
+    "IDR",
+    "PHP",
+    "INR",
+    "AED",
+    "TWD",
 )
 HOTEL_CURRENCY_CODES = frozenset(HOTEL_CURRENCIES)
 

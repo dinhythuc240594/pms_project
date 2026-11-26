@@ -6,6 +6,8 @@ from decimal import Decimal
 from flask import g, request
 from sqlalchemy import func, select
 
+from common import RequestData
+
 from .admin.feature_models import FEATURE_CATALOG, FeatureControl, TenantFeatureOverride
 from .catalog.models import PhysicalRoom
 from .core_models import Plan, Subscription, Tenant, TenantUser, utcnow
@@ -53,8 +55,8 @@ ADVANCED_FEATURES = {
     "OTA_SYNC",
     "REPORTS_ADVANCED",
     "INVENTORY_WAREHOUSE",
-    "MULTI_CURRENCY",
-    "VOUCHER_PROMO",
+    # "MULTI_CURRENCY",
+    # "VOUCHER_PROMO",
     "API_EXTERNAL",
 }
 
@@ -76,7 +78,7 @@ def timestamp(value, label):
         if parsed is None or parsed.tzinfo is None or parsed.utcoffset() is None:
             raise ValueError
         return parsed
-    except ValueError, TypeError:
+    except (ValueError, TypeError):
         raise ApiError(422, "invalid_dates", f"{label} phải là thời điểm ISO có múi giờ.") from None
 
 
@@ -289,7 +291,7 @@ def completion_allowed(action, access, *, operation=None):
     if booking is None or booking.created_at > datetime.fromisoformat(access["createdAt"]):
         return False
     if endpoint == "booking.change_status":
-        data = request.get_json(silent=True)
+        data = RequestData.payload()
         return (
             booking.status == "IN_HOUSE"
             and isinstance(data, dict)

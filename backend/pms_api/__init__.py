@@ -14,6 +14,7 @@ from .channels.urls import channels
 from .chatbot.urls import chatbot
 from .commands import register_commands
 from .config import BACKEND_DIR, load_config
+from .contact_urls import contact as contact_blueprint
 from .extensions import db, migrate
 from .finance.urls import finance
 from .health_urls import health as health_blueprint
@@ -60,6 +61,7 @@ def create_app(environ=None, *, env_file=BACKEND_DIR / ".env"):
         )
     register_security(app)
     app.register_blueprint(health_blueprint)
+    app.register_blueprint(contact_blueprint)
     app.register_blueprint(auth)
     app.register_blueprint(admin)
     app.register_blueprint(features)

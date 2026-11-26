@@ -54,7 +54,9 @@ class RequestData:
                         raise ApiError(422, "invalid_json", "Nội dung JSON chứa ký tự NUL.")
                     item.encode("utf-8")
         except UnicodeEncodeError:
-            raise ApiError(422, "invalid_json", "Nội dung JSON chứa Unicode không hợp lệ.") from None
+            raise ApiError(
+                422, "invalid_json", "Nội dung JSON chứa Unicode không hợp lệ."
+            ) from None
         return value
 
 
