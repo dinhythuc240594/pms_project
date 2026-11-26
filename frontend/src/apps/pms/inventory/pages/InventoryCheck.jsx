@@ -1,5 +1,5 @@
-import InventoryDocuments from '../InventoryDocuments';
+import InventoryDocuments from '../InventoryDocuments'
 
 export default function InventoryCheck() {
-  return <InventoryDocuments kind="count" />;
+  return <InventoryDocuments kind="count" />
 }
