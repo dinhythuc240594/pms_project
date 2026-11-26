@@ -26,7 +26,9 @@ class Reservation(MoneySnapshot, db.Model):
     __tablename__ = "reservations"
     id = db.Column(db.String(40), primary_key=True, default=uid)
     tenant_id = db.Column(db.String(40), db.ForeignKey("tenants.id"), nullable=False)
-    version = db.Column(db.Integer, nullable=False, default=1, server_default="1", server_onupdate=db.FetchedValue())
+    version = db.Column(
+        db.Integer, nullable=False, default=1, server_default="1", server_onupdate=db.FetchedValue()
+    )
     __mapper_args__ = {"eager_defaults": True}
     status = db.Column(db.String(20), nullable=False, default="CONFIRMED")
     check_in = db.Column(db.Date, nullable=False)

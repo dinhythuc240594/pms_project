@@ -132,9 +132,15 @@ def find_reservation(tenant_id, reservation_id, *, locked=False):
 def require_booking_version(row, data):
     version = data.get("expectedVersion")
     if isinstance(version, bool) or not isinstance(version, int) or not 1 <= version <= 2147483647:
-        raise ApiError(422, "version_required", "Cần phiên bản đặt phòng đã tải trước khi chỉnh sửa.")
+        raise ApiError(
+            422, "version_required", "Cần phiên bản đặt phòng đã tải trước khi chỉnh sửa."
+        )
     if version != row.version:
-        raise ApiError(409, "stale_booking", "Đặt phòng đã thay đổi. Vui lòng tải lại dữ liệu trước khi tiếp tục.")
+        raise ApiError(
+            409,
+            "stale_booking",
+            "Đặt phòng đã thay đổi. Vui lòng tải lại dữ liệu trước khi tiếp tục.",
+        )
 
 
 def rows_for(model, tenant_id, reservation_id=None):
@@ -483,9 +489,11 @@ def guest_input(tenant_id, data, row=None):
 
 
 def resolve_guests(tenant_id, data, current=None):
-    linked_ids = {
-        link.guest_id for link in rows_for(ReservationGuest, tenant_id, current.id)
-    } if current else set()
+    linked_ids = (
+        {link.guest_id for link in rows_for(ReservationGuest, tenant_id, current.id)}
+        if current
+        else set()
+    )
     if "guests" not in data:
         existing = [] if current is None else rows_for(ReservationGuest, tenant_id, current.id)
         if existing and "guest" not in data and "phone" not in data:
@@ -499,9 +507,11 @@ def resolve_guests(tenant_id, data, current=None):
             160,
             required=True,
         )
-        phone = phone_value(string_value(
-            data.get("phone", current.guest_phone if current else ""), "Điện thoại", 40
-        ))
+        phone = phone_value(
+            string_value(
+                data.get("phone", current.guest_phone if current else ""), "Điện thoại", 40
+            )
+        )
         if current and name == current.guest_name and phone == current.guest_phone and existing:
             return [
                 db.session.get(Guest, link.guest_id)
@@ -554,7 +564,11 @@ def resolve_guests(tenant_id, data, current=None):
                     value != getattr(row, {"identityNumber": "identity_number"}.get(key, key))
                     for key, value in profile.items()
                 ):
-                    raise ApiError(409, "stale_guest", "Hồ sơ khách đã khác dữ liệu đã chọn. Vui lòng tải lại và sửa trong đặt phòng đang liên kết.")
+                    raise ApiError(
+                        409,
+                        "stale_guest",
+                        "Hồ sơ khách đã khác dữ liệu đã chọn. Vui lòng tải lại và sửa trong đặt phòng đang liên kết.",
+                    )
                 row = guest_input(tenant_id, profile, row)
                 audit("guest.updated", "guest", row.id, {"fields": sorted(profile)})
         else:
@@ -730,7 +744,10 @@ class CreateReservationView(CommonMethodView):
         guests = resolve_guests(tenant_id, data)
         check_guest_capacity(tenant_id, rooms, guests)
         source = master(
-            tenant_id, "bookingSources", data.get("sourceId") or data.get("source", "Direct"), read_lock=True
+            tenant_id,
+            "bookingSources",
+            data.get("sourceId") or data.get("source", "Direct"),
+            read_lock=True,
         )
         row = Reservation(
             tenant_id=tenant_id,
@@ -742,7 +759,10 @@ class CreateReservationView(CommonMethodView):
             base_currency=quote["baseCurrency"],
             exchange_rate=Decimal(quote["exchangeRate"]),
             base_amount=Decimal(quote["baseAmount"]),
-            pricing_snapshot={**quote["pricingSnapshot"], "commission": commission_snapshot(source)},
+            pricing_snapshot={
+                **quote["pricingSnapshot"],
+                "commission": commission_snapshot(source),
+            },
             guest_name=guests[0].name,
             guest_phone=guests[0].phone,
         )
@@ -863,7 +883,8 @@ class EditReservationView(CommonMethodView):
             else:
                 old_total, paid, _ = totals(row)
                 old_nights = sum(
-                    (night.price for night in rows_for(ReservationNight, tenant_id, row.id)), Decimal(0)
+                    (night.price for night in rows_for(ReservationNight, tenant_id, row.id)),
+                    Decimal(0),
                 )
                 new_total = old_total - old_nights + Decimal(quote["total"])
                 if new_total < paid:
@@ -881,7 +902,8 @@ class EditReservationView(CommonMethodView):
                 )
                 db.session.execute(
                     delete(ReservationRoom).where(
-                        ReservationRoom.tenant_id == tenant_id, ReservationRoom.reservation_id == row.id
+                        ReservationRoom.tenant_id == tenant_id,
+                        ReservationRoom.reservation_id == row.id,
                     )
                 )
                 row.check_in, row.check_out = start, end
@@ -891,7 +913,10 @@ class EditReservationView(CommonMethodView):
                     Decimal(quote["baseAmount"]),
                 )
                 commission = (row.pricing_snapshot or {}).get("commission")
-                row.pricing_snapshot = {**quote["pricingSnapshot"], **({"commission": commission} if commission else {})}
+                row.pricing_snapshot = {
+                    **quote["pricingSnapshot"],
+                    **({"commission": commission} if commission else {}),
+                }
                 add_stay(row, rooms, quote)
                 inventory(tenant_id, rooms, start, end, 1)
         if "source" in data or "sourceId" in data:
@@ -900,7 +925,10 @@ class EditReservationView(CommonMethodView):
                 source = master(tenant_id, "bookingSources", requested_source, read_lock=True)
                 row.source_id, row.source_name = source.id, source.name
                 if row.status == "CONFIRMED" and (row.pricing_snapshot or {}).get("commission"):
-                    row.pricing_snapshot = {**row.pricing_snapshot, "commission": commission_snapshot(source)}
+                    row.pricing_snapshot = {
+                        **row.pricing_snapshot,
+                        "commission": commission_snapshot(source),
+                    }
         set_booking_guests(row, guests)
         row.version += 1
         audit(
@@ -1074,9 +1102,15 @@ def begin_write(
         identity = {"path": request.path, "actor": g.user.id, "body": data}
 
         def digest(value):
-            return hashlib.sha256(json.dumps(
-                value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
-            ).encode()).hexdigest()
+            return hashlib.sha256(
+                json.dumps(
+                    value,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=False,
+                    allow_nan=False,
+                ).encode()
+            ).hexdigest()
 
         fingerprint = digest({**identity, "method": request.method})
         # Pending money intents from earlier deployments use the original digest.
@@ -1103,9 +1137,7 @@ def finish_write(
 ):
     if key is not None:
         db.session.add(
-            record_model(
-                tenant_id=tenant_id, key=key, fingerprint=fingerprint, response=response
-            )
+            record_model(tenant_id=tenant_id, key=key, fingerprint=fingerprint, response=response)
         )
         db.session.flush()
     return response, status
