@@ -13,8 +13,12 @@ class URL(CommonURL):
         )
         if rule.startswith("/api/tenants/<tenant_id>/channels"):
             super().register(
-                target, rule.replace("/api/tenants/", "/api/admin/channex/tenants/", 1),
-                view_class, endpoint="support_" + endpoint, methods=methods, **options,
+                target,
+                rule.replace("/api/tenants/", "/api/admin/channex/tenants/", 1),
+                view_class,
+                endpoint="support_" + endpoint,
+                methods=methods,
+                **options,
             )
         return result
 
@@ -87,16 +91,25 @@ URL.register(
 )
 
 CommonURL.register(
-    channels, URL.RESOLVE_BOOKING_REVIEW, "pms_api.channels.exceptions:ResolveBookingReviewView",
-    endpoint="resolve_booking_review", methods=["POST"],
+    channels,
+    URL.RESOLVE_BOOKING_REVIEW,
+    "pms_api.channels.exceptions:ResolveBookingReviewView",
+    endpoint="resolve_booking_review",
+    methods=["POST"],
 )
 URL.register(
-    channels, URL.INCIDENTS, "pms_api.channels.exceptions:IncidentsView",
-    endpoint="incidents", methods=["GET"],
+    channels,
+    URL.INCIDENTS,
+    "pms_api.channels.exceptions:IncidentsView",
+    endpoint="incidents",
+    methods=["GET"],
 )
 URL.register(
-    channels, URL.INCIDENT_ACTION, "pms_api.channels.exceptions:IncidentActionView",
-    endpoint="incident_action", methods=["POST"],
+    channels,
+    URL.INCIDENT_ACTION,
+    "pms_api.channels.exceptions:IncidentActionView",
+    endpoint="incident_action",
+    methods=["POST"],
 )
 
 URL.register(

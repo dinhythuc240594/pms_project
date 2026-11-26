@@ -23,9 +23,13 @@ class ChannelSourceTests(unittest.TestCase):
         g.user = SimpleNamespace(global_role="SYSTEM_MANAGER")
         self.app.config["CHANNEX_MANAGER_API_KEY_STAGING"] = "private-manager-staging-key"
         self.body = {"accountId": "system:staging", "propertyId": PROPERTY, "active": True}
-        linked = patch("pms_api.channels.routes.connection", return_value=SimpleNamespace(
-            property_id=PROPERTY, environment="staging",
-        ))
+        linked = patch(
+            "pms_api.channels.routes.connection",
+            return_value=SimpleNamespace(
+                property_id=PROPERTY,
+                environment="staging",
+            ),
+        )
         linked.start()
         self.addCleanup(linked.stop)
 

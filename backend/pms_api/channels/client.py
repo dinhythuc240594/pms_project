@@ -12,9 +12,7 @@ from http.client import HTTPException as HTTPClientError
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import HTTPRedirectHandler, Request, build_opener
-
-from .errors import ProviderError as ProviderError
-from .identifiers import remote_id as remote_id
+from uuid import UUID
 
 BASES = {
     "staging": "https://staging.channex.io/api/v1",
@@ -23,9 +21,25 @@ BASES = {
 MAX_RESPONSE = 2 * 1024 * 1024
 
 
+class ProviderError(Exception):
+    def __init__(self, code, retryable=False, *, http_status=None, failure_type=None):
+        self.code, self.retryable = code, retryable
+        self.http_status, self.failure_type = http_status, failure_type
+        super().__init__(code)
+
+
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         return None
+
+
+def remote_id(value):
+    try:
+        if not isinstance(value, str) or len(value) != 36:
+            raise ValueError
+        return str(UUID(value))
+    except (ValueError, TypeError, AttributeError):
+        raise ProviderError("invalid_remote_id") from None
 
 
 def finite_number(value):
@@ -126,7 +140,7 @@ class ChannexClient:
             else:
                 failure_type = "transport"
             raise ProviderError("provider_unavailable", True, failure_type=failure_type) from None
-        except ValueError, UnicodeDecodeError, RecursionError:
+        except (ValueError, UnicodeDecodeError, RecursionError):
             raise ProviderError("provider_invalid_response") from None
 
     def feed(self, property_id, page=1):
@@ -228,7 +242,7 @@ class ChannexClient:
                     and isinstance(related, dict)
                     and related.get("id") == property_id
                 )
-            except KeyError, TypeError, AttributeError:
+            except (KeyError, TypeError, AttributeError):
                 raise ProviderError("provider_invalid_response") from None
 
         found, seen, expected_total = [], set(), None

@@ -107,11 +107,19 @@ class ChannelCredentialTests(DomainTestCase):
             for path, client, auth_headers in routes:
                 for active in (False, True):
                     with self.subTest(path=path, active=active):
-                        response = self.request("put", path, {
-                            "environment": "staging", "propertyId": PROPERTY,
-                            "credentialRef": api_ref, "webhookSecretRef": webhook_ref,
-                            "active": active,
-                        }, client=client, headers=auth_headers)
+                        response = self.request(
+                            "put",
+                            path,
+                            {
+                                "environment": "staging",
+                                "propertyId": PROPERTY,
+                                "credentialRef": api_ref,
+                                "webhookSecretRef": webhook_ref,
+                                "active": active,
+                            },
+                            client=client,
+                            headers=auth_headers,
+                        )
                         self.assertEqual(response.status_code, 422, response.json)
                         self.assertEqual(response.json["error"]["code"], "channel_api_key_required")
                         self.assertIsNone(self.stored())
@@ -132,10 +140,18 @@ class ChannelCredentialTests(DomainTestCase):
             ):
                 for active in (False, True):
                     with self.subTest(path=path, target=target, active=active):
-                        response = self.request("put", path, {
-                            **target, "credentialRef": api_ref, "webhookSecretRef": webhook_ref,
-                            "active": active,
-                        }, client=client, headers=auth_headers)
+                        response = self.request(
+                            "put",
+                            path,
+                            {
+                                **target,
+                                "credentialRef": api_ref,
+                                "webhookSecretRef": webhook_ref,
+                                "active": active,
+                            },
+                            client=client,
+                            headers=auth_headers,
+                        )
                         self.assertEqual(response.status_code, 422, response.json)
                         self.assertEqual(response.json["error"]["code"], "channel_api_key_required")
                         self.assertEqual(self.stored(), original)
@@ -152,19 +168,27 @@ class ChannelCredentialTests(DomainTestCase):
         with patch.dict(self.app.config, {"CHANNEX_ENCRYPTION_KEY": None}):
             for active in (False, True):
                 with self.subTest(active=active):
-                    self.saved({
-                        "environment": "staging", "propertyId": property_id.upper(),
-                        "credentialRef": api_ref, "webhookSecretRef": webhook_ref,
-                        "active": active,
-                    })
+                    self.saved(
+                        {
+                            "environment": "staging",
+                            "propertyId": property_id.upper(),
+                            "credentialRef": api_ref,
+                            "webhookSecretRef": webhook_ref,
+                            "active": active,
+                        }
+                    )
                     stored = self.stored()
                     self.assertEqual(stored["property_id"], property_id)
                     self.assertEqual(stored["environment"], "staging")
                     self.assertEqual(stored["active"], active)
                     self.assertIsNone(stored["secrets_ciphertext"])
-                    self.assertEqual(self.decoded(), {
-                        "apiKey": LEGACY_KEY, "webhookSecret": LEGACY_WEBHOOK,
-                    })
+                    self.assertEqual(
+                        self.decoded(),
+                        {
+                            "apiKey": LEGACY_KEY,
+                            "webhookSecret": LEGACY_WEBHOOK,
+                        },
+                    )
         self.provider.assert_not_called()
 
     def test_verified_save_encrypts_secrets_and_only_exposes_status(self):
@@ -200,9 +224,11 @@ class ChannelCredentialTests(DomainTestCase):
     def test_manager_links_system_source_without_returning_or_forwarding_keys(self):
         manager, headers = self.login("manager@test.local")
         denied = self.request(
-            "put", "/channels/config",
+            "put",
+            "/channels/config",
             json={"accountId": "system:staging", "propertyId": PROPERTY, "active": True},
-            client=manager, headers=headers,
+            client=manager,
+            headers=headers,
         )
         self.assertEqual(denied.status_code, 403, denied.json)
         self.assertEqual(denied.json["error"]["code"], "tenant_denied")
@@ -240,10 +266,17 @@ class ChannelCredentialTests(DomainTestCase):
         for body in (
             {"accountId": "hotel:" + self.other_tenant_id, "propertyId": PROPERTY, "active": True},
             {"accountId": "system:staging", "propertyId": PROPERTY, "active": "true"},
-            {"accountId": "system:staging", "propertyId": PROPERTY, "active": True, "apiKey": API_KEY},
+            {
+                "accountId": "system:staging",
+                "propertyId": PROPERTY,
+                "active": True,
+                "apiKey": API_KEY,
+            },
         ):
             with self.subTest(body=body):
-                response = self.request("put", "/channels/config", json=body, client=manager, headers=headers)
+                response = self.request(
+                    "put", "/channels/config", json=body, client=manager, headers=headers
+                )
                 self.assertEqual(response.status_code, 422, response.json)
         self.provider.assert_not_called()
         self.assertIsNone(self.stored())
@@ -259,7 +292,11 @@ class ChannelCredentialTests(DomainTestCase):
             response = self.request(
                 "put",
                 "/channels/config",
-                json={"accountId": "system:staging", "propertyId": str(UUID(int=99)), "active": True},
+                json={
+                    "accountId": "system:staging",
+                    "propertyId": str(UUID(int=99)),
+                    "active": True,
+                },
                 client=manager,
                 headers=headers,
             )
@@ -308,7 +345,10 @@ class ChannelCredentialTests(DomainTestCase):
                     {tenant["id"] for tenant in session.json["tenants"]},
                     {self.other_tenant_id},
                 )
-                self.assertEqual(self.request("get", "/channels", client=client, headers=headers).status_code, 403)
+                self.assertEqual(
+                    self.request("get", "/channels", client=client, headers=headers).status_code,
+                    403,
+                )
                 saved = self.request(
                     "put", prefix + "/config", json=self.config, client=client, headers=headers
                 )

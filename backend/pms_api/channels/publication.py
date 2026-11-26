@@ -5,10 +5,9 @@ from datetime import timedelta
 from decimal import Decimal, InvalidOperation
 from hashlib import sha256
 
+from flask import current_app, g
 from sqlalchemy import select, text
 from sqlalchemy.exc import SQLAlchemyError
-
-from pms_api.ports import runtime
 
 from ..core_models import User
 from ..extensions import db
@@ -32,10 +31,10 @@ def publisher_lock(tenant_id):
                     released = owner.scalar(text("SELECT pg_advisory_unlock(:key)"), {"key": key})
                     if not released:
                         owner.invalidate()
-                        runtime().logger.warning("channel_publisher_lock_lost")
+                        current_app.logger.warning("channel_publisher_lock_lost")
                 except SQLAlchemyError:
                     owner.invalidate()
-                    runtime().logger.warning("channel_publisher_unlock_unavailable")
+                    current_app.logger.warning("channel_publisher_unlock_unavailable")
 
 
 def recover_publications(tenant_id):
@@ -113,7 +112,7 @@ def stage_ari(client, availability, restrictions):
                     )
                 )
             )
-        except InvalidOperation, ValueError, TypeError:
+        except (InvalidOperation, ValueError, TypeError):
             verified = False
         if not verified:
             raise ProviderError("channel_rate_unverified", retryable=True)
@@ -150,7 +149,7 @@ def publish_ari(tenant_id, job, connection, client):
     )
 
     set_context(tenant_id=tenant_id)
-    runtime().state.tenant = lock_tenant(tenant_id)
+    g.tenant = lock_tenant(tenant_id)
     authorize_actor(tenant_id, actor_id)
     connection = db.session.scalar(
         select(ChannelConnection).where(ChannelConnection.tenant_id == tenant_id)
@@ -174,7 +173,7 @@ def publish_ari(tenant_id, job, connection, client):
     )
 
     set_context(tenant_id=tenant_id)
-    runtime().state.tenant = lock_tenant(tenant_id)
+    g.tenant = lock_tenant(tenant_id)
     authorize_actor(tenant_id, actor_id)
     connection = db.session.scalar(
         select(ChannelConnection).where(ChannelConnection.tenant_id == tenant_id)
@@ -195,5 +194,5 @@ def publish_ari(tenant_id, job, connection, client):
     # Keep the mutation lock for the final open so a booking cannot overtake it.
     if any(row["availability"] > 0 for row in availability):
         client.push_availability(availability)
-    runtime().state.user = db.session.get(User, actor_id)
+    g.user = db.session.get(User, actor_id)
     return job, connection
