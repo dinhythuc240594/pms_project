@@ -160,7 +160,7 @@ test('owner billing paginates invoices and plan history independently and reads 
       ),
     )
     assert.match(view.container.textContent, /SAAS-000001/)
-    assert.match(view.container.textContent, /60,125 USD/)
+    assert.match(view.container.textContent, /60\.125 USD/)
     assert.ok(!view.container.textContent.includes('Gia hạn gói'))
     const next = (label) =>
       [...view.container.querySelector(`[aria-label="${label}"]`).querySelectorAll('button')].find(
@@ -177,7 +177,7 @@ test('owner billing paginates invoices and plan history independently and reads 
     assert.deepEqual(detailCalls, ['invoice-b'])
     const dialog = view.container.querySelector('[role="dialog"]')
     assert.match(dialog.textContent, /Chứng từ nội bộ, không phải hóa đơn thuế/)
-    assert.match(dialog.textContent, /50,125 USD/)
+    assert.match(dialog.textContent, /50\.125 USD/)
     assert.match(dialog.textContent, /BANK-REF/)
     assert.match(dialog.textContent, /Stored payment note/)
     assert.match(dialog.textContent, /Tải chứng từ/)
