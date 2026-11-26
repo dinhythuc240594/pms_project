@@ -217,6 +217,8 @@ def type_json(room_type):
         "name": room_type.name,
         "price": str(room_type.base_price),
         "capacity": room_type.capacity,
+        "floor": room_type.floor,
+        "bedTypeId": room_type.bed_type_id,
         "active": room_type.active,
     }
 
@@ -526,6 +528,31 @@ def save_room_type(tenant_id, data, *, updating=False, toggle=False):
         current.code = code
     if "price" in data:
         current.base_price = money_value(data["price"])
+    if "floor" in data:
+        current.floor = (
+            text_value(data["floor"], "Tầng", 120, empty=True) or None
+            if data["floor"] is not None
+            else None
+        )
+    if "bedTypeId" in data:
+        bed_type_id = (
+            text_value(data["bedTypeId"], "Loại giường", 40, empty=True) or None
+            if data["bedTypeId"] is not None
+            else None
+        )
+        if bed_type_id:
+            bed_type = db.session.scalar(
+                select(Master)
+                .where(
+                    Master.tenant_id == tenant_id,
+                    Master.catalog == "bedTypes",
+                    Master.id == bed_type_id,
+                )
+                .with_for_update()
+            )
+            if bed_type is None or (not bed_type.active and current.bed_type_id != bed_type_id):
+                raise ApiError(422, "VALIDATION_ERROR", "Loại giường không còn sử dụng.")
+        current.bed_type_id = bed_type_id
     if "capacity" in data:
         capacity = data["capacity"]
         if isinstance(capacity, bool) or not isinstance(capacity, int) or not 1 <= capacity <= 50:
@@ -569,6 +596,7 @@ def save_room_type(tenant_id, data, *, updating=False, toggle=False):
                         tenant_id=tenant_id,
                         number=number,
                         room_type_id=current.id,
+                        floor=current.floor,
                         condition="clean",
                         active=True,
                     )
@@ -582,6 +610,10 @@ def save_room_type(tenant_id, data, *, updating=False, toggle=False):
                 room.room_type_id, room.active = current.id, True
             else:
                 room.active = True
+    if "floor" in data:
+        for room in all_rooms:
+            if room.active and room.room_type_id == current.id:
+                room.floor = current.floor
     refresh_existing_inventory(tenant_id, sorted(affected_types))
     return type_json(current)
 
@@ -608,8 +640,11 @@ def save_physical_room(tenant_id, data, *, updating=False, toggle=False):
     )
     previous_type = room.room_type_id if room else type_id
     previous_condition = room.condition if room else None
+    default_floor = None
     for affected_type in sorted({previous_type, type_id}):
-        get_room_type(tenant_id, affected_type, lock=True)
+        configured_type = get_room_type(tenant_id, affected_type, lock=True)
+        if affected_type == type_id:
+            default_floor = configured_type.floor
     condition = data.get("condition", room.condition if room else "clean")
     if condition not in ("clean", "dirty", "inspection", "maintenance"):
         raise ApiError(422, "VALIDATION_ERROR", "Trạng thái phòng không hợp lệ.")
@@ -640,7 +675,7 @@ def save_physical_room(tenant_id, data, *, updating=False, toggle=False):
         guard_room_condition(room, condition)
         invalidate_room_tasks(room, "room_config_changed")
     if room is None:
-        room = PhysicalRoom(id=uid(), tenant_id=tenant_id, number=number)
+        room = PhysicalRoom(id=uid(), tenant_id=tenant_id, number=number, floor=default_floor)
         db.session.add(room)
     room.room_type_id, room.condition, room.active = type_id, condition, active
     for key, value in location.items():
