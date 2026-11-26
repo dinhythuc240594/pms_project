@@ -2,7 +2,7 @@
 
 PMS (Property Management System) là đồ án xây dựng hệ thống quản lý khách sạn theo mô hình SaaS. Repository này lưu mã nguồn backend, frontend và lịch sử bàn giao của nhóm qua Git/GitHub.
 
-> **Cập nhật ngày 25/11/2026:** Repository đã có mã nguồn cho đặt phòng, giá và tồn phòng, OTA, tài chính, buồng phòng, kho, báo cáo và quản trị. Các hạng mục được tích hợp qua Pull Request; ứng dụng vẫn cần bổ sung các điểm kết nối, tài nguyên và migration còn thiếu trước khi chạy đầy đủ.
+> **Cập nhật ngày 26/11/2026:** Repository đã có mã nguồn cho đặt phòng, giá và tồn phòng, OTA, tài chính, buồng phòng, kho, báo cáo và quản trị. Các hạng mục được tích hợp qua Pull Request; ứng dụng vẫn cần bổ sung các điểm kết nối, tài nguyên và migration còn thiếu trước khi chạy đầy đủ.
 
 ## Mục tiêu của hệ thống
 
@@ -120,6 +120,19 @@ Ba gói tiếp theo được chuẩn bị vào ngày 25/11/2026 trên một nhá
 
 35 file ứng dụng được lấy nguyên nội dung từ `pms-system`. Bỏ qua ba file chưa có trong nguồn: `backend/pms_api/saas_billing/application.py`, `backend/pms_api/reconciliation/application.py` và `backend/pms_api/finance/commissions_application.py`.
 
+### Hoàn tất gói 01/12/2026
+
+Gói cuối trong bộ workflow được chuẩn bị vào ngày 26/11/2026 trên nhánh `loc/2026-12-01-handoff`. Lịch phân công kết thúc ở 01/12, không có gói 02/12.
+
+Đã lấy 58/71 file từ nguồn `pms-system`: 28 revision migration, 3 công cụ backend, 1 test PostgreSQL, 7 component Channex, 1 test giao diện, 1 công cụ đo bundle, 1 template Mako và 16 tài liệu Markdown. Tài liệu gồm [hướng dẫn backend](backend/README.md), [hướng dẫn frontend](frontend/README.md), các báo cáo và ghi chú công việc; nội dung nguồn được giữ nguyên.
+
+13 file không có trong nguồn hiện tại nên được bỏ qua:
+
+- `PMS_PUBLIC_RELEASE_REVIEW_2026-10-03.md`, `backend/ARCHITECTURE.md`, `backend/tests/test_pms_workflows.py`.
+- Sáu file thuộc `docs/bao-cao-tien-do/pms-ai/` trong phân công: hai DOCX, hai Markdown và hai ảnh PNG.
+- `docs/reports/reviews/pms-nine-workflows-2026-10-25.md`.
+- `tasks/api-standardization.md`, `tasks/manager-completion.md`, `tasks/manager-owner.md`.
+
 ## Thiết lập và kiểm tra
 
 ### Lấy mã nguồn
@@ -135,9 +148,9 @@ Chuẩn bị Python 3.14, Node.js từ 22.12.0, npm và PostgreSQL. Mẫu cấu 
 
 Một số điểm còn thiếu đã được xác định trong bản hiện tại:
 
-- Backend: file đăng ký route `pms_api/admin/urls.py` đang được tham chiếu nhưng chưa có. Thư mục `backend/migrations/` cũng chưa được bàn giao.
+- Backend: file đăng ký route `pms_api/admin/urls.py` đang được tham chiếu nhưng chưa có. `backend/migrations/` đã có 28 revision và template; còn thiếu 13 revision cha được tham chiếu, `env.py` và `alembic.ini`, nên chuỗi migration chưa đầy đủ.
 - Frontend: cấu hình Vite tham chiếu `frontend/scripts/bundle-manifest.mjs` chưa có; một số layout và trang quản trị được khai báo trong điều hướng vẫn cần bổ sung.
-- Công cụ Windows: `start_backend.bat` cần `backend/scripts/local_postgres.py`; helper và tài liệu `backend/README.md` mà file này tham chiếu chưa có trong repo.
+- Công cụ Windows: đã có `backend/README.md`, nhưng `start_backend.bat` vẫn cần `backend/scripts/local_postgres.py` chưa có trong repo. Một số công cụ và đường dẫn trong hướng dẫn backend thuộc bộ source đầy đủ, cần bổ sung trước khi sử dụng.
 - Docker: `backend/Dockerfile` cài dependency với `--require-hashes`, trong khi các file requirements hiện chỉ có phiên bản. Cần bổ sung hash và migration trước khi dùng quy trình Docker này.
 
 Việc cài thư viện chưa đủ để khắc phục các file còn thiếu ở trên. Các lệnh sau áp dụng khi đã ghép đủ mã nguồn, cấu hình môi trường và chuẩn bị database phù hợp:
@@ -161,6 +174,8 @@ Frontend proxy cả `/api` và `/p` đến backend tại `http://127.0.0.1:5000`
 **Tình trạng kiểm chứng:** 31 file trong đợt 24–27/11 đã được đối chiếu SHA-256 với nguồn; kiểm tra cú pháp 11 file Python, kiểm tra tĩnh 15 file JavaScript/JSX và phân tích 5 file CSS đều đạt, không có cảnh báo. Mười bài kiểm thử Node độc lập trong `catalog.test.js`, `clientChannelOperations.test.js` và `operationsPresentation.test.js` đều qua. Chưa chạy test giao diện, test tích hợp PostgreSQL, toàn bộ ứng dụng hoặc bản build; kiểm tra tĩnh và các test độc lập không thay thế kiểm thử khi ghép đủ hệ thống.
 
 **Kiểm tra đợt 28–30/11:** Đối chiếu SHA-256 của 35 file và kiểm tra cú pháp 12 file Python đều đạt. Kiểm tra tĩnh 19 file JavaScript/JSX không có lỗi, còn 3 cảnh báo nguồn tại `AdminFeatures.jsx` và `PlanPricingModal.jsx`; 4 file CSS phân tích thành công. 23 bài kiểm thử độc lập trong `saasBillingForm.test.js`, `subscriptionStatus.test.js`, `airbnbReturn.test.js` và `channelForms.test.js` đều qua. `planForm.test.js` chưa chạy vì thiếu `frontend/src/shared/config/featureVisibility.js`; các test giao diện, tích hợp PostgreSQL và bản build vẫn chưa được chạy.
+
+**Kiểm tra gói 01/12:** 58 file khớp SHA-256 nguồn. Kiểm tra cú pháp 32 file Python, kiểm tra tĩnh 8 file JavaScript/JSX, kiểm tra cú pháp `measure-bundle.mjs` và phân tích template Mako đều đạt; các file văn bản đọc được bằng UTF-8. Chưa chạy test giao diện, PostgreSQL, migration, restore, CI hoặc đo bundle. Công cụ đo bundle còn cần bản build, manifest và dữ liệu module; các phần này chưa có trong bản bàn giao hiện tại.
 
 ## Quy trình làm việc
 
