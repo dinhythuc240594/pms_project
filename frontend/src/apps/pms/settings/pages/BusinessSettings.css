@@ -1,0 +1,243 @@
+.pms-business-settings {
+  min-width: 0;
+  width: 100%;
+  color: var(--text-primary, #26394e);
+}
+.pms-business-heading {
+  margin-bottom: 17px;
+}
+.pms-business-heading h2 {
+  margin: 0;
+  color: #26394e;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.pms-business-settings > fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.pms-business-panel {
+  min-width: 0;
+  margin-bottom: 16px;
+  padding: 21px;
+  border: 1px solid #e3eaf1;
+  border-radius: var(--pms-panel-radius, 12px);
+  background: #fff;
+}
+.pms-business-panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+}
+.pms-business-panel-heading h3 {
+  margin: 0;
+  color: #344a62;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.pms-business-panel-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 30px;
+  height: 30px;
+  border: 1px solid #e3edf6;
+  border-radius: 8px;
+  background: #f1f6fb;
+  color: #6d8da9;
+}
+.pms-business-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+}
+.pms-business-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 7px;
+  color: #52677f;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.pms-business-field-wide {
+  grid-column: 1 / -1;
+}
+.pms-business-required {
+  color: #cf6673;
+}
+.pms-business-settings .pms-business-field :is(input, select, textarea) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--pms-control-height, 44px);
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--pms-control-border, #d7e1eb);
+  border-radius: var(--pms-control-radius, 9px);
+  background: #fff;
+  color: #344a62;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.pms-business-settings .pms-business-field textarea {
+  min-height: 190px;
+  resize: vertical;
+}
+.pms-business-settings .pms-business-field input::placeholder,
+.pms-business-settings .pms-business-field textarea::placeholder {
+  color: #94a3b8;
+}
+.pms-business-settings .pms-business-field :is(input, select, textarea):hover:not(:disabled) {
+  border-color: #b9ccdd;
+}
+.pms-business-settings .pms-business-field :is(input, select, textarea):focus-visible {
+  outline: 3px solid #086ab41c;
+  outline-offset: 1px;
+  border-color: var(--accent-primary, #086ab4);
+}
+.pms-business-settings fieldset:disabled .pms-business-field :is(input, select, textarea) {
+  background: #f8fafc;
+  color: #7e8fa1;
+  cursor: not-allowed;
+}
+.pms-business-hint {
+  margin: 12px 0 0;
+  color: #8290a2;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.pms-business-language {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  background: #fbfcfe;
+}
+.pms-business-language > div:first-child {
+  flex: 1 1 290px;
+  min-width: 0;
+}
+.pms-business-language .pms-business-panel-heading {
+  margin-bottom: 7px;
+}
+.pms-business-language .pms-business-hint {
+  margin-top: 0;
+}
+.pms-business-language .loha-language-switcher {
+  flex: 0 1 auto;
+}
+.pms-business-logo-preview {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px solid #e6ecf2;
+  border-radius: 9px;
+  background: #fbfcfe;
+}
+.pms-business-logo-preview img {
+  display: block;
+  width: 160px;
+  max-width: 100%;
+  height: 100px;
+  object-fit: contain;
+}
+.pms-business-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+  padding: 2px 0;
+}
+.pms-business-settings .pms-business-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--accent-primary, #086ab4);
+  border-radius: var(--pms-control-radius, 9px);
+  background: var(--accent-primary, #086ab4);
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.pms-business-settings .pms-business-save:hover:not(:disabled) {
+  filter: brightness(0.94);
+}
+.pms-business-settings .pms-business-save:focus-visible {
+  outline: 3px solid #086ab42b;
+  outline-offset: 3px;
+}
+.pms-business-settings fieldset:disabled .pms-business-save {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pms-business-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border: 1px solid #d8ebdf;
+  border-radius: 9px;
+  background: #eef8f2;
+  color: #327852;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.pms-business-notice > svg {
+  flex-shrink: 0;
+}
+.pms-business-notice.is-error {
+  border-color: #f2dce0;
+  background: #fff2f3;
+  color: #b94450;
+}
+.pms-business-readonly {
+  margin: 16px 0 0;
+  color: #8290a2;
+  font-size: 12px;
+  line-height: 1.65;
+}
+@media (max-width: 700px) {
+  .pms-business-heading {
+    margin-bottom: 14px;
+  }
+  .pms-business-panel {
+    margin-bottom: 14px;
+    padding: 15px;
+  }
+  .pms-business-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  .pms-business-panel-heading {
+    margin-bottom: 15px;
+  }
+  .pms-business-settings .pms-business-field :is(input, select, textarea) {
+    min-height: 44px;
+    font-size: 16px;
+  }
+  .pms-business-footer .pms-business-save {
+    width: 100%;
+  }
+}
