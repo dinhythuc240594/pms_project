@@ -1,0 +1,822 @@
+{
+  "schema_version": "1.0",
+  "status": "DRAFT_INCOMPLETE_PROJECT_HISTORY",
+  "prepared_on": "2026-11-27",
+  "timezone": "Asia/Saigon",
+  "scope_requested": "Toàn bộ dự án; người dùng sẽ bổ sung lịch sử còn thiếu.",
+  "capture_policy": "Nguyên văn phần lời nhắn con người nhìn thấy; bỏ wrapper tự sinh, hệ thống/developer/tool internals. Giữ thứ tự, các lượt lặp lại, dấu câu, xuống dòng và khoảng trắng trong raw_user_text. Không suy ngày thực từ nhãn workflow.",
+  "counts": {
+    "visible_human_entries": 36,
+    "known_client_date_entries": 16,
+    "unknown_actual_date_entries": 20,
+    "project_query_artifacts": 9
+  },
+  "records": [
+    {
+      "id": "A001",
+      "actual_date": null,
+      "date_display": "Chưa có ngày thực của phiên",
+      "date_basis": "Các prompt đầu không có timestamp đầy đủ; ngày 9–17/11 là nhãn công việc.",
+      "workflow_labels": [
+        "9/11",
+        "10/11",
+        "11/11",
+        "12/11",
+        "13/11",
+        "14/11",
+        "15/11",
+        "16/11",
+        "17/11"
+      ],
+      "tool": "Codex (OpenAI)",
+      "model": null,
+      "model_status": "Chưa xác nhận tên/phiên bản model từ bằng chứng nộp",
+      "evidence_level": "visible_conversation",
+      "prompt_ids": [
+        "P001",
+        "P002",
+        "P003",
+        "P004",
+        "P005",
+        "P006",
+        "P007",
+        "P008",
+        "P009",
+        "P010",
+        "P012",
+        "P013",
+        "P014",
+        "P015",
+        "P017",
+        "P018",
+        "P019",
+        "P020"
+      ],
+      "purpose": "Tổ chức bàn giao mã nguồn theo phân công",
+      "summary": "AI hỗ trợ đọc workflow, tìm phần của Lộc, chép file hiện có từ pms-system sang pms_project, chia nhánh/commit và push. File thiếu được bỏ qua theo lựa chọn người dùng. Đây là chuyển giao mã nguồn sẵn có, không phải bằng chứng AI hoặc sinh viên mới viết toàn bộ chức năng.",
+      "outputs": [
+        "Các nhánh và commit bàn giao theo ngày/gói",
+        "Các báo cáo file có/thiếu trong chat"
+      ],
+      "verification": "Trong chat có kiểm tra phạm vi, hash và cú pháp ở các đợt đã ghi. Chưa có đầy đủ timestamp và kết quả chi tiết cho mọi phiên đầu.",
+      "human_review_status": "Người dùng có báo đã merge; chưa có bằng chứng riêng xác nhận đã kiểm chứng toàn bộ đầu ra.",
+      "limitations": [
+        "Không quy đổi số commit/nhánh thành số tính năng hoặc ngày công.",
+        "Không suy ngày thực từ nhãn workflow.",
+        "Chưa có toàn bộ lịch sử AI tạo mã nguồn ban đầu trong pms-system."
+      ],
+      "evidence_refs": [
+        "S1",
+        "S3"
+      ]
+    },
+    {
+      "id": "A002",
+      "actual_date": null,
+      "date_display": "Phiên review mang nhãn 13/11; ngày thực chưa xác định",
+      "date_basis": "Prompt nêu tên nhánh; không có timestamp thực của lượt nhắn.",
+      "workflow_labels": [
+        "loc/2026-11-13-fullstack-booking-auth"
+      ],
+      "tool": "Codex với một tác vụ reviewer phụ",
+      "model": null,
+      "model_status": "Chưa xác nhận",
+      "evidence_level": "visible_conversation",
+      "prompt_ids": [
+        "P016"
+      ],
+      "purpose": "Review thay đổi mã nguồn",
+      "summary": "Người dùng yêu cầu một reviewer riêng, chỉ đọc, bao gồm staged/unstaged/untracked và so với origin/main tại merge base 460728a90752f6acedd1b1748e50f9eae02fdce4. Chat ghi nhận một phát hiện P2 về giới hạn khoảng ngày khóa tồn phòng; không coi đây là kiểm toán đầy đủ hoặc khẳng định trạng thái lỗi hiện tại sau các lần cập nhật sau.",
+      "outputs": [
+        "Phản hồi review với vị trí file trong chat"
+      ],
+      "verification": "Theo kết quả reviewer trong chat, không thực hiện sửa lỗi trong tác vụ review đó.",
+      "human_review_status": "Cần sinh viên xác nhận cách đã xử lý phản hồi và phiên bản mã liên quan.",
+      "limitations": [
+        "Không chạy lại review khi lập nhật ký.",
+        "Không chứng minh mọi lỗi đã được phát hiện hoặc sửa."
+      ],
+      "evidence_refs": [
+        "S1"
+      ]
+    },
+    {
+      "id": "A003",
+      "actual_date": null,
+      "date_display": "Các phiên viết và cập nhật README",
+      "date_basis": "Lượt đầu không có ngày; lần bổ sung có client date 22/11/2026.",
+      "workflow_labels": [],
+      "tool": "Codex (OpenAI)",
+      "model": null,
+      "model_status": "Chưa xác nhận",
+      "evidence_level": "visible_conversation_and_git",
+      "prompt_ids": [
+        "P011",
+        "P028"
+      ],
+      "purpose": "Soạn tài liệu dự án",
+      "summary": "AI hỗ trợ viết/cập nhật README về mục tiêu, cấu trúc repo, phạm vi mã đã bàn giao, điều kiện chạy, các phần còn thiếu và giới hạn kiểm chứng. Tiêu đề PMS và phần giới thiệu do người dùng chỉnh được giữ trong các cập nhật tiếp theo.",
+      "outputs": [
+        "README.md",
+        "Commit d174bc0 và các commit tài liệu về sau"
+      ],
+      "verification": "Các lần cập nhật có kiểm tra liên kết nội bộ, UTF-8, code fences, cấu hình lệnh và file thiếu được ghi trong chat.",
+      "human_review_status": "Cần sinh viên rà soát bản README cuối trước khi nộp.",
+      "limitations": [
+        "Tài liệu hiện diện không đồng nghĩa các tính năng đã chạy trọn vẹn."
+      ],
+      "evidence_refs": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "A004",
+      "actual_date": null,
+      "date_display": "18–22/11/2026 theo client context",
+      "date_basis": "Có ngày client cho từng lượt P021–P028; hoạt động trải qua nhiều ngày.",
+      "workflow_labels": [
+        "18/11",
+        "19/11",
+        "20/11",
+        "21/11",
+        "22/11"
+      ],
+      "tool": "Codex (OpenAI)",
+      "model": null,
+      "model_status": "Chưa xác nhận",
+      "evidence_level": "visible_conversation_and_git",
+      "prompt_ids": [
+        "P021",
+        "P022",
+        "P023",
+        "P024",
+        "P025",
+        "P026",
+        "P027",
+        "P028"
+      ],
+      "purpose": "Tiếp tục bàn giao và giảm số nhánh",
+      "summary": "AI tiếp tục đối chiếu nguồn thực tế và đưa các phần được phân công vào repo đích. Người dùng xác nhận repo nhận push, sau đó yêu cầu giảm số nhánh; cách làm được chuyển sang một nhánh tổng hợp mỗi ngày/đợt, nhiều commit có ý nghĩa trên cùng nhánh.",
+      "outputs": [
+        "Các gói 18–22/11",
+        "Nhánh loc/2026-11-22-inventory-settings"
+      ],
+      "verification": "Có đối chiếu hash, phạm vi thay đổi, metadata tác giả, cú pháp và xác minh tip sau push trong chat. Các test cần DB/DOM/dependencies còn thiếu không được tính là đã chạy.",
+      "human_review_status": "Việc merge được người dùng thực hiện/xác nhận ở các lượt tương ứng; chưa chứng minh kiểm chứng thủ công toàn tính năng.",
+      "limitations": [
+        "Không tự xóa các nhánh cũ.",
+        "Các cảnh báo nguồn và file thiếu được giữ/ghi nhận theo đợt."
+      ],
+      "evidence_refs": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "A005",
+      "actual_date": "2026-11-24",
+      "date_display": "24/11/2026",
+      "date_basis": "Client date và metadata Git được nhìn thấy trong chat.",
+      "workflow_labels": [
+        "24/11/2026",
+        "25/11/2026",
+        "26/11/2026",
+        "27/11/2026"
+      ],
+      "tool": "Codex (OpenAI)",
+      "model": null,
+      "model_status": "Chưa xác nhận",
+      "evidence_level": "visible_conversation_and_git",
+      "prompt_ids": [
+        "P029"
+      ],
+      "purpose": "Chuẩn bị trước bốn gói trên một nhánh",
+      "summary": "Chép 31/36 file có nguồn; bốn gói và README được đưa vào 5 commit trên loc/2026-11-24-27-handoff. Các nhãn 25–27/11 không phải ngày thực hiện commit.",
+      "outputs": [
+        "31 file ứng dụng",
+        "README.md",
+        "Commit tip 767f00b"
+      ],
+      "verification": "Theo kết quả công cụ trong chat: 31 hash; 11 Python AST; 15 JS/JSX lint không lỗi/cảnh báo; 5 CSS parse; 10 bài test Node độc lập qua; remote tip đã đối chiếu.",
+      "human_review_status": "Cần sinh viên xác nhận đã đọc các thay đổi và chấp nhận giới hạn kiểm thử.",
+      "limitations": [
+        "5 file không có nguồn bị bỏ qua.",
+        "Không chạy UI suite, PostgreSQL suite, toàn ứng dụng hoặc build."
+      ],
+      "evidence_refs": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "A006",
+      "actual_date": "2026-11-25",
+      "date_display": "25/11/2026",
+      "date_basis": "Client date và metadata Git được nhìn thấy trong chat.",
+      "workflow_labels": [
+        "28/11/2026",
+        "29/11/2026",
+        "30/11/2026"
+      ],
+      "tool": "Codex (OpenAI)",
+      "model": null,
+      "model_status": "Chưa xác nhận",
+      "evidence_level": "visible_conversation_and_git",
+      "prompt_ids": [
+        "P030"
+      ],
+      "purpose": "Chuẩn bị tiếp đến gói 30/11",
+      "summary": "Chép 35/38 file có nguồn; ba gói và README thành 4 commit trên loc/2026-11-28-30-handoff, giữ nguyên ngày commit thực 25/11.",
+      "outputs": [
+        "35 file ứng dụng",
+        "README.md",
+        "Commit tip b6dd2e0"
+      ],
+      "verification": "Theo công cụ trong chat: 35 hash; 12 Python AST; 19 JS/JSX lint không lỗi, còn 3 cảnh báo nguồn; 4 CSS parse; 23 bài test độc lập qua.",
+      "human_review_status": "Cần sinh viên rà soát các cảnh báo và kiểm thử nghiệm thu khi đủ hệ thống.",
+      "limitations": [
+        "3 file không có nguồn bị bỏ qua.",
+        "planForm.test.js chưa chạy vì thiếu featureVisibility.js.",
+        "Không chạy UI, PostgreSQL và build đầy đủ."
+      ],
+      "evidence_refs": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "A007",
+      "actual_date": "2026-11-26",
+      "date_display": "26/11/2026",
+      "date_basis": "Client date và metadata Git: f9440a7/a2573b0.",
+      "workflow_labels": [
+        "01/12/2026"
+      ],
+      "tool": "Codex (OpenAI)",
+      "model": null,
+      "model_status": "Chưa xác nhận",
+      "evidence_level": "visible_conversation_and_git",
+      "prompt_ids": [
+        "P031",
+        "P032"
+      ],
+      "purpose": "Hoàn tất gói cuối của workflow hiện có",
+      "summary": "Sau khi xác định workflow kết thúc 01/12, người dùng chọn hoàn tất gói này. AI chép 58/71 file, gồm migration, công cụ, tài liệu và component Channex; tạo 2 commit trên loc/2026-12-01-handoff.",
+      "outputs": [
+        "58 file nguồn",
+        "README.md",
+        "Commits f9440a7 và a2573b0"
+      ],
+      "verification": "Theo công cụ trong chat: 58 hash và committed blobs khớp; 32 Python AST, 8 JS/JSX lint không diagnostics, 1 MJS syntax check, Mako Lexer parse và UTF-8 đạt. Đọc metadata migration có 28 revision, thiếu 13 parent.",
+      "human_review_status": "Cần sinh viên kiểm tra các tài liệu được chuyển và các phần phụ thuộc còn thiếu.",
+      "limitations": [
+        "13 file không có nguồn bị bỏ qua.",
+        "Không có gói 02/12 để tự suy diễn.",
+        "Không thực thi migration, restore, CI, benchmark, UI/PostgreSQL suites hay build.",
+        "Các file tài liệu nguồn giữ nguyên ba dòng hard break vốn có."
+      ],
+      "evidence_refs": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "A008",
+      "actual_date": null,
+      "date_display": "Báo cáo nguồn ghi 26/10/2026",
+      "date_basis": "Ngày trên tài liệu và commit 8c1d7cc; chưa có timestamp/transcript phiên AI.",
+      "workflow_labels": [],
+      "tool": "Codex Security Deep Scan (theo báo cáo nguồn)",
+      "model": null,
+      "model_status": "Model chưa xác nhận; plugin được tài liệu ghi là 0.1.32",
+      "evidence_level": "repository_report_claim_not_revalidated",
+      "prompt_ids": [],
+      "purpose": "Bằng chứng về một lần dùng AI/công cụ trước lịch sử chat hiện có",
+      "summary": "Báo cáo security-code-audit-2026-10-26.md ghi đã gọi Deep Scan nhưng scan failed và coverage partial; còn phân biệt review nguồn/test cục bộ với kết quả plugin.",
+      "outputs": [
+        "Báo cáo source docs/reports/reviews/security-code-audit-2026-10-26.md"
+      ],
+      "verification": "Lần lập nhật ký chỉ đọc báo cáo và metadata Git đã có; không chạy lại scan, không xác nhận độc lập các kết quả an ninh.",
+      "human_review_status": "Người dùng cần cung cấp prompt, đầu ra gốc và xác nhận công cụ/model thực tế cho phiên này.",
+      "limitations": [
+        "Không coi findings rỗng là scan sạch.",
+        "Không coi toàn repository đã được kiểm toán đầy đủ.",
+        "Không có nguyên văn prompt của phiên trong bằng chứng hiện có."
+      ],
+      "evidence_refs": [
+        "S2",
+        "S5"
+      ]
+    },
+    {
+      "id": "A009",
+      "actual_date": null,
+      "date_display": "26–27/11/2026 – 65 commit phân hệ đã tạo; chờ sinh viên rà soát hồ sơ",
+      "date_basis": "Client date 26/11 cho P033–P035 và 27/11 cho P036; kết quả kiểm tra mã hiện tại được tác vụ điều phối xác nhận.",
+      "workflow_labels": [],
+      "tool": "Codex (OpenAI)",
+      "model": null,
+      "model_status": "Chưa xác nhận",
+      "evidence_level": "verified_current_code_results_reported_by_task_orchestrator",
+      "prompt_ids": [
+        "P033",
+        "P034",
+        "P035",
+        "P036"
+      ],
+      "purpose": "Cập nhật theo nguồn mới và soạn hồ sơ sử dụng AI",
+      "summary": "Người dùng yêu cầu đối chiếu toàn nguồn pms-system và cập nhật pms_project, sau đó yêu cầu chia nhỏ commit và tiếp tục công việc. Nguồn ea0398f được giữ nguyên. Đã kiểm tra 794 file đủ điều kiện và chép ban đầu 619 file mới/thay đổi, gồm 282 file mới và 337 file khác byte; giữ 70 file chỉ có ở đích. Đây là số liệu đối chiếu ban đầu, không phải số file thay đổi Git cuối cùng vì chuẩn hóa xuống dòng có thể làm hai số khác nhau. Chatbot/marketing AI đã có sẵn trong ĐÍCH pms_project: việc hợp nhất giữ các điểm đăng ký, cấu hình, phân quyền, điều hướng, API provider và i18n. Phiên này thêm test_ai_integration và kiểm thử App từ chối quyền marketing; sửa kỳ vọng đã cũ trong bảy file test theo hợp đồng locale tiền tệ/Details hiện có, không đổi hành vi ứng dụng, đồng thời điều chỉnh một fixture Chatbot.test được giữ lại. Hai snapshot commit cục bộ chưa push được chia lại theo phân hệ bằng reset --mixed theo P035; thao tác này giữ nguyên các file làm việc. Không sử dụng mã commit cũ làm bằng chứng nhánh hiện tại. Đã hoàn tất 65 commit theo phân hệ trên cùng một nhánh theo yêu cầu P035; kết quả kiểm tra áp dụng cho trạng thái mã hợp nhất, không phải xác nhận mỗi commit trung gian đã được chạy kiểm thử riêng. Phần lớn mã được chuyển từ bản có sẵn, không phải toàn bộ chức năng gốc do phiên AI này mới viết.",
+      "outputs": [
+        "Đối chiếu 794 file nguồn; chép ban đầu 619 file (282 mới, 337 khác byte), giữ 70 file chỉ có ở đích",
+        "Các phần hợp nhất README/.gitignore và giữ tích hợp AI vốn có ở repo đích",
+        "65 commit theo phân hệ đã tạo cục bộ trên một nhánh; commit đầu 4f710b8c641460e3e1672e31da67f5bbcf6e1f83 và commit cuối 5675aee085afc415c4cd46b40fe73a94d076c586",
+        "Nhánh đối chiếu ổn định: https://github.com/dinhythuc240594/pms_project/tree/loc/2026-11-26-source-sync-ai-log (nhật ký chưa ghi nhận kết quả xác minh push)",
+        "Báo cáo đối chiếu/danh sách module: https://github.com/dinhythuc240594/pms_project/blob/loc/2026-11-26-source-sync-ai-log/docs/sync/SOURCE_SYNC_2026-11-27.md (đối chiếu khi nhánh và tài liệu được công bố)",
+        "Bản sửa chỉ trong kiểm thử cho thứ tự schema fixture: migrate core trước các AI installers đã đăng ký; teardown tùy chọn chỉ cho vòng roundtrip cô lập",
+        "Bản nháp ai_usage_log.md, prompts.json, activity_records.json, missing_history_template.csv và portal_text.md; không ghi hash commit tài liệu/nhật ký chưa tồn tại"
+      ],
+      "verification": "Phạm vi bằng chứng: các kết quả bên dưới xác nhận trạng thái mã hợp nhất của nhánh; không khẳng định từng commit trung gian đã được chạy toàn bộ test riêng.\n\nBackend: 100/100 kiểm thử an toàn đạt, gồm 96 bài đã ghi trước đó (62 lõi, 22 marketing, 12 chatbot) và bốn bài hồi quy mô phỏng schema fixture. Ruff không có lỗi. Nhóm kiểm thử cách ly chặn truy cập ngoài/PostgreSQL, dùng provider giả lập, SQLite trong bộ nhớ hoặc SQL offline. Bốn test mới kiểm tra thứ tự fixture bằng mô phỏng, không thực thi database/migration thật; bản sửa chỉ ở kiểm thử, không đổi migration production.\n\nFrontend: lượt chạy cuối đạt 704/704 test sau khi tám assertion thất bại ở lượt trước được sửa trong bảy file test để khớp hợp đồng locale tiền tệ/Details đã có. Build thành công. Lint không có lỗi và còn 47 cảnh báo. Có ghi nhận cảnh báo kích thước chunk và cổng HMR.\n\nKiểm tra i18n ghi nhận 4.581 ứng viên, 3.694 đã có trong catalog, 887 còn thiếu. Các kết quả chỉ chứng minh phạm vi đã chạy, không phải chứng nhận nghiệm thu hoàn chỉnh hoặc an toàn tuyệt đối. 34 prompt gốc và hash cũ được giữ nguyên; hai prompt P035–P036 được bổ sung đúng nguyên văn kèm hash.",
+      "human_review_status": "Chưa có xác nhận cuối của sinh viên. Cần đối chiếu các phần hợp nhất giữ AI ở đích, kỳ vọng test đã điều chỉnh, bản sửa fixture chỉ trong kiểm thử, nhóm commit được chia lại và các cảnh báo/i18n còn thiếu trước khi duyệt hồ sơ nộp.",
+      "limitations": [
+        "Toàn bộ hồ sơ vẫn là dự thảo vì thiếu lịch sử AI ngoài chat này và phần của các thành viên khác; model/phiên bản chưa có xác nhận.",
+        "100 test backend là tập kiểm thử an toàn có cách ly, không phải toàn bộ PostgreSQL suite. Không có DB vận hành, migration, restore, provider hay SMTP thật được gọi.",
+        "Còn 47 cảnh báo lint, cảnh báo chunk-size/HMR và 887 ứng viên i18n chưa có trong catalog; sinh viên cần đánh giá phần phải hoàn thiện.",
+        "Kết quả frontend đã qua sau khi điều chỉnh bảy file kỳ vọng test; sinh viên cần rà soát tính đúng của việc điều chỉnh.",
+        "65 commit phân hệ đã được tạo theo P035; kết quả kiểm tra là của trạng thái hợp nhất, không phải kết quả kiểm thử riêng cho mỗi commit. Nhật ký chưa ghi nhận xác minh push; không dùng hai mã snapshot cũ hoặc hash tài liệu/nhật ký chưa tồn tại.",
+        "Hồ sơ chưa ký, chưa xác nhận đủ lịch sử và chưa được tự động nộp lên cổng trường."
+      ],
+      "evidence_refs": [
+        "S1"
+      ],
+      "sync_progress": {
+        "status": "VERIFIED_COMBINED_CODE_RESULTS_65_MODULE_COMMITS_COMPLETED",
+        "source_commit": "ea0398ffab5049a684170d68900bff4cc5e04325",
+        "source_unchanged": true,
+        "eligible_source_files_checked": 794,
+        "initially_copied_new_or_changed_files": 619,
+        "initial_new_files": 282,
+        "initial_byte_changed_files": 337,
+        "destination_only_files_retained": 70,
+        "manual_merge_examples": [
+          "README.md",
+          ".gitignore"
+        ],
+        "count_note": "Số file chép khác byte ban đầu không đồng nhất với net Git diff sau chuẩn hóa; không suy số đường dẫn cuối từ số liệu trước sửa fixture.",
+        "existing_ai_origin": "DESTINATION pms_project",
+        "preserved_ai_integration_areas": [
+          "registration",
+          "configuration",
+          "permissions",
+          "navigation",
+          "provider API",
+          "i18n"
+        ],
+        "added_regression_tests": [
+          "test_ai_integration",
+          "App marketing-denial test",
+          "four mocked schema-fixture regression tests"
+        ],
+        "stale_assertion_failures_before_final_rerun": 8,
+        "source_test_files_adjusted": 7,
+        "retained_fixture_adjusted": "Chatbot.test",
+        "application_behavior_changed_by_assertion_updates": false,
+        "schema_fixture_fix": {
+          "scope": "tests only",
+          "ordering": "core migrate then registered AI installers",
+          "teardown": "optional only for isolated roundtrip",
+          "mocked_regression_tests": 4,
+          "production_migrations_changed": false,
+          "database_execution_in_new_fixture_tests": false
+        },
+        "backend_tests": {
+          "passed": 100,
+          "total": 100,
+          "previous_safe_tests": 96,
+          "core": 62,
+          "marketing": 22,
+          "chatbot": 12,
+          "mocked_schema_fixture_regressions": 4,
+          "scope": "isolated safe tests; external/PostgreSQL blocked; mocked providers, SQLite memory, offline SQL"
+        },
+        "ruff_errors": 0,
+        "frontend_tests": {
+          "passed": 704,
+          "total": 704,
+          "status": "final rerun passed"
+        },
+        "frontend_build": "success",
+        "frontend_lint": {
+          "errors": 0,
+          "warnings": 47
+        },
+        "i18n": {
+          "candidates": 4581,
+          "catalogued": 3694,
+          "missing": 887
+        },
+        "additional_warnings": [
+          "chunk-size",
+          "HMR port"
+        ],
+        "live_actions_not_run": [
+          "live database",
+          "migrations",
+          "restore",
+          "provider calls",
+          "SMTP calls"
+        ],
+        "code_branch": "loc/2026-11-26-source-sync-ai-log",
+        "branch_url": "https://github.com/dinhythuc240594/pms_project/tree/loc/2026-11-26-source-sync-ai-log",
+        "commit_grouping_change": {
+          "requested_by": "P035",
+          "unpublished_local_snapshot_commits_reorganized": 2,
+          "method": "reset --mixed",
+          "working_files_preserved": true,
+          "old_snapshot_commits_pushed": false,
+          "new_module_commit_refs": [
+            {
+              "key": "01 backend dependencies and tooling",
+              "subject": "sync: backend dependencies and tooling",
+              "commit": "4f710b8c641460e3e1672e31da67f5bbcf6e1f83"
+            },
+            {
+              "key": "02 backend migrations",
+              "subject": "sync: backend migrations",
+              "commit": "455403fbfad99b13ceb823607b283dc33e9fe919"
+            },
+            {
+              "key": "03 backend foundation and HTTP checks",
+              "subject": "sync: backend foundation and HTTP checks",
+              "commit": "f6f4741040b0bc0d08a06e5e12e7cf69f4d71e10"
+            },
+            {
+              "key": "04 backend authentication and roles",
+              "subject": "sync: backend authentication and roles",
+              "commit": "2a5107615271da9ff2099de4801dc3b4c9da60f8"
+            },
+            {
+              "key": "05 backend bookings and stay changes",
+              "subject": "sync: backend bookings and stay changes",
+              "commit": "d44ec523fffd98e95cd84d35b7048e180b6aff74"
+            },
+            {
+              "key": "06 backend channex administration",
+              "subject": "sync: backend channex administration",
+              "commit": "dc49919664c7c41c1988af2f64b54551d0187dc6"
+            },
+            {
+              "key": "07 backend channel synchronization",
+              "subject": "sync: backend channel synchronization",
+              "commit": "11f80928a7675bffd6abd11963fde320ea6bc33b"
+            },
+            {
+              "key": "08 backend catalog settings",
+              "subject": "sync: backend catalog settings",
+              "commit": "a9f322aa34af0232654f2582dee9f42e78399115"
+            },
+            {
+              "key": "09 backend finance",
+              "subject": "sync: backend finance",
+              "commit": "da1dd712ec6bae1bf6db374ad243c9c015b20bb9"
+            },
+            {
+              "key": "10 backend housekeeping",
+              "subject": "sync: backend housekeeping",
+              "commit": "917721c9c443cec50c01cd148c64eb7169f4c501"
+            },
+            {
+              "key": "12 backend pricing",
+              "subject": "sync: backend pricing",
+              "commit": "30aba636ea7faf8283d297fd5950755172741a73"
+            },
+            {
+              "key": "13 backend subscription administration",
+              "subject": "sync: backend subscription administration",
+              "commit": "fbe3ede52fca2ca6105136858c267b7576ad3544"
+            },
+            {
+              "key": "14 backend reports and reconciliation",
+              "subject": "sync: backend reports and reconciliation",
+              "commit": "e558c9370ac30494e35b2898489c97c5f8ce965e"
+            },
+            {
+              "key": "15 backend infrastructure checks",
+              "subject": "sync: backend infrastructure checks",
+              "commit": "a3a410e10a3136bf74e95dab4befed95b99ac92a"
+            },
+            {
+              "key": "16 backend isolated schema fixtures",
+              "subject": "sync: backend isolated schema fixtures",
+              "commit": "01dae6257dc7ace418e89c32a8dfd3b7dd88fa89"
+            },
+            {
+              "key": "17 CI workflows",
+              "subject": "sync: CI workflows",
+              "commit": "1edb0fafe90688302034c622c3dff21adb97ad70"
+            },
+            {
+              "key": "17 repository delivery configuration",
+              "subject": "sync: repository delivery configuration",
+              "commit": "f16df55e1aec1b5f4562b8c172950322aff79db9"
+            },
+            {
+              "key": "18 frontend tooling and entry assets",
+              "subject": "sync: frontend tooling and entry assets",
+              "commit": "661e02436e092ab8e9db26d79276c755892f9c21"
+            },
+            {
+              "key": "19 locale catalog en-US",
+              "subject": "sync: locale catalog en-US",
+              "commit": "05ae39f472907bdc5d4560b1ecbb90ee46aa08c2"
+            },
+            {
+              "key": "19 locale catalog vi",
+              "subject": "sync: locale catalog vi",
+              "commit": "bf01db5dae5e1f7902cd15ffc53c7fbe9724e05d"
+            },
+            {
+              "key": "19 locale catalog zh-CN",
+              "subject": "sync: locale catalog zh-CN",
+              "commit": "057196eefaddf17132641e02ff776de073976de7"
+            },
+            {
+              "key": "20 shared frontend components",
+              "subject": "sync: shared frontend components",
+              "commit": "7aefeb5d57e2070e854ccc8877f7c935dcc5336a"
+            },
+            {
+              "key": "20 shared frontend config",
+              "subject": "sync: shared frontend config",
+              "commit": "d9fa665dfa80dd24ade366c0eeaf60ba9666c865"
+            },
+            {
+              "key": "20 shared frontend drafts",
+              "subject": "sync: shared frontend drafts",
+              "commit": "295c1e6002df6d05c3819cf69d5d82a82a14e352"
+            },
+            {
+              "key": "20 shared frontend i18n",
+              "subject": "sync: shared frontend i18n",
+              "commit": "91b725588c9f8ef3a9b749efad8b605e4821ac11"
+            },
+            {
+              "key": "20 shared frontend lib",
+              "subject": "sync: shared frontend lib",
+              "commit": "c73d9cb9acc4395ebb6ed97ff7beee84529daf2e"
+            },
+            {
+              "key": "20 shared frontend styles",
+              "subject": "sync: shared frontend styles",
+              "commit": "5181537d54b436047f70ce2fa7be5380e2ec353a"
+            },
+            {
+              "key": "21 application routes and access guards",
+              "subject": "sync: application routes and access guards",
+              "commit": "79427a4f991cb794372d12ca42722a0c2e20a8a3"
+            },
+            {
+              "key": "22 PMS shell and AI navigation",
+              "subject": "sync: PMS shell and AI navigation",
+              "commit": "f54dd0d02ca7417882eae3943a5e700eec422112"
+            },
+            {
+              "key": "23 PMS API transport",
+              "subject": "sync: PMS API transport",
+              "commit": "87cf51e3c0962ccc83de16048b92d5981dee6640"
+            },
+            {
+              "key": "24 PMS domain data and formatting",
+              "subject": "sync: PMS domain data and formatting",
+              "commit": "87cf0b87a3c126e9a6c19bab1f0e9e4d18945984"
+            },
+            {
+              "key": "25 PMS workspace state",
+              "subject": "sync: PMS workspace state",
+              "commit": "8784d3925980d79c6716f486becde2e0f4516377"
+            },
+            {
+              "key": "26 PMS feature auth",
+              "subject": "sync: PMS feature auth",
+              "commit": "748110d8818bd37fb0e5d13ad0168b045890cf37"
+            },
+            {
+              "key": "26 PMS feature channel-manager",
+              "subject": "sync: PMS feature channel-manager",
+              "commit": "b8639e33f49f54a53826775a504bb26432c25682"
+            },
+            {
+              "key": "26 PMS feature dashboard",
+              "subject": "sync: PMS feature dashboard",
+              "commit": "6ffc0040ae8c84a349eddb32e0706f8fa477e2c2"
+            },
+            {
+              "key": "26 PMS feature finance",
+              "subject": "sync: PMS feature finance",
+              "commit": "363403276999e297aa8bc359a2291b3cc5d4ba4f"
+            },
+            {
+              "key": "26 PMS feature housekeeping",
+              "subject": "sync: PMS feature housekeeping",
+              "commit": "c6325c137db24806769320c91f79cbb18ccff697"
+            },
+            {
+              "key": "26 PMS feature inventory",
+              "subject": "sync: PMS feature inventory",
+              "commit": "3ea121e2829c774f535e62241f2e949f9f7644cd"
+            },
+            {
+              "key": "26 PMS feature profile",
+              "subject": "sync: PMS feature profile",
+              "commit": "db38abb76f8f46fbfbd2e8806252a42694b864b0"
+            },
+            {
+              "key": "26 PMS feature rates-inventory",
+              "subject": "sync: PMS feature rates-inventory",
+              "commit": "5d11bba2eade2f610ce2b4c12e9439b723e1424f"
+            },
+            {
+              "key": "26 PMS feature reconciliation",
+              "subject": "sync: PMS feature reconciliation",
+              "commit": "d1f8d10c746591f9c865c76c768cb041ac031706"
+            },
+            {
+              "key": "26 PMS feature reports",
+              "subject": "sync: PMS feature reports",
+              "commit": "7103b19eb9c3d96d9fb1b169c86f548c5bd50fa8"
+            },
+            {
+              "key": "26 PMS feature reservations",
+              "subject": "sync: PMS feature reservations",
+              "commit": "41fff0472a539ed29704656163f13eaba1690445"
+            },
+            {
+              "key": "26 PMS feature rooms",
+              "subject": "sync: PMS feature rooms",
+              "commit": "65e187edb54f71d54b2cf02d10c448d387123d79"
+            },
+            {
+              "key": "26 PMS feature settings",
+              "subject": "sync: PMS feature settings",
+              "commit": "d235d11d089706bf436f45ee8b501f34d8679d40"
+            },
+            {
+              "key": "26 PMS feature user-management",
+              "subject": "sync: PMS feature user-management",
+              "commit": "899dfdad277db583072d6e5dc2e29215d91a2e9d"
+            },
+            {
+              "key": "27 manager feature billing",
+              "subject": "sync: manager feature billing",
+              "commit": "0bf83b146389169da895af1c56f3a5821e9be82d"
+            },
+            {
+              "key": "27 manager feature channex",
+              "subject": "sync: manager feature channex",
+              "commit": "0ae76ac4589f2453e0d7135a9467837984e2ba4b"
+            },
+            {
+              "key": "27 manager feature dashboard",
+              "subject": "sync: manager feature dashboard",
+              "commit": "a9431ee2db478c66f5a055fdba74a06febbe900f"
+            },
+            {
+              "key": "27 manager feature features",
+              "subject": "sync: manager feature features",
+              "commit": "cb5664a4b2765e4347f36c4cf3d8b641a5941185"
+            },
+            {
+              "key": "27 manager feature logs",
+              "subject": "sync: manager feature logs",
+              "commit": "b5318a38b7224955d01f8e48704df37fd04bd38c"
+            },
+            {
+              "key": "27 manager feature tenants",
+              "subject": "sync: manager feature tenants",
+              "commit": "b9b024590960961b1f873d690980028ba2c5e403"
+            },
+            {
+              "key": "27 manager feature users",
+              "subject": "sync: manager feature users",
+              "commit": "3b9a0fa5665d2ff33bfa0a6bb2dbff84f477ed56"
+            },
+            {
+              "key": "27 manager shell",
+              "subject": "sync: manager shell",
+              "commit": "92b2d86730f9f2a0a8c288e91d2032bcfa02268b"
+            },
+            {
+              "key": "28 public application marketing",
+              "subject": "sync: public application marketing",
+              "commit": "94d27dee685741c30183eb11254b5943c3eee986"
+            },
+            {
+              "key": "37 local API contracts and mock fixtures",
+              "subject": "sync: local API contracts and mock fixtures",
+              "commit": "81c6bab77bef60725706ad79f025a7e1a716526a"
+            },
+            {
+              "key": "38 backend documentation",
+              "subject": "sync: backend documentation",
+              "commit": "ca535bb26ecb9d689ae4e67bd40eab945e4ea845"
+            },
+            {
+              "key": "39 project architecture and reference reports",
+              "subject": "sync: project architecture and reference reports",
+              "commit": "fcbe9b5279d757d7f71048f9b9d68a2f0662471e"
+            },
+            {
+              "key": "39 project documentation bao-cao-hoc-phan",
+              "subject": "sync: project documentation bao-cao-hoc-phan",
+              "commit": "c3194aebcfd07df58ed79622a9ad0ae4adeb9dc7"
+            },
+            {
+              "key": "39 project documentation bao-cao-tien-do",
+              "subject": "sync: project documentation bao-cao-tien-do",
+              "commit": "3f16174df255c802fbf6ea5ba762960931c01060"
+            },
+            {
+              "key": "39 project documentation plans",
+              "subject": "sync: project documentation plans",
+              "commit": "c2c63e7fdfd0b14a9ab2cded47f28e8f96ab27b2"
+            },
+            {
+              "key": "39 project documentation qa-round2",
+              "subject": "sync: project documentation qa-round2",
+              "commit": "b5be7fd6c3233e2ad6ab6861c2ec18c2b94428ab"
+            },
+            {
+              "key": "39 project documentation reports",
+              "subject": "sync: project documentation reports",
+              "commit": "ece49269c4d07a309e357d95ee2d6061e93c61f4"
+            },
+            {
+              "key": "39 project documentation runbooks",
+              "subject": "sync: project documentation runbooks",
+              "commit": "1b4018c4cf2495f742c6cf0a55d0083e3d4d5fe8"
+            },
+            {
+              "key": "40 project work notes",
+              "subject": "sync: project work notes",
+              "commit": "5675aee085afc415c4cd46b40fe73a94d076c586"
+            }
+          ],
+          "completed": true,
+          "new_module_commit_count": 65
+        },
+        "documentation_and_log_commits": "pending; no hash recorded",
+        "entire_project_history_complete": false,
+        "student_review_status": "pending",
+        "code_branch_count": 1,
+        "verification_scope": "combined final working-tree state; no claim of full testing per intermediate commit",
+        "provenance_document": "docs/sync/SOURCE_SYNC_2026-11-27.md",
+        "push_verification_status": "not recorded in this log yet"
+      },
+      "work_period": {
+        "start_date": "2026-11-26",
+        "end_date": "2026-11-27"
+      }
+    }
+  ],
+  "evidence_sources": [
+    {
+      "id": "S1",
+      "type": "conversation",
+      "description": "Các lượt người dùng và kết quả công cụ nhìn thấy trong cuộc trò chuyện hiện tại. Không phải bản xuất lịch sử AI toàn dự án."
+    },
+    {
+      "id": "S2",
+      "type": "repository_report",
+      "repository": "pms-system",
+      "path": "docs/reports/reviews/security-code-audit-2026-10-26.md",
+      "lines": "9, 27–34",
+      "git_commit_seen": "8c1d7cc",
+      "description": "Tài liệu ghi nhận Codex Security Deep Scan failed/coverage partial; không có transcript prompt của phiên đó và không được chạy lại trong lần lập nhật ký."
+    },
+    {
+      "id": "S3",
+      "type": "repository_report",
+      "repository": "pms-system",
+      "path": "docs/bao-cao-tien-do/Bao_cao_tuan_03-09_10_2026_Le_Tran_Xuan_Loc.md",
+      "lines": "3–14",
+      "description": "Xác nhận tên người báo cáo; ghi lịch sử bàn giao và lưu ý số commit không tương đương số tính năng/ngày công."
+    },
+    {
+      "id": "S4",
+      "type": "repository_report",
+      "repository": "pms-system",
+      "path": "docs/bao-cao-hoc-phan/Bao_cao_QLDA_LOHA_PMS_Nhom_2.md",
+      "lines": "3–10",
+      "description": "Báo cáo học phần quản lý dự án; nhóm bốn thành viên và GVHD để trống. Không dùng thay thông tin xác nhận nhóm/học phần tiểu luận chuyên ngành hiện tại."
+    },
+    {
+      "id": "S5",
+      "type": "git_metadata_seen",
+      "repository": "pms_project",
+      "description": "Commit và metadata đã xuất hiện trong chat hoặc được đọc trước khi soạn nội dung; không dùng tác giả Git để suy ra ai tự viết từng dòng mã."
+    }
+  ],
+  "current_sync_results_need_update": false,
+  "source_cutoff_date": "2026-11-27",
+  "source_cutoff_note": "Bao gồm các lượt người dùng nhìn thấy đến P036 ngày 27/11/2026; chưa phải toàn bộ lịch sử AI của dự án."
+}

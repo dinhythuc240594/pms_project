@@ -1,0 +1,7 @@
+Mã,Người dùng/thành viên,Ngày giờ thực,Múi giờ,Công cụ,Model/phiên bản,Mục đích/phạm vi,Prompt nguyên văn,Đầu ra AI/đường dẫn,Phần được dùng/sửa/bỏ,Tệp/commit liên quan,Cách kiểm tra thực tế,Kết quả kiểm tra,Hạn chế,Trạng thái bổ sung
+MH001,,,,,,Lịch sử AI tạo mã nguồn trước chat bàn giao hiện có,,,,,,,,Chờ bổ sung
+MH002,,,,,,Lịch sử AI của các thành viên khác trong dự án,,,,,,,,Chờ bổ sung
+MH003,,,,,,Prompt và đầu ra gốc cho audit Codex Security được báo cáo ngày 26/10/2026,,,,,,,Tài liệu nguồn chỉ ghi scan failed/partial,Chờ bổ sung
+MH004,,,,,,Phiên AI ở công cụ hoặc tài khoản khác chưa được cung cấp,,,,,,,,Chờ bổ sung
+MH005,,,,,,Đối chiếu 9 artifact query với lịch sử chat gốc,,,,,,,Timestamp artifact không được tự coi là timestamp chat,Chờ bổ sung
+MH006,,,,,,Sinh viên đối chiếu phiên cập nhật 26–27/11 và việc chia nhỏ commit (A009),,,,,,,"Kết quả kiểm tra đã ghi; cần xác nhận bằng chứng, nhóm commit và phần lịch sử AI còn thiếu",Chờ bổ sung
