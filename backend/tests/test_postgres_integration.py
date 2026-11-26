@@ -9,6 +9,7 @@ from sqlalchemy.exc import DBAPIError
 from pms_api import create_app
 from pms_api.config import postgres_url
 from pms_api.extensions import db
+from tests.schema_fixture import remove_optional_test_schemas, upgrade_test_schema
 
 RUNTIME_URL = os.environ.get("TEST_DATABASE_URL")
 MIGRATION_URL = os.environ.get("TEST_DATABASE_MIGRATION_URL")
@@ -43,6 +44,9 @@ class PostgreSQLIntegrationTests(unittest.TestCase):
         cls.addClassCleanup(cls.migrator.dispose)
 
     def migrate(self, direction, target=None):
+        if direction == "upgrade" and target is None:
+            upgrade_test_schema(self.app)
+            return
         args = ["db", direction] + ([target] if target else [])
         result = self.app.test_cli_runner().invoke(args=args)
         self.assertEqual(
@@ -67,6 +71,7 @@ class PostgreSQLIntegrationTests(unittest.TestCase):
         tables = ",".join('"' + table.name + '"' for table in db.metadata.sorted_tables)
         with self.migrator.begin() as connection:
             connection.execute(text(f"TRUNCATE {tables} CASCADE"))
+        remove_optional_test_schemas(self.app, self.migrator)
         self.migrate("downgrade", "base")
         response = self.app.test_client().get("/api/ready")
         self.assertEqual(response.status_code, 503)
