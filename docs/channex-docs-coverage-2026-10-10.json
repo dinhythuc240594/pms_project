@@ -1,0 +1,1253 @@
+{
+  "reviewedOn": "2026-10-10",
+  "indexUrl": "https://docs.channex.io/llms.txt",
+  "indexedPageCount": 153,
+  "reviewedTextPageCount": 153,
+  "failedPageCount": 0,
+  "remainingPartialPageCount": 0,
+  "scope": "Indexed page text, API operations and schema fields. Repeated OpenAPI/common schema material was compressed during review. Embedded screenshots, videos, linked binaries and external sites were not inspected.",
+  "liveChannexApiTestsPerformed": false,
+  "accountMutationsPerformed": [],
+  "groups": [
+    {
+      "scope": "API v1",
+      "count": 57
+    },
+    {
+      "scope": "Application UI, Google, channel mapping and app guides",
+      "count": 54
+    },
+    {
+      "scope": "General, FOR OTA, channel API examples, retention and PCI",
+      "count": 38
+    },
+    {
+      "scope": "PMS and best practices; Booking.com and Airbnb test accounts",
+      "count": 4
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://docs.channex.io/readme.md",
+      "status": "reviewed",
+      "sourceLineCount": 52,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/about-channex-and-faq.md",
+      "status": "reviewed",
+      "sourceLineCount": 48,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/changelog.md",
+      "status": "reviewed",
+      "sourceLineCount": 1627,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/for-ota/intro.md",
+      "status": "reviewed",
+      "sourceLineCount": 20,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/for-ota/shopping-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 668,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/for-ota/open-channel-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 775,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/api-reference.md",
+      "status": "reviewed",
+      "sourceLineCount": 188,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/rate-limits.md",
+      "status": "reviewed",
+      "sourceLineCount": 44,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/property-size-limits.md",
+      "status": "reviewed",
+      "sourceLineCount": 42,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/hotels-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 106,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/hotels-collection/get-list-of-properties-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 47,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/hotels-collection/get-list-of-property-options-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/hotels-collection/get-property-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 44,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/hotels-collection/create-property-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 72,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/hotels-collection/update-property-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/hotels-collection/delete-property-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/property-users-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 565,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/property-users-collection/get-list-of-property-users-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/property-users-collection/get-property-user-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/property-users-collection/create-property-user-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 13,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/property-users-collection/update-property-user-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 13,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/property-users-collection/delete-property-user-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 12,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/groups-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 653,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/groups-collection/get-list-of-groups-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/groups-collection/get-list-of-group-options-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/groups-collection/get-group-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/groups-collection/create-group-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/groups-collection/update-group-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 13,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/groups-collection/delete-group-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/group-users-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 563,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/room-types-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 725,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/room-types-collection/get-list-of-room-types-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 30,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/room-types-collection/get-list-of-room-type-options-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 12,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/room-types-collection/get-room-type-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 27,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/room-types-collection/create-room-type-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 42,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/room-types-collection/update-room-type-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/room-types-collection/delete-room-type-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/rate-plans-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 1099,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/rate-plans-collection/get-list-of-rate-plans-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 42,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/rate-plans-collection/get-list-of-rate-plan-options-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 14,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/rate-plans-collection/get-rate-plan-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/rate-plans-collection/create-rate-plan-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/rate-plans-collection/update-rate-plan-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 11,
+      "method": "Official HTTPS Markdown fallback; prose and OpenAPI paths/schema fields reviewed; duplicate common schemas compressed",
+      "recoveredWithMarkdown": true,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/rate-plans-collection/delete-rate-plan-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 12,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/ari.md",
+      "status": "reviewed",
+      "sourceLineCount": 764,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/webhook-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 609,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/bookings-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 2199,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/booking-crs-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 325,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/channel-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 385,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/airbnb-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 629,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/photos-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 484,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/hotel-policy-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 556,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/facilities-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 235,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/taxes-and-tax-sets.md",
+      "status": "reviewed",
+      "sourceLineCount": 1176,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/applications-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 253,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/messages-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 1101,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/reviews-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 1117,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/availability-rules-collection.md",
+      "status": "reviewed",
+      "sourceLineCount": 566,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/stripe-tokenization-app.md",
+      "status": "reviewed",
+      "sourceLineCount": 169,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/payment-application-api.md",
+      "status": "reviewed",
+      "sourceLineCount": 848,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/channel-codes.md",
+      "status": "reviewed",
+      "sourceLineCount": 711,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/channel-iframe.md",
+      "status": "reviewed",
+      "sourceLineCount": 178,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/api-v.1-documentation/pms-certification-tests.md",
+      "status": "reviewed",
+      "sourceLineCount": 316,
+      "method": "Official docs via web.open; .md and normal URLs, follow-up line windows where needed",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/agoda.md",
+      "status": "reviewed",
+      "sourceLineCount": 378,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/airbnb.md",
+      "status": "reviewed",
+      "sourceLineCount": 255,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/bed-and-breakfast.it.md",
+      "status": "reviewed",
+      "sourceLineCount": 409,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/bookeasy.md",
+      "status": "reviewed",
+      "sourceLineCount": 420,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/booking.com.md",
+      "status": "reviewed",
+      "sourceLineCount": 471,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/check24.md",
+      "status": "reviewed",
+      "sourceLineCount": 420,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/ctoutvert.md",
+      "status": "reviewed",
+      "sourceLineCount": 464,
+      "method": "read_only_https_markdown",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/edreams.md",
+      "status": "reviewed",
+      "sourceLineCount": 413,
+      "method": "read_only_https_markdown",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/emerging-travel-group-ostrovok.md",
+      "status": "reviewed",
+      "sourceLineCount": 426,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/expedia.md",
+      "status": "reviewed",
+      "sourceLineCount": 434,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/hopper.md",
+      "status": "reviewed",
+      "sourceLineCount": 262,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/hopper-homes.md",
+      "status": "reviewed",
+      "sourceLineCount": 858,
+      "method": "read_only_https_markdown",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/hotelbeds.md",
+      "status": "reviewed",
+      "sourceLineCount": 456,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/hoteltonight.md",
+      "status": "reviewed",
+      "sourceLineCount": 421,
+      "method": "read_only_https_markdown",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/hoterip.md",
+      "status": "reviewed",
+      "sourceLineCount": 392,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/lido.md",
+      "status": "reviewed",
+      "sourceLineCount": 370,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/keytel.md",
+      "status": "reviewed",
+      "sourceLineCount": 437,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/kliknbook.md",
+      "status": "reviewed",
+      "sourceLineCount": 408,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/klook.md",
+      "status": "reviewed",
+      "sourceLineCount": 412,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/mr-and-mrs-smith.md",
+      "status": "reviewed",
+      "sourceLineCount": 391,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/pitchup.md",
+      "status": "reviewed",
+      "sourceLineCount": 453,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/reconline.md",
+      "status": "reviewed",
+      "sourceLineCount": 418,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/roibos.md",
+      "status": "reviewed",
+      "sourceLineCount": 500,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/switzerland-travel-centre.md",
+      "status": "reviewed",
+      "sourceLineCount": 437,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/szallas.md",
+      "status": "reviewed",
+      "sourceLineCount": 452,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/tablet-hotels.md",
+      "status": "reviewed",
+      "sourceLineCount": 454,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/trip-affiliates.md",
+      "status": "reviewed",
+      "sourceLineCount": 400,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/vacanceselect.md",
+      "status": "reviewed",
+      "sourceLineCount": 415,
+      "method": "read_only_https_markdown",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/world2meet.md",
+      "status": "reviewed",
+      "sourceLineCount": 497,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-api-examples/yatra.md",
+      "status": "reviewed",
+      "sourceLineCount": 388,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/guides/pms-integration-guide.md",
+      "status": "reviewed",
+      "sourceLineCount": 144,
+      "method": "Official Markdown text via web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/guides/best-practices-guide.md",
+      "status": "reviewed",
+      "sourceLineCount": 37,
+      "method": "Official Markdown text via web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/guides/test-account-for-booking.com.md",
+      "status": "reviewed",
+      "sourceLineCount": 97,
+      "method": "Official Markdown text via web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/guides/test-accounts-for-airbnb.md",
+      "status": "reviewed",
+      "sourceLineCount": 16,
+      "method": "Official Markdown text via web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/guides/channex-retention-periods.md",
+      "status": "reviewed",
+      "sourceLineCount": 31,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/guides/guide-to-pci.md",
+      "status": "reviewed",
+      "sourceLineCount": 19,
+      "method": "web",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/overview.md",
+      "status": "reviewed",
+      "sourceLineCount": 13,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/dashboard.md",
+      "status": "reviewed",
+      "sourceLineCount": 25,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/properties-and-groups-management.md",
+      "status": "reviewed",
+      "sourceLineCount": 101,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/property-tasks.md",
+      "status": "reviewed",
+      "sourceLineCount": 26,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/rooms-management.md",
+      "status": "reviewed",
+      "sourceLineCount": 121,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/inventory-management.md",
+      "status": "reviewed",
+      "sourceLineCount": 134,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/channels-management.md",
+      "status": "reviewed",
+      "sourceLineCount": 29,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/channel-actions-log.md",
+      "status": "reviewed",
+      "sourceLineCount": 17,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/bookings-management.md",
+      "status": "reviewed",
+      "sourceLineCount": 70,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/availability-rules.md",
+      "status": "reviewed",
+      "sourceLineCount": 56,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/api-key-access.md",
+      "status": "reviewed",
+      "sourceLineCount": 65,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/application-documentation/change-log-feature.md",
+      "status": "reviewed",
+      "sourceLineCount": 34,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/google/google-hotel-ads.md",
+      "status": "reviewed",
+      "sourceLineCount": 131,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/google/google-hotel-ads-1.md",
+      "status": "reviewed",
+      "sourceLineCount": 105,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/agoda.md",
+      "status": "reviewed",
+      "sourceLineCount": 50,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/airbnb.md",
+      "status": "reviewed",
+      "sourceLineCount": 171,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/booking.com.md",
+      "status": "reviewed",
+      "sourceLineCount": 143,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/check24.md",
+      "status": "reviewed",
+      "sourceLineCount": 46,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/crewdogs.md",
+      "status": "reviewed",
+      "sourceLineCount": 40,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/ctrip-trip.com.md",
+      "status": "reviewed",
+      "sourceLineCount": 57,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/despegar.md",
+      "status": "reviewed",
+      "sourceLineCount": 56,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/dida.md",
+      "status": "reviewed",
+      "sourceLineCount": 36,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/emerging-travel.md",
+      "status": "reviewed",
+      "sourceLineCount": 43,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/expedia.md",
+      "status": "reviewed",
+      "sourceLineCount": 61,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/feratel.md",
+      "status": "reviewed",
+      "sourceLineCount": 40,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/getaroom.md",
+      "status": "reviewed",
+      "sourceLineCount": 8,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/glamping-hub.md",
+      "status": "reviewed",
+      "sourceLineCount": 45,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/hipcamp.md",
+      "status": "reviewed",
+      "sourceLineCount": 38,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/hostelworld.md",
+      "status": "reviewed",
+      "sourceLineCount": 35,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/hopper.md",
+      "status": "reviewed",
+      "sourceLineCount": 49,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/hopper-homes.md",
+      "status": "reviewed",
+      "sourceLineCount": 34,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/hotelbeds.md",
+      "status": "reviewed",
+      "sourceLineCount": 83,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/hoteltonight.md",
+      "status": "reviewed",
+      "sourceLineCount": 30,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/hoteltrader.md",
+      "status": "reviewed",
+      "method": "Invoke-WebRequest (public read, HTTP 200)",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/hyperguest.md",
+      "status": "reviewed",
+      "sourceLineCount": 40,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/hrs.md",
+      "status": "reviewed",
+      "sourceLineCount": 46,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/inntopia.md",
+      "status": "reviewed",
+      "sourceLineCount": 54,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/instant-booking-page.md",
+      "status": "reviewed",
+      "sourceLineCount": 53,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/kliknbook.md",
+      "status": "reviewed",
+      "sourceLineCount": 47,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/klook.md",
+      "status": "reviewed",
+      "sourceLineCount": 35,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/mmt.md",
+      "status": "reviewed",
+      "sourceLineCount": 42,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/mg.md",
+      "status": "reviewed",
+      "sourceLineCount": 43,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/smith.md",
+      "status": "reviewed",
+      "sourceLineCount": 44,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/nuitee.md",
+      "status": "reviewed",
+      "sourceLineCount": 30,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/opengds.md",
+      "status": "reviewed",
+      "sourceLineCount": 40,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/pricetravel.md",
+      "status": "reviewed",
+      "method": "Invoke-WebRequest (public read, HTTP 200)",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/roibos.md",
+      "status": "reviewed",
+      "sourceLineCount": 46,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/traveloka.md",
+      "status": "reviewed",
+      "sourceLineCount": 48,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/tiket.md",
+      "status": "reviewed",
+      "sourceLineCount": 38,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/webbeds.md",
+      "status": "reviewed",
+      "sourceLineCount": 44,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/vrbo.md",
+      "status": "reviewed",
+      "sourceLineCount": 72,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/channel-mapping-guides/yatra.md",
+      "status": "reviewed",
+      "sourceLineCount": 40,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/app-guide/apaleo.md",
+      "status": "reviewed",
+      "sourceLineCount": 34,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    },
+    {
+      "url": "https://docs.channex.io/app-guide/pci-app.md",
+      "status": "reviewed",
+      "sourceLineCount": 34,
+      "method": "web.run",
+      "recoveredWithMarkdown": false,
+      "imagesInspected": false
+    }
+  ]
+}
