@@ -22,11 +22,11 @@ export const HOTEL_CURRENCIES = [
   { code: 'INR', label: 'INR — Rupee Ấn Độ', locale: 'en-IN' },
   { code: 'AED', label: 'AED — Dirham UAE', locale: 'en-AE' },
   { code: 'TWD', label: 'TWD — Tân Đài tệ', locale: 'zh-TW' },
-];
+]
 
-export const HOTEL_CURRENCY_CODES = HOTEL_CURRENCIES.map(currency => currency.code);
-const supportedCodes = new Set(HOTEL_CURRENCY_CODES);
+export const HOTEL_CURRENCY_CODES = HOTEL_CURRENCIES.map((currency) => currency.code)
+const supportedCodes = new Set(HOTEL_CURRENCY_CODES)
 
 export function isHotelCurrency(value) {
-  return supportedCodes.has(value);
+  return supportedCodes.has(value)
 }
