@@ -7,20 +7,31 @@ are half-open. Voucher quotas are consumed only by a committed new reservation,
 including zero-value redemptions; cancellation does not restore a quota.
 """
 
+from collections import defaultdict
 from datetime import date
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from zoneinfo import ZoneInfo
 
-from pms_api.ports import runtime
+from sqlalchemy import select
 
-from ..core_models import utcnow
+from ..core_models import Tenant, utcnow
 from ..currencies import is_hotel_currency
+from ..extensions import db
 from ..security import ApiError
-from .domain import CENT as CENT
-from .domain import LIMIT as LIMIT
-from .domain import allocate_discount as allocate_discount
-from .domain import eligible_promotion as eligible_promotion
-from .domain import rounded as rounded
+from .models import ExchangeRate, PricingRule, Promotion, Voucher, VoucherRedemption
+
+CENT = Decimal("0.0001")
+LIMIT = Decimal("999999999999999.9999")
+
+
+def rounded(value):
+    try:
+        result = Decimal(str(value)).quantize(CENT, rounding=ROUND_HALF_UP)
+        if not result.is_finite() or abs(result) > LIMIT:
+            raise ValueError
+        return result
+    except (InvalidOperation, ValueError, TypeError):
+        raise ApiError(422, "invalid_amount", "Giá trị tiền vượt giới hạn.") from None
 
 
 def business_date(tenant):
@@ -32,7 +43,7 @@ def business_date(tenant):
 
 
 def exchange_snapshot(tenant_id, currency=None):
-    tenant = runtime().pricing.tenant(tenant_id)
+    tenant = db.session.get(Tenant, tenant_id)
     base = (tenant.settings or {}).get("currency", "VND")
     currency = currency or base
     if not is_hotel_currency(currency) or not is_hotel_currency(base):
@@ -40,7 +51,13 @@ def exchange_snapshot(tenant_id, currency=None):
     if currency == base:
         return currency, base, Decimal(1)
     require_feature("MULTI_CURRENCY")
-    row = runtime().pricing.exchange_rate(tenant_id, currency, base)
+    row = db.session.scalar(
+        select(ExchangeRate).where(
+            ExchangeRate.tenant_id == tenant_id,
+            ExchangeRate.currency == currency,
+            ExchangeRate.base_currency == base,
+        )
+    )
     if not row:
         raise ApiError(409, "exchange_rate_required", "Cần khai báo tỷ giá cho tiền tệ đã chọn.")
     return currency, base, row.rate
@@ -81,10 +98,64 @@ def money_json(row):
     }
 
 
-def promotional_discount(policy, nightly):
-    from .strategies import promotion_strategy
+def allocate_discount(prices, discount):
+    """Allocate with an exact total; capped rounding residue goes to the last rows."""
+    prices = [rounded(price) for price in prices]
+    total = sum(prices, Decimal(0))
+    discount = min(max(rounded(discount), Decimal(0)), total)
+    if total == 0:
+        return prices
+    remaining = discount
+    allocations = []
+    for price in prices:
+        share = min(price, remaining, rounded(discount * price / total))
+        allocations.append(share)
+        remaining -= share
+    for index in reversed(range(len(prices))):
+        extra = min(prices[index] - allocations[index], remaining)
+        allocations[index] += extra
+        remaining -= extra
+    return [price - allocation for price, allocation in zip(prices, allocations)]
 
-    return promotion_strategy(policy["kind"]).discount(policy, nightly)
+
+def promotional_discount(policy, nightly):
+    if policy["kind"] != "staypay":
+        return rounded(
+            sum((Decimal(n["price"]) for n in nightly), Decimal(0))
+            * Decimal(policy["percent"])
+            / 100
+        )
+    rooms = defaultdict(list)
+    for night in nightly:
+        rooms[night["room"]].append(Decimal(night["price"]))
+    return sum(
+        (
+            sum(
+                sorted(prices)[
+                    : len(prices) // policy["stayN"] * (policy["stayN"] - policy["payM"])
+                ],
+                Decimal(0),
+            )
+            for prices in rooms.values()
+        ),
+        Decimal(0),
+    )
+
+
+def eligible_promotion(policy, start, end, today):
+    nights = (end - start).days
+    advance = (start - today).days
+    if nights < policy["minNights"] or advance < 0:
+        return False
+    if policy.get("startDate") and start < date.fromisoformat(policy["startDate"]):
+        return False
+    if policy.get("endDate") and end > date.fromisoformat(policy["endDate"]):
+        return False
+    if policy["kind"] == "staypay":
+        return nights >= policy["stayN"]
+    return advance >= policy["minDaysBefore"] and (
+        policy["maxDaysBefore"] is None or advance <= policy["maxDaysBefore"]
+    )
 
 
 def apply_pricing(
@@ -98,11 +169,17 @@ def apply_pricing(
     voucher_policy=None,
     redeem=False,
 ):
-    tenant = runtime().pricing.tenant(tenant_id)
+    tenant = db.session.get(Tenant, tenant_id)
     today = business_date(tenant)
     currency, base, rate = exchange_snapshot(tenant_id, currency)
     nights = (end - start).days
-    rules = runtime().pricing.rules(tenant_id)
+    rules = list(
+        db.session.scalars(
+            select(PricingRule)
+            .where(PricingRule.tenant_id == tenant_id, PricingRule.active.is_(True))
+            .order_by(PricingRule.priority.desc(), PricingRule.id)
+        )
+    )
     priced, applied = [], {}
     for raw in nightly:
         item = dict(raw)
@@ -145,9 +222,12 @@ def apply_pricing(
     elif voucher_code:
         if not isinstance(voucher_code, str) or len(voucher_code.strip()) > 40:
             raise ApiError(422, "invalid_voucher", "Mã voucher không hợp lệ.")
-        voucher = runtime().pricing.voucher_by_code(
-            tenant_id, voucher_code.strip().upper(), locked=redeem
+        statement = select(Voucher).where(
+            Voucher.tenant_id == tenant_id, Voucher.code == voucher_code.strip().upper()
         )
+        if redeem:
+            statement = statement.with_for_update().execution_options(populate_existing=True)
+        voucher = db.session.scalar(statement)
         if not voucher or not voucher.active:
             raise ApiError(422, "invalid_voucher", "Voucher không tồn tại hoặc đã ngừng sử dụng.")
         if voucher.usage_limit is not None and voucher.used_count >= voucher.usage_limit:
@@ -180,7 +260,13 @@ def apply_pricing(
         from ..subscriptions import feature_enabled
 
         promotions = (
-            runtime().pricing.promotions(tenant_id) if feature_enabled("VOUCHER_PROMO") else []
+            db.session.scalars(
+                select(Promotion)
+                .where(Promotion.tenant_id == tenant_id, Promotion.active.is_(True))
+                .order_by(Promotion.id)
+            )
+            if feature_enabled("VOUCHER_PROMO")
+            else []
         )
         for promotion in promotions:
             policy = {
@@ -232,10 +318,19 @@ def redeem_voucher(tenant_id, reservation_id, quote):
     policy = quote["pricingSnapshot"]["discount"]
     if not policy or policy["kind"] != "voucher":
         return
-    row = runtime().pricing.voucher_by_id(tenant_id, policy["id"])
+    row = db.session.scalar(
+        select(Voucher)
+        .where(Voucher.tenant_id == tenant_id, Voucher.id == policy["id"])
+        .with_for_update()
+    )
     if row.usage_limit is not None and row.used_count >= row.usage_limit:
         raise ApiError(409, "voucher_exhausted", "Voucher đã hết lượt sử dụng.")
     row.used_count += 1
-    runtime().pricing.add_redemption(
-        tenant_id, row.id, reservation_id, Decimal(quote["pricingSnapshot"]["discountBase"])
+    db.session.add(
+        VoucherRedemption(
+            tenant_id=tenant_id,
+            voucher_id=row.id,
+            reservation_id=reservation_id,
+            discount=Decimal(quote["pricingSnapshot"]["discountBase"]),
+        )
     )

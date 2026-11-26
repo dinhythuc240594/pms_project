@@ -96,7 +96,9 @@ class PricingReportsTests(DomainTestCase):
         self.assertEqual(base["summary"]["closing"], "57.5000")
         self.assertEqual(base["snapshot"]["deposits"], "57.5000")
         self.assertEqual(base["snapshot"]["debt"], "162.5000")
-        self.assertEqual(base["definitions"]["moneyBasis"], "i18n:reports.definitions.moneyBasisBase")
+        self.assertEqual(
+            base["definitions"]["moneyBasis"], "i18n:reports.definitions.moneyBasisBase"
+        )
         self.assertEqual(self.report("revenue", "&basis=base")["rows"][0]["amount"], "200.0000")
         self.assertEqual(self.report("revenue", "&currency=USD")["rows"][0]["amount"], "4.0000")
         # The requested base currency filters stored baseCurrency, not original USD.
@@ -117,7 +119,7 @@ class PricingReportsTests(DomainTestCase):
             "POST", f"/reservations/{usd['id']}/status", {"status": "IN_HOUSE"}
         )
         self.assertEqual(checked_in.status_code, 200, checked_in.json)
-        with patch("pms_api.reports.application.utcnow", return_value=utcnow() + timedelta(days=1)):
+        with patch("pms_api.reports.routes.utcnow", return_value=utcnow() + timedelta(days=1)):
             served = self.report(query="&basis=base")
         self.assertEqual(served["summary"]["servedNights"], 1)
         self.assertEqual(served["summary"]["roomRevenue"], "100.0000")
@@ -212,20 +214,20 @@ class PricingReportsTests(DomainTestCase):
         self.prepare_fx()
         row = self.booking("101", "USD")
         clock = datetime.combine(self.day, datetime.min.time(), tzinfo=UTC) + timedelta(hours=3)
-        with patch("pms_api.bookings.application.utcnow", return_value=clock):
+        with patch("pms_api.bookings.routes.utcnow", return_value=clock):
             extra = self.request(
                 "POST", f"/reservations/{row['id']}/charges", {"serviceId": "service-a"}, key=uid()
             )
             self.assertEqual(extra.status_code, 201, extra.json)
             payment = self.pay(row, "4.8")
-        with patch("pms_api.bookings.application.utcnow", return_value=clock + timedelta(hours=1)):
+        with patch("pms_api.bookings.routes.utcnow", return_value=clock + timedelta(hours=1)):
             for status in ("IN_HOUSE", "CHECKED_OUT"):
                 result = self.request(
                     "POST", f"/reservations/{row['id']}/status", {"status": status}
                 )
                 self.assertEqual(result.status_code, 200, result.json)
         self.request("PUT", "/pricing/exchange-rates", {"currency": "USD", "rate": "50"})
-        with patch("pms_api.bookings.application.utcnow", return_value=clock + timedelta(hours=2)):
+        with patch("pms_api.bookings.routes.utcnow", return_value=clock + timedelta(hours=2)):
             for adjustment in (
                 {"type": "credit", "amount": "0.4", "paymentId": payment["id"]},
                 {"type": "debit", "amount": "0.2", "methodId": "cash-a", "fundId": self.usd_fund},
