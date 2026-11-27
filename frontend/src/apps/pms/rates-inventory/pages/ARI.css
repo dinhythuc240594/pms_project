@@ -1,56 +1,523 @@
-.pms-legacy-timeline { --ari-room-column: 250px; }
-.ari-toolbar { flex-wrap: wrap; gap: 16px; padding: 12px 16px; }
-.ari-toolbar-actions { flex-wrap: wrap; gap: 12px; min-width: 0; max-width: 100%; }
-.ari-date-label { min-width: 0; padding: 0 16px; text-align: center; font-size: 14px; }
-.ari-date-cell { padding: 8px 0; }
-.ari-search { width: 220px; min-width: 0; }
-.ari-search input { width: 100%; min-width: 0; font-size: 14px; }
-.pms-original.pms-legacy-timeline .pms-legacy-chart { min-width: 0; flex-wrap: nowrap; gap: 0; margin: 12px 0; overscroll-behavior-x: contain; }
-.pms-legacy-timeline .pms-legacy-chart .ari-chart-row { min-width: calc(var(--ari-room-column) + 1400px); flex-wrap: nowrap; gap: 0; }
-.ari-room-column { width: var(--ari-room-column); }
-.ari-room-heading { padding: 12px; background: #f9fafb; }
-.ari-room-type, .ari-room-label { padding: 0 12px; }
-.ari-room-type { align-items: center; justify-content: space-between; }
-.ari-room-label > div { min-width: 0; max-width: 100%; }
-.ari-room-dot { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: #10b981; }
-.ari-room-blocked { background: #fff1f2; }
-.ari-room-blocked .ari-room-dot { background: #be123c; }
-.ari-room-caption { min-width: 0; }
-.ari-room-caption > span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ari-room-caption small { display: block; color: #9f1239; font-size: 10px; line-height: 1.3; }
-.ari-cell-blocked { display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(135deg, #fff1f2, #fff1f2 6px, #ffe4e6 6px, #ffe4e6 12px); }
-.ari-blocked-caption { color: #9f1239; font-size: 10px; text-align: center; padding: 0 4px; }
-.ari-booking { top: 2px; height: 44px; }
-.ari-mobile-hint { display: none; }
-@media (pointer: coarse), (max-width: 768px) {
-  .ari-toolbar-actions button { min-width: 44px; min-height: 44px; }
-  .ari-search input, .ari-room-type-filter { min-height: 44px; font-size: 16px; }
+.ari-page {
+  --ari-room-width: 176px;
+  --ari-min-day-width: 104px;
+  --ari-line: var(--border-color, #dce5ee);
+  --ari-muted: var(--text-secondary, #56677a);
+  --ari-blue: var(--accent-primary, #086ab4);
+  --ari-surface: var(--bg-card, #fff);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+  color: var(--text-primary, #122b44);
 }
+
+.pms-content:has(> .ari-page) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ari-toolbar,
+.ari-toolbar-actions,
+.ari-context,
+.ari-shortcuts,
+.ari-legend,
+.ari-search-results,
+.ari-search-modes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ari-toolbar,
+.ari-context,
+.ari-search-results {
+  justify-content: space-between;
+}
+
+.ari-toolbar h1 {
+  margin: 0;
+  font-size: clamp(18px, 2vw, 25px);
+  line-height: 1.3;
+  font-weight: 650;
+}
+
+.ari-toolbar-actions button,
+.ari-shortcuts a,
+.ari-search-modes button,
+.ari-no-match button,
+.ari-room-type-filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 6px 10px;
+  border: 1px solid var(--ari-line);
+  border-radius: 8px;
+  background: var(--ari-surface);
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ari-date-navigation,
+.ari-range-switch {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--ari-line);
+  border-radius: 9px;
+  background: var(--ari-surface);
+}
+
+.ari-date-navigation button,
+.ari-range-switch button {
+  min-width: 38px;
+  min-height: 38px;
+  border: 0;
+}
+
+.ari-date-label {
+  padding: 0 5px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.ari-range-switch button[aria-pressed='true'],
+.ari-search-modes button[aria-pressed='true'] {
+  background: #eaf4fc;
+  color: #123957;
+  box-shadow: inset 0 0 0 1px #b7d5ec;
+}
+
+.ari-toolbar-actions .ari-today-button {
+  color: #fff;
+  background: var(--ari-blue);
+  border-color: var(--ari-blue);
+}
+
+.ari-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 214px;
+  min-width: 0;
+  min-height: 40px;
+  padding-inline: 10px;
+  border: 1px solid var(--ari-line);
+  border-radius: 8px;
+  background: var(--ari-surface);
+  color: var(--ari-muted);
+}
+
+.ari-search svg,
+.ari-balance-icon {
+  flex-shrink: 0;
+}
+
+.ari-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-primary, #122b44);
+  font: inherit;
+  font-size: 13px;
+}
+
+.ari-search:focus-within {
+  outline: 2px solid var(--ari-blue);
+  outline-offset: 2px;
+}
+
+.ari-page .ari-search input:focus-visible {
+  outline: none;
+}
+
+.ari-shortcuts a {
+  color: #123957;
+}
+
+.ari-shortcuts strong {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: #edf3f8;
+  font-variant-numeric: tabular-nums;
+}
+
+.ari-legend {
+  column-gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ari-muted);
+  font-size: 12px;
+}
+
+.ari-legend li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ari-legend li > span {
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--ari-line);
+  border-radius: 3px;
+  background-color: var(--ari-booking-bg);
+  border-color: var(--ari-booking-border, var(--ari-line));
+}
+
+.ari-room-type-filter {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.ari-search-results {
+  padding: 8px 12px;
+  border: 1px solid var(--ari-line);
+  border-radius: 8px;
+  background: var(--ari-surface);
+  font-size: 13px;
+}
+
+.ari-search-results p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.ari-search-modes button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ari-chart {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 156px;
+  overflow: auto;
+  overscroll-behavior-inline: contain;
+  border: 1px solid var(--ari-line);
+  border-radius: 10px;
+  background: var(--ari-surface);
+}
+
+.ari-chart-row {
+  display: grid;
+  grid-template-columns: var(--ari-room-width) minmax(0, 1fr);
+  min-width: calc(var(--ari-room-width) + var(--ari-days) * var(--ari-min-day-width));
+  border-bottom: 1px solid var(--ari-line);
+}
+
+.ari-chart-header {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background: #f7f9fc;
+}
+
+.ari-room-column {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 7px 11px;
+  border-inline-end: 1px solid var(--ari-line);
+  background: var(--ari-surface);
+}
+
+.ari-room-heading,
+.ari-room-type {
+  background: #f7f9fc;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.ari-room-type {
+  justify-content: space-between;
+}
+
+.ari-room-type span,
+.ari-room-caption {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ari-room-type span + span {
+  color: var(--ari-muted);
+  font-weight: 500;
+}
+
+.ari-day-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--ari-days), minmax(0, 1fr));
+  min-width: 0;
+}
+
+.ari-date-cell,
+.ari-availability,
+.ari-day {
+  min-width: 0;
+  border-inline-end: 1px solid var(--ari-line);
+}
+
+.ari-day-grid > :last-of-type:is(.ari-date-cell, .ari-availability, .ari-day) {
+  border-inline-end: 0;
+}
+
+.ari-date-cell {
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  padding: 6px 2px;
+  color: var(--ari-muted);
+  font-size: 12px;
+}
+
+.ari-date-cell strong {
+  color: var(--text-primary, #122b44);
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ari-day-weekend {
+  background-color: #f5f7f9;
+}
+
+.ari-day-today {
+  background-color: #f1f7fd;
+  box-shadow: inset 2px 0 #8bbbe1;
+}
+
+.ari-date-cell.ari-day-today,
+.ari-date-cell.ari-day-today strong {
+  color: #07578f;
+}
+
+.ari-type-row {
+  min-height: 36px;
+  background: #f7f9fc;
+}
+
+.ari-availability {
+  display: grid;
+  place-items: center;
+  color: var(--ari-muted);
+  font-size: 12px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.ari-room-row {
+  min-height: 48px;
+}
+
+.ari-room-caption strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+
+.ari-room-caption small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ari-muted);
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.ari-room-dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #6d889f;
+}
+
+.ari-room-blocked {
+  background: #f1f3f5;
+  color: #374151;
+}
+
+.ari-room-blocked .ari-room-dot {
+  background: #66788b;
+}
+
+.ari-room-match {
+  box-shadow: inset 3px 0 var(--ari-blue);
+}
+
+.ari-room-track {
+  position: relative;
+}
+
+.ari-cell-blocked {
+  display: grid;
+  place-items: center;
+  background-color: #f1f3f5;
+  background-image: repeating-linear-gradient(135deg, transparent 0 5px, #e8ebef 5px 9px);
+  color: #374151;
+}
+
+.ari-blocked-caption {
+  padding: 0 4px;
+  font-size: 10px;
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.ari-tone-confirmed {
+  --ari-booking-bg: #eaf4fc;
+  --ari-booking-text: #123957;
+  --ari-booking-border: #a8cbe7;
+}
+
+.ari-tone-in-house {
+  --ari-booking-bg: #e7f4ef;
+  --ari-booking-text: #174737;
+  --ari-booking-border: #acd5c5;
+}
+
+.ari-booking {
+  position: absolute;
+  inset-block: 3px;
+  inset-inline-start: calc(var(--ari-start) * 100% / var(--ari-days) + 2px);
+  width: calc(var(--ari-span) * 100% / var(--ari-days) - 4px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 0 6px;
+  overflow: hidden;
+  border: 1px solid var(--ari-booking-border);
+  border-radius: 6px;
+  background: var(--ari-booking-bg);
+  color: var(--ari-booking-text);
+  font: inherit;
+  font-size: 13px;
+  text-align: start;
+  cursor: pointer;
+}
+
+.ari-booking-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 650;
+}
+
+.ari-balance-icon {
+  color: #87520d;
+}
+
+.ari-booking:hover {
+  border-color: currentColor;
+}
+
+.ari-booking.is-match {
+  box-shadow: inset 0 0 0 1px var(--ari-blue);
+  border-color: var(--ari-blue);
+}
+
+.ari-page .ari-booking:focus-visible {
+  z-index: 1;
+  outline: 2px solid #122b44;
+  outline-offset: -2px;
+}
+
+.ari-no-match {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  color: var(--ari-muted);
+  font-size: 13px;
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  .ari-page {
+    --ari-room-width: 144px;
+    --ari-min-day-width: 88px;
+  }
+}
+
 @media (max-width: 768px) {
-  .pms-legacy-timeline { --ari-room-column: 112px; }
-  .pms-legacy-timeline .ari-toolbar-actions { width: 100%; min-width: 0; flex-wrap: wrap; }
-  .ari-date-navigation { flex: 1 1 100%; justify-content: space-between; min-width: 0; }
-  .ari-date-label { padding: 0 8px; }
-  .ari-search { flex: 1 1 100%; width: 100%; }
-  .ari-room-heading { padding: 12px 8px; }
-  .ari-room-type, .ari-room-label { padding: 0 8px; }
-  .ari-room-type { flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; }
-  .ari-room-type > span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .ari-mobile-hint { display: block; margin: 12px 0 0; font-size: 12px; line-height: 1.5; color: var(--text-secondary, #5a7084); }
+  .ari-page {
+    --ari-room-width: 96px;
+    --ari-min-day-width: 78px;
+    gap: 8px;
+  }
+
+  .ari-toolbar-actions {
+    width: 100%;
+  }
+
+  .ari-search {
+    flex: 1 1 190px;
+  }
+
+  .ari-room-column {
+    padding-inline: 7px;
+    gap: 5px;
+  }
+
+  .ari-room-type {
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .ari-room-type span {
+    max-width: 100%;
+  }
 }
-@media (pointer: coarse) and (max-height: 500px) and (orientation: landscape) {
-  .pms-legacy-timeline { --ari-room-column: 112px; }
-  .pms-original.pms-legacy-timeline .ari-toolbar { padding: 12px; gap: 8px; }
-  .pms-shell .pms-legacy-timeline .ari-toolbar h1 { font-size: 18px !important; }
-  .ari-toolbar > div:first-child > p, .ari-mobile-hint { display: none; }
-  .pms-original.pms-legacy-timeline .ari-toolbar-actions { width: 100%; flex-wrap: nowrap; gap: 8px; }
-  .ari-date-navigation { flex: 0 0 auto; }
-  .ari-date-label { padding: 0 4px; font-size: 12px; }
-  .ari-search { flex: 1 1 120px; width: 120px; }
-  .pms-original.pms-legacy-timeline .pms-legacy-chart { margin: 12px 0; }
-  .ari-date-cell { padding: 4px 0; }
-  .ari-room-heading { padding: 8px; }
-  .ari-room-type { flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; }
-  .ari-room-type > span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .ari-room-type, .ari-room-label { padding: 0 8px; }
+
+@media (max-width: 400px) {
+  .ari-page {
+    --ari-min-day-width: 72px;
+  }
+
+  .ari-search {
+    flex-basis: 120px;
+  }
+}
+
+@media (max-width: 768px), (pointer: coarse) {
+  .ari-toolbar-actions button,
+  .ari-shortcuts a,
+  .ari-search-modes button,
+  .ari-no-match button,
+  .ari-room-type-filter,
+  .ari-search {
+    min-height: 44px;
+  }
+
+  .ari-search input,
+  .ari-room-type-filter {
+    font-size: 16px;
+  }
 }

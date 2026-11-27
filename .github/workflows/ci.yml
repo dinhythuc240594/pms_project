@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.14.6'
+          cache: pip
+          cache-dependency-path: backend/requirements*.txt
+      - name: Update installer from a verified wheel
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements-installer.txt
+      - name: Install isolated audit tool with verified hashes
+        run: |
+          python -m venv "$RUNNER_TEMP/pms-audit"
+          python -m pip --python "$RUNNER_TEMP/pms-audit/bin/python" install --require-hashes --only-binary=:all: -r requirements-audit.txt
+      - name: Audit Python application and audit-tool dependencies
+        run: |
+          "$RUNNER_TEMP/pms-audit/bin/python" -m pip_audit --disable-pip --require-hashes --strict --progress-spinner off -r requirements-dev.txt
+          "$RUNNER_TEMP/pms-audit/bin/python" -m pip_audit --disable-pip --require-hashes --strict --progress-spinner off -r requirements-audit.txt
+      - name: Install application dependencies with verified hashes
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements-dev.txt
+      - run: python -m pip check
+      - run: python -m ruff format --check .
+      - run: python -m ruff check .
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: '24.18.0'
+      - name: Start isolated PostgreSQL with a fresh ephemeral password
+        shell: bash
+        run: |
+          password="$(python -c 'import secrets; print(secrets.token_urlsafe(32))')"
+          echo "::add-mask::$password"
+          echo "CI_DATABASE_ADMIN_URL=postgresql://postgres:$password@127.0.0.1:5432/postgres" >> "$GITHUB_ENV"
+          export POSTGRES_PASSWORD="$password"
+          docker run --name pms-ci-db --detach --publish 127.0.0.1:5432:5432 --env POSTGRES_PASSWORD postgres:18@sha256:edb0c08dc33befd0262ab3b5cf1c4f3f8cfd8b09e88c05b45adee29d6761ddb6
+          for attempt in {1..30}; do
+            if docker exec pms-ci-db pg_isready -U postgres; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Start local Channex HTTP simulation
+        shell: bash
+        run: |
+          PORT=49123 node ../postman/mocks/channex-booking-import.js > "$RUNNER_TEMP/channex-simulation.log" 2>&1 &
+          echo "CHANNEX_SIMULATION_PID=$!" >> "$GITHUB_ENV"
+          echo "CHANNEX_SIMULATION_URL=http://127.0.0.1:49123/api/v1" >> "$GITHUB_ENV"
+          curl --silent --show-error --fail --retry 10 --retry-delay 1 --retry-connrefused \
+            --connect-timeout 1 --max-time 2 --header 'user-api-key: fixture-api-key' \
+            http://127.0.0.1:49123/api/v1/bookings/00000000-0000-0000-0000-000000000004 > /dev/null
+      - name: Migrations, non-superuser RLS and required domain tests
+        run: python scripts/ci_database.py
+      - name: Stop local Channex HTTP simulation
+        if: always() && env.CHANNEX_SIMULATION_PID != ''
+        run: kill "$CHANNEX_SIMULATION_PID"
+      - name: Remove isolated PostgreSQL
+        if: always()
+        run: docker rm --force pms-ci-db
+
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: '24.18.0'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Verify pinned npm version
+        run: |
+          expected="$(node -p "require('./package.json').packageManager.slice(4)")"
+          test "$(npm --version)" = "$expected"
+      - run: npm ci --ignore-scripts
+      - run: npm audit --package-lock-only --audit-level=high
+      - run: npm audit signatures
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build

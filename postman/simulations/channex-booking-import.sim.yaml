@@ -1,0 +1,5 @@
+simulation: channex-booking-import
+routing: path
+mocks:
+  - routeKey: channex
+    path: ../mocks/channex-booking-import.js

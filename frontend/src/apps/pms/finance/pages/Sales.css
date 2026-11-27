@@ -1,0 +1,114 @@
+/* POS editor only. The invoice comes first in the DOM so phones and keyboard
+   users reach the cart before the catalog; wide screens place the catalog left. */
+.pms-domain-page .domain-grid.pos-workspace {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'invoice' 'catalog';
+}
+.pms-domain-page .pos-workspace > .pos-invoice {
+  grid-area: invoice;
+}
+.pms-domain-page .pos-workspace > .pos-catalog {
+  grid-area: catalog;
+}
+.pms-domain-page .pos-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.pms-domain-page .pos-service-grid button {
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.pms-domain-page .pos-service-pager {
+  margin: 0;
+}
+/* The shared panel's overflow:auto would make the catalog its own (non-scrolling)
+   scroll container and pin the sticky heading to it; let the page scroll it instead.
+   The catalog holds no wide tables, so nothing needs the panel's own overflow. */
+.pms-domain-page .pos-workspace > .domain-panel.pos-catalog {
+  overflow: visible;
+}
+.pms-domain-page .pos-catalog-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 8px 0;
+  background: var(--bg-surface);
+}
+.pms-domain-page .pos-catalog-head h2 {
+  margin: 0;
+}
+.pms-domain-page .pos-catalog-head button {
+  white-space: nowrap;
+}
+.pms-domain-page .pos-draft-summary {
+  scroll-margin: 16px;
+}
+/* Booking choice: long option labels and full IDs must not widen the page at 320px. */
+.pms-domain-page .pos-booking-field {
+  min-width: 0;
+  max-width: 100%;
+}
+.pms-domain-page .pos-booking-field input,
+.pms-domain-page .pos-booking-field select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+}
+.pms-domain-page .pos-booking-status,
+.pms-domain-page .pos-booking-warning {
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
+}
+.pms-domain-page .pos-booking-preview {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 12px;
+  margin: 8px 0 0;
+}
+.pms-domain-page .pos-booking-preview dt {
+  font-weight: 600;
+}
+.pms-domain-page .pos-booking-preview dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.pms-domain-page .pos-list-error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+.pms-domain-page .pos-list-error .domain-error {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 479px) {
+  .pms-domain-page .pos-booking-preview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .pms-domain-page .pos-booking-preview dd + dt {
+    margin-top: 6px;
+  }
+}
+
+@media (min-width: 900px) {
+  .pms-domain-page .domain-grid.pos-workspace.pos-has-catalog {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: 'catalog invoice';
+  }
+}

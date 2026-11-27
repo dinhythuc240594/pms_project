@@ -32,7 +32,10 @@ class NightAudit(db.Model):
     reason = db.Column(db.String(1000), nullable=False)
     snapshot = db.Column(JSONB, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False, default=utcnow)
-    __table_args__ = (UniqueConstraint("tenant_id", "id"), UniqueConstraint("tenant_id", "business_date"))
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "id"),
+        UniqueConstraint("tenant_id", "business_date"),
+    )
 
 
 class RevenueRecognition(db.Model):
@@ -52,5 +55,7 @@ class RevenueRecognition(db.Model):
     __table_args__ = (
         UniqueConstraint("tenant_id", "id"),
         UniqueConstraint("tenant_id", "audit_id", "source_kind", "source_id"),
-        ForeignKeyConstraint(["tenant_id", "audit_id"], ["night_audits.tenant_id", "night_audits.id"]),
+        ForeignKeyConstraint(
+            ["tenant_id", "audit_id"], ["night_audits.tenant_id", "night_audits.id"]
+        ),
     )

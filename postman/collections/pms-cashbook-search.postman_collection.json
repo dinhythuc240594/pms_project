@@ -1,0 +1,416 @@
+{
+  "info": {
+    "name": "PMS cashbook search — local contract",
+    "description": "Calls the actual CashbookView against a synthetic DB session and serializer. Does not verify PostgreSQL, authentication, real data or concurrency. Local only; run with --no-report-events.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:5224"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (pm.variables.get('baseUrl') !== 'http://127.0.0.1:5224') throw new Error('This synthetic contract collection only runs against its loopback harness');"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Unfiltered baseline: 1000 period entries, 20 per page",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&pageSize=20"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Unfiltered matching total and page size', () => { pm.expect(body.pagination.totalItems).to.eql(1000); pm.expect(body.ledger).to.have.lengthOf(20); });",
+              "pm.test('Needle record is absent from unfiltered first page', () => pm.expect(body.ledger.map(row => row.id)).not.to.include('entry-0001'));",
+              "pm.test('Exact period aggregates and nonempty fund balance', () => { pm.expect(body.summary.opening).to.eql('100.0000'); pm.expect(body.summary.income).to.eql('999.0000'); pm.expect(body.summary.outflow).to.eql('2.0000'); pm.expect(body.summary.closing).to.eql('1097.0000'); pm.expect(body.fundBalances[0].balance).to.eql('777.0000'); });",
+              "pm.test('No search metadata when q is absent', () => pm.expect(body).not.to.have.property('search'));",
+              "pm.collectionVariables.set('baselineSummary', JSON.stringify(body.summary)); pm.collectionVariables.set('baselineFunds', JSON.stringify(body.fundBalances));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Empty query stays compatible",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q="
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('No search metadata and all period rows remain', () => { pm.expect(body).not.to.have.property('search'); pm.expect(body.pagination.totalItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Whitespace query stays compatible",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=%20%20"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('No search metadata and all period rows remain', () => { pm.expect(body).not.to.have.property('search'); pm.expect(body.pagination.totalItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Case-insensitive whole-period search finds a record beyond the first page",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=NEEDLE-token"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Exact expected record and matching count', () => { pm.expect(body.ledger.map(row => row.id)).to.deep.eql(['entry-0001']); pm.expect(body.pagination.totalItems).to.eql(1); });",
+              "pm.test('Search scope and full-period count are explicit', () => { pm.expect(body.search.scope).to.eql('ledger_entries'); pm.expect(body.search.summaryFiltered).to.eql(false); pm.expect(body.search.totalPeriodItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Precomposed Unicode matches decomposed description",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=CAF%C3%89"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Exact expected record and matching count', () => { pm.expect(body.ledger.map(row => row.id)).to.deep.eql(['entry-0003']); pm.expect(body.pagination.totalItems).to.eql(1); });",
+              "pm.test('Search scope and full-period count are explicit', () => { pm.expect(body.search.scope).to.eql('ledger_entries'); pm.expect(body.search.summaryFiltered).to.eql(false); pm.expect(body.search.totalPeriodItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Decomposed Unicode query matches the same record",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=CAFE%CC%81"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Exact expected record and matching count', () => { pm.expect(body.ledger.map(row => row.id)).to.deep.eql(['entry-0003']); pm.expect(body.pagination.totalItems).to.eql(1); });",
+              "pm.test('Search scope and full-period count are explicit', () => { pm.expect(body.search.scope).to.eql('ledger_entries'); pm.expect(body.search.summaryFiltered).to.eql(false); pm.expect(body.search.totalPeriodItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Percent and underscore are literal characters",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=%25_"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Exact expected record and matching count', () => { pm.expect(body.ledger.map(row => row.id)).to.deep.eql(['entry-0002']); pm.expect(body.pagination.totalItems).to.eql(1); });",
+              "pm.test('Search scope and full-period count are explicit', () => { pm.expect(body.search.scope).to.eql('ledger_entries'); pm.expect(body.search.summaryFiltered).to.eql(false); pm.expect(body.search.totalPeriodItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Partial booking reference searches real IDs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=oking-0001"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Exact expected record and matching count', () => { pm.expect(body.ledger.map(row => row.id)).to.deep.eql(['entry-0001']); pm.expect(body.pagination.totalItems).to.eql(1); });",
+              "pm.test('Search scope and full-period count are explicit', () => { pm.expect(body.search.scope).to.eql('ledger_entries'); pm.expect(body.search.summaryFiltered).to.eql(false); pm.expect(body.search.totalPeriodItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Full voucher reference is case-insensitive",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=VOUCHER-0001"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Exact expected record and matching count', () => { pm.expect(body.ledger.map(row => row.id)).to.deep.eql(['entry-0001']); pm.expect(body.pagination.totalItems).to.eql(1); });",
+              "pm.test('Search scope and full-period count are explicit', () => { pm.expect(body.search.scope).to.eql('ledger_entries'); pm.expect(body.search.summaryFiltered).to.eql(false); pm.expect(body.search.totalPeriodItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Matching rows paginate after search",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=service&pageSize=2&page=2"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Second matching page has the expected records and count', () => { pm.expect(body.pagination.totalItems).to.eql(997); pm.expect(body.ledger.map(row => row.id)).to.deep.eql(['entry-0998', 'entry-0997']); });",
+              "pm.test('Search scope and full-period count are explicit', () => { pm.expect(body.search.scope).to.eql('ledger_entries'); pm.expect(body.search.summaryFiltered).to.eql(false); pm.expect(body.search.totalPeriodItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "No matches keep period totals",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=not-found"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Zero matches is explicit', () => { pm.expect(body.ledger).to.have.lengthOf(0); pm.expect(body.pagination.totalItems).to.eql(0); });",
+              "pm.test('Search scope and full-period count are explicit', () => { pm.expect(body.search.scope).to.eql('ledger_entries'); pm.expect(body.search.summaryFiltered).to.eql(false); pm.expect(body.search.totalPeriodItems).to.eql(1000); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Beyond the matching last page is empty without losing the matching total",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=needle&pageSize=20&page=2"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('Out-of-range page retains count', () => { pm.expect(body.ledger).to.have.lengthOf(0); pm.expect(body.pagination.totalItems).to.eql(1); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search does not include opening entries before the selected period",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=opening"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200 from the actual-view local harness', () => pm.response.to.have.status(200));",
+              "pm.test('Explicit synthetic evidence boundary', () => pm.expect(pm.response.headers.get('X-Fixture-Mode')).to.eql('actual-view-synthetic-session-no-db-auth'));",
+              "const body = pm.response.json();",
+              "pm.test('The pre-period opening row is not a period match', () => { pm.expect(body.ledger).to.have.lengthOf(0); pm.expect(body.pagination.totalItems).to.eql(0); });",
+              "pm.test('Period totals and current fund balances are independent of q', () => { pm.expect(body.summary).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineSummary'))); pm.expect(body.fundBalances).to.deep.eql(JSON.parse(pm.collectionVariables.get('baselineFunds'))); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Duplicate q is rejected",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=one&q=two"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Invalid filter returns HTTP 422', () => pm.response.to.have.status(422));",
+              "pm.test('Invalid input rejects before database reads', () => { pm.expect(pm.response.json().error.code).to.eql('invalid_filter'); pm.expect(pm.response.headers.get('X-Fixture-DB-Reads')).to.eql('0'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Raw newline is rejected rather than trimmed",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=%0A"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Invalid filter returns HTTP 422', () => pm.response.to.have.status(422));",
+              "pm.test('Invalid input rejects before database reads', () => { pm.expect(pm.response.json().error.code).to.eql('invalid_filter'); pm.expect(pm.response.headers.get('X-Fixture-DB-Reads')).to.eql('0'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Raw tab is rejected rather than trimmed",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=%09abc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Invalid filter returns HTTP 422', () => pm.response.to.have.status(422));",
+              "pm.test('Invalid input rejects before database reads', () => { pm.expect(pm.response.json().error.code).to.eql('invalid_filter'); pm.expect(pm.response.headers.get('X-Fixture-DB-Reads')).to.eql('0'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "161 characters are rejected",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tenants/synthetic-hotel/cashbook?startDate=2026-01-02&endDate=2026-01-31&q=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Invalid filter returns HTTP 422', () => pm.response.to.have.status(422));",
+              "pm.test('Invalid input rejects before database reads', () => { pm.expect(pm.response.json().error.code).to.eql('invalid_filter'); pm.expect(pm.response.headers.get('X-Fixture-DB-Reads')).to.eql('0'); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

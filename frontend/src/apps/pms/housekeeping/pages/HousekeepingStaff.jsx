@@ -164,10 +164,6 @@ function StaffWorkspace({ pms }) {
   return (
     <div className="pms-domain-page hk-staff-page">
       <header className="hk-page-heading">
-        <div>
-          <h1>{tUi('nav.housekeepingStaff')}</h1>
-          <p>{tUi('hk.staffIntro')}</p>
-        </div>
         <div className="hk-team-actions">
           <span className="hk-team-count">
             <Users size={16} aria-hidden="true" />

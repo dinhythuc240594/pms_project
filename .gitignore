@@ -1,7 +1,6 @@
 # Logs
 /logs
 /backend/logs
-/frontend/.cache/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -41,8 +40,11 @@ __pycache__/
 AGENTS.md
 README-VI.md
 /docs
-*.md
-!/backend/pms_api/marketing/README.md
-!/backend/pms_api/chatbot/README.md
-/backend/tests
-/.tmp
+
+# Local verification and generated workspace artifacts
+/frontend/.cache/
+/.tmp/
+/graphify-out/
+/frontend/output/
+/frontend/.playwright-cli/
+/.postman/resources.yaml

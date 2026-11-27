@@ -23,7 +23,7 @@ from .security import GLOBAL_ROLES, ApiError, set_context
 @click.option("--password", prompt=True, hide_input=True, confirmation_prompt=True)
 @with_appcontext
 def init_admin(email, name, password):
-    from pms_api.auth.application import validate_email, validate_password
+    from .auth.routes import validate_email, validate_password
 
     email = validate_email(email)
     validate_password(password)
@@ -139,7 +139,7 @@ def register_commands(app):
 @click.command("db-check")
 @with_appcontext
 def database_check():
-    from pms_api.health_application import database_status
+    from .health import database_status
 
     status = database_status()
     if status["status"] != "ok":

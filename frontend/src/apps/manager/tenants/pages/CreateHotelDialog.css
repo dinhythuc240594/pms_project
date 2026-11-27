@@ -1,0 +1,170 @@
+.hotel-create-dialog.customer-dialog {
+  box-sizing: border-box;
+  width: min(960px, 100%);
+  max-height: calc(100dvh - 32px);
+  min-width: 0;
+}
+
+.hotel-create-dialog .customer-dialog-head,
+.hotel-create-dialog .customer-dialog-footer {
+  flex-shrink: 0;
+  padding: 16px 32px;
+}
+
+.hotel-create-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hotel-create-heading > span {
+  display: grid;
+  flex: 0 0 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--manager-accent);
+  background: var(--manager-accent-bg);
+}
+
+.hotel-create-dialog .customer-dialog-head h2 {
+  margin: 0;
+}
+
+.hotel-create-dialog .customer-dialog-body {
+  padding: 24px 32px 28px;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-padding-block: 12px;
+}
+
+.hotel-create-sections {
+  display: grid;
+  gap: 16px;
+}
+.hotel-create-section {
+  min-width: 0;
+}
+.hotel-create-section + .hotel-create-section {
+  padding-top: 12px;
+  border-top: 1px solid var(--manager-line);
+}
+
+.hotel-create-section h3 {
+  margin: 0 0 16px;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.hotel-create-dialog .customer-form-grid {
+  gap: 20px 24px;
+}
+.hotel-create-dialog .hotel-create-field {
+  min-width: 0;
+}
+.hotel-create-field-wide {
+  grid-column: 1 / -1;
+}
+
+.hotel-create-dialog .hotel-create-field label {
+  color: var(--manager-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hotel-create-dialog .hotel-create-field h3 label {
+  display: inline;
+  font: inherit;
+}
+
+.hotel-create-dialog label:has(> :required) > span::after {
+  content: ' *' / '';
+  color: var(--manager-muted);
+}
+
+.hotel-create-dialog .hotel-create-field :is(input, select, textarea) {
+  min-height: 46px;
+}
+.hotel-create-dialog .hotel-create-field textarea {
+  display: block;
+  resize: vertical;
+}
+.hotel-create-dialog .hotel-create-field [aria-invalid='true'] {
+  border-color: var(--manager-danger);
+}
+.hotel-create-dialog .customer-hint,
+.hotel-create-field-error {
+  margin: 6px 0 0;
+  overflow-wrap: anywhere;
+}
+
+.hotel-create-field-error {
+  color: var(--manager-danger);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.hotel-create-dialog .customer-account-modes {
+  display: grid;
+  min-width: 0;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hotel-create-dialog .customer-account-modes label {
+  font-size: 13px;
+  font-weight: 600;
+}
+.hotel-create-dialog .customer-account-modes + .customer-hint {
+  margin: 0 0 16px;
+}
+.hotel-create-dialog .customer-account-results {
+  max-height: none;
+  overflow: visible;
+}
+.hotel-create-submit-error {
+  margin: 0 0 20px;
+}
+
+.hotel-create-spinner {
+  animation: hotel-create-spin 0.8s linear infinite;
+}
+@keyframes hotel-create-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .hotel-create-dialog .customer-dialog-head,
+  .hotel-create-dialog .customer-dialog-footer {
+    padding: 12px 16px;
+  }
+  .hotel-create-dialog .customer-dialog-body {
+    padding: 20px 16px 24px;
+  }
+  .hotel-create-dialog .customer-dialog-head {
+    gap: 12px;
+  }
+  .hotel-create-dialog .customer-dialog-head h2 {
+    font-size: 18px;
+  }
+  .hotel-create-heading {
+    gap: 8px;
+  }
+  .hotel-create-heading > span {
+    flex-basis: 36px;
+    height: 36px;
+  }
+  .hotel-create-dialog .customer-dialog-footer .manager-button {
+    min-width: 0;
+    padding-inline: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotel-create-spinner {
+    animation: none;
+  }
+}

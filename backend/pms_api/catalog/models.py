@@ -13,6 +13,8 @@ class RoomType(db.Model):
     tenant_id = db.Column(db.String(40), db.ForeignKey("tenants.id"), nullable=False, index=True)
     code = db.Column(db.String(40))
     name = db.Column(db.String(120), nullable=False)
+    floor = db.Column(db.String(120))
+    bed_type_id = db.Column(db.String(40))
     base_price = db.Column(db.Numeric(19, 4), nullable=False, default=0)
     capacity = db.Column(db.Integer, nullable=False, default=2)
     active = db.Column(db.Boolean, nullable=False, default=True)
@@ -20,6 +22,10 @@ class RoomType(db.Model):
         UniqueConstraint("tenant_id", "id", name="uq_room_types_tenant_id_id"),
         UniqueConstraint("tenant_id", "name", name="uq_room_types_tenant_name"),
         UniqueConstraint("tenant_id", "code", name="uq_room_types_tenant_code"),
+        ForeignKeyConstraint(["tenant_id", "bed_type_id"], ["masters.tenant_id", "masters.id"]),
+        CheckConstraint(
+            "floor IS NULL OR (floor = btrim(floor) AND length(floor) > 0)", name="valid_floor"
+        ),
         CheckConstraint(
             "code IS NULL OR (code = btrim(code) AND length(code) > 0)", name="valid_code"
         ),

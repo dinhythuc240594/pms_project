@@ -1,4 +1,5 @@
 [tool.ruff]
+# Preserve syntax accepted before Python 3.14, including parenthesized exception tuples.
 target-version = "py314"
 line-length = 100
 exclude = [".venv", ".local-postgres"]

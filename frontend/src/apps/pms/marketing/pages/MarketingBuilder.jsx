@@ -1,67 +1,639 @@
-import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { ArrowDown, ArrowUp, Eye, Monitor, Plus, Save, Smartphone, Sparkles, Trash2 } from 'lucide-react';
-import { usePms } from '../../data/usePms';
-import useMarketingPage from '../useMarketingPage';
-import { moveSection, newSection, REVIEW_CHECKS, reviewComplete, SECTION_NAMES } from '../api';
-import '../styles.css';
+import { useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import {
+  ArrowDown,
+  ArrowUp,
+  Eye,
+  Monitor,
+  Plus,
+  Save,
+  Smartphone,
+  Sparkles,
+  Trash2,
+} from 'lucide-react'
+import { usePms } from '../../data/usePms'
+import useMarketingPage from '../useMarketingPage'
+import { moveSection, newSection, REVIEW_CHECKS, reviewComplete, SECTION_NAMES } from '../api'
+import '../styles.css'
 
 const JOB_MESSAGES = {
-  queued: 'Đang chờ AI xử lý…', running: 'AI đang tạo nội dung…', failed: 'Không thể tạo nội dung. Bản nháp vẫn giữ nguyên.',
-  unknown: 'Chưa xác định được kết quả từ AI. Kiểm tra với quản trị viên trước khi gửi yêu cầu mới.',
+  queued: 'Đang chờ AI xử lý…',
+  running: 'AI đang tạo nội dung…',
+  failed: 'Không thể tạo nội dung. Bản nháp vẫn giữ nguyên.',
+  unknown:
+    'Chưa xác định được kết quả từ AI. Kiểm tra với quản trị viên trước khi gửi yêu cầu mới.',
   cancelled: 'Yêu cầu đã dừng vì tài khoản hoặc dịch vụ không còn khả dụng.',
-};
+}
 
 function Builder({ request, pageId, tenant }) {
-  const editor = useMarketingPage(request, pageId);
-  const [sectionId, setSectionId] = useState(null);
-  const [device, setDevice] = useState('desktop');
-  const [prompt, setPrompt] = useState('');
-  const [checklist, setChecklist] = useState({});
-  const [note, setNote] = useState('');
-  const [addType, setAddType] = useState('about');
-  const [showUnpublish, setShowUnpublish] = useState(false);
-  const { page, document, busy, stage, artifact, job } = editor;
-  const section = document?.sections.find(item => item.id === sectionId) || document?.sections[0];
-  const inReview = stage === 'review';
-  const approved = page?.review?.decision === 'approved' && page.review.manifestHash === artifact?.manifestHash;
-  const activeJob = job && ['queued', 'running'].includes(job.status);
-  const change = patch => editor.setDocument(previous => ({ ...previous, ...patch }));
-  const changeSection = patch => change({ sections: document.sections.map(item => item.id === section.id ? { ...item, ...patch } : item) });
-  async function review() { setChecklist({}); setNote(''); await editor.review(); }
-  if (!page || !document) return <div className="marketing-module"><Link to="/id/marketing/pages">← Danh sách trang</Link>{editor.error ? <div className="mk-error" role="alert">{editor.error}<button className="mk-button" onClick={editor.reload} type="button">Tải lại</button></div> : <p role="status">Đang tải trình biên tập…</p>}</div>;
-  return <div className="marketing-module mk-builder">
-    <header className="mk-header"><div><p className="mk-eyebrow"><Link to="/id/marketing/pages">MARKETING</Link> · {tenant?.name}</p><h1>{page.name}</h1><p>Bản nháp v{page.revisionNumber} · {editor.dirty ? 'Có thay đổi chưa lưu' : approved ? 'Đã duyệt' : 'Đã lưu'}{page.publishedReleaseId ? ' · Có phiên bản đang công khai' : ' · Chưa xuất bản'}</p></div>
-      <div className="mk-actions">{inReview ? <button className="mk-button" disabled={busy} onClick={() => editor.setStage('edit')} type="button">Quay lại chỉnh sửa</button> : <><button className="mk-button" onClick={editor.save} disabled={busy || !editor.dirty} type="button"><Save size={16} />Lưu nháp</button><button className="mk-button mk-primary" onClick={review} disabled={busy} type="button"><Eye size={16} />Xem trước &amp; duyệt</button></>}<button className="mk-button" onClick={editor.openHistory} disabled={busy} type="button">Lịch sử</button></div>
-    </header>
-    {editor.error && <div className="mk-error" role="alert">{editor.error}<button className="mk-button" onClick={editor.reload} disabled={busy} type="button">Tải lại bản mới nhất</button></div>}
-    {editor.notice && <p className="mk-notice" role="status">{editor.notice}</p>}
-    <div className={`mk-workspace${inReview ? ' is-review' : ''}`}>
-      {!inReview && <aside className="mk-panel mk-left" aria-label="Yêu cầu AI và bố cục">
-        <h2>Tạo với AI</h2><div className="mk-template-buttons">{editor.library.templates.map(template => <button className="mk-button" key={template.id} type="button" onClick={() => setPrompt(template.prompt)} disabled={busy}>{template.name}</button>)}<button className="mk-button" onClick={() => setPrompt('')} disabled={busy} type="button">Tự nhập</button></div>
-        <label>Yêu cầu của bạn<textarea value={prompt} maxLength={4000} placeholder="Mô tả mục tiêu, đối tượng và phong cách trang…" onChange={e => setPrompt(e.target.value)} disabled={busy} /></label>
-        {!editor.library.aiAvailable && <p className="mk-muted">Tạo nội dung AI chưa được bật. Bạn có thể dùng mẫu và chỉnh sửa thủ công.</p>}
-        <button className="mk-button mk-primary" type="button" disabled={busy || activeJob || !editor.library.aiAvailable || !prompt.trim()} onClick={() => editor.generate(prompt)}><Sparkles size={16} />Tạo toàn trang</button>
-        {job && <div className="mk-job" role="status">{job.status === 'succeeded' ? <><strong>Đề xuất đã sẵn sàng</strong><p>Bản nháp chưa thay đổi. Kiểm tra đề xuất trước khi áp dụng.</p><details><summary>Xem nội dung đề xuất</summary>{job.result?.sections.map(item => <section key={item.id}><h3>{item.heading}</h3><p>{item.body}</p></section>)}</details><button className="mk-button" type="button" onClick={editor.apply} disabled={busy || editor.dirty || job.baseRevisionId !== page.workingRevisionId}>Áp dụng đề xuất</button>{(editor.dirty || job.baseRevisionId !== page.workingRevisionId) && <p>Bản nháp đã thay đổi; hãy tạo đề xuất mới.</p>}</> : <p>{JOB_MESSAGES[job.status] || 'Đang kiểm tra yêu cầu…'}</p>}</div>}
-        <div className="mk-outline"><h2>Bố cục trang</h2>{document.sections.map((item, index) => <div key={item.id} className="mk-outline-row"><button type="button" className={`mk-outline-select${item.id === section.id ? ' is-selected' : ''}`} aria-pressed={item.id === section.id} onClick={() => setSectionId(item.id)}>{String(index + 1).padStart(2, '0')} · {SECTION_NAMES[item.type]}{!item.visible && ' (ẩn)'}</button><button className="mk-icon-button" aria-label={`Di chuyển ${item.heading} lên`} disabled={busy || index <= 1} type="button" onClick={() => change(moveSection(document, index, -1))}><ArrowUp size={14} /></button><button className="mk-icon-button" aria-label={`Di chuyển ${item.heading} xuống`} disabled={busy || index === 0 || index === document.sections.length - 1} type="button" onClick={() => change(moveSection(document, index, 1))}><ArrowDown size={14} /></button></div>)}</div>
-        <label>Thêm khối<select value={addType} onChange={e => setAddType(e.target.value)} disabled={busy}>{Object.entries(SECTION_NAMES).filter(([key]) => key !== 'hero').map(([key, name]) => <option key={key} value={key}>{name}</option>)}</select></label><button className="mk-button" type="button" disabled={busy || document.sections.length >= 20} onClick={() => { const item = newSection(addType); change({ sections: [...document.sections, item] }); setSectionId(item.id); }}><Plus size={16} />Thêm khối</button>
-      </aside>}
-      <main className="mk-preview" aria-label="Xem trước trang khách sạn"><div className="mk-device-buttons"><button className="mk-button" aria-pressed={device === 'desktop'} type="button" onClick={() => setDevice('desktop')}><Monitor size={16} />Máy tính</button><button className="mk-button" aria-pressed={device === 'mobile'} type="button" onClick={() => setDevice('mobile')}><Smartphone size={16} />Điện thoại</button></div>{editor.previewError && <div className="mk-error" role="alert">Xem trước chưa cập nhật: {editor.previewError}</div>}<div className={`mk-preview-frame ${device === 'mobile' ? 'is-mobile' : ''}`}><iframe title={`Xem trước ${page.name}`} srcDoc={editor.html || '<p>Đang dựng trang xem trước…</p>'} sandbox="" referrerPolicy="no-referrer" /></div></main>
-      {inReview ? <aside className="mk-panel mk-review" aria-label="Duyệt trước khi xuất bản"><h2>Duyệt phiên bản v{page.revisionNumber}</h2><p>Trang xuất bản sẽ dùng đúng bản xem trước này.</p><div className="mk-checklist">{REVIEW_CHECKS.map(([key, label]) => <label key={key} className="mk-check"><input type="checkbox" checked={approved || Boolean(checklist[key])} disabled={busy || approved} onChange={e => setChecklist({ ...checklist, [key]: e.target.checked })} /><span>{label}</span></label>)}</div><label>Ghi chú<textarea value={note} maxLength={2000} onChange={e => setNote(e.target.value)} disabled={busy} /></label><button className="mk-button" type="button" disabled={busy || !note.trim()} onClick={() => editor.decide('changes_requested', checklist, note)}>Yêu cầu chỉnh sửa</button><button className="mk-button mk-primary" type="button" disabled={busy || approved || !reviewComplete(checklist)} onClick={() => editor.decide('approved', checklist, note)}>{approved ? `Đã duyệt v${page.revisionNumber}` : `Duyệt v${page.revisionNumber}`}</button><div className="mk-publish-summary"><span>Đường dẫn công khai</span><strong>{artifact?.publicPath}</strong><button className="mk-button mk-primary" disabled={busy || !approved || page.publishedRevisionId === page.workingRevisionId} type="button" onClick={editor.publish}>Xuất bản v{page.revisionNumber}</button></div></aside> : <aside className="mk-panel mk-inspector" aria-label="Thuộc tính khối">
-        <h2>Chỉnh sửa · {SECTION_NAMES[section.type]}</h2><label>Tiêu đề<input value={section.heading} maxLength={160} onChange={e => changeSection({ heading: e.target.value })} disabled={busy} /></label><label>Nội dung<textarea value={section.body} maxLength={4000} onChange={e => changeSection({ body: e.target.value })} disabled={busy} /></label><label>Ảnh khách sạn<input type="file" accept="image/jpeg,image/png,image/webp" disabled={busy} onChange={e => { const file = e.target.files?.[0]; if (file) editor.uploadImage(file, section.id); e.target.value = ''; }} /></label><p className="mk-muted">JPEG, PNG hoặc WebP, tối đa 700 KB mỗi ảnh.</p>{section.imageUrl && <button className="mk-button" type="button" disabled={busy} onClick={() => changeSection({ imageUrl: '', imageAlt: '' })}>Xóa ảnh khỏi khối</button>}<label>Mô tả ảnh<input value={section.imageAlt} maxLength={240} onChange={e => changeSection({ imageAlt: e.target.value })} disabled={busy} /></label>
-        {section.type !== 'hero' && <><label className="mk-check"><input type="checkbox" checked={section.visible} disabled={busy} onChange={e => changeSection({ visible: e.target.checked })} /><span>Hiển thị khối</span></label><button className="mk-button mk-danger" type="button" disabled={busy} onClick={() => { change({ sections: document.sections.filter(item => item.id !== section.id) }); setSectionId(null); }}><Trash2 size={14} />Xóa khối</button></>}
-        <button className="mk-button" type="button" disabled={busy || activeJob || !editor.library.aiAvailable || !prompt.trim()} onClick={() => editor.generate(prompt, section.id)}><Sparkles size={15} />Viết lại khối bằng AI</button>
-        <details className="mk-page-settings"><summary>Thương hiệu &amp; SEO</summary><label>Tên hiển thị<input value={document.brand.name} maxLength={160} disabled={busy} onChange={e => change({ brand: { ...document.brand, name: e.target.value } })} /></label><label>Phong cách<select value={document.brand.theme} disabled={busy} onChange={e => change({ brand: { ...document.brand, theme: e.target.value } })}><option value="calm-blue">Xanh biển dịu</option><option value="forest">Xanh lá thanh lịch</option><option value="sand">Cát ấm</option></select></label><label>Ngôn ngữ<select value={document.locale} disabled={busy} onChange={e => change({ locale: e.target.value })}><option value="vi">Tiếng Việt</option><option value="en">English</option></select></label><label>Đường dẫn trang<input value={document.slug} maxLength={80} pattern="[a-z0-9]+(-[a-z0-9]+)*" disabled={busy} onChange={e => change({ slug: e.target.value })} /></label><label>Nhãn nút chính<input value={document.cta.label} maxLength={60} disabled={busy} onChange={e => change({ cta: { ...document.cta, label: e.target.value } })} /></label><label>Liên kết nút chính<input value={document.cta.url} maxLength={2048} placeholder="https://… hoặc tel:+84…" disabled={busy} onChange={e => change({ cta: { ...document.cta, url: e.target.value } })} /></label><label>Tiêu đề SEO<input value={document.seo.title} maxLength={100} disabled={busy} onChange={e => change({ seo: { ...document.seo, title: e.target.value } })} /></label><label>Mô tả SEO<textarea value={document.seo.description} maxLength={320} disabled={busy} onChange={e => change({ seo: { ...document.seo, description: e.target.value } })} /></label></details>
-      </aside>}
+  const editor = useMarketingPage(request, pageId)
+  const [sectionId, setSectionId] = useState(null)
+  const [device, setDevice] = useState('desktop')
+  const [prompt, setPrompt] = useState('')
+  const [checklist, setChecklist] = useState({})
+  const [note, setNote] = useState('')
+  const [addType, setAddType] = useState('about')
+  const [showUnpublish, setShowUnpublish] = useState(false)
+  const { page, document, busy, stage, artifact, job } = editor
+  const section = document?.sections.find((item) => item.id === sectionId) || document?.sections[0]
+  const inReview = stage === 'review'
+  const approved =
+    page?.review?.decision === 'approved' && page.review.manifestHash === artifact?.manifestHash
+  const activeJob = job && ['queued', 'running'].includes(job.status)
+  const change = (patch) => editor.setDocument((previous) => ({ ...previous, ...patch }))
+  const changeSection = (patch) =>
+    change({
+      sections: document.sections.map((item) =>
+        item.id === section.id ? { ...item, ...patch } : item,
+      ),
+    })
+  async function review() {
+    setChecklist({})
+    setNote('')
+    await editor.review()
+  }
+  if (!page || !document)
+    return (
+      <div className="marketing-module">
+        <Link to="/id/marketing/pages">← Danh sách trang</Link>
+        {editor.error ? (
+          <div className="mk-error" role="alert">
+            {editor.error}
+            <button className="mk-button" onClick={editor.reload} type="button">
+              Tải lại
+            </button>
+          </div>
+        ) : (
+          <p role="status">Đang tải trình biên tập…</p>
+        )}
+      </div>
+    )
+  return (
+    <div className="marketing-module mk-builder">
+      <header className="mk-header">
+        <div>
+          <p className="mk-eyebrow">
+            <Link to="/id/marketing/pages">MARKETING</Link> · {tenant?.name}
+          </p>
+          <h1>{page.name}</h1>
+          <p>
+            Bản nháp v{page.revisionNumber} ·{' '}
+            {editor.dirty ? 'Có thay đổi chưa lưu' : approved ? 'Đã duyệt' : 'Đã lưu'}
+            {page.publishedReleaseId ? ' · Có phiên bản đang công khai' : ' · Chưa xuất bản'}
+          </p>
+        </div>
+        <div className="mk-actions">
+          {inReview ? (
+            <button
+              className="mk-button"
+              disabled={busy}
+              onClick={() => editor.setStage('edit')}
+              type="button"
+            >
+              Quay lại chỉnh sửa
+            </button>
+          ) : (
+            <>
+              <button
+                className="mk-button"
+                onClick={editor.save}
+                disabled={busy || !editor.dirty}
+                type="button"
+              >
+                <Save size={16} />
+                Lưu nháp
+              </button>
+              <button
+                className="mk-button mk-primary"
+                onClick={review}
+                disabled={busy}
+                type="button"
+              >
+                <Eye size={16} />
+                Xem trước &amp; duyệt
+              </button>
+            </>
+          )}
+          <button className="mk-button" onClick={editor.openHistory} disabled={busy} type="button">
+            Lịch sử
+          </button>
+        </div>
+      </header>
+      {editor.error && (
+        <div className="mk-error" role="alert">
+          {editor.error}
+          <button className="mk-button" onClick={editor.reload} disabled={busy} type="button">
+            Tải lại bản mới nhất
+          </button>
+        </div>
+      )}
+      {editor.notice && (
+        <p className="mk-notice" role="status">
+          {editor.notice}
+        </p>
+      )}
+      <div className={`mk-workspace${inReview ? ' is-review' : ''}`}>
+        {!inReview && (
+          <aside className="mk-panel mk-left" aria-label="Yêu cầu AI và bố cục">
+            <h2>Tạo với AI</h2>
+            <div className="mk-template-buttons">
+              {editor.library.templates.map((template) => (
+                <button
+                  className="mk-button"
+                  key={template.id}
+                  type="button"
+                  onClick={() => setPrompt(template.prompt)}
+                  disabled={busy}
+                >
+                  {template.name}
+                </button>
+              ))}
+              <button
+                className="mk-button"
+                onClick={() => setPrompt('')}
+                disabled={busy}
+                type="button"
+              >
+                Tự nhập
+              </button>
+            </div>
+            <label>
+              Yêu cầu của bạn
+              <textarea
+                value={prompt}
+                maxLength={4000}
+                placeholder="Mô tả mục tiêu, đối tượng và phong cách trang…"
+                onChange={(e) => setPrompt(e.target.value)}
+                disabled={busy}
+              />
+            </label>
+            {!editor.library.aiAvailable && (
+              <p className="mk-muted">
+                Tạo nội dung AI chưa được bật. Bạn có thể dùng mẫu và chỉnh sửa thủ công.
+              </p>
+            )}
+            <button
+              className="mk-button mk-primary"
+              type="button"
+              disabled={busy || activeJob || !editor.library.aiAvailable || !prompt.trim()}
+              onClick={() => editor.generate(prompt)}
+            >
+              <Sparkles size={16} />
+              Tạo toàn trang
+            </button>
+            {job && (
+              <div className="mk-job" role="status">
+                {job.status === 'succeeded' ? (
+                  <>
+                    <strong>Đề xuất đã sẵn sàng</strong>
+                    <p>Bản nháp chưa thay đổi. Kiểm tra đề xuất trước khi áp dụng.</p>
+                    <details>
+                      <summary>Xem nội dung đề xuất</summary>
+                      {job.result?.sections.map((item) => (
+                        <section key={item.id}>
+                          <h3>{item.heading}</h3>
+                          <p>{item.body}</p>
+                        </section>
+                      ))}
+                    </details>
+                    <button
+                      className="mk-button"
+                      type="button"
+                      onClick={editor.apply}
+                      disabled={
+                        busy || editor.dirty || job.baseRevisionId !== page.workingRevisionId
+                      }
+                    >
+                      Áp dụng đề xuất
+                    </button>
+                    {(editor.dirty || job.baseRevisionId !== page.workingRevisionId) && (
+                      <p>Bản nháp đã thay đổi; hãy tạo đề xuất mới.</p>
+                    )}
+                  </>
+                ) : (
+                  <p>{JOB_MESSAGES[job.status] || 'Đang kiểm tra yêu cầu…'}</p>
+                )}
+              </div>
+            )}
+            <div className="mk-outline">
+              <h2>Bố cục trang</h2>
+              {document.sections.map((item, index) => (
+                <div key={item.id} className="mk-outline-row">
+                  <button
+                    type="button"
+                    className={`mk-outline-select${item.id === section.id ? ' is-selected' : ''}`}
+                    aria-pressed={item.id === section.id}
+                    onClick={() => setSectionId(item.id)}
+                  >
+                    {String(index + 1).padStart(2, '0')} · {SECTION_NAMES[item.type]}
+                    {!item.visible && ' (ẩn)'}
+                  </button>
+                  <button
+                    className="mk-icon-button"
+                    aria-label={`Di chuyển ${item.heading} lên`}
+                    disabled={busy || index <= 1}
+                    type="button"
+                    onClick={() => change(moveSection(document, index, -1))}
+                  >
+                    <ArrowUp size={14} />
+                  </button>
+                  <button
+                    className="mk-icon-button"
+                    aria-label={`Di chuyển ${item.heading} xuống`}
+                    disabled={busy || index === 0 || index === document.sections.length - 1}
+                    type="button"
+                    onClick={() => change(moveSection(document, index, 1))}
+                  >
+                    <ArrowDown size={14} />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <label>
+              Thêm khối
+              <select value={addType} onChange={(e) => setAddType(e.target.value)} disabled={busy}>
+                {Object.entries(SECTION_NAMES)
+                  .filter(([key]) => key !== 'hero')
+                  .map(([key, name]) => (
+                    <option key={key} value={key}>
+                      {name}
+                    </option>
+                  ))}
+              </select>
+            </label>
+            <button
+              className="mk-button"
+              type="button"
+              disabled={busy || document.sections.length >= 20}
+              onClick={() => {
+                const item = newSection(addType)
+                change({ sections: [...document.sections, item] })
+                setSectionId(item.id)
+              }}
+            >
+              <Plus size={16} />
+              Thêm khối
+            </button>
+          </aside>
+        )}
+        <main className="mk-preview" aria-label="Xem trước trang khách sạn">
+          <div className="mk-device-buttons">
+            <button
+              className="mk-button"
+              aria-pressed={device === 'desktop'}
+              type="button"
+              onClick={() => setDevice('desktop')}
+            >
+              <Monitor size={16} />
+              Máy tính
+            </button>
+            <button
+              className="mk-button"
+              aria-pressed={device === 'mobile'}
+              type="button"
+              onClick={() => setDevice('mobile')}
+            >
+              <Smartphone size={16} />
+              Điện thoại
+            </button>
+          </div>
+          {editor.previewError && (
+            <div className="mk-error" role="alert">
+              Xem trước chưa cập nhật: {editor.previewError}
+            </div>
+          )}
+          <div className={`mk-preview-frame ${device === 'mobile' ? 'is-mobile' : ''}`}>
+            <iframe
+              title={`Xem trước ${page.name}`}
+              srcDoc={editor.html || '<p>Đang dựng trang xem trước…</p>'}
+              sandbox=""
+              referrerPolicy="no-referrer"
+            />
+          </div>
+        </main>
+        {inReview ? (
+          <aside className="mk-panel mk-review" aria-label="Duyệt trước khi xuất bản">
+            <h2>Duyệt phiên bản v{page.revisionNumber}</h2>
+            <p>Trang xuất bản sẽ dùng đúng bản xem trước này.</p>
+            <div className="mk-checklist">
+              {REVIEW_CHECKS.map(([key, label]) => (
+                <label key={key} className="mk-check">
+                  <input
+                    type="checkbox"
+                    checked={approved || Boolean(checklist[key])}
+                    disabled={busy || approved}
+                    onChange={(e) => setChecklist({ ...checklist, [key]: e.target.checked })}
+                  />
+                  <span>{label}</span>
+                </label>
+              ))}
+            </div>
+            <label>
+              Ghi chú
+              <textarea
+                value={note}
+                maxLength={2000}
+                onChange={(e) => setNote(e.target.value)}
+                disabled={busy}
+              />
+            </label>
+            <button
+              className="mk-button"
+              type="button"
+              disabled={busy || !note.trim()}
+              onClick={() => editor.decide('changes_requested', checklist, note)}
+            >
+              Yêu cầu chỉnh sửa
+            </button>
+            <button
+              className="mk-button mk-primary"
+              type="button"
+              disabled={busy || approved || !reviewComplete(checklist)}
+              onClick={() => editor.decide('approved', checklist, note)}
+            >
+              {approved ? `Đã duyệt v${page.revisionNumber}` : `Duyệt v${page.revisionNumber}`}
+            </button>
+            <div className="mk-publish-summary">
+              <span>Đường dẫn công khai</span>
+              <strong>{artifact?.publicPath}</strong>
+              <button
+                className="mk-button mk-primary"
+                disabled={busy || !approved || page.publishedRevisionId === page.workingRevisionId}
+                type="button"
+                onClick={editor.publish}
+              >
+                Xuất bản v{page.revisionNumber}
+              </button>
+            </div>
+          </aside>
+        ) : (
+          <aside className="mk-panel mk-inspector" aria-label="Thuộc tính khối">
+            <h2>Chỉnh sửa · {SECTION_NAMES[section.type]}</h2>
+            <label>
+              Tiêu đề
+              <input
+                value={section.heading}
+                maxLength={160}
+                onChange={(e) => changeSection({ heading: e.target.value })}
+                disabled={busy}
+              />
+            </label>
+            <label>
+              Nội dung
+              <textarea
+                value={section.body}
+                maxLength={4000}
+                onChange={(e) => changeSection({ body: e.target.value })}
+                disabled={busy}
+              />
+            </label>
+            <label>
+              Ảnh khách sạn
+              <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                disabled={busy}
+                onChange={(e) => {
+                  const file = e.target.files?.[0]
+                  if (file) editor.uploadImage(file, section.id)
+                  e.target.value = ''
+                }}
+              />
+            </label>
+            <p className="mk-muted">JPEG, PNG hoặc WebP, tối đa 700 KB mỗi ảnh.</p>
+            {section.imageUrl && (
+              <button
+                className="mk-button"
+                type="button"
+                disabled={busy}
+                onClick={() => changeSection({ imageUrl: '', imageAlt: '' })}
+              >
+                Xóa ảnh khỏi khối
+              </button>
+            )}
+            <label>
+              Mô tả ảnh
+              <input
+                value={section.imageAlt}
+                maxLength={240}
+                onChange={(e) => changeSection({ imageAlt: e.target.value })}
+                disabled={busy}
+              />
+            </label>
+            {section.type !== 'hero' && (
+              <>
+                <label className="mk-check">
+                  <input
+                    type="checkbox"
+                    checked={section.visible}
+                    disabled={busy}
+                    onChange={(e) => changeSection({ visible: e.target.checked })}
+                  />
+                  <span>Hiển thị khối</span>
+                </label>
+                <button
+                  className="mk-button mk-danger"
+                  type="button"
+                  disabled={busy}
+                  onClick={() => {
+                    change({ sections: document.sections.filter((item) => item.id !== section.id) })
+                    setSectionId(null)
+                  }}
+                >
+                  <Trash2 size={14} />
+                  Xóa khối
+                </button>
+              </>
+            )}
+            <button
+              className="mk-button"
+              type="button"
+              disabled={busy || activeJob || !editor.library.aiAvailable || !prompt.trim()}
+              onClick={() => editor.generate(prompt, section.id)}
+            >
+              <Sparkles size={15} />
+              Viết lại khối bằng AI
+            </button>
+            <details className="mk-page-settings">
+              <summary>Thương hiệu &amp; SEO</summary>
+              <label>
+                Tên hiển thị
+                <input
+                  value={document.brand.name}
+                  maxLength={160}
+                  disabled={busy}
+                  onChange={(e) => change({ brand: { ...document.brand, name: e.target.value } })}
+                />
+              </label>
+              <label>
+                Phong cách
+                <select
+                  value={document.brand.theme}
+                  disabled={busy}
+                  onChange={(e) => change({ brand: { ...document.brand, theme: e.target.value } })}
+                >
+                  <option value="calm-blue">Xanh biển dịu</option>
+                  <option value="forest">Xanh lá thanh lịch</option>
+                  <option value="sand">Cát ấm</option>
+                </select>
+              </label>
+              <label>
+                Ngôn ngữ
+                <select
+                  value={document.locale}
+                  disabled={busy}
+                  onChange={(e) => change({ locale: e.target.value })}
+                >
+                  <option value="vi">Tiếng Việt</option>
+                  <option value="en">English</option>
+                </select>
+              </label>
+              <label>
+                Đường dẫn trang
+                <input
+                  value={document.slug}
+                  maxLength={80}
+                  pattern="[a-z0-9]+(-[a-z0-9]+)*"
+                  disabled={busy}
+                  onChange={(e) => change({ slug: e.target.value })}
+                />
+              </label>
+              <label>
+                Nhãn nút chính
+                <input
+                  value={document.cta.label}
+                  maxLength={60}
+                  disabled={busy}
+                  onChange={(e) => change({ cta: { ...document.cta, label: e.target.value } })}
+                />
+              </label>
+              <label>
+                Liên kết nút chính
+                <input
+                  value={document.cta.url}
+                  maxLength={2048}
+                  placeholder="https://… hoặc tel:+84…"
+                  disabled={busy}
+                  onChange={(e) => change({ cta: { ...document.cta, url: e.target.value } })}
+                />
+              </label>
+              <label>
+                Tiêu đề SEO
+                <input
+                  value={document.seo.title}
+                  maxLength={100}
+                  disabled={busy}
+                  onChange={(e) => change({ seo: { ...document.seo, title: e.target.value } })}
+                />
+              </label>
+              <label>
+                Mô tả SEO
+                <textarea
+                  value={document.seo.description}
+                  maxLength={320}
+                  disabled={busy}
+                  onChange={(e) =>
+                    change({ seo: { ...document.seo, description: e.target.value } })
+                  }
+                />
+              </label>
+            </details>
+          </aside>
+        )}
+      </div>
+      <footer className="mk-footer">
+        <span>Bản nháp và trang công khai được lưu độc lập.</span>
+        {page.publishedUrl && (
+          <div className="mk-actions">
+            <a href={page.publishedUrl} target="_blank" rel="noreferrer">
+              Mở trang công khai
+            </a>
+            <button
+              className="mk-button mk-danger"
+              type="button"
+              onClick={() => setShowUnpublish(true)}
+              disabled={busy}
+            >
+              Gỡ trang
+            </button>
+          </div>
+        )}
+      </footer>
+      {showUnpublish && (
+        <section className="mk-confirm" aria-label="Xác nhận gỡ trang">
+          <h2>Gỡ trang khỏi đường dẫn công khai?</h2>
+          <p>Bản nháp và lịch sử phiên bản được giữ lại.</p>
+          <div className="mk-actions">
+            <button
+              className="mk-button"
+              type="button"
+              disabled={busy}
+              onClick={() => setShowUnpublish(false)}
+            >
+              Hủy
+            </button>
+            <button
+              className="mk-button mk-danger"
+              type="button"
+              disabled={busy}
+              onClick={async () => {
+                await editor.unpublish()
+                setShowUnpublish(false)
+              }}
+            >
+              Gỡ trang
+            </button>
+          </div>
+        </section>
+      )}
+      {editor.historyOpen && (
+        <section className="mk-history" aria-label="Lịch sử xuất bản">
+          <div className="mk-actions">
+            <h2>Lịch sử xuất bản</h2>
+            <button
+              className="mk-button"
+              type="button"
+              onClick={() => editor.setHistoryOpen(false)}
+            >
+              Đóng
+            </button>
+          </div>
+          {!editor.releases.length ? (
+            <p>Chưa có phiên bản đã xuất bản.</p>
+          ) : (
+            editor.releases.map((release) => (
+              <div className="mk-history-row" key={release.id}>
+                <span>
+                  Phiên bản v{release.revisionNumber} ·{' '}
+                  {release.isLive ? 'Đang công khai' : 'Đã xuất bản trước đây'}
+                  <small>{release.slug}</small>
+                </span>
+                <button
+                  className="mk-button"
+                  type="button"
+                  disabled={busy || release.isLive}
+                  onClick={() => editor.restore(release.id)}
+                >
+                  Khôi phục bản này
+                </button>
+              </div>
+            ))
+          )}
+        </section>
+      )}
     </div>
-    <footer className="mk-footer"><span>Bản nháp và trang công khai được lưu độc lập.</span>{page.publishedUrl && <div className="mk-actions"><a href={page.publishedUrl} target="_blank" rel="noreferrer">Mở trang công khai</a><button className="mk-button mk-danger" type="button" onClick={() => setShowUnpublish(true)} disabled={busy}>Gỡ trang</button></div>}</footer>
-    {showUnpublish && <section className="mk-confirm" aria-label="Xác nhận gỡ trang"><h2>Gỡ trang khỏi đường dẫn công khai?</h2><p>Bản nháp và lịch sử phiên bản được giữ lại.</p><div className="mk-actions"><button className="mk-button" type="button" disabled={busy} onClick={() => setShowUnpublish(false)}>Hủy</button><button className="mk-button mk-danger" type="button" disabled={busy} onClick={async () => { await editor.unpublish(); setShowUnpublish(false); }}>Gỡ trang</button></div></section>}
-    {editor.historyOpen && <section className="mk-history" aria-label="Lịch sử xuất bản"><div className="mk-actions"><h2>Lịch sử xuất bản</h2><button className="mk-button" type="button" onClick={() => editor.setHistoryOpen(false)}>Đóng</button></div>{!editor.releases.length ? <p>Chưa có phiên bản đã xuất bản.</p> : editor.releases.map(release => <div className="mk-history-row" key={release.id}><span>Phiên bản v{release.revisionNumber} · {release.isLive ? 'Đang công khai' : 'Đã xuất bản trước đây'}<small>{release.slug}</small></span><button className="mk-button" type="button" disabled={busy || release.isLive} onClick={() => editor.restore(release.id)}>Khôi phục bản này</button></div>)}</section>}
-  </div>;
+  )
 }
 
 export default function MarketingBuilder() {
-  const { pageId } = useParams();
-  const { marketingRequest, tenantId, tenant, authGeneration } = usePms();
-  return <Builder key={`${tenantId}:${pageId}:${authGeneration}`} request={marketingRequest} pageId={pageId} tenant={tenant} />;
+  const { pageId } = useParams()
+  const { marketingRequest, tenantId, tenant, authGeneration } = usePms()
+  return (
+    <Builder
+      key={`${tenantId}:${pageId}:${authGeneration}`}
+      request={marketingRequest}
+      pageId={pageId}
+      tenant={tenant}
+    />
+  )
 }

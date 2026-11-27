@@ -44,9 +44,10 @@ before conditional ETag responses.
 
 ## Additive database installation
 
-The checkout lacks the original Alembic history, so this module ships an explicit,
-transactional schema extension rather than guessing a core migration revision.
-After restoring/migrating the core PMS schema, from `backend/` run:
+This module originally shipped without the core Alembic history and uses an
+explicit, transactional schema extension. The 27/11/2026 source sync restored
+the core history; the marketing installer remains separate from core Alembic.
+After migrating the core PMS schema, from `backend/` run:
 
 ```console
 python manage.py install-marketing-schema
@@ -57,9 +58,9 @@ It uses `DATABASE_MIGRATION_URL`, requires existing `tenants`, `users`,
 ENABLE/FORCE RLS and immutable-history triggers, grants the configured runtime
 role access and records version 1 in `marketing_schema_versions`. It refuses an
 unknown/partially created schema; it never stamps Alembic or recreates core data.
-Run it on a development/test database first. No migration was executed during
-implementation. When restoring the Alembic history, a future migration can invoke
-the same extension with the real dependency revision, avoiding a second root.
+Run it on a development/test database first. No live PostgreSQL migration was
+executed during the original implementation or this source sync. Applying the
+core Alembic history alone does not install the marketing tables.
 
 ## AI worker
 
@@ -132,13 +133,19 @@ the core schema. Frontend tests mount the actual builder in JSDOM, exercise
 review/approval/publication and switch tenants while a previous request is pending.
 No real AI request or production publication was made.
 
-Verification on 15/11/2026: 22 marketing backend tests and 7 frontend tests passed;
+Historical verification on 15/11/2026: 22 marketing backend tests and 7 frontend tests passed;
 Ruff, module Oxlint and a production library build of all three marketing screens
 passed. The existing configuration suite passed 10 of 11 tests; its CLI startup
 test is blocked by the missing `pms_api.admin` baseline. Full application import
 also stops there. `npm run build` stops at the already missing
 `frontend/scripts/bundle-manifest.mjs`. PostgreSQL migration/RLS and real AI calls
 remain unverified. Dependency installation was confined to workspace caches.
+
+Update on 27/11/2026: the source sync restored the missing core modules and build
+script. The combined application now imports in isolated checks, and the full
+frontend build passes. See the [current verification scope and remaining
+limits](../../../docs/sync/SOURCE_SYNC_2026-11-27.md); live PostgreSQL/provider
+verification is still pending.
 
 Rollback: turn off `MARKETING_ENABLED` to stop management mutations and AI worker
 processing. Existing public projections continue to be served; gỡ trang/unpublish

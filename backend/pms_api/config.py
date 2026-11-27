@@ -13,7 +13,6 @@ BACKEND_DIR = Path(__file__).resolve().parents[1]
 
 class ConfigurationError(ValueError):
     """A configuration error safe to display without credentials."""
-    pass
 
 
 def postgres_url(value, name="DATABASE_URL"):
@@ -131,13 +130,22 @@ def load_config(environ=None, *, env_file=BACKEND_DIR / ".env"):
     if marketing_origin:
         try:
             parsed_origin = urlsplit(marketing_origin)
-            if (parsed_origin.scheme not in ({"https"} if environment == "production" else {"http", "https"})
-                    or not parsed_origin.hostname or parsed_origin.username or parsed_origin.password
-                    or parsed_origin.path or parsed_origin.query or parsed_origin.fragment):
+            if (
+                parsed_origin.scheme
+                not in ({"https"} if environment == "production" else {"http", "https"})
+                or not parsed_origin.hostname
+                or parsed_origin.username
+                or parsed_origin.password
+                or parsed_origin.path
+                or parsed_origin.query
+                or parsed_origin.fragment
+            ):
                 raise ValueError
             parsed_origin.port
         except ValueError:
-            raise ConfigurationError("MARKETING_PUBLIC_ORIGIN must be an exact public origin.") from None
+            raise ConfigurationError(
+                "MARKETING_PUBLIC_ORIGIN must be an exact public origin."
+            ) from None
     marketing_enabled = values.get("MARKETING_ENABLED", "true")
     if marketing_enabled not in ("true", "false"):
         raise ConfigurationError("MARKETING_ENABLED must be true or false.")
@@ -171,6 +179,12 @@ def load_config(environ=None, *, env_file=BACKEND_DIR / ".env"):
         "CHANNEX_MANAGER_API_KEY_STAGING": values.get("CHANNEX_MANAGER_API_KEY_STAGING"),
         "CHANNEX_MANAGER_API_KEY_PRODUCTION": values.get("CHANNEX_MANAGER_API_KEY_PRODUCTION"),
         "CHANNEX_WEBHOOK_BASE_URL": webhook_base_url(values.get("CHANNEX_WEBHOOK_BASE_URL")),
+        "CONTACT_SMTP_HOST": values.get("CONTACT_SMTP_HOST"),
+        "CONTACT_SMTP_PORT": values.get("CONTACT_SMTP_PORT"),
+        "CONTACT_SMTP_SECURITY": values.get("CONTACT_SMTP_SECURITY", "starttls"),
+        "CONTACT_SMTP_USERNAME": values.get("CONTACT_SMTP_USERNAME"),
+        "CONTACT_SMTP_PASSWORD": values.get("CONTACT_SMTP_PASSWORD"),
+        "CONTACT_SMTP_FROM": values.get("CONTACT_SMTP_FROM"),
         "CORS_ORIGINS": cors_origins(values.get("CORS_ORIGINS", default_origins)),
         "SQLALCHEMY_DATABASE_URI": database_url,
         "DATABASE_MIGRATION_URL": migration_url,

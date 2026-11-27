@@ -1,0 +1,218 @@
+.admin-logs-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.admin-logs-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.admin-logs-metric {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 20px;
+}
+.admin-logs-metric > span {
+  color: var(--manager-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+.admin-logs-metric > strong {
+  color: var(--manager-ink);
+  font-size: 28px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+.admin-logs-metric > strong[data-tone='warning'] {
+  color: var(--manager-warning, var(--manager-ink));
+}
+.admin-logs-metric > strong[data-tone='danger'] {
+  color: var(--manager-danger);
+}
+.admin-logs-metric > small {
+  color: var(--manager-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.admin-logs-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+}
+.admin-logs-search {
+  display: flex;
+  align-items: center;
+  flex: 1 1 300px;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  background: var(--manager-soft);
+  color: var(--manager-muted);
+}
+.admin-logs-search svg {
+  flex-shrink: 0;
+}
+.admin-logs-search input {
+  min-width: 0;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--manager-ink);
+  font-size: 13px;
+}
+.admin-logs-filter-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+.admin-logs-filter-actions select {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  color: var(--manager-ink);
+  background: var(--manager-surface);
+  border: 1px solid var(--manager-line);
+  border-radius: 6px;
+  font-size: 12px;
+}
+.admin-logs-table-panel {
+  min-width: 0;
+  overflow: hidden;
+}
+.admin-logs-empty {
+  padding: 32px 20px;
+  color: var(--manager-muted);
+  text-align: center;
+}
+.admin-logs-ip-caption {
+  margin: 4px 0 0;
+  color: var(--manager-muted);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.admin-logs-ip-details {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+  font-size: 11px;
+}
+.admin-logs-ip-details > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+.admin-logs-ip-details dt {
+  color: var(--manager-muted);
+}
+.admin-logs-ip-details dd {
+  margin: 0;
+  color: var(--manager-ink);
+  font-weight: 600;
+}
+.admin-logs-ip-caption + button {
+  margin-top: 10px;
+}
+@media (max-width: 1100px) {
+  .admin-logs-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .admin-logs-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .admin-logs-metric {
+    padding: 16px;
+  }
+  .admin-logs-filter-actions {
+    width: 100%;
+  }
+  .admin-logs-filter-actions select {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-logs-page button {
+    min-height: 44px;
+  }
+  .admin-logs-page :is(input, select) {
+    min-height: 44px;
+    font-size: 16px !important;
+  }
+  .admin-logs-search {
+    padding-block: 0;
+  }
+  .admin-logs-filter-actions > button {
+    width: 100%;
+  }
+  .admin-logs-table-panel button {
+    min-width: 44px;
+  }
+  .admin-logs-page .pms-legacy-overlay {
+    padding: 12px !important;
+  }
+  .admin-logs-dialog {
+    padding: 16px !important;
+    max-height: calc(100dvh - 24px) !important;
+    overscroll-behavior: contain;
+  }
+  .admin-logs-dialog div {
+    min-width: 0;
+  }
+  .admin-logs-dialog-heading {
+    gap: 12px;
+  }
+  .admin-logs-dialog-heading > div {
+    gap: 8px !important;
+    align-items: flex-start !important;
+  }
+  .admin-logs-dialog-heading > div > div:last-child > div {
+    flex-wrap: wrap;
+  }
+  .admin-logs-dialog-heading button {
+    min-width: 44px;
+    flex-shrink: 0;
+  }
+  .admin-logs-dialog-status {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .admin-logs-dialog-status > div {
+    flex-wrap: wrap;
+  }
+  .admin-logs-dialog-tabs {
+    flex-wrap: wrap;
+  }
+  .admin-logs-dialog-tabs > button {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+  .admin-logs-dialog-code {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .admin-logs-dialog-footer > div {
+    width: 100%;
+  }
+  .admin-logs-dialog-footer button {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}

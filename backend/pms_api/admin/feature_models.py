@@ -19,8 +19,8 @@ FEATURE_CATALOG = {
         "OTA_SYNC",
         "REPORTS_ADVANCED",
         "INVENTORY_WAREHOUSE",
-        "MULTI_CURRENCY",
-        "VOUCHER_PROMO",
+        # "MULTI_CURRENCY",
+        # "VOUCHER_PROMO",
         "API_EXTERNAL",
     )
 }

@@ -2,187 +2,117 @@
 
 PMS (Property Management System) là đồ án xây dựng hệ thống quản lý khách sạn theo mô hình SaaS. Repository này lưu mã nguồn backend, frontend và lịch sử bàn giao của nhóm qua Git/GitHub.
 
-> **Cập nhật ngày 26/11/2026:** Repository đã có mã nguồn cho đặt phòng, giá và tồn phòng, OTA, tài chính, buồng phòng, kho, báo cáo và quản trị. Các hạng mục được tích hợp qua Pull Request; ứng dụng vẫn cần bổ sung các điểm kết nối, tài nguyên và migration còn thiếu trước khi chạy đầy đủ.
+> **Cập nhật 27/11/2026:** Đã tích hợp nguồn hiện tại từ `pms-system`, bổ sung các phần trước đây chưa có trong các gói workflow. Giữ lại chatbot và công cụ marketing AI của repo này. Kết quả kiểm tra và giới hạn được ghi ở cuối trang; cần nghiệm thu với PostgreSQL và dịch vụ thật trước khi vận hành.
 
-## Mục tiêu của hệ thống
+## Phạm vi hệ thống
 
-Hệ thống hướng đến ba khu vực sử dụng:
-
-| Khu vực | Mục tiêu |
+| Khu vực | Chức năng có trong mã nguồn |
 | --- | --- |
-| Website giới thiệu | Giới thiệu sản phẩm, gói dịch vụ và thông tin liên hệ. |
-| Ứng dụng khách sạn | Quản lý phòng, đặt phòng, lưu trú, buồng phòng, thu chi, kho và báo cáo. |
-| Quản trị hệ thống | Quản lý khách sạn, tài khoản, quyền truy cập và thuê bao dịch vụ. |
-
-Kiến trúc tổng thể khi ghép đủ mã nguồn:
+| Website giới thiệu | Sản phẩm, gói dịch vụ, bài viết và biểu mẫu liên hệ qua backend SMTP. |
+| Ứng dụng khách sạn | Phòng và hạng phòng, khách hàng, đặt phòng, lưu trú, giá và tồn phòng, buồng phòng, kho, thu chi, hoa hồng, báo cáo và Night Audit. |
+| Kết nối OTA | Channex, ánh xạ phòng/gói giá, nhận booking, đồng bộ giá và tồn phòng, hàng đợi và xử lý ngoại lệ. |
+| Quản trị hệ thống | Khách sạn, tài khoản, quyền, thuê bao, tính năng, thanh toán SaaS và nhật ký. |
+| Công cụ AI | Chatbot hỗ trợ trong PMS và tạo trang marketing; cần cấu hình riêng ở backend và quyền sử dụng phù hợp. |
 
 ```mermaid
 flowchart LR
-    Browser["Trình duyệt"] --> Frontend["Frontend · React / Vite"]
-    Frontend -->|HTTP /api| Backend["Backend · Flask"]
+    Browser["Trình duyệt"] --> Frontend["React / Vite"]
+    Frontend -->|"/api"| Backend["Flask API"]
     Backend --> Database[(PostgreSQL)]
+    Worker["Worker nghiệp vụ / OTA"] --> Database
+    Backend --> Services["SMTP / Channex / AI theo cấu hình"]
 ```
 
-## Công nghệ sử dụng
+Đây là phạm vi triển khai trong mã nguồn, chưa phải xác nhận nghiệm thu tất cả nghiệp vụ hoặc tích hợp bên ngoài.
 
-Các phiên bản dưới đây được khai báo trong cấu hình hiện tại của repository.
+## Công nghệ và cấu trúc
 
-| Thành phần | Công nghệ |
+| Thành phần | Công nghệ / yêu cầu khai báo |
 | --- | --- |
-| Giao diện | React 19, JavaScript/JSX, React Router 7, CSS. |
-| Công cụ frontend | Vite 8, Node.js từ 22.12.0, npm 11.16.0. |
-| Backend | Python 3.14, Flask 3.1.3. |
-| Truy cập dữ liệu | SQLAlchemy 2.0, Flask-SQLAlchemy, Psycopg 3. |
-| Cơ sở dữ liệu và migration | PostgreSQL, Flask-Migrate, Alembic. |
-| Kiểm thử và kiểm tra mã | Python unittest, Node.js test runner, Oxlint, Ruff. |
-| Quản lý mã nguồn | Git, GitHub, nhánh theo hạng mục và Pull Request. |
-
-## Cấu trúc repository
+| Frontend | React 19, React Router 7, Vite 8, JavaScript/JSX, CSS. |
+| Công cụ frontend | Node.js từ 22.12.0; npm 11.16.0. CI khai báo Node 24.18.0. |
+| Backend | Python 3.14, Flask, SQLAlchemy, Psycopg 3. |
+| Dữ liệu | PostgreSQL, Flask-Migrate / Alembic; script phát triển local dùng PostgreSQL 18. |
+| Kiểm tra | Python unittest, Node test runner, Ruff, Oxlint, kiểm tra i18n. |
 
 ```text
-pms_project/
-├── backend/
-│   ├── common/               # Tiện ích HTTP và định dạng dữ liệu dùng chung
-│   ├── pms_api/              # Flask, phân quyền và các module nghiệp vụ
-│   ├── tests/                # Kiểm thử và dữ liệu mẫu cho kiểm thử
-│   ├── app.py                # Điểm khởi chạy backend
-│   ├── manage.py             # Lệnh quản lý ứng dụng Flask
-│   ├── requirements.txt      # Phụ thuộc backend
-│   └── .env.example          # Mẫu biến môi trường
-├── frontend/
-│   ├── public/               # Tài nguyên tĩnh và trang 404
-│   ├── src/
-│   │   ├── app/              # Cấu hình điều hướng và kiểm thử route
-│   │   ├── assets/           # Tài nguyên giao diện
-│   │   ├── apps/             # Ứng dụng khách sạn, quản trị và marketing
-│   │   └── shared/           # Component, định dạng dữ liệu, đa ngôn ngữ và biểu mẫu
-│   ├── package.json          # Phụ thuộc và các lệnh frontend
-│   └── vite.config.js        # Cấu hình Vite và proxy API
-├── start_backend.bat         # Công cụ khởi chạy backend trên Windows
-├── start_frontend.bat        # Công cụ khởi chạy frontend trên Windows
-└── README.md
+backend/       API, nghiệp vụ, migration, worker, script và kiểm thử
+frontend/      Website giới thiệu, ứng dụng khách sạn, quản trị hệ thống
+postman/       Hợp đồng, bộ request và kịch bản mô phỏng API
+docs/          Kiến trúc, báo cáo nguồn, kế hoạch và hướng dẫn vận hành
+tasks/         Ghi chú công việc được chuyển từ nguồn
+submission/    Bản nháp hồ sơ nhật ký sử dụng AI
 ```
 
-## Thành viên
+Tài liệu cũ được giữ nguyên bối cảnh và ngày ghi nhận; một số tài liệu vẫn dùng tên LOHA PMS hoặc thuộc học phần cũ. Không dùng chúng thay thông tin lớp, nhóm và giảng viên của Tiểu luận chuyên ngành hiện tại.
 
-Tên thành viên được ghi theo thông tin tác giả trong lịch sử Git.
+## Chạy trên máy phát triển
 
-| Thành viên | Phạm vi tham gia |
-| --- | --- |
-| Le Tran Xuan Loc (Lộc) | Backend và frontend theo các hạng mục được phân công. |
-| Dinh Y Thuc (Thức) | Backend và frontend theo các hạng mục được phân công. |
+Cài Python 3.14, Node.js/npm theo yêu cầu ở trên và PostgreSQL. Xem [hướng dẫn backend](backend/README.md) trước khi thiết lập database. Các bước dưới đây dành cho **database local riêng**, cần kiểm tra cấu hình kết nối trước khi chạy migration hoặc seed.
 
-Chi tiết đóng góp có thể xem tại [lịch sử commit](https://github.com/dinhythuc240594/pms_project/commits/main/) và [các Pull Request đã merge](https://github.com/dinhythuc240594/pms_project/pulls?q=is%3Apr+is%3Amerged).
-
-## Phạm vi mã nguồn hiện có
-
-| Hạng mục | Các thành phần đã có mã nguồn |
-| --- | --- |
-| Nền tảng | Cấu hình Flask/React, đăng nhập, phân quyền, workspace, tiện ích HTTP, nhập ngày và đa ngôn ngữ. |
-| Phòng và đặt phòng | Danh mục phòng, đặt phòng, lưu trú, chi tiết booking, thanh toán và thay đổi kỳ ở. |
-| Giá và tồn phòng | Giá theo đêm, ma trận giá, lịch ARI, quy tắc giá và dữ liệu phục vụ báo cáo. |
-| Kênh OTA | Kết nối Channex, quản lý credential, mapping, hàng đợi đồng bộ, onboarding, lịch sử và giao diện xử lý ngoại lệ. |
-| Tài chính và đối soát | Bán hàng POS, sổ quỹ, hoa hồng, báo cáo kinh doanh, đối soát và chốt ngày. |
-| Buồng phòng | Danh sách công việc, lịch sử, nhân viên, ca làm, phân công và kế hoạch dọn tự động. |
-| Kho | Nhập, xuất, chuyển, kiểm kê, tồn kho và thiết lập danh mục kho, hàng hóa, vật tư, nhà cung cấp. |
-| Quản trị | Các thành phần quản lý khách sạn, người dùng, thuê bao, tính năng và hỗ trợ OTA. |
-
-Bảng trên mô tả phạm vi mã nguồn, chưa xác nhận các chức năng đã chạy hoàn chỉnh. Mã trên nhánh bàn giao được đưa vào `main` sau khi Pull Request được kiểm tra và merge.
-
-### Bàn giao ngày 22/11/2026
-
-- Bổ sung [InventorySettings.jsx](frontend/src/apps/pms/inventory/pages/InventorySettings.jsx) cùng [CSS](frontend/src/apps/pms/inventory/pages/InventorySettings.css), lấy nguyên nội dung từ bản `pms-system` hiện tại.
-- Cập nhật README theo tiến độ tích hợp, cấu hình thực tế và quy trình một nhánh mỗi ngày.
-- File `backend/pms_api/channels/exceptions_application.py` trong danh sách phân công không có ở nguồn hiện tại nên được bỏ qua; không lấy bù từ bản snapshot của workflow.
-
-### Chuẩn bị các gói 24–27/11/2026
-
-Bốn gói được chuẩn bị cùng đợt vào ngày 24/11/2026 trên một nhánh chung; ngày trong bảng là nhãn phân công của workflow, không phải ngày thực hiện commit.
-
-| Gói Lộc | File có trong nguồn | Nội dung chính |
-| --- | --- | --- |
-| 24/11 | 5/6 | Quản lý tính năng và giao diện thanh toán của chủ khách sạn. |
-| 25/11 | 9/10 | Quản trị Channex, danh mục mapping và thao tác OTA của khách sạn. |
-| 26/11 | 8/10 | Airbnb, chọn nguồn kết nối và giao diện kênh OTA. |
-| 27/11 | 9/10 | Thông báo, bố cục quản trị và chỉ báo vận hành. |
-
-Tổng cộng 31 file ứng dụng được lấy từ `pms-system`. Bỏ qua bốn file chưa có trong `backend/pms_api/admin/`: `features_application.py`, `channex_application.py`, `channex_channels_application.py`, `channex_insights_application.py`; cùng `frontend/src/apps/manager/mockData.js`. Không lấy bù từ snapshot workflow.
-
-### Chuẩn bị các gói 28–30/11/2026
-
-Ba gói tiếp theo được chuẩn bị vào ngày 25/11/2026 trên một nhánh chung. Ngày của gói là nhãn phân công; commit giữ ngày thực hiện thật.
-
-| Gói Lộc | File có trong nguồn | Nội dung chính |
-| --- | --- | --- |
-| 28/11 | 14/15 | Giá gói dịch vụ, thuê bao, tính năng, hồ sơ và hỗ trợ OTA quản trị. |
-| 29/11 | 14/15 | Đối soát, khóa kỳ tài chính và biểu mẫu quản lý thuê bao. |
-| 30/11 | 7/8 | Thay đổi kỳ ở, hoa hồng và biểu mẫu kênh Channex/Airbnb. |
-
-35 file ứng dụng được lấy nguyên nội dung từ `pms-system`. Bỏ qua ba file chưa có trong nguồn: `backend/pms_api/saas_billing/application.py`, `backend/pms_api/reconciliation/application.py` và `backend/pms_api/finance/commissions_application.py`.
-
-### Hoàn tất gói 01/12/2026
-
-Gói cuối trong bộ workflow được chuẩn bị vào ngày 26/11/2026 trên nhánh `loc/2026-12-01-handoff`. Lịch phân công kết thúc ở 01/12, không có gói 02/12.
-
-Đã lấy 58/71 file từ nguồn `pms-system`: 28 revision migration, 3 công cụ backend, 1 test PostgreSQL, 7 component Channex, 1 test giao diện, 1 công cụ đo bundle, 1 template Mako và 16 tài liệu Markdown. Tài liệu gồm [hướng dẫn backend](backend/README.md), [hướng dẫn frontend](frontend/README.md), các báo cáo và ghi chú công việc; nội dung nguồn được giữ nguyên.
-
-13 file không có trong nguồn hiện tại nên được bỏ qua:
-
-- `PMS_PUBLIC_RELEASE_REVIEW_2026-10-03.md`, `backend/ARCHITECTURE.md`, `backend/tests/test_pms_workflows.py`.
-- Sáu file thuộc `docs/bao-cao-tien-do/pms-ai/` trong phân công: hai DOCX, hai Markdown và hai ảnh PNG.
-- `docs/reports/reviews/pms-nine-workflows-2026-10-25.md`.
-- `tasks/api-standardization.md`, `tasks/manager-completion.md`, `tasks/manager-owner.md`.
-
-## Thiết lập và kiểm tra
-
-### Lấy mã nguồn
+Từ thư mục `backend`, trong PowerShell:
 
 ```powershell
-git clone https://github.com/dinhythuc240594/pms_project.git
-cd pms_project
+py -3.14 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-installer.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe scripts/local_postgres.py start
+.\.venv\Scripts\python.exe manage.py db upgrade
+.\.venv\Scripts\python.exe manage.py install-chatbot-schema
+.\.venv\Scripts\python.exe manage.py install-marketing-schema
+.\.venv\Scripts\python.exe manage.py db-check
+# Chỉ chạy lần đầu với database pms_local trống:
+.\.venv\Scripts\python.exe manage.py seed-local
+.\.venv\Scripts\python.exe manage.py run --host 127.0.0.1 --port 5000
 ```
 
-### Điều kiện để chạy ứng dụng
+Script local tạo cluster riêng, mặc định tại `127.0.0.1:15432`, và tạo `.env` nếu chưa tồn tại. Nếu đã có `.env`, script giữ file đó: kiểm tra đúng database local trước khi tiếp tục. Với PostgreSQL tự cấu hình, dùng mẫu `backend/.env.example` và hướng dẫn backend. Không đưa `.env`, mật khẩu, khóa AI hay dữ liệu nghiệp vụ lên Git; không đặt bí mật trong biến frontend `VITE_`.
 
-Chuẩn bị Python 3.14, Node.js từ 22.12.0, npm và PostgreSQL. Mẫu cấu hình backend nằm tại [backend/.env.example](backend/.env.example); thông tin kết nối database được cấu hình ở backend. Giữ mật khẩu và khóa dịch vụ trong môi trường local hoặc môi trường triển khai.
+Chuỗi Alembic hiện có 50 revision, một head `0045_room_type_details` và không thiếu revision cha. Chatbot/marketing dùng hai lệnh cài schema riêng sau migration core, theo [hướng dẫn chatbot](backend/pms_api/chatbot/README.md) và [hướng dẫn marketing AI](backend/pms_api/marketing/README.md). Đợt cập nhật này chỉ kiểm tra đồ thị migration và sinh SQL offline; chưa áp dụng lên PostgreSQL thật.
 
-Một số điểm còn thiếu đã được xác định trong bản hiện tại:
+Ở cửa sổ khác, từ thư mục `frontend`:
 
-- Backend: file đăng ký route `pms_api/admin/urls.py` đang được tham chiếu nhưng chưa có. `backend/migrations/` đã có 28 revision và template; còn thiếu 13 revision cha được tham chiếu, `env.py` và `alembic.ini`, nên chuỗi migration chưa đầy đủ.
-- Frontend: cấu hình Vite tham chiếu `frontend/scripts/bundle-manifest.mjs` chưa có; một số layout và trang quản trị được khai báo trong điều hướng vẫn cần bổ sung.
-- Công cụ Windows: đã có `backend/README.md`, nhưng `start_backend.bat` vẫn cần `backend/scripts/local_postgres.py` chưa có trong repo. Một số công cụ và đường dẫn trong hướng dẫn backend thuộc bộ source đầy đủ, cần bổ sung trước khi sử dụng.
-- Docker: `backend/Dockerfile` cài dependency với `--require-hashes`, trong khi các file requirements hiện chỉ có phiên bản. Cần bổ sung hash và migration trước khi dùng quy trình Docker này.
+```powershell
+npm ci --ignore-scripts --no-audit --no-fund
+npm run dev
+```
 
-Việc cài thư viện chưa đủ để khắc phục các file còn thiếu ở trên. Các lệnh sau áp dụng khi đã ghép đủ mã nguồn, cấu hình môi trường và chuẩn bị database phù hợp:
+Mở địa chỉ Vite hiển thị, vào `/id/login` và dùng tài khoản do backend tạo. Vite chuyển `/api` về `http://127.0.0.1:5000`; bản triển khai cần cấu hình API/proxy riêng. Xem [hướng dẫn frontend](frontend/README.md) và [hợp đồng API](backend/API_CONTRACT.md).
 
-| Thư mục thực hiện | Lệnh | Mục đích |
-| --- | --- | --- |
-| `frontend/` | `npm ci` | Cài phụ thuộc theo lockfile. |
-| `frontend/` | `npm run dev` | Chạy giao diện trong môi trường phát triển. |
-| `frontend/` | `npm test` | Chạy bộ kiểm thử frontend. |
-| `frontend/` | `npm run lint` | Kiểm tra mã frontend. |
-| `frontend/` | `npm run build` | Tạo bản build frontend. |
-| `backend/` | `python -m venv .venv` | Tạo môi trường riêng bằng Python 3.14. |
-| `backend/` | `.\.venv\Scripts\python.exe -m pip install -r requirements.txt` | Cài phụ thuộc backend vào môi trường riêng trên Windows. |
-| `backend/` | `.\.venv\Scripts\python.exe app.py` | Chạy backend sau khi hoàn tất mã nguồn, cấu hình database và migration. |
-| `backend/` | `.\.venv\Scripts\python.exe -m unittest discover -s tests` | Chạy kiểm thử; các bài tích hợp cần database kiểm thử và fixture tương ứng. |
+Các worker buồng phòng/Channex chạy riêng theo tài liệu backend. SMTP và dịch vụ AI cần thông tin xác thực ở môi trường backend; bước thiết lập local không tự cấu hình các dịch vụ đó.
 
-Các lệnh Python trong bảng dùng PowerShell trên Windows; `python` phải trỏ đến Python 3.14 khi tạo môi trường. Cấu hình frontend khai báo npm 11.16.0 và có lockfile cho `npm ci`.
+## Kiểm tra đợt đồng bộ 26–27/11/2026
 
-Frontend proxy cả `/api` và `/p` đến backend tại `http://127.0.0.1:5000`. Hai file `start_backend.bat` và `start_frontend.bat` hỗ trợ chạy trên Windows khi đã hoàn tất thiết lập. Riêng `start_backend.bat` còn khởi động PostgreSQL local và chạy migration, nên cần đủ helper, schema và môi trường database trước khi sử dụng.
+| Nội dung | Kết quả thực hiện |
+| --- | --- |
+| Frontend | 704/704 kiểm thử đạt, không bỏ qua; build thành công. |
+| Backend cô lập | 100/100 kiểm thử đạt, gồm các kiểm tra cục bộ, AI với provider mô phỏng và fixture schema. |
+| Ruff backend | Không có lỗi. |
+| Lint frontend | Không có lỗi, còn 47 cảnh báo. |
+| i18n | Lệnh audit chạy thành công; còn 887 ứng viên chưa có trong catalog. |
+| Build | Còn cảnh báo chunk lớn hơn 500 KB. |
 
-**Tình trạng kiểm chứng:** 31 file trong đợt 24–27/11 đã được đối chiếu SHA-256 với nguồn; kiểm tra cú pháp 11 file Python, kiểm tra tĩnh 15 file JavaScript/JSX và phân tích 5 file CSS đều đạt, không có cảnh báo. Mười bài kiểm thử Node độc lập trong `catalog.test.js`, `clientChannelOperations.test.js` và `operationsPresentation.test.js` đều qua. Chưa chạy test giao diện, test tích hợp PostgreSQL, toàn bộ ứng dụng hoặc bản build; kiểm tra tĩnh và các test độc lập không thay thế kiểm thử khi ghép đủ hệ thống.
+Kiểm thử backend dùng môi trường cô lập, chặn kết nối ngoài và mô phỏng provider; không thay thế toàn bộ bộ kiểm thử PostgreSQL/CI. Chưa chạy database thật, migration/restore thật, SMTP, provider AI/Channex thật hoặc nghiệm thu trên trình duyệt. Các cảnh báo trên chưa được xử lý trong đợt đồng bộ này.
 
-**Kiểm tra đợt 28–30/11:** Đối chiếu SHA-256 của 35 file và kiểm tra cú pháp 12 file Python đều đạt. Kiểm tra tĩnh 19 file JavaScript/JSX không có lỗi, còn 3 cảnh báo nguồn tại `AdminFeatures.jsx` và `PlanPricingModal.jsx`; 4 file CSS phân tích thành công. 23 bài kiểm thử độc lập trong `saasBillingForm.test.js`, `subscriptionStatus.test.js`, `airbnbReturn.test.js` và `channelForms.test.js` đều qua. `planForm.test.js` chưa chạy vì thiếu `frontend/src/shared/config/featureVisibility.js`; các test giao diện, tích hợp PostgreSQL và bản build vẫn chưa được chạy.
+Các lệnh kiểm tra frontend từ thư mục `frontend`:
 
-**Kiểm tra gói 01/12:** 58 file khớp SHA-256 nguồn. Kiểm tra cú pháp 32 file Python, kiểm tra tĩnh 8 file JavaScript/JSX, kiểm tra cú pháp `measure-bundle.mjs` và phân tích template Mako đều đạt; các file văn bản đọc được bằng UTF-8. Chưa chạy test giao diện, PostgreSQL, migration, restore, CI hoặc đo bundle. Công cụ đo bundle còn cần bản build, manifest và dữ liệu module; các phần này chưa có trong bản bàn giao hiện tại.
+```powershell
+npm test
+npm run lint
+npm run i18n:audit
+npm run build
+```
 
-## Quy trình làm việc
+Kiểm thử backend có phần cần database dùng riêng cho testing; đọc [hướng dẫn kiểm thử backend](backend/README.md) và cấu hình của `backend/scripts/ci_database.py` trước khi chạy. Không trỏ bộ kiểm thử này vào database đang sử dụng.
 
-1. Cập nhật `main` trước khi bắt đầu hạng mục mới.
-2. Ưu tiên một nhánh cho gói công việc mỗi ngày. Khi chuẩn bị nhiều gói trong cùng đợt, dùng một nhánh chung, ví dụ `loc/2026-11-24-27-handoff`.
-3. Chia commit theo từng phần việc có ý nghĩa trên cùng nhánh. Giữ component, CSS và kiểm thử liên quan trong cùng nhóm; chỉ stage đúng các file đã kiểm tra.
-4. Push nhánh và mở một Pull Request về `main`, ghi nội dung bàn giao, cách kiểm tra và phần phụ thuộc còn thiếu.
-5. Kiểm tra, merge vào `main`, đồng bộ lại trên máy và cập nhật README khi tiến độ thay đổi.
+## Nguồn cập nhật và lịch sử đóng góp
 
-Lịch sử commit và Pull Request được giữ để theo dõi từng lần bàn giao, nội dung thay đổi và thành viên thực hiện.
+Đợt này so sánh 794 file hợp lệ ở `pms-system`, chép 619 file mới/thay đổi và ghép thủ công những điểm cần giữ tích hợp của repo đích. Giữ đủ 70 file chỉ có ở repo đích. File runtime, cache, cấu hình riêng, `.env` và đầu ra công cụ không được chuyển vào lịch sử cập nhật.
+
+Thay đổi được chia thành 65 commit module trên nhánh `loc/2026-11-26-source-sync-ai-log`, kèm các commit tài liệu/hồ sơ riêng. Đây là lịch sử tích hợp mã sẵn có; số commit không đại diện số tính năng mới, ngày công hay tác giả của từng dòng. Xem [biên bản đồng bộ và kiểm chứng](docs/sync/SOURCE_SYNC_2026-11-27.md).
+
+## Hồ sơ nhật ký sử dụng AI
+
+Thư mục [submission/ai-usage-log](submission/ai-usage-log) chứa bản nháp PDF, nội dung Markdown, dữ liệu prompt, nhật ký hoạt động, mẫu bổ sung lịch sử và nội dung tham khảo cho ô nộp bài. Gói ZIP chỉ gồm hồ sơ nhật ký, dung lượng dưới 5 MB.
+
+**Hồ sơ hiện có 36 lượt người dùng trong lịch sử chat đang thấy và 9 query artifact được ghi riêng. Đây là bản dự thảo toàn dự án, còn thiếu các phiên AI khác và lịch sử thành viên khác; chưa ký xác nhận, chưa nộp lên cổng trường.** Sinh viên cần bổ sung lịch sử, xác nhận thông tin học phần và tự rà soát đầu ra trước khi nộp. Xem [nhật ký](submission/ai-usage-log/ai_usage_log.md) và [mẫu bổ sung](submission/ai-usage-log/missing_history_template.csv).

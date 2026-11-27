@@ -68,8 +68,10 @@ python manage.py install-chatbot-schema
 
 The installer uses `DATABASE_MIGRATION_URL`, requires existing core tenant/user
 tables and grants the configured runtime role access. It does not guess or stamp
-an Alembic revision; this checkout still lacks the core migration history.
-Schema installation and live provider calls were not performed by this change.
+an Alembic revision. The 27/11/2026 source sync restored the core Alembic history;
+run the core upgrade before this separate chatbot installer. The sync did not
+perform live PostgreSQL schema installation or provider calls. See the
+[sync verification report](../../../docs/sync/SOURCE_SYNC_2026-11-27.md).
 
 ## API and usage
 

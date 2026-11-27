@@ -1,5 +1,5 @@
-import InventoryDocuments from '../InventoryDocuments';
+import InventoryDocuments from '../InventoryDocuments'
 
 export default function InventoryOut() {
-  return <InventoryDocuments kind="issue" />;
+  return <InventoryDocuments kind="issue" />
 }

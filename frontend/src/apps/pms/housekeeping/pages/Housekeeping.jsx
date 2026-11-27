@@ -393,11 +393,6 @@ export default function Housekeeping() {
         }}
       >
         <div>
-          <h1
-            style={{ fontSize: '24px', fontWeight: 'bold', color: '#111827', margin: '0 0 16px 0' }}
-          >
-            {tUi('hk.management')}
-          </h1>
           <div
             style={{
               display: 'flex',

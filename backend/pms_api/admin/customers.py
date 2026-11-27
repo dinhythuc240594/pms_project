@@ -1,13 +1,12 @@
 import re
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 
-from pms_api.auth.application import validate_email
-
+from ..auth.routes import validate_email
 from ..core_models import Tenant, TenantUser, User
 from ..currencies import normalize_hotel_currency
 from ..extensions import db
-from ..security import ApiError
+from ..security import ROLES, ApiError
 from ..validation import phone_value, tax_id_value
 from .client_models import TenantClientProfile
 
@@ -65,18 +64,33 @@ def customer_account_json(user):
     }
 
 
+def active_owner_membership_query(user_id):
+    return select(TenantUser.id).where(
+        TenantUser.user_id == user_id,
+        TenantUser.role == "HOTEL_OWNER",
+        TenantUser.active.is_(True),
+    )
+
+
 def customer_accounts(search):
     users = db.session.scalars(
         select(User)
         .where(
             User.active.is_(True),
             User.global_role == "USER",
+            active_owner_membership_query(User.id).exists(),
             User.name.icontains(search, autoescape=True)
             | User.email.icontains(search, autoescape=True),
         )
         .order_by(User.name, User.email, User.id)
         .limit(20)
     ).all()
+    return customer_accounts_json(users)
+
+
+def customer_accounts_json(users):
+    if not users:
+        return []
     memberships = {user.id: [] for user in users}
     for membership, tenant in db.session.execute(
         select(TenantUser, Tenant)
@@ -93,6 +107,63 @@ def customer_accounts(search):
             }
         )
     return [{**customer_account_json(user), "memberships": memberships[user.id]} for user in users]
+
+
+def customer_directory_filters(args):
+    allowed = {"search", "tenantId", "role", "active", "page", "pageSize"}
+    if set(args) - allowed or any(len(args.getlist(key)) != 1 for key in args):
+        raise ApiError(422, "invalid_filter", "Bộ lọc tài khoản không hợp lệ hoặc bị lặp.")
+    raw_search = args.get("search", "")
+    search = raw_search.strip()
+    if len(search) > 254 or any(ord(char) < 32 or ord(char) == 127 for char in raw_search):
+        raise ApiError(
+            422, "invalid_search", "Từ khóa tối đa 254 ký tự, không chứa ký tự điều khiển."
+        )
+    tenant_id = args.get("tenantId")
+    if tenant_id is not None and (not tenant_id or len(tenant_id) > 40):
+        raise ApiError(422, "invalid_tenant", "Khách sạn không hợp lệ.")
+    role = args.get("role")
+    if role is not None and role not in ROLES:
+        raise ApiError(422, "invalid_role", "Vai trò khách sạn không hợp lệ.")
+    active = args.get("active")
+    if active is not None and active not in {"true", "false"}:
+        raise ApiError(422, "invalid_active", "Trạng thái tài khoản phải là true hoặc false.")
+    return {
+        "search": search,
+        "tenant_id": tenant_id,
+        "role": role,
+        "active": None if active is None else active == "true",
+    }
+
+
+def customer_account_directory(page, size, *, search="", tenant_id=None, role=None, active=None):
+    filters = [User.global_role == "USER"]
+    if search:
+        filters.append(
+            User.name.icontains(search, autoescape=True)
+            | User.email.icontains(search, autoescape=True)
+        )
+    if active is not None:
+        filters.append(User.active.is_(active))
+    if tenant_id or role:
+        membership = select(TenantUser.id).where(TenantUser.user_id == User.id)
+        if tenant_id:
+            membership = membership.where(TenantUser.tenant_id == tenant_id)
+        if role:
+            membership = membership.where(TenantUser.role == role)
+        filters.append(membership.exists())
+    total = db.session.scalar(select(func.count()).select_from(User).where(*filters))
+    users = db.session.scalars(
+        select(User)
+        .where(*filters)
+        .order_by(User.name, User.email, User.id)
+        .offset((page - 1) * size)
+        .limit(size)
+    ).all()
+    return {
+        "users": customer_accounts_json(users),
+        "pagination": {"page": page, "pageSize": size, "totalItems": total},
+    }
 
 
 def customer_tenants(tenant_id=None):

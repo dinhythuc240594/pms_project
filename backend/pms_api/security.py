@@ -60,7 +60,9 @@ ROLE_ACTIONS = {
     },
 }
 for _actions in ROLE_ACTIONS.values():
-    _actions.update({"workspace.view", "profile.view", "notifications.view", "chatbot.view", "chatbot.send"})
+    _actions.update(
+        {"workspace.view", "profile.view", "notifications.view", "chatbot.view", "chatbot.send"}
+    )
 ROLE_ACTIONS["FRONT_DESK"].add("channels.view")
 
 
@@ -72,7 +74,9 @@ def digest(token):
     return hashlib.sha256(token.encode()).hexdigest()
 
 
-def set_context(user_id="", tenant_id="", is_system=False, *, is_service=False, channel_support=False):
+def set_context(
+    user_id="", tenant_id="", is_system=False, *, is_service=False, channel_support=False
+):
     """Set transaction-local scope; SaaS administration never implies PMS access.
 
     is_service is reserved for trusted background/maintenance work, never derived
@@ -282,9 +286,7 @@ def register_security(app):
         response.headers.setdefault("Referrer-Policy", "no-referrer")
         response.headers.setdefault("Cross-Origin-Resource-Policy", "same-site")
         if app.config["APP_ENV"] == "production":
-            response.headers.setdefault(
-                "Strict-Transport-Security", "max-age=31536000"
-            )
+            response.headers.setdefault("Strict-Transport-Security", "max-age=31536000")
         if request.path.startswith("/api/"):
             response.headers["Cache-Control"] = "no-store"
         return response

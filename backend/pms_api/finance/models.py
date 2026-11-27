@@ -174,9 +174,14 @@ class CommissionSettlement(MoneySnapshot, db.Model):
     __table_args__ = (
         UniqueConstraint("tenant_id", "id"),
         UniqueConstraint("tenant_id", "reservation_id"),
-        ForeignKeyConstraint(["tenant_id", "reservation_id"], ["reservations.tenant_id", "reservations.id"]),
+        ForeignKeyConstraint(
+            ["tenant_id", "reservation_id"], ["reservations.tenant_id", "reservations.id"]
+        ),
         CheckConstraint("percent BETWEEN 0 AND 100", name="percent"),
-        CheckConstraint("room_net >= 0 AND base_room_net >= 0 AND amount >= 0 AND base_amount >= 0", name="nonnegative_amounts"),
+        CheckConstraint(
+            "room_net >= 0 AND base_room_net >= 0 AND amount >= 0 AND base_amount >= 0",
+            name="nonnegative_amounts",
+        ),
         CheckConstraint(
             column("currency").in_(HOTEL_CURRENCIES)
             & column("base_currency").in_(HOTEL_CURRENCIES)
@@ -196,8 +201,13 @@ class CommissionPayout(db.Model):
     __table_args__ = (
         UniqueConstraint("tenant_id", "id"),
         UniqueConstraint("tenant_id", "cash_document_id"),
-        ForeignKeyConstraint(["tenant_id", "commission_id"], ["commission_settlements.tenant_id", "commission_settlements.id"]),
-        ForeignKeyConstraint(["tenant_id", "cash_document_id"], ["cash_documents.tenant_id", "cash_documents.id"]),
+        ForeignKeyConstraint(
+            ["tenant_id", "commission_id"],
+            ["commission_settlements.tenant_id", "commission_settlements.id"],
+        ),
+        ForeignKeyConstraint(
+            ["tenant_id", "cash_document_id"], ["cash_documents.tenant_id", "cash_documents.id"]
+        ),
     )
 
 
@@ -216,8 +226,14 @@ class CommissionReview(MoneySnapshot, db.Model):
     created_at = db.Column(db.DateTime(timezone=True), nullable=False, default=utcnow)
     __table_args__ = (
         UniqueConstraint("tenant_id", "id"),
-        ForeignKeyConstraint(["tenant_id", "commission_id"], ["commission_settlements.tenant_id", "commission_settlements.id"]),
-        CheckConstraint("room_net >= 0 AND base_room_net >= 0 AND amount >= 0 AND base_amount >= 0 AND amount <= room_net", name="valid_amounts"),
+        ForeignKeyConstraint(
+            ["tenant_id", "commission_id"],
+            ["commission_settlements.tenant_id", "commission_settlements.id"],
+        ),
+        CheckConstraint(
+            "room_net >= 0 AND base_room_net >= 0 AND amount >= 0 AND base_amount >= 0 AND amount <= room_net",
+            name="valid_amounts",
+        ),
         CheckConstraint("exchange_rate > 0 AND length(btrim(reason)) > 0", name="review_details"),
         db.Index("ix_commission_reviews_latest", "tenant_id", "commission_id", "created_at", "id"),
     )
@@ -233,6 +249,11 @@ class CommissionRecovery(db.Model):
     __table_args__ = (
         UniqueConstraint("tenant_id", "id"),
         UniqueConstraint("tenant_id", "cash_document_id"),
-        ForeignKeyConstraint(["tenant_id", "commission_id"], ["commission_settlements.tenant_id", "commission_settlements.id"]),
-        ForeignKeyConstraint(["tenant_id", "cash_document_id"], ["cash_documents.tenant_id", "cash_documents.id"]),
+        ForeignKeyConstraint(
+            ["tenant_id", "commission_id"],
+            ["commission_settlements.tenant_id", "commission_settlements.id"],
+        ),
+        ForeignKeyConstraint(
+            ["tenant_id", "cash_document_id"], ["cash_documents.tenant_id", "cash_documents.id"]
+        ),
     )

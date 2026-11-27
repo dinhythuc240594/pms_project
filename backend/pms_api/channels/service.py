@@ -233,7 +233,7 @@ def drain_pending_ari(connection):
 def _relationship(entity, key):
     try:
         return entity["relationships"][key]["data"]["id"]
-    except KeyError, TypeError:
+    except (KeyError, TypeError):
         raise ProviderError("channel_mapping_invalid") from None
 
 
@@ -481,7 +481,8 @@ def validate_mapping_target(connection, client, room_id, rate_id, inbound_ids, c
     for identifier in [rate_id, *inbound_ids]:
         rate = rates.get(identifier)
         if (
-            not rate or _relationship(rate, "property") != connection.property_id
+            not rate
+            or _relationship(rate, "property") != connection.property_id
             or _relationship(rate, "room_type") != room_id
             or rate["attributes"].get("currency") != currency
         ):
@@ -493,20 +494,27 @@ def validate_mapping_target(connection, client, room_id, rate_id, inbound_ids, c
 def booking_inventory_hold(tenant_id):
     """An unimported OTA revision can consume stock outside the locally recorded stay."""
     return or_(
-        select(ChannelBookingReview.id).where(
+        select(ChannelBookingReview.id)
+        .where(
             ChannelBookingReview.tenant_id == tenant_id,
             ChannelBookingReview.resolved_at.is_(None),
-        ).exists(),
-        select(ChannelJob.id).where(
+        )
+        .exists(),
+        select(ChannelJob.id)
+        .where(
             ChannelJob.tenant_id == tenant_id,
             ChannelJob.kind == "pull_bookings",
             ChannelJob.status.in_(["queued", "processing", "failed"]),
             ChannelJob.payload["revisionId"].astext.is_not(None),
-            ~select(ChannelRevision.id).where(
+            ~select(ChannelRevision.id)
+            .where(
                 ChannelRevision.tenant_id == tenant_id,
                 ChannelRevision.revision_id == ChannelJob.payload["revisionId"].astext,
-            ).correlate(ChannelJob).exists(),
-        ).exists(),
+            )
+            .correlate(ChannelJob)
+            .exists(),
+        )
+        .exists(),
     )
 
 
@@ -893,10 +901,14 @@ def schedule_jobs(tenant_id):
             inbound_only = bool(entitlement(tenant_id)["blockedReason"])
             if not inbound_only:
                 drain_pending_ari(connection)
-            if not inbound_only and connection.inventory_reconciled_at is not None and db.session.scalar(
-                select(ChannelMapping.id)
-                .where(ChannelMapping.tenant_id == tenant_id, ChannelMapping.active.is_(True))
-                .limit(1)
+            if (
+                not inbound_only
+                and connection.inventory_reconciled_at is not None
+                and db.session.scalar(
+                    select(ChannelMapping.id)
+                    .where(ChannelMapping.tenant_id == tenant_id, ChannelMapping.active.is_(True))
+                    .limit(1)
+                )
             ):
                 today = business_date(g.tenant)
                 first, last = today, today + timedelta(days=366)

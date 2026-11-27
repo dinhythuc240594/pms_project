@@ -14,11 +14,15 @@
 
 :root {
   /* Keep all fonts local: a blocked remote CSS import also delays CJK fonts. */
-  --font-sans: 'Inter Variable', 'Be Vietnam Pro', 'Noto Sans SC Variable', 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+  --font-sans:
+    'Inter Variable', 'Be Vietnam Pro', 'Noto Sans SC Variable', 'Microsoft YaHei', 'PingFang SC',
+    Arial, sans-serif;
   --font-mono: ui-monospace, Consolas, Monaco, 'Courier New', 'Noto Sans SC Variable', monospace;
 }
 
 :root:lang(zh) {
   /* Prefer the bundled Chinese face throughout the translated interface. */
-  --font-sans: 'Noto Sans SC Variable', 'Inter Variable', 'Be Vietnam Pro', 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+  --font-sans:
+    'Noto Sans SC Variable', 'Inter Variable', 'Be Vietnam Pro', 'Microsoft YaHei', 'PingFang SC',
+    Arial, sans-serif;
 }

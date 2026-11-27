@@ -525,6 +525,7 @@
   "Email liên hệ: {0}": "Contact email: {0}",
   "Email người dùng": "User email",
   "Email đã được sử dụng. Dùng tài khoản đã có hoặc email khác.": "Email is already in use. Use an existing account or another email.",
+  "Email đã được sử dụng. Vui lòng dùng email khác để thêm nhân viên.": "Email is already in use. Please use another email to add an employee.",
   "Email đăng nhập Owner": "Owner login email",
   "Email đăng nhập không thể thay đổi.": "Login email cannot be changed.",
   "Email đăng nhập không được đổi trong quản lý nhân viên.": "Login email cannot be changed in employee management.",

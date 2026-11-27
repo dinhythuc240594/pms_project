@@ -19,14 +19,28 @@ class URL(CommonURL):
     )
     ADJUST_CLOSED_STAY = "/api/tenants/<tenant_id>/reservations/<reservation_id>/adjustments"
     ADD_NOTE = "/api/tenants/<tenant_id>/reservations/<reservation_id>/notes"
-    PREVIEW_STAY_CHANGE = "/api/tenants/<tenant_id>/reservations/<reservation_id>/stay-change/preview"
+    PREVIEW_STAY_CHANGE = (
+        "/api/tenants/<tenant_id>/reservations/<reservation_id>/stay-change/preview"
+    )
     CONFIRM_STAY_CHANGE = "/api/tenants/<tenant_id>/reservations/<reservation_id>/stay-change"
 
 
 booking = Blueprint("booking", __name__)
 
-URL.register(booking, URL.PREVIEW_STAY_CHANGE, "pms_api.bookings.stay_changes:PreviewStayChangeView", endpoint="preview_stay_change", methods=["POST"])
-URL.register(booking, URL.CONFIRM_STAY_CHANGE, "pms_api.bookings.stay_changes:ConfirmStayChangeView", endpoint="confirm_stay_change", methods=["POST"])
+URL.register(
+    booking,
+    URL.PREVIEW_STAY_CHANGE,
+    "pms_api.bookings.stay_changes:PreviewStayChangeView",
+    endpoint="preview_stay_change",
+    methods=["POST"],
+)
+URL.register(
+    booking,
+    URL.CONFIRM_STAY_CHANGE,
+    "pms_api.bookings.stay_changes:ConfirmStayChangeView",
+    endpoint="confirm_stay_change",
+    methods=["POST"],
+)
 
 URL.register(
     booking,

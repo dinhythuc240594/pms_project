@@ -5,12 +5,11 @@ from datetime import date, timedelta
 from decimal import Decimal
 from zoneinfo import ZoneInfo
 
+from flask import g
 from sqlalchemy import func, select
 
-from pms_api.bookings.application import decimal_text, iso
-from pms_api.ports import runtime
-
 from ..bookings.models import Charge, Reservation, ReservationNight
+from ..bookings.routes import decimal_text, iso
 from ..core_models import utcnow
 from ..extensions import db
 from ..finance.models import PosInvoice
@@ -41,9 +40,7 @@ def ensure_open_day(tenant_id, day):
 
 def posting_date(tenant_id, requested=None):
     today = (
-        utcnow()
-        .astimezone(ZoneInfo(runtime().state.tenant.settings.get("timezone", "Asia/Ho_Chi_Minh")))
-        .date()
+        utcnow().astimezone(ZoneInfo(g.tenant.settings.get("timezone", "Asia/Ho_Chi_Minh"))).date()
     )
     return ensure_open_day(tenant_id, requested if requested is not None else today)
 
@@ -152,10 +149,10 @@ def recognition_changes(tenant_id, day, timezone):
 
 
 def night_audit_preview(tenant_id, value):
-    timezone = runtime().state.tenant.settings.get("timezone", "Asia/Ho_Chi_Minh")
+    timezone = g.tenant.settings.get("timezone", "Asia/Ho_Chi_Minh")
     try:
         day = date.fromisoformat(value)
-    except TypeError, ValueError:
+    except (TypeError, ValueError):
         raise ApiError(422, "invalid_dates", "Chọn ngày chốt hợp lệ.") from None
     today = utcnow().astimezone(ZoneInfo(timezone)).date()
     if day >= today:

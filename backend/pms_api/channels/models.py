@@ -199,7 +199,9 @@ class ChannelSyncIncident(db.Model):
     __table_args__ = (
         db.UniqueConstraint("tenant_id", "id"),
         db.UniqueConstraint("tenant_id", "fingerprint"),
-        db.CheckConstraint("event_code IN ('sync_error','sync_warning','rate_error')", name="event"),
+        db.CheckConstraint(
+            "event_code IN ('sync_error','sync_warning','rate_error')", name="event"
+        ),
         db.Index("ix_channel_sync_incidents_pending", "tenant_id", "resolved_at", "created_at"),
     )
 
@@ -212,4 +214,7 @@ class ChannelActionReceipt(db.Model):
     fingerprint = db.Column(db.String(64), nullable=False)
     response = db.Column(JSONB, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False, default=utcnow)
-    __table_args__ = (db.UniqueConstraint("tenant_id", "id"), db.UniqueConstraint("tenant_id", "key"))
+    __table_args__ = (
+        db.UniqueConstraint("tenant_id", "id"),
+        db.UniqueConstraint("tenant_id", "key"),
+    )
