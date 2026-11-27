@@ -36,7 +36,7 @@
     "@vitejs/plugin-react": "^6.1.0",
     "happy-dom": "^21.0.4",
     "jsdom": "^26.1.0",
-    "oxlint": "^1.79.0",
+    "oxlint": "^1.95.0",
     "prettier": "3.9.10",
     "vite": "^8.2.4"
   }
