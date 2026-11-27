@@ -3,8 +3,9 @@
 --only-binary=:all:
 
 -r requirements-installer.txt
-CacheControl==0.14.4 \
-    --hash=sha256:b7ac014ff72ee199b5f8af1de29d60239954f223e948196fa3d84adaffc71d2b
+CacheControl==0.15.0 \
+    --hash=sha256:10b7ab4387355ad9361d5b89bc0f6758e48099017be173241c4e0f20d9e1dad2 \
+    --hash=sha256:52157b539eb64d85c8c793660e86cf05cf95fad7b98c8ef6846e4a0ddffdb193
 Pygments==2.21.0 \
     --hash=sha256:2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9
 boolean.py==5.0 \
