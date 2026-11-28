@@ -49,3 +49,5 @@ README-VI.md
 /frontend/.playwright-cli/
 /.postman/resources.yaml
 /.codex
+/submission
+/submission/ai-usage-log
