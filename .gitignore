@@ -48,3 +48,4 @@ README-VI.md
 /frontend/output/
 /frontend/.playwright-cli/
 /.postman/resources.yaml
+/.codex
